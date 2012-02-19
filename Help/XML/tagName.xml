@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="tagName" type="propety">
+	<title>
+		Open Twebst Library | Documentation - tagName Property
+	</title>
+
+	<description>
+		Retrieves the tag name of the web automation Element.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var t = elementObj.tagName;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		The returned tag name is a lowercase string.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>GetAttribute</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+		<seealso_item>SetAttribute</seealso_item>
+	</seealso>
+</topic>

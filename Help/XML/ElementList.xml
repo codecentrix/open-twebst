@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\overview.xsl"?>
+
+<overview name="ElementList" type="object">
+	<title>
+		Open Twebst Library | Documentation - ElementList Object
+	</title>
+
+
+	<description>
+		This IE macro object represents a collection of Element web automation objects. Each web macro object in
+		the collection represents a native <i>Internet Explorer</i> web control ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> ).
+		It provides properties to access IE macro objects in the collection.
+	</description>
+
+
+	<creation>
+		<creat_method>
+			var elementListObj = browserObj.FindAllElements(Search conditions);
+		</creat_method>
+		
+		<creat_method>
+			var elementListObj = frameObj.FindAllElements(Search conditions);
+		</creat_method>
+
+		<creat_method>
+			var elementListObj = frameObj.FindChildrenElements(Search conditions);
+		</creat_method>
+		
+		<creat_method>
+			var elementListObj = elementObj.FindAllElements(Search conditions);
+		</creat_method>
+		
+		<creat_method>
+			var elementListObj = elementObj.FindChildrenElements(Search conditions);
+		</creat_method>
+	</creation>
+
+
+	<properties>
+		<property>
+			<prop_name><reference href="coreProp.htm">core</reference></prop_name>
+			<prop_desc>Returns a reference to the parent Core IE macro object of the element list.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name><reference>item</reference></prop_name>
+			<prop_desc>Retrieves an Element IE macro object from the collection based on a given index.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name><reference>length</reference></prop_name>
+			<prop_desc>Retrieves the number of Element web macro objects in the collection.</prop_desc>
+		</property>
+	</properties>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>Frame</seealso_item>
+	</seealso>
+</overview>

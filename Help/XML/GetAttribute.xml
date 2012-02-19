@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="GetAttribute" type="method">
+	<title>
+		Open Twebst Library | Documentation - GetAttribute Method
+	</title>
+
+	<description>
+		Extract the value of the specified attribute of an <a target="_bank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> inside a web page.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var attr = elementObj.GetAttribute(attrName);
+	</call>
+
+	<arguments>
+	    <arg>
+	      <code>attrName</code> is the name of the attribute to be retrieved.
+	    </arg>
+	</arguments>
+
+	<remarks>
+		If the attribute is not present, this method returns empty string. The attribute name is case insensitive.
+		When retrieving the CLASS attribute using this method, set the attrName to be "className", which is the corresponding Dynamic HTML (DHTML) property.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+		<seealso_item>RemoveAttribute</seealso_item>
+		<seealso_item>SetAttribute</seealso_item>
+	</seealso>
+</topic>

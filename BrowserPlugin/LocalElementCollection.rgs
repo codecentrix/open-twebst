@@ -1,0 +1,26 @@
+HKCR
+{
+	OpenTwebstPlugin.LocalElementCollection.1 = s 'LocalElementCollection Class'
+	{
+		CLSID = s '{B95A99C9-A0F8-42C1-878D-F879B0D0E68E}'
+	}
+	OpenTwebstPlugin.LocalElementCollection = s 'LocalElementCollection Class'
+	{
+		CLSID = s '{B95A99C9-A0F8-42C1-878D-F879B0D0E68E}'
+		CurVer = s 'OpenTwebstPlugin.LocalElementCollection.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B95A99C9-A0F8-42C1-878D-F879B0D0E68E} = s 'LocalElementCollection Class'
+		{
+			ProgID = s 'OpenTwebstPlugin.LocalElementCollection.1'
+			VersionIndependentProgID = s 'OpenTwebstPlugin.LocalElementCollection'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '7F5F0CF0-E950-4766-B31A-BAB37075F5D4'
+		}
+	}
+}

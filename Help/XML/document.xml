@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="document" type="property">
+	<title>
+		Open Twebst Library | Documentation - document Property
+	</title>
+
+	<description>
+		Returns the native HTML <i>document</i> object ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752574.aspx">IHTMLDocument2</a> ) from the current IE automation library Frame object.
+	</description>
+
+	<apply>
+		<apply_item>Frame</apply_item>
+	</apply>
+
+	<call>
+		var doc = frameObj.document;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		This property gives access to all methods and properties of the HTML native <i>document</i> object.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://www.codecentrix.com/");
+
+var doc = newBrowser.topFrame.document;
+WScrip.Echo("The document size is: " + doc.fileSize);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Frame</seealso_item>
+		<seealso_item>nativeFrame</seealso_item>
+	</seealso>
+</topic>

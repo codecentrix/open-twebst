@@ -1,0 +1,111 @@
+body {
+	font: 75%/1.5em Verdana, Tahoma, arial, sans-serif;
+	color: #555; 
+}
+
+table {
+	font: 100%/1.5em Verdana, Tahoma, arial, sans-serif;
+	color: #555;
+	border-collapse: collapse;
+	border-style : none;
+}
+
+td, th {
+	padding-left: 11px;
+	padding-right: 11px;
+	border-right: 1px solid;
+	border-top: solid 1px;
+	border-left: 1px solid;
+	border-bottom: solid 1px;
+}
+
+hr {
+	height:     1px;
+	color:      #EFF0F1;
+	background: #EFF0F1;
+	border:     0;
+}
+
+/* links */
+a, a:visited {
+	text-decoration: none;
+	color: #2180BC;
+	background: inherit;
+}
+a:hover {
+	color: #88ac0b;
+	background: inherit;
+	text-decoration: underline;
+}
+
+/* headers */
+h2, h3 {
+	font-family: 'Trebuchet MS', Tahoma, Sans-serif;
+	font-weight: Bold;
+}
+h1 {
+	font-size: 100%;
+	font-weight: Normal;
+}
+h2 {
+	font-size: 130%;
+}
+h3 {
+	font-size: 120%;
+	color: #666666; 
+}
+
+div.section {
+	font-size:   120%;
+	font-family: 'Trebuchet MS', Tahoma, Sans-serif;
+	font-weight: Bold;
+	padding:     10px;		
+	margin:      0;
+}
+
+/* images */
+img {
+	background: #FAFAFA;
+   border: 1px solid #E5E5E5;
+	padding: 5px;
+}
+img.float-right {
+  margin: 5px 0px 10px 10px;  
+}
+img.float-left {
+  margin: 5px 10px 10px 0px;
+}
+
+h1, h2, h3, p {
+	padding: 10px;		
+	margin: 0;
+}
+ul, ol {
+	margin: 5px 20px;
+	padding: 0 20px;
+}
+ul li {
+	list-style-image: url(bullet.gif);
+}
+
+code {
+  margin: 5px 0;
+  padding: 10px;
+  text-align: left;
+  display: block;
+  overflow: auto;  
+  font: 500 1em/1.5em 'Lucida Console', 'courier new', monospace ;
+  /* white-space: pre; */
+  background: #FAFAFA;
+  border: 1px solid #f2f2f2;  
+}
+acronym {
+  cursor: help;
+  border-bottom: 1px solid #777;
+}
+
+.topicHighlight
+{
+	color: black;
+	background-color: silver;
+}

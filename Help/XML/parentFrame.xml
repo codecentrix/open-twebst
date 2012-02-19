@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="parentFrame" type="propety">
+	<title>
+		Open Twebst Library | Documentation - parentFrame Property
+	</title>
+
+	<description>
+		IE automation property that returns the parent Frame object of the current Element or Frame.
+		Returns <i>null</i> if the current frame/iframe has no parent because is the top frame in DOM hierarchy.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+		<apply_item>Frame</apply_item>
+	</apply>
+
+	<call>
+		var f = obj.parentFrame;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		This IE automation property can be useful if you already have a native IHTMLElement object and you need the parent Frame.
+	</remarks>
+
+	<example>
+		<jscode>
+// "e" is a native HTML element.
+var coreObj            = new ActiveXObject("OpenTwebst.Core");
+var firstAnchorInFrame = coreObj.AttachToNativeElement(e).parentFrame.FindElement("a", "");
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>Frame</seealso_item>
+		<seealso_item>parentBrowser</seealso_item>
+		<seealso_item>parentElement</seealso_item>
+	</seealso>
+</topic>

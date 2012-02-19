@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="SetAttribute" type="method">
+	<title>
+		Open Twebst Library | Documentation - SetAttribute Method
+	</title>
+
+	<description>
+		Browser automation method that sets the value of the specified HTML attribute.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		elementObj.SetAttribute(attrName, attrValue);
+	</call>
+
+	<arguments>
+	    <arg>
+	      <code>attrName</code> is the name of the attribute to be set.
+	    </arg>
+		
+	    <arg>
+	      <code>attrValue</code> is the string, number, or boolean to assign to the attribute.
+	    </arg>
+	</arguments>
+
+	<remarks>
+		When setting the CLASS attribute using this method, set the sName to be "className", which is the corresponding Dynamic HTML (DHTML) property.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>GetAttribute</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+		<seealso_item>RemoveAttribute</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="Close" type="method">
+	<title>
+		Open Twebst Library | Documentation - Close Method
+	</title>
+
+	<description>
+		Closes the <i>Internet Explorer</i> instance represented by the Browser web automation library object.
+	</description>
+
+	<apply>
+		<apply_item>Browser</apply_item>
+	</apply>
+
+	<call>
+		browserObj.Close();
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		The method throws a web macro exception if the browser instance can not be closed (for example, if the browser is already closed).
+		In this case the lastError property of the	Core object is set to FAIL_ERROR or BROWSER_CONNECTION_LOST_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://codecentrix.blogspot.com/");
+newBrowser.Close();
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>StartBrowser</seealso_item>
+	</seealso>
+</topic>

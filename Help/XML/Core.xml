@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\overview.xsl"?>
+
+<overview name="Core" type="object">
+	<title>
+		Open Twebst Library | Documentation - Core Object
+	</title>
+
+
+	<description>
+		The core object is the root of the <i>Open Twebst Library</i> and every IE macro must create a core object in order to gain access to the
+		other features of the web automation library. The methods it provides create Browser, Frame and Element web automation objects connected to <i>Internet
+		Explorer</i> HTML web controls. The properties of the core object allow to finely tune the behavior of the other objects and methods. 
+	</description>
+
+
+	<creation>
+		<creat_method>var coreObj = new ActiveXObject("OpenTwebst.Core");</creat_method>
+	</creation>
+
+
+	<methods>
+		<method>
+			<method_name>AttachToNativeBrowser</method_name>
+			<method_description>Creates a library Browser IE macro object from a native <i>Internet Explorer</i> browser object.</method_description>
+		</method>
+
+		<method>
+			<method_name>AttachToNativeElement</method_name>
+			<method_description>Creates a library Element IE macro object from a native <i>Internet Explorer</i> element object.</method_description>
+		</method>
+
+		<method>
+			<method_name>AttachToNativeFrame</method_name>
+			<method_description>Creates a library Frame IE macro object from a native <i>Internet Explorer</i> window object.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindBrowser</method_name>
+			<method_description>Searches for an existing instance of <i>Internet Explorer</i> browser that verifies a list of <reference href="SearchCondition.htm">Search Conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>GetClipboardText</method_name>
+			<method_description>The method retrieves text data from the clipboard.</method_description>
+		</method>
+
+		<method>
+			<method_name>Reset</method_name>
+			<method_description>Resets all properties of core IE macro object to their default values.</method_description>
+		</method>
+
+		<method>
+			<method_name>SetClipboardText</method_name>
+			<method_description>The method places text on the clipboard in both ANSI and Unicode format.</method_description>
+		</method>
+
+		<method>
+			<method_name>StartBrowser</method_name>
+			<method_description>Starts a new instance of <i>Internet Explorer</i> browser and returns a Browser web macro object connected to it.</method_description>
+		</method>
+	</methods>
+
+
+	<properties>
+		<property>
+			<prop_name>asyncHtmlEvents</prop_name>
+			<prop_desc>Determines whether HTML events will be fired up synchronously or asynchronously.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>closeBrowserPopups</prop_name>
+			<prop_desc>Automatically close IE browser popups (security alerts, auto complete, errors).</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>foregroundBrowser</prop_name>
+			<prop_desc>Returns a library Browser web automation object attached to foreground <i>Internet Explorer</i> instance.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>IEVersion</prop_name>
+			<prop_desc>Returns the version of <i>Internet Explorer</i>.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>lastError</prop_name>
+			<prop_desc>Returns the error code for the last library operation.</prop_desc>
+		</property>
+		
+		<property>
+			<prop_name>loadTimeout</prop_name>
+			<prop_desc>Sets or retrieves the amount of time library methods wait the web page to load.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>loadTimeoutIsError</prop_name>
+			<prop_desc>Enables or disables script exception raising when the loadTimeout has expired.</prop_desc>
+		</property>
+		
+		<property>
+			<prop_name>productName</prop_name>
+			<prop_desc>Returns the name of the installed Twebst Library.</prop_desc>
+		</property>
+		
+		<property>
+			<prop_name>productVersion</prop_name>
+			<prop_desc>Returns the version of the installed Twebst Library.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>searchTimeout</prop_name>
+			<prop_desc>Sets or retrieves the amount of time web automation library methods try to find HTML objects in web pages.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>useHardwareInputEvents</prop_name>
+			<prop_desc>Sets or retrieves the type of input events used to perform actions on HTML web controls.</prop_desc>
+		</property>
+	</properties>
+
+
+	<constants>
+		<constant>
+			<const_name>OK_ERROR</const_name>
+			<const_desc>No error occured</const_desc>
+		</constant>
+
+		<constant>
+			<const_name>FAIL_ERROR</const_name>
+			<const_desc>Undetermined error occurred.</const_desc>
+		</constant>
+
+		<constant>
+			<const_name>INVALID_ARG_ERROR</const_name>
+			<const_desc>Invald parameter in method call.</const_desc>
+		</constant>
+
+		<constant>
+			<const_name>LOAD_TIMEOUT_ERROR</const_name>
+			<const_desc>Load timeout expired while waiting for the web page to complete.</const_desc>
+		</constant>
+
+		<constant>
+			<const_name>INDEX_OUT_OF_BOUND_ERROR</const_name>
+			<const_desc>Attempt to access an element of a collection with an index that exceeds the size of the collection.</const_desc>
+		</constant>
+
+		<constant>
+			<const_name>BROWSER_CONNECTION_LOST_ERROR</const_name>
+			<const_desc>A web automation object was disconnected from its <i>Internet Explorer</i> instance.</const_desc>
+		</constant>
+
+		<constant>
+			<const_name>INVALID_OPERATION_ERROR</const_name>
+			<const_desc>Operation not applicable to current web automation object.</const_desc>
+		</constant>
+
+		<constant>
+			<const_name>NOT_FOUND_ERROR</const_name>
+			<const_desc>Item(s) not found.</const_desc>
+		</constant>
+	</constants>
+
+
+	<seealso>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>ElementList</seealso_item>
+		<seealso_item>Frame</seealso_item>
+	</seealso>
+</overview>

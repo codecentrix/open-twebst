@@ -1,0 +1,26 @@
+HKCR
+{
+	OpenTwebstPlugin.OpenTwebstBHO.1 = s 'OpenTwebstBHO Class'
+	{
+		CLSID = s '{8BF2B70E-D67C-4051-A368-737384FF9765}'
+	}
+	OpenTwebstPlugin.OpenTwebstBHO = s 'OpenTwebstBHO Class'
+	{
+		CLSID = s '{8BF2B70E-D67C-4051-A368-737384FF9765}'
+		CurVer = s 'OpenTwebstPlugin.OpenTwebstBHO.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {8BF2B70E-D67C-4051-A368-737384FF9765} = s 'OpenTwebstBHO Class'
+		{
+			ProgID = s 'OpenTwebstPlugin.OpenTwebstBHO.1'
+			VersionIndependentProgID = s 'OpenTwebstPlugin.OpenTwebstBHO'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '7F5F0CF0-E950-4766-B31A-BAB37075F5D4'
+		}
+	}
+}

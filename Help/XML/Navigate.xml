@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="Navigate" type="method">
+	<title>
+		Open Twebst Library | Documentation - Navigate Method
+	</title>
+
+	<description>
+		Internet Explore automation method that navigates the browser to a given URL.
+	</description>
+
+	<apply>
+		<apply_item>Browser</apply_item>
+	</apply>
+
+	<call>
+		browserObj.Navigate(url_string);
+	</call>
+
+	<arguments>
+		<arg><code>url_string</code> is the URL where the browser will navigate.</arg>
+	</arguments>
+
+	<remarks>
+		This <i>Internet Explorer</i> automation method works for all versions: <i>IE6</i>, <i>IE7</i>, <i>IE8</i> and with <i>IE protected mode</i> on <i>Windows XP</i>, <i>Vista</i> and <i>Win7</i>.
+		In case of failure this method throws a <i>Internet Explorer</i> automation exception and the lastError property of the Core object is set to FAIL_ERROR or BROWSER_CONNECTION_LOST_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://www.codecentrix.blogspot.com/");
+newBrowser.Navigate("http://www.codecentrix.com/");
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>StartBrowser</seealso_item>
+		<seealso_item>WaitToLoad</seealso_item>
+		<seealso_item>isLoading</seealso_item>
+		<seealso_item>navigationError</seealso_item>
+	</seealso>
+</topic>

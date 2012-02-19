@@ -1,0 +1,306 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_TWBST_ICON          ICON                    "res\\twbst.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004e4"
+        BEGIN
+            VALUE "Comments", "www.codecentrix.com"
+            VALUE "CompanyName", "Codecentrix Software"
+            VALUE "FileDescription", "Open Twebst Library"
+            VALUE "FileVersion", "1.0.0.0"
+            VALUE "InternalName", "OpenTwebstLib.dll"
+            VALUE "LegalCopyright", "(c) 2012 Codecentrix Software."
+            VALUE "OriginalFilename", "OpenTwebstLib.dll"
+            VALUE "ProductName", "Open Twebst"
+            VALUE "ProductVersion", "1.0.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJNAME            "CatCLSLib"
+    IDS_BUY_NOW             "Purchase now"
+    IDS_CODECENTRIX_BUY_TWEBST_URL "http://www.codecentrix.com/buytwebst.html"
+    IDS_VERSION_STATIC_TEXT "Twebst Library version "
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERR_CAN_NOT_START_BROWSER 
+                            "Failed to start ""Internet Explorer"" browser!"
+    IDS_ERR_CAN_NOT_START_BROWSER_BECAUSE_OF_PROXY 
+                            "Can not properly create a new browser object. It is possible that OTWBSTPlugin.dll is not properly registered!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_WAIT_TO_LOAD_TIMEOUT "Page loading timeout in WaitToLoad method call!"
+    IDS_FIND_ALL_BRWS_LOAD_TIMEOUT 
+                            "Page load timeout in FindAllBrowsers method call!"
+    IDS_ERR_INDEX_OUT_OF_BOUNDS "Index out of bounds!"
+    IDS_ERR_FIND_ELEMENT_INVALID_PARAM 
+                            "Invalid parameter list in FindElement method call!"
+    IDS_ERR_FIND_ELEMENT_FAILED "FindElement method call failed!"
+    IDS_ERR_BROWSER_DISCONNECTED "Browser disconnected!"
+    IDS_FIND_ELEMENT_LOAD_TIMEOUT 
+                            "Page load timeout in FindElement method call!"
+    IDS_ERR_CAN_NOT_CREATE_ELEMENT "Can not create a new Element object!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERR_CAN_NOT_CREATE_FRAME "Can not create a new Frame object!"
+    IDS_ERR_FIND_CHILD_ELEMENT_INVALID_PARAM 
+                            "Invald parameter list in FindChildElement method call!"
+    IDS_ERR_FIND_CHILD_ELEMENT_FAILED "FindChildElement method call failed!"
+    IDS_FIND_CHILD_ELEMENT_LOAD_TIMEOUT 
+                            "Page load timeout in FindChildElement method call!"
+    IDS_ERR_FIND_FRAME_INVALID_PARAM 
+                            "Invalid parameter list in FindFrame method call!"
+    IDS_ERR_FIND_FRAME_FAILED "FindFrame method call failed!"
+    IDS_FIND_FRAME_LOAD_TIMEOUT "Page load timeout in FindFrame method call!"
+    IDS_ERR_FIND_CHILD_FRAME_INVALID_PARAM 
+                            "Invalid paramter list in FindChildFrame method call!"
+    IDS_FIND_CHILD_FRAME_LOAD_TIMEOUT 
+                            "Page load timeout in FindChildFrame method call!"
+    IDS_ERR_FIND_CHILD_FRAME_FAILED "FindChildFrame method call failed!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERR_FIND_ALL_ELEMENTS_INVALID_PARAM 
+                            "Invalid parameter list in FindAllElements method call!"
+    IDS_ERR_FIND_ALL_ELEMENTS_FAILED "FindAllElements method call failed!"
+    IDS_ERR_CAN_NOT_CREATE_ELEMENT_LIST 
+                            "Can not create a new ElementList object!"
+    IDS_FIND_ALL_ELEMENTS_LOAD_TIMEOUT 
+                            "Page load timeout in FindAllElements method call!"
+    IDS_ERR_FIND_CHILDREN_ELEMENTS_FAILED 
+                            "FindChildrenElements method call failed!"
+    IDS_ERR_FIND_CHILDREN_ELEMENTS_INVALID_PARAM 
+                            "Invalid parameter list in FindChildrenElements method call!"
+    IDS_FIND_CHILDREN_ELEMENTS_LOAD_TIMEOUT 
+                            "Page load timeout in FindChildrenElements method call!"
+    IDS_ERR_FIND_FRAMES_INVALID_PARAM 
+                            "Invalid parameter list in FindAllFrames method call!"
+    IDS_ERR_FIND_FRAMES_FAILED "FindAllFrames method call failed!"
+    IDS_FIND_FRAMES_LOAD_TIMEOUT 
+                            "Page load timeout in FindAllFrames method call!"
+    IDS_ERR_CAN_NOT_CREATE_FRAME_LIST "Can not create a new FrameList object!"
+    IDS_ERR_FIND_ALL_FRAMES_INVALID_PARAM 
+                            "Invalid parameter list in FindAllFrames method call!"
+    IDS_ERR_FIND_ALL_FRAMES_FAILED "FindAllFrames method call failed!"
+    IDS_FIND_ALL_FRAMES_LOAD_TIMEOUT 
+                            "Page load timeout in FindAllFrames method call!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERR_FIND_CHILDREN_FRAMES_INVALID_PARAM 
+                            "Invalid parameter list in FindChildrenFrames method call!"
+    IDS_ERR_FIND_CHILDREN_FRAMES_FAILED 
+                            "FindChildrenFrames method call failed!"
+    IDS_FIND_CHILDREN_FRAMES_LOAD_TIMEOUT 
+                            "Page load timeout in FindChildrenFrames method call!"
+    IDS_ERR_INVALID_OPERATION 
+                            "The operation is not applicable to this html element!"
+    IDS_ERR_CAN_NOT_CREATE_BROWSER "Can not create a new Browser object!"
+    IDS_INVALID_PARAM_LIST_IN_METHOD 
+                            "Invalid parameter list in %s method call!"
+    IDS_METHOD_CALL_FAILED  "%s method call failed!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_PROPERTY_FAILED     "%s property failed!"
+    IDS_OPTION_ELEMENT_NOT_FOUND "Item(s) not found in <select> html element!"
+    IDS_ERR_FIND_HTML_DIALOG_INVALID_PARAM 
+                            "Invalid parameter list in FindModelessHtmlDialog method call!"
+    IDS_ERR_FIND_HTML_DIALOG_FAILED 
+                            "FindModelessHtmlDialog method call failed!"
+    IDS_FIND_HTML_DIALOG_LOAD_TIMEOUT 
+                            "Page load timeout in FindModelessHtmlDialog method call!"
+    IDS_ERR_FIND_MODAL_HTML_DIALOG_INVALID_PARAM 
+                            "Invalid parameter list in FindModalHtmlDialog method call!"
+    IDS_ERR_FIND_MODAL_HTML_DIALOG_FAILED 
+                            "FindModalHtmlDialog method call failed!"
+    IDS_FIND_MODAL_HTML_DIALOG_LOAD_TIMEOUT 
+                            "Page load timeout in FindModalHtmlDialog method call!"
+    IDS_ERR_FIND_PARENT_ELEMENT_INVALID_PARAM 
+                            "Invalid parameter list in FindParentElement method call!"
+    IDS_ERR_FIND_PARENT_ELEMENT_FAILED "FindParentElement method call failed!"
+    IDS_FIND_PARENT_ELEMENT_LOAD_TIMEOUT 
+                            "Page load timeout in FindParentElement method call!"
+    IDS_INVALID_FILE_PATH_IN_INPUT_TEXT 
+                            "Invalid file path in InputText method call!"
+    IDS_INPUT_TEXT_TAB_NOT_ACTIVE 
+                            "Can NOT automate <input type=""file"" /> in IE8 if the tab is not active!"
+    IDS_ERR_SELECTED_OPTION_INVALID_PARAM 
+                            "Invalid parameter list in selectedOption property call!"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERR_SELECTED_OPTION_FAILED "selectedOption property call failed!"
+    IDS_SELECTED_OPTION_LOAD_TIMEOUT 
+                            "Page load timeout in selectedOption property call!"
+    IDS_SELECT_OPTIONS_LOAD_TIMEOUT 
+                            "Page load timeout while selecting options!"
+    IDS_ERR_GET_ALL_SEL_OPTIONS_INVALID_PARAM 
+                            "Invalid parameter list in GetAllSelectedOptions method call!"
+    IDS_ERR_GET_ALL_SEL_OPTIONS_FAILED 
+                            "GetAllSelectedOptions method call failed!"
+    IDS_GET_ALL_SEL_OPTIONS_LOAD_TIMEOUT 
+                            "Page load timeout in GetAllSelectedOptions method call!"
+    IDS_BROWSER_CLOSE_POPUP_TIMEOUT "Timeout in ClosePopup method call!"
+    IDS_CLOSE_POPUP_BUTTON_NOT_FOUND 
+                            "Button NOT found in ClosePopup/ClosePrompt method call!"
+    IDS_CLOSE_POPUP_EDIT_NOT_FOUND 
+                            "Edit field NOT found in ClosePrompt method call!"
+    IDS_UPGRADE_NOW         "Upgrade Now!"
+    IDS_CODECENTRIX_UPGRADE_TWEBST_URL 
+                            "http://www.codecentrix.com/upgradetwebst.html"
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_CORE                REGISTRY                "Core.rgs"
+IDR_BROWSER             REGISTRY                "Browser.rgs"
+IDR_FRAME               REGISTRY                "Frame.rgs"
+IDR_ELEMENT             REGISTRY                "Element.rgs"
+IDR_ELEMENTLIST         REGISTRY                "ElementList.rgs"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// French (France) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)
+#ifdef _WIN32
+LANGUAGE LANG_FRENCH, SUBLANG_FRENCH
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_CATCLSLIB           REGISTRY                "CatCLSLib.rgs"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "1 TYPELIB ""CatCLSLib.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // French (France) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "CatCLSLib.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

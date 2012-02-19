@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="Uncheck" type="method">
+	<title>
+		Open Twebst Library | Documentation - Uncheck Method
+	</title>
+
+	<description>
+		Sets the checked state of a checkbox web control to false. All necessary HTML events are fired up to simulate user's behavior.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		checkboxObj.Uncheck();
+	</call>
+
+	<arguments>
+		<arg_summary>
+			None.
+		</arg_summary>
+	</arguments>
+
+	<remarks>
+		The method clears a selected checkbox by simulating a click on the HTML element using hardware or <i>Internet Explorer</i> events,
+		depending on useHardwareInputEvents property. If the element is already un-checked, the method returns immediately. The method can only be
+		applied to &lt;input type=checkbox&gt; elements, otherwise a web macro exception is thrown and the lastError
+		property is set to INVALID_OPERATION_ERROR. To clear a selected radio button, select another button in the set.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>Check</seealso_item>		
+		<seealso_item>Click</seealso_item>
+		<seealso_item>isChecked</seealso_item>
+		<seealso_item>useHardwareInputEvents</seealso_item>
+	</seealso>
+</topic>

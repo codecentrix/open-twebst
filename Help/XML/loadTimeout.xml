@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="loadTimeout" type="property">
+	<title>
+		Open Twebst Library | Documentation - loadTimeout Property
+	</title>
+
+	<description>
+		Web automation property that sets or retrieves the amount of time web automation methods wait the web page to load.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		coreObj.loadTimeout = numericValue;
+	</call>
+
+	<arguments>
+		<arg_summary><i>numericValue</i> is the time to wait in milliseconds.</arg_summary>
+	</arguments>
+
+	<remarks>
+		<p>The default value of this web automation property is 60,000 milliseconds (one minute).<br></br>
+		If loadTimeoutIsError property is <i>true</i>, then a web automation exception is thrown when load timeout expires in one
+		of the methods bellow. In this case, the lastError property is set to LOAD_TIMEOUT_ERROR.<br></br>
+		The property affects the following web automation methods:	AddSelection, AddSelectionRange, FindElement, FindChildElement, FindFrame, FindChildFrame,
+		FindAllElements, FindChildrenElements, FindParentElement, GetAllSelectedOptions, Select, selectedOption, SelectRange, WaitToLoad.
+		These methods wait the web page to be completly loaded before they continue.</p>
+
+		<p>If loadTimeout is zero then find methods do not wait the page to complete and no script exception is thrown.</p>
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>lastError</seealso_item>
+		<seealso_item>loadTimeoutIsError</seealso_item>
+		<seealso_item>searchTimeout</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="selectedOption" type="propety">
+	<title>
+		Open Twebst Library | Documentation - selectedOption Property
+	</title>
+
+	<description>
+		IE automation property that retrieves the selected option in a HTML drop-down / list-box web control.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var option = elementObj.selectedOption;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		If no option is selected then <i>null</i> is returned after searchTimeout has expired. It can be applied only to &lt;select&gt; objects, otherwise
+		a web automation exception is thrown and the lastError property is set to INVALID_OPERATION_ERROR.
+		In case of an error the method throws a script exception and the lastError property of the core object is set accordingly.
+		<br/><br/>
+		The time allocated for searching the selected option is specified by the searchTimeout property. If loadTimeout is not zero, then the method waits the browser objects to be completely loaded in the amount of time specified by the property.
+		If the timeout has expired the lastError property is set to LOAD_TIMEOUT_ERROR. In this case, if loadTimeoutIsError property is true, then a web automation exception is thrown.
+	</remarks>
+
+	<example>
+		<jscode>
+// Displays the selected option in a combo-box HTML control.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var browser = coreObj.StartBrowser("http://www.codecentrix.com/tests/qt3.htm");
+var select  = browser.FindElement("select", "");
+
+WScript.Echo(select.selectedOption.uiName);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>AddSelection</seealso_item>
+		<seealso_item>AddSelectionRange</seealso_item>
+		<seealso_item>ClearSelection</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>GetAllSelectedOptions</seealso_item>
+		<seealso_item>Select</seealso_item>
+		<seealso_item>SelectRange</seealso_item>
+	</seealso>
+</topic>

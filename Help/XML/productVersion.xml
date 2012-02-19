@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="productVersion" type="property">
+	<title>
+		Open Twebst Library | Documentation - productVersion Property
+	</title>
+
+	<description>
+		Returns the version of the installed Twebst web automation software.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var name = core.productVersion;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		Returns the version formated as a string: <i>major.minor</i>
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var name    = coreObj.productVersion;
+WScript.Echo(name);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>productName</seealso_item>
+	</seealso>
+</topic>

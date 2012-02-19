@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="nativeElement" type="property">
+	<title>
+		Open Twebst Library | Documentation - nativeElement Property
+	</title>
+
+	<description>
+		Returns a native HTML element ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> )
+		represented by the current web automation library Element object.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var native = elementObj.nativeElement;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		With this <i>Internet Explorer</i> automation property, get access to all methods and properties of the <a target="_bank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> native object from C#, VB.Net, VBScript web macros.
+	</remarks>
+
+	<example>
+		<jscode>
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://www.codecentrix.com/");
+
+var e = newBrowser.FindElement("a", "text=Download");
+var native = e.nativeElement;
+WScript.Echo(native.outerHTML);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>nativeBrowser</seealso_item>
+		<seealso_item>nativeFrame</seealso_item>
+	</seealso>
+</topic>

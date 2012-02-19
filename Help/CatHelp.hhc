@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="Window Styles" value="0x800025">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="General">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Introduction">
+			<param name="Local" value="HTML\Introduction.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Tutorials">
+			<param name="Local" value="HTML\Tutorials.htm">
+			</OBJECT>			
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Search condition">
+			<param name="Local" value="HTML\SearchCondition.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Objects">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Core">
+			<param name="Local" value="HTML\Core.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Browser">
+			<param name="Local" value="HTML\Browser.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Element">
+			<param name="Local" value="HTML\Element.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ElementList">
+			<param name="Local" value="HTML\ElementList.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Frame">
+			<param name="Local" value="HTML\Frame.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Properties">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="asyncHtmlEvents">
+			<param name="Local" value="HTML\asyncHtmlEvents.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="closeBrowserPopups">
+			<param name="Local" value="HTML\closeBrowserPopups.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="core">
+			<param name="Local" value="HTML\coreProp.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="document">
+			<param name="Local" value="HTML\document.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="foregroundBrowser">
+			<param name="Local" value="HTML\foregroundBrowser.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="IEVersion">
+			<param name="Local" value="HTML\IEVersion.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="isChecked">
+			<param name="Local" value="HTML\isChecked.htm">
+			</OBJECT>			
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="isLoading">
+			<param name="Local" value="HTML\isLoading.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="item">
+			<param name="Local" value="HTML\item.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="lastError">
+			<param name="Local" value="HTML\lastError.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="length">
+			<param name="Local" value="HTML\length.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="loadTimeout">
+			<param name="Local" value="HTML\loadTimeout.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="loadTimeoutIsError">
+			<param name="Local" value="HTML\loadTimeoutIsError.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="navigationError">
+			<param name="Local" value="HTML\navigationError.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="nativeBrowser">
+			<param name="Local" value="HTML\nativeBrowser.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="nativeElement">
+			<param name="Local" value="HTML\nativeElement.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="nativeFrame">
+			<param name="Local" value="HTML\nativeFrame.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="nextSiblingElement">
+			<param name="Local" value="HTML\nextSiblingElement.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="parentBrowser">
+			<param name="Local" value="HTML\parentBrowser.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="parentElement">
+			<param name="Local" value="HTML\parentElement.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="parentFrame">
+			<param name="Local" value="HTML\parentFrame.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="previousSiblingElement">
+			<param name="Local" value="HTML\previousSiblingElement.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="productName">
+			<param name="Local" value="HTML\productName.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="productVersion">
+			<param name="Local" value="HTML\productVersion.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="searchTimeout">
+			<param name="Local" value="HTML\searchTimeout.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="selectedOption">
+			<param name="Local" value="HTML\selectedOption.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="tagName">
+			<param name="Local" value="HTML\tagName.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="title">
+			<param name="Local" value="HTML\title.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="topFrame">
+			<param name="Local" value="HTML\topFrame.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="uiName">
+			<param name="Local" value="HTML\uiName.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="url">
+			<param name="Local" value="HTML\url.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="useHardwareInputEvents">
+			<param name="Local" value="HTML\useHardwareInputEvents.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Methods">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AddSelection">
+			<param name="Local" value="HTML\AddSelection.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AddSelectionRange">
+			<param name="Local" value="HTML\AddSelectionRange.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AttachToNativeBrowser">
+			<param name="Local" value="HTML\AttachToNativeBrowser.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AttachToNativeElement">
+			<param name="Local" value="HTML\AttachToNativeElement.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AttachToNativeFrame">
+			<param name="Local" value="HTML\AttachToNativeFrame.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Check">
+			<param name="Local" value="HTML\Check.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ClearSelection">
+			<param name="Local" value="HTML\ClearSelection.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Click">
+			<param name="Local" value="HTML\Click.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Close">
+			<param name="Local" value="HTML\Close.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ClosePopup">
+			<param name="Local" value="HTML\ClosePopup.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ClosePrompt">
+			<param name="Local" value="HTML\ClosePrompt.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindAllElements">
+			<param name="Local" value="HTML\FindAllElements.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindBrowser">
+			<param name="Local" value="HTML\FindBrowser.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindChildElement">
+			<param name="Local" value="HTML\FindChildElement.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindChildFrame">
+			<param name="Local" value="HTML\FindChildFrame.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindChildrenElements">
+			<param name="Local" value="HTML\FindChildrenElements.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindElement">
+			<param name="Local" value="HTML\FindElement.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindFrame">
+			<param name="Local" value="HTML\FindFrame.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindModalHtmlDialog">
+			<param name="Local" value="HTML\FindModalHtmlDialog.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindModelessHtmlDialog">
+			<param name="Local" value="HTML\FindModelessHtmlDialog.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="FindParentElement">
+			<param name="Local" value="HTML\FindParentElement.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetAllSelectedOptions">
+			<param name="Local" value="HTML\GetAllSelectedOptions.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetAttribute">
+			<param name="Local" value="HTML\GetAttribute.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetClipboardText">
+			<param name="Local" value="HTML\GetClipboardText.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Highlight">
+			<param name="Local" value="HTML\Highlight.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="InputText">
+			<param name="Local" value="HTML\InputText.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Navigate">
+			<param name="Local" value="HTML\Navigate.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="RemoveAttribute">
+			<param name="Local" value="HTML\RemoveAttribute.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Reset">
+			<param name="Local" value="HTML\Reset.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="RightClick">
+			<param name="Local" value="HTML\RightClick.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Select">
+			<param name="Local" value="HTML\Select.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SelectRange">
+			<param name="Local" value="HTML\SelectRange.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetAttribute">
+			<param name="Local" value="HTML\SetAttribute.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="SetClipboardText">
+			<param name="Local" value="HTML\SetClipboardText.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="StartBrowser">
+			<param name="Local" value="HTML\StartBrowser.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Uncheck">
+			<param name="Local" value="HTML\Uncheck.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="WaitToLoad">
+			<param name="Local" value="HTML\WaitToLoad.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="FindChildrenElements" type="method">
+	<title>
+		Open Twebst Library | Documentation - FindChildrenElements Method
+	</title>
+
+	<description>
+		Searches inside a container object, the list of direct child elements that match a tag-name and verifies a list
+		of <reference href="SearchCondition.htm">Search Conditions</reference>.
+	</description>
+
+	<apply>
+		<apply_item>Frame</apply_item>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var elementList = obj.FindChildrenElements("tag_name", Search conditions);
+	</call>
+
+	<arguments>
+		<arg_summary>
+			This method accepts a variable number of <reference href="SearchCondition.htm">Search Condition</reference> arguments.
+			Any HTML attribute is accepted in search conditions. <i>uiName</i> is also accepted as attribute in search conditions,
+			in this case the text name of the HTML element is used in search. If no search condition is provided,
+			then the collection of all direct child elements that match the <i>tag_name</i> is returned.
+		</arg_summary>
+		<arg><code>tag_name</code> is the HTML tag of the elements to be found.</arg>
+	</arguments>
+
+	<remarks>
+		The method returns an ElementList web automation object containing elements that match the search condition arguments and have
+		the specified <i>tag_name</i>. If no element verifies the search conditions, then an empty list is returned.<br/>
+		In case of an error the method throws a script exception and the lastError property of the core object is set as follows:
+		<ul>
+			<li>INVALID_ARG_ERROR: if invalid parameters are provided</li>
+			<li>BROWSER_CONNECTION_LOST_ERROR: if the browser was closed.</li>
+			<li>FAIL_ERROR: in case of anohter error.</li>
+		</ul>
+		<br/>
+		The time allocated for search is specified by the searchTimeout property.
+		If loadTimeout is not zero, then the method waits the browser objects to be completely loaded in the amount of time specified by the property.
+		If the timeout has expired the lastError property is set to LOAD_TIMEOUT_ERROR. In this case, if loadTimeoutIsError property is true,
+		then a script exception is thrown.
+		<br/><br/>
+		If the container object is a Frame, then the method searches the elements in the HTML document associated with the frame.
+		If the container object is an Element, then the method searches the elements among the direct children elements of the container element.
+	</remarks>
+
+	<example>
+		<jscode>
+// Display all the links in the &lt;body&gt; HTML element.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var browser = coreObj.StartBrowser("http://www.codecentrix.com/");
+
+var textToDisplay = "";
+var anchorList    = browser.FindElement("body", "").FindChildrenElements("a", "");
+for (i = 0; i &lt; anchorList.length; ++i)
+{
+	textToDisplay += anchorList(i).nativeElement.innerText + "\n";
+}
+WScript.Echo(textToDisplay);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>ElementList</seealso_item>
+		<seealso_item>FindAllElements</seealso_item>
+		<seealso_item>loadTimeout</seealso_item>
+		<seealso_item>searchTimeout</seealso_item>
+	</seealso>
+</topic>

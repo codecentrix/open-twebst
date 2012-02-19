@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="parentElement" type="propety">
+	<title>
+		Open Twebst Library | Documentation - parentElement Property
+	</title>
+
+	<description>
+		IE automation property that returns the parent Element object of the current Element.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var e = elementObj.parentElement;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		If the current element has no parent IHTMLElement (it is the top element in the DOM hierarchy), then <i>null</i> is returned.
+	</remarks>
+
+	<example>
+		<jscode>
+// Find the parent &lt;form&gt; element.
+function FindParentForm(e)
+{
+	var f = e;
+	while (true)
+	{
+		f = f.parentElement;
+		if (f == null)
+			break;
+		
+		if (f.nativeElement.tagName == "form")
+			break;
+	}
+
+	return f;
+}
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>FindParentElement</seealso_item>
+		<seealso_item>parentBrowser</seealso_item>
+		<seealso_item>parentFrame</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'OpenTwebstPlugin'
+		'TwebstBHO.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

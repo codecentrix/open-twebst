@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="Reset" type="method">
+	<title>
+		Open Twebst Library | Documentation - Reset Method
+	</title>
+
+	<description>
+		Resets web automation core object.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		coreObj.Reset();
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		Resets all properties of web automation core oject to their default values.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+coreObj.Reset();
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>lastError</seealso_item>
+		<seealso_item>loadTimeout</seealso_item>
+		<seealso_item>loadTimeoutIsError</seealso_item>
+		<seealso_item>searchTimeout</seealso_item>
+		<seealso_item>useHardwareInputEvents</seealso_item>
+	</seealso>
+</topic>

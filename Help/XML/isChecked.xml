@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="isChecked" type="property">
+	<title>
+		Open Twebst Library | Documentation - isChecked Property
+	</title>
+
+	<description>
+		Web automation property that retrieves the state of a check box or radio button web control.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var checked = elementObj.isChecked;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		Returns <i>true</i> if the checkbox or radio HTML element is checked, <i>false</i> otherwise.
+		This web automation property is useful when testing the value of a check-box or radio.
+		It can only be applied to automate <b>&lt;input type=radio&gt;</b> and <b>&lt;input type=checkbox&gt;</b> web controls, otherwise
+		a web macro exception is thrown and the lastError property is set to INVALID_OPERATION_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://www.google.ro");
+var radio      = newBrowser.FindElement("input radio", "");
+
+if (!radio.isChecked)
+{
+    radio.Check();
+}
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>Check</seealso_item>
+		<seealso_item>Uncheck</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+		<seealso_item>tagName</seealso_item>
+	</seealso>
+</topic>

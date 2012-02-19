@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="parentBrowser" type="propety">
+	<title>
+		Open Twebst Library | Documentation - parentBrowser Property
+	</title>
+
+	<description>
+		IE automation property that returns the parent Browser object of the current Frame or Element.
+	</description>
+
+	<apply>
+		<apply_item>Frame</apply_item>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var b = obj.parentBrowser;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		This web automation property can be useful if you already have a native <i>frame</i> or <i>element</i> and you need the parent Browser.
+	</remarks>
+
+	<example>
+		<jscode>
+// You have a native element "native" and you need the parent Browser object.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var e       = coreObj.AttachToNativeElement(native);
+var b       = e.parentBrowser;
+
+b.Navigate("htp://www.codecentrix.com");
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Frame</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>parentElement</seealso_item>
+		<seealso_item>parentFrame</seealso_item>
+	</seealso>
+</topic>

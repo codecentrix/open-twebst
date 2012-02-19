@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\overview.xsl"?>
+
+<overview name="Element" type="object">
+	<title>
+		Open Twebst Library | Documentation - Element Object
+	</title>
+
+
+	<description>
+		The Element IE macro object represents a native <i>Internet Explorer</i> web control ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> ).<br/>
+		It provides methods and properties for:
+		<ul>
+			<li>searching other element objects inside the current element.</li>
+			<li>accessing parent and sibling elements </li>
+			<li>various actions on web controls like: Click, Highlight, InputText, Select.</li>
+		</ul>
+	</description>
+
+
+	<creation>
+		<creat_method>
+			var elementObj = browserObj.FindElement(Search conditions);
+		</creat_method>
+
+		<creat_method>
+			var elementObj = browserObj.FindAllElement(Search conditions)(index);
+		</creat_method>
+
+		<creat_method>
+			var elementObj = frameObj.FindElement(Search conditions);
+		</creat_method>
+		
+		<creat_method>
+			var elementObj = frameObj.FindChildElement(Search conditions);
+		</creat_method>		
+		
+		<creat_method>
+			var elementObj = frameObj.FindAllElements(Search conditions)(index);
+		</creat_method>
+
+		<creat_method>
+			var elementObj = frameObj.FindChildrenElements(Search conditions)(index);
+		</creat_method>
+
+		<creat_method>
+			var elementObj = elemObj.FindElement(Search conditions);
+		</creat_method>
+		
+		<creat_method>
+			var elementObj = elemObj.FindChildElement(Search conditions);
+		</creat_method>		
+		
+		<creat_method>
+			var elementObj = elemObj.FindAllElements(Search conditions)(index);
+		</creat_method>
+
+		<creat_method>
+			var elementObj = elemObj.FindChildrenElements(Search conditions)(index);
+		</creat_method>
+		
+		<creat_method>
+			var elementObj = coreObj.AttachToNativeElement(native element);
+		</creat_method>
+
+		<creat_method>
+			var elementObj = elemObj.parentElement;
+		</creat_method>
+
+		<creat_method>
+			var elementObj = elemObj.nextSiblingElement;
+		</creat_method>
+
+		<creat_method>
+			var elementObj = elemObj.previousSiblingElement;
+		</creat_method>
+	</creation>
+
+
+	<methods>
+		<method>
+			<method_name>AddSelection</method_name>
+			<method_description>Add items to the current selection in HTML multiple selection list-box web controls.</method_description>
+		</method>
+
+		<method>
+			<method_name>AddSelectionRange</method_name>
+			<method_description>Add a range of items to the current selection in HTML multiple selection list-box web controls.</method_description>
+		</method>
+
+		<method>
+			<method_name>Check</method_name>
+			<method_description>Sets the checked state of a radio or checkbox control to true.</method_description>
+		</method>
+		
+		<method>
+			<method_name>ClearSelection</method_name>
+			<method_description>Clears any selection in HTML combo-box or list-box web controls.</method_description>
+		</method>
+
+		<method>
+			<method_name>Click</method_name>
+			<method_description>Simulates a click on a <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> element.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindAllElements</method_name>
+			<method_description>Searches in the current element, the list of all HTML elements that verify a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindChildElement</method_name>
+			<method_description>Searches in the current element, a direct HTML child element that verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindChildrenElements</method_name>
+			<method_description>Searches in the current element, the list of direct HTML child elements that verify a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindElement</method_name>
+			<method_description>Searches in the current element, an HTML element that verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindParentElement</method_name>
+			<method_description>Searches a parent element that matches a tag-name and verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>GetAllSelectedOptions</method_name>
+			<method_description>Retrieves the collection of selected options in a combo-box or list-box control.</method_description>
+		</method>
+		
+		<method>
+			<method_name>GetAttribute</method_name>
+			<method_description>Retrieves the value of the specified attribute.</method_description>
+		</method>
+		
+		<method>
+			<method_name>Highlight</method_name>
+			<method_description>Highlights the element.</method_description>
+		</method>
+
+		<method>
+			<method_name>InputText</method_name>
+			<method_description>Simulates keystrokes in an HTML editable web control.</method_description>
+		</method>
+
+		<method>
+			<method_name>RemoveAttribute</method_name>
+			<method_description>Removes the given attribute from the object.</method_description>
+		</method>
+		
+		<method>
+			<method_name>RightClick</method_name>
+			<method_description>Simulates a right click on a HTML element.</method_description>
+		</method>
+
+		<method>
+			<method_name>Select</method_name>
+			<method_description>Selects items in HTML drop-down or list-box web controls.</method_description>
+		</method>
+
+		<method>
+			<method_name>SelectRange</method_name>
+			<method_description>Selects a range of items in HTML multiple selection list-box web controls.</method_description>
+		</method>
+		
+		<method>
+			<method_name>SetAttribute</method_name>
+			<method_description>Sets the value of the specified attribute.</method_description>
+		</method>
+		
+		<method>
+			<method_name>Uncheck</method_name>
+			<method_description>Sets the checked state of a checkbox web control to false.</method_description>
+		</method>
+	</methods>
+
+
+
+	<properties>
+		<property>
+			<prop_name><reference href="coreProp.htm">core</reference></prop_name>
+			<prop_desc>Returns a reference to the parent Core IE macro object of the element.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>isChecked</prop_name>
+			<prop_desc>Retrieves the state of a check box or radio button.
+			</prop_desc>
+		</property>
+		
+		<property>
+			<prop_name>nativeElement</prop_name>
+			<prop_desc>Returns a native HTML element ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> )
+					   represented by the current web automation library Element object.
+			</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>nextSiblingElement</prop_name>
+			<prop_desc>Returns the next child of the parent for the object.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>parentBrowser</prop_name>
+			<prop_desc>Returns the parent Browser IE macro object of the current element.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>parentElement</prop_name>
+			<prop_desc>Returns the parent element object of the current element.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>parentFrame</prop_name>
+			<prop_desc>Returns the parent Frame IE macro object of the current element.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>previousSiblingElement</prop_name>
+			<prop_desc>Returns the previous child of the parent for the object.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>selectedOption</prop_name>
+			<prop_desc>Retrieves the selected option in a select object.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>tagName</prop_name>
+			<prop_desc>Retrieves the tag name of the object</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>uiName</prop_name>
+			<prop_desc>Retrieves the text of the element.</prop_desc>
+		</property>
+	</properties>
+
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>ElementList</seealso_item>
+		<seealso_item>Frame</seealso_item>
+	</seealso>
+</overview>

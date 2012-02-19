@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\overview.xsl"?>
+
+<overview name="Browser" type="object">
+	<title>
+		Open Twebst Library | Documentation - Browser Object
+	</title>
+
+	<description>
+		This IE macro object represents an <i>Internet Explorer</i> instance.<br/>
+		It provides web macro methods for searching Element and Frame web automation objects inside the web page DOM hierarchy, and for automating various browser actions (navigate, close, show/hide browser window).
+	</description>
+
+	<creation>
+		<creat_method>
+			var browserObj = coreObj.FindBrowser(Search conditions);
+		</creat_method>
+
+		<creat_method>
+			var browserObj = coreObj.AttachToNativeBrowser(native browser);
+		</creat_method>
+
+		<creat_method>
+			var browserObj = frameObj.parentBrowser;
+		</creat_method>
+
+		<creat_method>
+			var browserObj = elementObj.parentBrowser;
+		</creat_method>
+	</creation>
+
+
+	<methods>
+		<method>
+			<method_name>Close</method_name>
+			<method_description>Closes the <i>Internet Explorer</i> instance represented by the browser object.</method_description>
+		</method>
+
+		<method>
+			<method_name>ClosePopup</method_name>
+			<method_description>Closes a <i>window.alert</i> or a <i>window.confirm</i> popup window in <i>Internet Explorer</i>.</method_description>
+		</method>
+
+		<method>
+			<method_name>ClosePrompt</method_name>
+			<method_description>Closes a <i>window.prompt</i> popup window in <i>Internet Explorer</i>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindAllElements</method_name>
+			<method_description>Searches in the current browser, the collection of all HTML elements that verify a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindElement</method_name>
+			<method_description>Searches in the current browser, an HTML element that verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindFrame</method_name>
+			<method_description>Searches in the current browser, a HTML <i>frame</i> or <i>iframe</i> that verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+		
+		<method>
+			<method_name>FindModalHtmlDialog</method_name>
+			<method_description>Searches a Frame object in the current browser corresponding to a HTML modal dialog box.</method_description>
+		</method>
+		
+		<method>
+			<method_name>FindModelessHtmlDialog</method_name>
+			<method_description>Searches a Frame object corresponding to a modeless HTML dialog box that verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>Navigate</method_name>
+			<method_description>Navigates the browser to a given URL.</method_description>
+		</method>
+
+		<method>
+			<method_name>WaitToLoad</method_name>
+			<method_description>Waits the browser to load and check it against a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+	</methods>
+
+
+	<properties>
+		<property>
+			<prop_name><reference href="coreProp.htm">core</reference></prop_name>
+			<prop_desc>Returns a reference to the parent Core IE macro object of the browser.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>isLoading</prop_name>
+			<prop_desc>Returns a boolean value indicating whether the browser is engaged in a navigation operation.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>nativeBrowser</prop_name>
+			<prop_desc>Returns a native <i>Internet Explorer</i> browser object ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752127.aspx">IWebBrowser2</a> ). </prop_desc>
+		</property>
+
+		<property>
+			<prop_name>navigationError</prop_name>
+			<prop_desc>Returns the browser navigation error code.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name><reference>title</reference></prop_name>
+			<prop_desc>Returns the title of the web page.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>topFrame</prop_name>
+			<prop_desc>Returns a reference to the top Frame IE macro object.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name><reference>url</reference></prop_name>
+			<prop_desc>Returns the URL for the current HTML document.</prop_desc>
+		</property>
+	</properties>
+
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>ElementList</seealso_item>
+		<seealso_item>Frame</seealso_item>
+	</seealso>
+</overview>

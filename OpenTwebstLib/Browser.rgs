@@ -1,0 +1,27 @@
+HKCR
+{
+	OpenTwebst.Browser.1 = s 'Browser Class'
+	{
+		CLSID = s '{35C7DC64-F51A-4F95-87FC-8A6B811746FB}'
+	}
+	OpenTwebst.Browser = s 'Browser Class'
+	{
+		CLSID = s '{35C7DC64-F51A-4F95-87FC-8A6B811746FB}'
+		CurVer = s 'OpenTwebst.Browser.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {35C7DC64-F51A-4F95-87FC-8A6B811746FB} = s 'Browser Class'
+		{
+			ProgID = s 'Twebst.Browser.1'
+			VersionIndependentProgID = s 'OpenTwebst.Browser'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{EF32AD57-B622-412e-AE12-DFE0CEA941A1}'
+		}
+	}
+}

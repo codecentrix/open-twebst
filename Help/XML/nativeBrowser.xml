@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="nativeBrowser" type="property">
+	<title>
+		Open Twebst Library | Documentation - nativeBrowser Property
+	</title>
+
+	<description>
+		Returns the native <I>Internet Explorer</I> browser object ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752127.aspx">IWebBrowser2</a> )
+		represented by the current web automation library Browser object.
+	</description>
+
+	<apply>
+		<apply_item>Browser</apply_item>
+	</apply>
+
+	<call>
+		var native = browserObj.nativeBrowser;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		With this IE automation property, get access to all methods and properties of the native <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752127.aspx">IWebBrowser2</a> browser object from C#, VB.Net, VBScript web macros.
+	</remarks>
+
+	<example>
+		<jscode>	
+// Call StatusText native property.
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://www.codecentrix.com/");
+var nativeBrws = newBrowser.nativeBrowser;
+
+nativeBrws.StatusText = "Status bar modified by web macro!";
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+		<seealso_item>nativeFrame</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,105 @@
+/*
+ * This file is part of Open Twebst - web automation framework.
+ * Copyright (c) 2012 Adrian Dorache
+ * adrian.dorache@codecentrix.com
+ *
+ * Open Twebst is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * Open Twebst is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Open Twebst. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Twebst can be used under a commercial license if such has been acquired
+ * (see http://www.codecentrix.com/). The commercial license does not
+ * cover derived or ported versions created by third parties under GPL.
+ */
+
+// BrowserPlugin.idl : IDL source for BrowserPlugin
+// This file will be processed by the MIDL tool to
+// produce the type library (BrowserPlugin.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[
+	uuid(7F5F0CF0-E950-4766-B31A-BAB37075F5D4),
+	version(1.0),
+	helpstring("OpenTwebstPluginLib 1.0 Type Library")
+]
+library OpenTwebstPluginLib
+{
+	importlib("shdocvw.dll");
+	importlib("Mshtml.tlb");
+
+	[
+		object,
+		uuid(01902795-0333-489a-85A6-9801AB4CB6FC),
+		dual,
+		nonextensible,
+		helpstring("IExplorerPlugin Interface"),
+		pointer_default(unique)
+	]
+	interface IExplorerPlugin : IDispatch{
+			[id( 1)]HRESULT GetNativeBrowser       ([out, retval] IWebBrowser2** ppWebBrowser);
+			[id( 2)]HRESULT CheckBrowserDescriptor ([in]  LONG nSearchFlags, [in] SAFEARRAY(VARIANT) psa);
+			[id( 3)]HRESULT IsLoading              ([out] VARIANT_BOOL* pLoading);
+			[id( 4)]HRESULT GetTopFrame            ([out] IHTMLWindow2** pTopFrame);
+			[id( 5)]HRESULT FindInContainer        ([in] IUnknown* pContainer, [in] LONG nSearchFlags, [in] BSTR bstrTagName, [in] SAFEARRAY(VARIANT) psa, [out] IUnknown** ppResult);
+			[id( 6)]HRESULT FindFramesInContainer  ([in] IUnknown* pContainer, [in] LONG nSearchFlags, [in] SAFEARRAY(VARIANT) psa, [out] LONG* pnSize, [out, size_is(, *pnSize)] IHTMLWindow2*** pppFrames);
+			[id( 7)]HRESULT GetScreenClickPoint    ([in] IHTMLElement* pElement, [in] LONG nGetInputFileButton, [out] LONG* pX, [out] LONG* pY);
+			[id( 8)]HRESULT SelectOptions          ([in] IHTMLElement* pElement, [in] VARIANT vStart, [in] VARIANT vEnd, [in] LONG nFlags);
+			[id( 9)]HRESULT ClearSelection         ([in] IHTMLElement* pElement);
+			[id(10)]HRESULT GetElementText         ([in] IHTMLElement* pElement, [out] BSTR* pBstrText);
+			[id(11)]HRESULT SetForceLoaded         ([in] LONG nIeWnd);
+			[id(12)]HRESULT GetIEServerWnd         ([in] IHTMLElement* pElement, [out] LONG* pWnd);
+			[id(13)]HRESULT GetLastNavigationErr   ([out] LONG* pErrCode);
+			[id(14)]HRESULT GetElementScreenRect   ([in] IHTMLElement* pElement, [out] long* pLeft, [out] long* pTop, [out] long* pRight, [out] long* pBottom);
+			[id(15)]HRESULT GetDocumentFromWindow  ([in] IHTMLWindow2* pWindow, [out] IHTMLDocument2** ppDocument);
+			[id(16)]HRESULT GetBrowserTitle        ([out] BSTR* pBstrTitle);
+			[id(17)]HRESULT GetBrowserThreadID     ([out] LONG* pThID);
+			[id(18)]HRESULT GetBrowserProcessID    ([out] LONG* pProcID);
+			[id(19)]HRESULT SetFocusOnElement      ([in] IHTMLElement* pTargetElement, [in] VARIANT_BOOL vbAsync);
+			[id(20)]HRESULT SetFocusAwayFromElement([in] IHTMLElement* pTargetElement, BOOL bGenerateOnChange, [in] VARIANT_BOOL vbAsync);
+			[id(21)]HRESULT FireEventOnElement     ([in] IHTMLElement* pTargetElement, [in] BSTR bstrEventName, [in] LONG wCharToRise, [in] VARIANT_BOOL vbAsync);
+			[id(22)]HRESULT ClickElementAt         ([in] IHTMLElement* pElement, [in] LONG x, [in] LONG y, [in] LONG nRightClick);
+			[id(24)]HRESULT PostInputText          ([in] LONG nIEWnd, [in] BSTR bstrText, [in] BOOL bIsInputFileElem);
+			[id(25)]HRESULT ClickElementAtAsync    ([in] IHTMLElement* pElement, [in] LONG x, [in] LONG y, [in] LONG nRightClick);
+			[id(26)]HRESULT FindSelectedOption     ([in] IHTMLElement* pElement, [out] IHTMLElement** ppSelectedOption);
+			[id(27)]HRESULT FindAllSelectedOptions ([in] IHTMLElement* pElement, [out] IUnknown** ppResult);
+	};
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	[
+		object,
+		uuid(52619D18-46BE-4d3f-9A35-8F710B16C116),
+		helpstring("ILocalElementCollection Interface"),
+		pointer_default(unique),
+		dual,
+		nonextensible
+	]
+	interface ILocalElementCollection : IDispatch{
+		[id(1)] HRESULT GetCollectionInfo([out] LONG* pNumberOfElements, [out] LONG* pNumberOfPages, [out] LONG* pPageSize);
+		[id(2)] HRESULT GetPage          ([in] LONG nPageNumber, [out]SAFEARRAY(IDispatch)* pPages);
+	};
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	importlib("stdole2.tlb");
+	[
+		uuid(8BF2B70E-D67C-4051-A368-737384FF9765),
+		helpstring("OpenTwebstPlugin Class")
+	]
+	coclass OpenTwebstBHO
+	{
+		[default] interface IExplorerPlugin;
+	};
+};

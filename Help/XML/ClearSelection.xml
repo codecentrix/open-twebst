@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="ClearSelection" type="method">
+	<title>
+		Open Twebst Library | Documentation - ClearSelection Method
+	</title>
+
+	<description>
+		Web macro method that clears any selection in HTML combo-box (drop-down) or list-box web controls.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		elementObj.ClearSelection();
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		If the method is applied to an Element that is not a combo-box or list-box web control, then a web macro exception is
+		thrown and the lastError property is set to INVALID_OPERATION_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>
+// Assume nativeList is a &lt;select multiple&gt; HTML element.
+// Clear the selection in the multiple selection list-box control.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var list    = coreObj.AttachToNativeElement(nativeList);
+list.ClearSelection();
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>AddSelection</seealso_item>
+		<seealso_item>AddSelectionRange</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>GetAllSelectedOptions</seealso_item>
+		<seealso_item>Select</seealso_item>
+		<seealso_item>selectedOption</seealso_item>
+		<seealso_item>SelectRange</seealso_item>
+	</seealso>
+</topic>

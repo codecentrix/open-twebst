@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="AttachToNativeElement" type="method">
+	<title>
+		Open Twebst Library | Documentation - AttachToNativeElement Method
+	</title>
+
+	<description>
+		Automates an existing instance of <i>IE6</i> - <i>IE9</i> browser and creates a web automation library Element object from a native <i>Internet Explorer</i> web object.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var e = coreObj.AttachToNativeElement(nativeElementObject);
+	</call>
+
+	<arguments>
+		<arg><code>nativeElementObject</code> is a native <i>Internet Explorer</i> element object.</arg>
+	</arguments>
+
+	<remarks>
+		Returns an Element library object.
+		The <i>nativeElementObject</i> parameter is a native <i>Internet Explorer</i> HTML element ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> ).
+		It could be obtained using other ways than <i>Twebst</i> web automation library features. It could be also obtained by using nativeElement property.
+		This method is useful if you already have a native <i>Internet Explorer</i> web control and you want to use it as a library Element object.
+	</remarks>
+
+	<example>
+		<jscode>
+// Start an Internet Explorer object.
+// Get the body native element and attach to it.
+// Use the attached library Element object.
+var internetExplorer     = new ActiveXObject("InternetExplorer.Application");
+internetExplorer.Visible = true;
+
+var coreObj         = new ActiveXObject("OpenTwebst.Core");
+var body            = internetExplorer.Document.body;
+var attachedElement = coreObj.AttachToNativeElement(body);
+
+attachedElement.parentBrowser.Navigate("www.codecentrix.com");
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>AttachToNativeBrowser</seealso_item>
+		<seealso_item>AttachToNativeFrame</seealso_item>
+		<seealso_item>nativeBrowser</seealso_item>
+		<seealso_item>nativeFrame</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+	</seealso>
+</topic>

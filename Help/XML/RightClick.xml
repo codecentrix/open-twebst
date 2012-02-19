@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="RightClick" type="method">
+	<title>
+		Open Twebst Library | Documentation - RightClick Method
+	</title>
+
+	<description>
+		Web automation method that simulates a mouse right click on a HTML web control.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		elementObj.RightClick();
+	</call>
+
+	<arguments>
+		<arg_summary>
+			None.
+		</arg_summary>
+	</arguments>
+
+	<remarks>
+		This web automation method simulates a right click on any HTML element using hardware or <i>Internet Explorer</i> events,
+		depending on useHardwareInputEvents property. All necessary HTML events are fired up to simulate user's behavior
+		(<b><i>onmouseover</i></b>, <b><i>onmousemove</i></b>, <b><i>onmousedown</i></b>, <b><i>onbeforeactivate</i></b>, <b><i>onactivate</i></b>,
+		<b><i>onfocusin</i></b>, <b><i>onfocus</i></b>, <b><i>onmouseup</i></b>).
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Click</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>InputText</seealso_item>
+		<seealso_item>Select</seealso_item>
+		<seealso_item>useHardwareInputEvents</seealso_item>
+	</seealso>
+</topic>

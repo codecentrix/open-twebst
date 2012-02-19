@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="productName" type="property">
+	<title>
+		Open Twebst Library | Documentation - productName Property
+	</title>
+
+	<description>
+		Returns the name of the installed Twebst web automation software.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var name = core.productName;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		Returns: <i>"Open Twebst"</i>
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var name    = coreObj.productName;
+WScript.Echo(name);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>productVersion</seealso_item>
+	</seealso>
+</topic>

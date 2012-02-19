@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="item" type="property">
+
+	<title>
+		Open Twebst Library | Documentation - item Property
+	</title>
+
+	<description>
+		Retrieves an Element, Frame or Browser object from a collection based on a given index.
+	</description>
+
+	<apply>
+		<apply_item>ElementList</apply_item>
+	</apply>
+
+	<call>
+		var obj = objList.item(index);
+	</call>
+
+	<arguments>
+		<arg><code>index</code> is the zero based ordinal position of the object to be retrieved from the list of HTML elements/frames or browsers.</arg>
+	</arguments>
+
+	<remarks>
+		Because <i>item</i> is the default property of the list objects, it can be omitted. In this case,
+		the index can applied directly to the list object (see the example bellow). If the <i>index</i> parameter
+		is greater than the index of the last object in the list, a browser macro exception is thrown. In this case
+		the lastError property of the Core object is set to INDEX_OUT_OF_BOUND_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>
+// Displays all anchors in a web page.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var browser = coreObj.StartBrowser("http://www.codecentrix.com/");
+var anchors = browser.FindAllElements("a", "");
+var text    = "";
+
+for (var i = 0; i &lt; anchors.length; ++i)
+{
+	text += anchors.item(i).uiName;
+	text += "\n";
+}
+
+WScript.Echo(text);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>ElementList</seealso_item>
+		<seealso_item><reference>length</reference></seealso_item>
+	</seealso>
+</topic>

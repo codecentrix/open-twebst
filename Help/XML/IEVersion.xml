@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="IEVersion" type="property">
+	<title>
+		Open Twebst Library | Documentation - IEVersion Property
+	</title>
+
+	<description>
+		 Web macro property that retrieves <i>Internet Explorer</i> version.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var version = coreObj.IEVersion;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		The <i>Internet Explorer</i> version is retrieved as a string formated as follows:	7.0.5730.11
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+	</seealso>
+</topic>

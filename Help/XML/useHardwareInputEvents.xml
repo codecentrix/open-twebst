@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="useHardwareInputEvents" type="property">
+	<title>
+		Open Twebst Library | Documentation - useHardwareInputEvents Property
+	</title>
+
+	<description>
+		Sets or retrieves the type of input events used to simulate users actions on HTML elements.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		coreObj.useHardwareInputEvents = booleanValue;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		<i>booleanValue</i> is an expression evaluated to <i>true</i> or <i>false</i>.<br></br>
+		If booleanValue is <i>false</i> then HTML events are used to click on HTML elements, or to input text in editable controls.
+		If booleanValue is <i>true</i> then hardware events are used. The browser window is put in foreground, then	a hardware keyboard or mouse event
+		is generated (using <a href="http://msdn.microsoft.com/en-us/library/ms646260(VS.85).aspx" target="_blank">mouse_event</a> or <a href="http://msdn.microsoft.com/en-us/library/ms646304(VS.85).aspx" target="_blank">keybd_event</a> Win32 API functions).
+		The default value of the property is <i>false</i> (browser events are used by default).<br></br>
+		The property affects the following web macro methods: Click and InputText.
+	</remarks>
+
+	<example>
+		<jscode>
+// Click an element using hardware events.
+var coreObj                    = new ActiveXObject("OpenTwebst.Core");
+coreObj.useHardwareInputEvents = true;
+coreObj.FindBrowser("url=*codecentrix*").FindElement("a", "text=Download").Click();
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>asyncHtmlEvents</seealso_item>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>Click</seealso_item>
+		<seealso_item>InputText</seealso_item>
+	</seealso>
+</topic>

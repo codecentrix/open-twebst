@@ -1,0 +1,12 @@
+; BrowserPlugin.def : Declares the module parameters.
+
+LIBRARY      "OTWBSTPlugin.DLL"
+
+EXPORTS
+	DllCanUnloadNow			PRIVATE
+	DllGetClassObject		PRIVATE
+	DllRegisterServer		PRIVATE
+	DllUnregisterServer		PRIVATE
+	DllInstall				PRIVATE
+	DllRegisterPerUser		PRIVATE
+	DllUnRegisterPerUser	PRIVATE

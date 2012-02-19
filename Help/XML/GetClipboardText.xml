@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="GetClipboardText" type="method">
+	<title>
+		Open Twebst Library | Documentation - GetClipboardText Method
+	</title>
+
+	<description>
+		The method extracts text data from the clipboard.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var text = coreObj.GetClipboardText();
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		The method extracts text data from the clipboard in Unicode/ANSI format.
+		The method throws a IE macro exception if the clipboard operation fails.
+		In this case the lastError property of the	Core object is set to FAIL_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj       = new ActiveXObject("OpenTwebst.Core");
+var clipboardText = coreObj.GetClipboardText();
+
+WScript.Echo(clipboardText);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>SetClipboardText</seealso_item>
+	</seealso>
+</topic>

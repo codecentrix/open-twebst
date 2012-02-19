@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="SelectRange" type="method">
+	<title>
+		Open Twebst Library | Documentation - SelectRange Method
+	</title>
+
+	<description>
+		IE automation method that selects a range of options in HTML multiple selection list-box web controls.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		elementObj.SelectRange(start_range, end_range);
+	</call>
+
+	<arguments>
+		<arg><code>start_range</code> is the text or the ordinal position of the first option in the range to be selected.</arg>
+		<arg><code>end_range</code> is the text or the ordinal position of the last option in the range to be selected.</arg>
+	</arguments>
+
+	<remarks>
+		Any previous selection in the HTML web control is removed and the options between <i>start_range</i> and
+		<i>end_range</i> are selected.<br></br>
+		Each of the two input parameters can be:
+		<ul>
+			<li>a number that represents the zero-based ordinal position of the option to be the limit of the range.</li>
+			<li>
+				a string that represents the text pattern of the option to be the limit of the range..
+				* and ? wildcards are accepted in the text pattern.
+			</li>
+		</ul>
+		If the speciffied range is empty (no option matches the input parameters), then a script exception is thrown and the lastError property is set to NOT_FOUND_ERROR<br></br>
+		If the IE automation method is applied to an Element that is not a multiple selection list-box web control, then a script exception is thrown and the lastError property is set to INVALID_OPERATION_ERROR.
+		
+		<br/><br/>
+		The time allocated for selecting the options is specified by the searchTimeout property. If loadTimeout is not zero, then the method waits the browser objects to be completely loaded in the amount of time specified by the property.
+		If the timeout has expired the lastError property is set to LOAD_TIMEOUT_ERROR. In this case, if loadTimeoutIsError property is true, then a script exception is thrown.				
+	</remarks>
+
+	<example>
+		<jscode>
+// Assume nativeList is a &lt;select multiple&gt; HTML element.
+// Select the first two items in the multiple selection list-box control.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var list    = coreObj.AttachToNativeElement(nativeList);
+list.SelectRange(0, 1);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>AddSelection</seealso_item>
+		<seealso_item>AddSelectionRange</seealso_item>
+		<seealso_item>ClearSelection</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>GetAllSelectedOptions</seealso_item>
+		<seealso_item>Select</seealso_item>
+		<seealso_item>selectedOption</seealso_item>
+	</seealso>
+</topic>

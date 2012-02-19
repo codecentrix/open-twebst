@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="Highlight" type="method">
+	<title>
+		Open Twebst Library | Documentation - Highlight Method
+	</title>
+
+	<description>
+		Highlights <a target="_bank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> objects.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		elementObj.Highlight();
+	</call>
+
+	<arguments>
+		<arg_summary>
+			None.
+		</arg_summary>
+	</arguments>
+
+	<remarks>
+		The method will cause the border of the <a target="_bank" href="http://msdn.microsoft.com/en-us/library/aa752279(VS.85).aspx">IHTMLElement</a> to flash so that it can be easily located on the screen.
+		This method can be useful for debugging IE macros when you want to verify that the correct HTML element was found.
+	</remarks>
+
+	<example>
+		<jscode>
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var browser = coreObj.StartBrowser("http://www.codecentrix.com");
+
+var element = browser.FindElement("a", "text=Download");
+element.Highlight();
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+		<seealso_item>uiName</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="uiName" type="propety">
+	<title>
+		Open Twebst Library | Documentation - uiName Property
+	</title>
+
+	<description>
+		Retrieves the text name of the web automation Element object.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var t = elementObj.uiName;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		Unlike the native <a target="_blank" href="http://msdn.microsoft.com/en-us/library/ms533899.aspx">innerText</a> property,
+		the text property can be also used on some non-block HTML elements, like &lt;input&gt;.
+		<ul>
+			<li>For editable HTML controls, the text in the left side is returned.</li>
+			<li>For radio and checkbox controls, the text in the right side is returned.</li>
+			<li>For buttons, the text on the button is returned.</li>
+		</ul>
+	</remarks>
+
+	<example>
+		<jscode>
+// Display the whole text of a HTML document.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var browser = coreObj.FindBrowser("url=http://www.codecentrix.com");
+var body    = browser.FindElement("body", "");
+
+WScript.Echo(body.uiName);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="RemoveAttribute" type="method">
+	<title>
+		Open Twebst Library | Documentation - RemoveAttribute Method
+	</title>
+
+	<description>
+		IE automation method that removes an HTML attribute from an Element object.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		elementObj.RemoveAttribute(attrName);
+	</call>
+
+	<arguments>
+	    <arg>
+	      <code>attrName</code> is the name of the attribute to be removed.
+	    </arg>
+	</arguments>
+
+	<remarks>
+		The HTML attribute name is case insensitive.
+		When removing the CLASS attribute using this method, specify the sName to be "className", which is the corresponding Dynamic HTML (DHTML) property.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>GetAttribute</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+		<seealso_item>SetAttribute</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="WaitToLoad" type="method">
+	<title>
+		Open Twebst Library | Documentation - WaitToLoad Method
+	</title>
+
+	<description>
+		Waits the browser to load and check it against a list of <reference href="SearchCondition.htm">Search Conditions</reference>.
+	</description>
+
+	<apply>
+		<apply_item>Browser</apply_item>
+	</apply>
+
+	<call>
+		var boolResult = browserObj.WaitToLoad(Search conditions);
+	</call>
+
+	<arguments>
+		<arg_summary>
+			The method accepts a variable number of <reference href="SearchCondition.htm">Search Condition</reference> arguments.
+			The following attributes are accepted in search conditions:
+		</arg_summary>
+
+		<arg><code>TITLE</code> condition on the title of the browser window</arg>
+		<arg><code>URL</code> condition on the url of the web page</arg>
+	</arguments>
+
+	<remarks>
+		This IE automation method returns <i>true</i> if the browser is completely loaded in the amount of time specified by
+		loadTimeout property and it verifies the list of <reference href="SearchCondition.htm">Search Conditions</reference> input parameters.
+		If loadTimeout property is zero, then only the check against <reference href="SearchCondition.htm">Search Conditions</reference> parameters
+		is performed.<br></br>
+
+		If load timeout has expired and the browser is not completely loaded then lastError property is set to LOAD_TIMEOUT_ERROR.
+		In this case, if loadTimeoutIsError is <i>true</i>, then a web automation exception is thrown.
+		In case of an error the method throws a web automation exception and the lastError property of the core object is set as follows:
+		<ul>
+			<li>INVALID_ARG_ERROR: if invalid parameters are provided.</li>
+			<li>FAIL_ERROR: in case of anohter error.</li>
+		</ul>
+	</remarks>
+
+	<example>
+		<jscode>
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var browser = coreObj.StartBrowser("http://www.codecentrix.com/");
+browser.WaitToLoad();
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>FindBrowser</seealso_item>
+		<seealso_item>loadTimeout</seealso_item>
+		<seealso_item>loadTimeoutIsError</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="AddSelection" type="method">
+	<title>
+		Open Twebst Library | Documentation - AddSelection Method
+	</title>
+
+	<description>
+		Adds options to the current selection in HTML multiple selection list-box web controls.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		elementObj.AddSelection(item_to_select);
+	</call>
+
+	<arguments>
+		<arg><code>item_to_select</code> is the text or the ordinal position of the option to be added to list-box selection.</arg>
+	</arguments>
+
+	<remarks>
+		The input parameter can be:
+		<ul>
+			<li>a number that represents the zero-based ordinal position of the option to be added to selection.</li>
+			<li>
+				a string that represents the text pattern of the option to be added to selection.
+				If the pattern contains * and/or ? wildcards then all the options matching the pattern are added to selection.
+			</li>
+		</ul>
+		If no option matches the input parameter, then a script exception is thrown and the lastError property is set to NOT_FOUND_ERROR<br></br>
+		If the method is applied to an Element that is not a multiple selection list-box web control, then a script exception is
+		thrown and the lastError property is set to INVALID_OPERATION_ERROR.
+
+		<br/><br/>
+		The time allocated for automating the options selection is specified by searchTimeout property. If loadTimeout is not zero, then the method waits the browser object to be completely loaded in the amount of time specified by the property.
+		If the timeout has expired the lastError property is set to LOAD_TIMEOUT_ERROR. In this case, if loadTimeoutIsError property is true, then a script exception is thrown.		
+	</remarks>
+
+	<example>
+		<jscode>
+// Assume nativeList is a &lt;select multiple&gt; HTML element.
+// Select the first two items in the multiple selection list-box control.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var list    = coreObj.AttachToNativeElement(nativeList);
+list.Select(0);
+list.AddSelection(1);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>AddSelectionRange</seealso_item>
+		<seealso_item>ClearSelection</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>GetAllSelectedOptions</seealso_item>
+		<seealso_item>Select</seealso_item>
+		<seealso_item>selectedOption</seealso_item>
+		<seealso_item>SelectRange</seealso_item>
+	</seealso>
+</topic>

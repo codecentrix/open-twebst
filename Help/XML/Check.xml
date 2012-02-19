@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="Check" type="method">
+	<title>
+		Open Twebst Library | Documentation - Check Method
+	</title>
+
+	<description>
+		Sets the checked state of a radio or checkbox web control to true. All necessary HTML events are fired up to simulate user's behavior
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		radioOrCheckboxObj.Check();
+	</call>
+
+	<arguments>
+		<arg_summary>
+			None.
+		</arg_summary>
+	</arguments>
+
+	<remarks>
+		The method selects a checkbox or radio by simulating a click on the HTML web control using hardware or <i>Internet Explorer</i> events,
+		depending on useHardwareInputEvents property. If the element is already checked, the method returns immediately. The method can only be
+		applied to &lt;input type=radio&gt; and &lt;input type=checkbox&gt; elements, otherwise	a web macro exception is thrown and the lastError
+		property is set to INVALID_OPERATION_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://www.google.ro");
+var radio      = newBrowser.FindElement("input radio", "");
+
+if (!radio.isChecked)
+{
+    radio.Check();
+}
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>Click</seealso_item>
+		<seealso_item>isChecked</seealso_item>
+		<seealso_item>Uncheck</seealso_item>
+		<seealso_item>useHardwareInputEvents</seealso_item>
+	</seealso>
+</topic>

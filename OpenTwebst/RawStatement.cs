@@ -1,0 +1,234 @@
+﻿/*
+ * This file is part of Open Twebst - web automation framework.
+ * Copyright (c) 2012 Adrian Dorache
+ * adrian.dorache@codecentrix.com
+ *
+ * Open Twebst is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * Open Twebst is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Open Twebst. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Twebst can be used under a commercial license if such has been acquired
+ * (see http://www.codecentrix.com/). The commercial license does not
+ * cover derived or ported versions created by third parties under GPL.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+
+
+namespace CatStudio
+{
+    enum RawStatementType
+    {
+        START_UP,
+        CLICK,
+        TEXT_CHANGE,
+        SELECTION_CHANGE,
+        BACK_NAVIGATION,
+        FORWARD_NAVIGATION,
+        RIGHT_CLICK,
+    }
+
+
+    internal class RawStatement
+    {
+        #region Public Area
+
+        static public RawStatement CreateStartupStatement(String url)
+        {
+            RawStatement result = new RawStatement();
+
+            result.type       = RawStatementType.START_UP;
+            result.browserURL = url;
+
+            return result;
+        }
+
+
+        static public RawStatement CreateClickStatement(String tag, String attr, String attrVal, int index, bool isChecked, bool isRightClick)
+        {
+            RawStatement result = new RawStatement();
+
+            result.type           = isRightClick ? RawStatementType.RIGHT_CLICK : RawStatementType.CLICK;
+            result.tagName        = tag;
+            result.attributeName  = attr;
+            result.attributeValue = attrVal;
+            result.index          = index;
+            result.isChecked      = isChecked;
+
+            return result;
+        }
+
+
+        static public RawStatement CreateTextChangeStatement(String tag, String attr, String attrVal, List<String> val, int index)
+        {
+            return CreateChangeStatement(RawStatementType.TEXT_CHANGE, tag, attr, attrVal, val, index);
+        }
+
+
+        static public RawStatement CreateSelectionChangeStatement
+            (String tag, String attr, String attrVal, List<String> val, bool isMultipleSel, bool genVarForSelect, int index)
+        {
+            RawStatement rs = CreateChangeStatement(RawStatementType.SELECTION_CHANGE, tag, attr, attrVal, val, index);
+
+            rs.generateVarForSelect = genVarForSelect && isMultipleSel && (val.Count > 1);
+            rs.isMultipleSelection  = isMultipleSel;
+            return rs;
+        }
+
+
+        static public RawStatement CreateBackStatement()
+        {
+            RawStatement backStatement = new RawStatement();
+            backStatement.type = RawStatementType.BACK_NAVIGATION;
+
+            return backStatement;
+        }
+
+
+        static public RawStatement CreateForwardStatement()
+        {
+            RawStatement fwdStatement = new RawStatement();
+            fwdStatement.type = RawStatementType.FORWARD_NAVIGATION;
+
+            return fwdStatement;
+        }
+
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null || (GetType() != obj.GetType()))
+            {
+                return false;
+            }
+
+            RawStatement otherRawStat = (RawStatement)obj;
+
+            return ((this.isMultipleSelection == otherRawStat.isMultipleSelection) &&
+                    (this.tagName             == otherRawStat.tagName)             &&
+                    (this.attributeValue      == otherRawStat.attributeValue)      &&
+                    (this.attributeName       == otherRawStat.attributeName)       &&
+                    (this.type                == otherRawStat.type)                &&
+                    (this.browserURL          == otherRawStat.browserURL));
+        }
+
+
+        public override int GetHashCode()
+        {
+            // To avoid warning.
+            return base.GetHashCode();
+        }
+
+
+        public bool IsChecked
+        {
+            get { return this.isChecked; }
+        }
+
+
+        public int Index
+        {
+            get { return this.index; }
+        }
+
+
+        public RawStatementType Type
+        {
+            get { return this.type; }
+        }
+
+
+        public String TagName
+        {
+            get { return this.tagName; }
+        }
+
+
+        public String Url
+        {
+            get { return this.browserURL; }
+        }
+
+
+        public String AttrName
+        {
+            get { return this.attributeName; }
+        }
+
+        
+        public String AttrValue
+        {
+            get { return this.attributeValue; }
+        }
+
+
+        public bool IsMultipleSelection
+        {
+            get { return this.isMultipleSelection; }
+        }
+
+
+        public List<String> Values
+        {
+            get { return this.values; }
+        }
+
+
+        public bool DeclareSelectVar
+        {
+            get { return this.generateVarForSelect;  }
+            set { this.generateVarForSelect = value; }
+        }
+
+        #endregion
+
+
+        #region Private Area
+
+        static private RawStatement CreateChangeStatement(RawStatementType t, String tag, String attr, String attrVal, List<String> val, int index)
+        {
+            RawStatement result = new RawStatement();
+
+            result.type           = t;
+            result.tagName        = tag;
+            result.attributeName  = attr;
+            result.attributeValue = attrVal;
+            result.values         = val;
+            result.index          = index;
+
+            return result;
+        }
+
+
+        private RawStatement()
+        {
+        }
+
+
+
+        private RawStatementType type;
+        private String           tagName;
+        private String           browserURL;
+        private List<String>     values;
+        private String           attributeName;
+        private String           attributeValue;
+        private bool             generateVarForSelect = false;
+        private bool             isMultipleSelection  = false;
+        private int              index                = 0;
+        private bool             isChecked            = false;
+
+        #endregion
+    }
+}

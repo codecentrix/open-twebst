@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="FindBrowser" type="method">
+	<title>
+		Open Twebst Library | Documentation - FindBrowser Method
+	</title>
+
+	<description>
+		Connects a web automation Browser to an existing instance of <i>Internet Explorer</i> object ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752127(VS.85).aspx">IWebBrowser2</a> ) that verifies a list of <reference href="SearchCondition.htm">Search Conditions</reference>.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var b = coreObj.FindBrowser(Search conditions);
+	</call>
+
+	<arguments>
+		<arg_summary>
+			This method accepts a variable number of <reference href="SearchCondition.htm">Search Condition</reference> arguments.
+			The following attributes are accepted in search conditions:
+		</arg_summary>
+
+		<arg><code>TITLE</code> condition on the title of the browser window</arg>
+		<arg><code>URL</code> condition on the url of the web page</arg>
+		<arg><code>APP</code> the name of the application hosting the <i>Internet Explorer</i> web control</arg>
+	</arguments>
+
+	<remarks>
+		The method returns a web automation Browser object that matches the search condition arguments and gets programmatic control over the <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752127(VS.85).aspx">IWebBrowser2</a> underlying IE native object.
+		If no browser verifies the search conditions, then <i>null</i> is returned.<br/>
+		In case of an error the method throws a web macro exception and the lastError property of the core object is set as follows:
+		<ul>
+			<li>INVALID_ARG_ERROR: if invalid parameters are provided</li>
+			<li>FAIL_ERROR: in case of anohter error.</li>
+		</ul>
+		<br/>
+		The time allocated for search is specified by the searchTimeout property.<br/>
+		<i>APP</i> attribute is case insensitive. The default value is <i>iexplore.exe</i> and * stands for any application (including IE).
+		This IE automation method works for all <i>Internet Explorer</i> versions: <i>IE6</i>, <i>IE7</i>, <i>IE8</i>, <i>IE9</i> and with <i>IE protected mode</i> on <i>Windows XP</i>, <i>Vista</i> and <i>Win7</i>.
+	</remarks>
+
+	<example>
+		<jscode>
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var browser = coreObj.FindBrowser("URL=http://www.codecentrix.com/");
+
+// If the browser is found then close it.
+if (browser != null)
+{
+	browser.Close();
+}
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>foregroundBrowser</seealso_item>
+		<seealso_item>searchTimeout</seealso_item>
+	</seealso>
+</topic>

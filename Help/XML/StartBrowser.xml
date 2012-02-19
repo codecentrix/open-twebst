@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="StartBrowser" type="method">
+	<title>
+		Open Twebst Library | Documentation - StartBrowser Method
+	</title>
+
+	<description>
+		Starts a new instance of <i>Internet Explorer</i> browser with an appropriate integrity level and returns a Browser web macro object connected to it.
+		This <i>Internet Explorer</i> automation method works for all browser versions: <i>IE6</i>, <i>IE7</i>, <i>IE8</i> and <i>IE9</i> and with <i>IE protected mode</i> on <i>Windows XP</i>, <i>Vista</i> and <i>Win7</i>.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var b = coreObj.StartBrowser("url");
+	</call>
+
+	<arguments>
+    <arg>
+      <code>url</code> is the URL where the newly started browser will navigate first.
+    </arg>
+	</arguments>
+
+	<remarks>
+		The URL of the newly started browser is specified by the <i>url</i> parameter.
+		The method throws a web macro exception if a new browser instance can not be started.
+		In this case the lastError property of the	Core object is set to FAIL_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://www.codecentrix.com/");
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>foregroundBrowser</seealso_item>
+	</seealso>
+</topic>

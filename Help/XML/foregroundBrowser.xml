@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="foregroundBrowser" type="property">
+	<title>
+		Open Twebst Library | Documentation - foregroundBrowser Property
+	</title>
+
+	<description>
+		Returns a web automation library Browser object attached to foreground <i>Internet Explorer</i> instance (the <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752127(VS.85).aspx">IWebBrowser2</a> with which the user is currently working).
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var b = coreObj.foregroundBrowser;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		The property is <i>null</i> if no <i>Internet Explorer</i> browser is in foreground.
+		The property returns a web automation Browser object that matches the search condition arguments and gets programmatic control over the <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752127(VS.85).aspx">IWebBrowser2</a> underlying IE native object.
+		This IE automation property works for all <i>Internet Explorer</i> versions: <i>IE6</i>, <i>IE7</i>, <i>IE8</i>, <i>IE9</i> and with <i>IE protected mode</i> on <i>Windows XP</i>, <i>Vista</i> and <i>Win7</i>.
+	</remarks>
+
+	<example>
+		<jscode>
+// Make the foreground browser to navigate; start a new browser if there is no browser in foreground.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var b       = coreObj.foregroundBrowser;
+
+if (b == null)
+{
+	// No foreground browser.
+	b = coreObj.StartBrowser("http://www.codecentrix.com/");
+}
+else
+{
+	b.Navigate("http://www.codecentrix.com/");
+}
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>FindBrowser</seealso_item>
+		<seealso_item>StartBrowser</seealso_item>
+	</seealso>
+</topic>

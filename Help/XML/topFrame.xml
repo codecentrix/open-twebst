@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="topFrame" type="property">
+	<title>
+		Open Twebst Library | Documentation - topFrame Property
+	</title>
+
+	<description>
+		Retrieves the topmost ancestor Frame object in the frames DOM hierarchy of the Browser bypassing cross-domain scripting security restrictions.
+	</description>
+
+	<apply>
+		<apply_item>Browser</apply_item>
+	</apply>
+
+	<call>
+		var frame = browserObj.topFrame;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		In case of failure this web automation property throws a script exception and the lastError property of the Core object is set to FAIL_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://codecentrix.blogspot.com/");
+var frame      = newBrowser.topFrame;
+frame.nativeFrame.navigate("http://www.codecentrix.com/");
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Frame</seealso_item>
+		<seealso_item>FindFrame</seealso_item>
+		<seealso_item>nativeFrame</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,394 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AddSelection">
+		<param name="Name" value="AddSelection method">
+		<param name="Local" value="HTML\AddSelection.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AddSelectionRange">
+		<param name="Name" value="AddSelectionRange method">
+		<param name="Local" value="HTML\AddSelectionRange.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="asyncHtmlEvents">
+		<param name="Name" value="asyncHtmlEvents property">
+		<param name="Local" value="HTML\asyncHtmlEvents.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AttachToNativeBrowser">
+		<param name="Name" value="AttachToNativeBrowser method">
+		<param name="Local" value="HTML\AttachToNativeBrowser.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AttachToNativeElement">
+		<param name="Name" value="AttachToNativeElement method">
+		<param name="Local" value="HTML\AttachToNativeElement.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AttachToNativeFrame">
+		<param name="Name" value="AttachToNativeFrame method">
+		<param name="Local" value="HTML\AttachToNativeFrame.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Browser">
+		<param name="Name" value="Browser object">
+		<param name="Local" value="HTML\Browser.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Check">
+		<param name="Name" value="Check method">
+		<param name="Local" value="HTML\Check.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ClearSelection">
+		<param name="Name" value="ClearSelection method">
+		<param name="Local" value="HTML\ClearSelection.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Click">
+		<param name="Name" value="Click method">
+		<param name="Local" value="HTML\Click.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Close">
+		<param name="Name" value="Close method">
+		<param name="Local" value="HTML\Close.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="closeBrowserPopups">
+		<param name="Name" value="closeBrowserPopups property">
+		<param name="Local" value="HTML\closeBrowserPopups.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ClosePopup">
+		<param name="Name" value="ClosePopup method">
+		<param name="Local" value="HTML\ClosePopup.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ClosePrompt">
+		<param name="Name" value="ClosePrompt method">
+		<param name="Local" value="HTML\ClosePrompt.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Core">
+		<param name="Name" value="Core object">
+		<param name="Local" value="HTML\Core.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="core">
+		<param name="Name" value="core property">
+		<param name="Local" value="HTML\coreProp.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="document">
+		<param name="Name" value="document property">
+		<param name="Local" value="HTML\document.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Element">
+		<param name="Name" value="Element object">
+		<param name="Local" value="HTML\Element.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ElementList">
+		<param name="Name" value="ElementList object">
+		<param name="Local" value="HTML\ElementList.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindAllElements">
+		<param name="Name" value="FindAllElements method">
+		<param name="Local" value="HTML\FindAllElements.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindBrowser">
+		<param name="Name" value="FindBrowser method">
+		<param name="Local" value="HTML\FindBrowser.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindChildElement">
+		<param name="Name" value="FindChildElement method">
+		<param name="Local" value="HTML\FindChildElement.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindChildFrame">
+		<param name="Name" value="FindChildFrame method">
+		<param name="Local" value="HTML\FindChildFrame.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindChildrenElements">
+		<param name="Name" value="FindChildrenElements method">
+		<param name="Local" value="HTML\FindChildrenElements.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindElement">
+		<param name="Name" value="FindElement method">
+		<param name="Local" value="HTML\FindElement.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindFrame">
+		<param name="Name" value="FindFrame method">
+		<param name="Local" value="HTML\FindFrame.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindModalHtmlDialog">
+		<param name="Name" value="FindModalHtmlDialog method">
+		<param name="Local" value="HTML\FindModalHtmlDialog.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindModelessHtmlDialog">
+		<param name="Name" value="FindModelessHtmlDialog method">
+		<param name="Local" value="HTML\FindModelessHtmlDialog.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FindParentElement">
+		<param name="Name" value="FindParentElement method">
+		<param name="Local" value="HTML\FindParentElement.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="foregroundBrowser">
+		<param name="Name" value="foregroundBrowser property">
+		<param name="Local" value="HTML\foregroundBrowser.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Frame">
+		<param name="Name" value="Frame object">
+		<param name="Local" value="HTML\Frame.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GetAllSelectedOptions">
+		<param name="Name" value="GetAllSelectedOptions method">
+		<param name="Local" value="HTML\GetAllSelectedOptions.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GetAttribute">
+		<param name="Name" value="GetAttribute method">
+		<param name="Local" value="HTML\GetAttribute.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GetClipboardText">
+		<param name="Name" value="GetClipboardText method">
+		<param name="Local" value="HTML\GetClipboardText.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Highlight">
+		<param name="Name" value="Highlight method">
+		<param name="Local" value="HTML\Highlight.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="InputText">
+		<param name="Name" value="InputText method">
+		<param name="Local" value="HTML\InputText.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Introduction">
+		<param name="Name" value="Introduction">
+		<param name="Local" value="HTML\Introduction.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IEVersion">
+		<param name="Name" value="IEVersion property">
+		<param name="Local" value="HTML\IEVersion.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="isChecked">
+		<param name="Name" value="isChecked property">
+		<param name="Local" value="HTML\isChecked.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="isLoading">
+		<param name="Name" value="isLoading property">
+		<param name="Local" value="HTML\isLoading.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="item">
+		<param name="Name" value="item property">
+		<param name="Local" value="HTML\item.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="lastError">
+		<param name="Name" value="lastError property">
+		<param name="Local" value="HTML\lastError.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="length">
+		<param name="Name" value="length property">
+		<param name="Local" value="HTML\length.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="loadTimeout">
+		<param name="Name" value="loadTimeout property">
+		<param name="Local" value="HTML\loadTimeout.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="loadTimeoutIsError">
+		<param name="Name" value="loadTimeoutIsError property">
+		<param name="Local" value="HTML\loadTimeoutIsError.htm">
+		</OBJECT>		
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Navigate">
+		<param name="Name" value="Navigate method">
+		<param name="Local" value="HTML\Navigate.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="navigationError">
+		<param name="Name" value="navigationError property">
+		<param name="Local" value="HTML\navigationError.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="nativeBrowser">
+		<param name="Name" value="nativeBrowser property">
+		<param name="Local" value="HTML\nativeBrowser.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="nativeElement">
+		<param name="Name" value="nativeElement property">
+		<param name="Local" value="HTML\nativeElement.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="nativeFrame">
+		<param name="Name" value="nativeFrame property">
+		<param name="Local" value="HTML\nativeFrame.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="nextSiblingElement">
+		<param name="Name" value="nextSiblingElement propety">
+		<param name="Local" value="HTML\nextSiblingElement.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="parentBrowser">
+		<param name="Name" value="parentBrowser property">
+		<param name="Local" value="HTML\parentBrowser.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="parentElement">
+		<param name="Name" value="parentElement property">
+		<param name="Local" value="HTML\parentElement.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="parentFrame">
+		<param name="Name" value="parentFrame property">
+		<param name="Local" value="HTML\parentFrame.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="previousSiblingElement">
+		<param name="Name" value="previousSiblingElement propety">
+		<param name="Local" value="HTML\previousSiblingElement.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="productName">
+		<param name="Name" value="productName property">
+		<param name="Local" value="HTML\productName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="productVersion">
+		<param name="Name" value="productVersion property">
+		<param name="Local" value="HTML\productVersion.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="RemoveAttribute">
+		<param name="Name" value="RemoveAttribute method">
+		<param name="Local" value="HTML\RemoveAttribute.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Reset">
+		<param name="Name" value="Reset method">
+		<param name="Local" value="HTML\Reset.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="RightClick">
+		<param name="Name" value="RightClick method">
+		<param name="Local" value="HTML\RightClick.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Search condition">
+		<param name="Name" value="Search condition">
+		<param name="Local" value="HTML\SearchCondition.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="searchTimeout">
+		<param name="Name" value="searchTimeout property">
+		<param name="Local" value="HTML\searchTimeout.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Select">
+		<param name="Name" value="Select method">
+		<param name="Local" value="HTML\Select.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="selectedOption">
+		<param name="Name" value="selectedOption property">
+		<param name="Local" value="HTML\selectedOption.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SelectRange">
+		<param name="Name" value="SelectRange method">
+		<param name="Local" value="HTML\SelectRange.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SetAttribute">
+		<param name="Name" value="SetAttribute method">
+		<param name="Local" value="HTML\SetAttribute.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SetClipboardText">
+		<param name="Name" value="SetClipboardText method">
+		<param name="Local" value="HTML\SetClipboardText.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="StartBrowser">
+		<param name="Name" value="StartBrowser method">
+		<param name="Local" value="HTML\StartBrowser.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="tagName">
+		<param name="Name" value="tagName propety">
+		<param name="Local" value="HTML\tagName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="title">
+		<param name="Name" value="title property">
+		<param name="Local" value="HTML\title.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="topFrame">
+		<param name="Name" value="topFrame property">
+		<param name="Local" value="HTML\topFrame.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Tutorials">
+		<param name="Name" value="Tutorials">
+		<param name="Local" value="HTML\Tutorials.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Uncheck">
+		<param name="Name" value="Uncheck method">
+		<param name="Local" value="HTML\Uncheck.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="uiName">
+		<param name="Name" value="uiName propety">
+		<param name="Local" value="HTML\uiName.htm">
+		</OBJECT>		
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="url">
+		<param name="Name" value="url property">
+		<param name="Local" value="HTML\url.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="useHardwareInputEvents">
+		<param name="Name" value="useHardwareInputEvents property">
+		<param name="Local" value="HTML\useHardwareInputEvents.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="WaitToLoad">
+		<param name="Name" value="WaitToLoad method">
+		<param name="Local" value="HTML\WaitToLoad.htm">
+		</OBJECT>
+</UL>
+</BODY></HTML>

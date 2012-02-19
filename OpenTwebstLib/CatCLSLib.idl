@@ -1,0 +1,449 @@
+/*
+ * This file is part of Open Twebst - web automation framework.
+ * Copyright (c) 2012 Adrian Dorache
+ * adrian.dorache@codecentrix.com
+ *
+ * Open Twebst is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * Open Twebst is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Open Twebst. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ * Twebst can be used under a commercial license if such has been acquired
+ * (see http://www.codecentrix.com/). The commercial license does not
+ * cover derived or ported versions created by third parties under GPL.
+ */
+
+// CatCLSLib.idl : IDL source for CatCLSLib
+// This file will be processed by the MIDL tool to
+// produce the type library (CatCLSLib.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+#include "HtmlHelpIDs.h"
+#include "ComHelpMessages.h"
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+[
+	uuid(EF32AD57-B622-412e-AE12-DFE0CEA941A1),
+	version(1.0),
+	helpstring("Open Twebst 1.0 Type Library"),
+	helpfile("OpenTwebst.chm")
+]
+library OpenTwebstLib
+{
+	importlib("stdole2.tlb");
+	importlib("shdocvw.dll");
+	importlib("Mshtml.tlb");
+
+	// Interface declarations.
+	interface ICore;
+	interface IBrowser;
+	interface IFrame;
+	interface IElement;
+	interface IElementList;
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	[
+		object,
+		uuid(00623FEE-B819-4067-89C2-50478169A6B0),
+		dual,
+		nonextensible,
+		helpstring("ICore Interface"),
+		helpcontext(IDH_CORE),
+		pointer_default(unique)
+	]
+	interface ICore : IDispatch {
+		// Methods.
+		[id(1), helpstring(CORE_CREATE_BROWSER_HELP), helpcontext(IDH_CORE_CREATE_BROWSER)]
+			HRESULT AttachToNativeBrowser([in] IWebBrowser2* pWebBrowser, [out, retval] IBrowser** ppBrowser);
+
+		[id(2), helpstring(CORE_CREATE_ELEMENT_HELP), helpcontext(IDH_CORE_CREATE_ELEMENT)]
+			HRESULT AttachToNativeElement([in] IHTMLElement* pHtmlElement, [out, retval] IElement** ppElement);
+
+		[id(3), helpstring(CORE_CREATE_FRAME_HELP), helpcontext(IDH_CORE_CREATE_FRAME)]
+			HRESULT AttachToNativeFrame([in] IHTMLWindow2* pHtmlWindow, [out, retval] IFrame** ppFrame);
+
+		[id(4), helpstring(CORE_FIND_BROWSER_HELP), helpcontext(IDH_CORE_FIND_BROWSER)]
+			HRESULT FindBrowser([in] BSTR bstrCond, [out, retval] IBrowser** ppBrowserFound);
+
+		[id(5), helpstring(CORE_GET_CLIPBOARD_TEXT), helpcontext(IDH_CORE_GET_CLIPBOARD_TEXT)]
+			HRESULT GetClipboardText([out, retval] BSTR* pBstrClipboardText);
+
+		[id(6), helpstring(CORE_RESET_HELP), helpcontext(IDH_CORE_RESET)]
+			HRESULT Reset();
+
+		[id(7), helpstring(CORE_SET_CLIPBOARD_TEXT), helpcontext(IDH_CORE_SET_CLIPBOARD_TEXT)]
+			HRESULT SetClipboardText([in] BSTR bstrClipboardText);
+
+		[id(8), helpstring(CORE_START_BROWSER_HELP), helpcontext(IDH_CORE_START_BROWSER)]
+			HRESULT StartBrowser([in] BSTR bstrUrl, [out, retval] IBrowser** ppNewBrowser);
+
+
+		// Properties.
+		[propget, id(9), helpstring(CORE_ASYNC_HTML_EVENTS_HELP), helpcontext(IDH_CORE_ASYNC_HTML_EVENTS)]
+			HRESULT asyncHtmlEvents([out, retval] VARIANT_BOOL* pVal);
+
+		[propput, id(9), helpstring(CORE_ASYNC_HTML_EVENTS_HELP), helpcontext(IDH_CORE_ASYNC_HTML_EVENTS)]
+			HRESULT asyncHtmlEvents([in] VARIANT_BOOL newVal);
+
+		[propget, id(10), helpstring(CORE_CLOSE_BROWSER_POPUPS), helpcontext(IDH_CORE_CLOSE_BROWSER_POPUPS)]
+			HRESULT closeBrowserPopups([out, retval] VARIANT_BOOL* pAutoClose);
+
+		[propput, id(10), helpstring(CORE_CLOSE_BROWSER_POPUPS), helpcontext(IDH_CORE_CLOSE_BROWSER_POPUPS)]
+			HRESULT closeBrowserPopups([in] VARIANT_BOOL vbAutoClose);
+
+		[propget, id(11), helpstring(CORE_FOREGROUND_BRWS_HELP), helpcontext(IDH_CORE_FOREGROUND_BRWS)]
+			HRESULT foregroundBrowser([out, retval] IBrowser** pFgBrowser);
+
+		[propget, id(12), helpstring(CORE_IE_VERSION_HELP), helpcontext(IDH_CORE_IE_VERSION)]
+			HRESULT IEVersion([out, retval] BSTR* pBstrVersion);
+
+		[propget, id(13), helpstring(CORE_LAST_ERROR_HELP), helpcontext(IDH_CORE_LAST_ERROR)]
+			HRESULT lastError([out, retval] LONG* pVal);
+
+		[propget, id(14), helpstring(CORE_LOAD_TIMEOUT_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT)]
+			HRESULT loadTimeout([out, retval] LONG* pVal);
+
+		[propput, id(14), helpstring(CORE_LOAD_TIMEOUT_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT)]
+			HRESULT loadTimeout([in] LONG newVal);
+
+		[propget, id(15), helpstring(CORE_LOAD_TIMEOUT_IS_ERR_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT_IS_ERR)]
+			HRESULT loadTimeoutIsError([out, retval] VARIANT_BOOL* pVal);
+
+		[propput, id(15), helpstring(CORE_LOAD_TIMEOUT_IS_ERR_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT_IS_ERR)]
+			HRESULT loadTimeoutIsError([in] VARIANT_BOOL newVal);
+
+		[propget, id(16), helpstring(CORE_PROD_NAME_HELP), helpcontext(IDH_CORE_PROD_NAME)]
+			HRESULT productName([out, retval] BSTR* pBstrName);
+
+		[propget, id(17), helpstring(CORE_PROD_VERSION_HELP), helpcontext(IDH_CORE_PROD_VERSION)]
+			HRESULT productVersion([out, retval] BSTR* pBstrVersion);
+
+		[propget, id(18), helpstring(CORE_SEARCH_TIMEOUT_HELP), helpcontext(IDH_CORE_SEARCH_TIMEOUT)]
+			HRESULT searchTimeout([out, retval] LONG* pVal);
+
+		[propput, id(18), helpstring(CORE_SEARCH_TIMEOUT_HELP), helpcontext(IDH_CORE_SEARCH_TIMEOUT)]
+			HRESULT searchTimeout([in] LONG newVal);
+
+		[propget, id(19), helpstring(CORE_USE_IE_EVENTS_HELP), helpcontext(IDH_CORE_USE_IE_EVENTS)]
+			HRESULT useHardwareInputEvents([out, retval] VARIANT_BOOL* pVal);
+
+		[propput, id(19), helpstring(CORE_USE_IE_EVENTS_HELP), helpcontext(IDH_CORE_USE_IE_EVENTS)]
+			HRESULT useHardwareInputEvents([in] VARIANT_BOOL newVal);
+
+
+		// Constant properties.
+		[propget, id(20), helpstring(CORE_BRWS_CONNECT_LOST_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+			HRESULT BROWSER_CONNECTION_LOST_ERROR([out, retval] LONG* pVal);
+		
+		[propget, id(21), helpstring(CORE_FAIL_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+			HRESULT FAIL_ERROR([out, retval] LONG* pVal);
+
+		[propget, id(22), helpstring(CORE_INDEX_OUT_OF_BOUND_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+			HRESULT INDEX_OUT_OF_BOUND_ERROR([out, retval] LONG* pVal);
+
+		[propget, id(23), helpstring(CORE_INVALID_ARG_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+			HRESULT INVALID_ARG_ERROR([out, retval] LONG* pVal);
+
+		[propget, id(24), helpstring(CORE_INVALID_OPERATION_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+			HRESULT INVALID_OPERATION_ERROR([out, retval] LONG* pVal);
+
+		[propget, id(25), helpstring(CORE_LOAD_TIMEOUT_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+			HRESULT LOAD_TIMEOUT_ERROR([out, retval] LONG* pVal);
+
+		[propget, id(26), helpstring(CORE_OK_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+			HRESULT OK_ERROR([out, retval] LONG* pVal);
+
+		[propget, id(27), helpstring(CORE_NOT_FOUND_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+			HRESULT NOT_FOUND_ERROR([out, retval] LONG* pVal);
+	};
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	[
+		object,
+		uuid(9012718B-BE24-40c1-8BF2-932479BF04BC),
+		dual,
+		nonextensible,
+		helpstring("IBrowser Interface"),
+		helpcontext(IDH_BROWSER),
+		pointer_default(unique)
+	]
+	interface IBrowser : IDispatch {
+		// Methods.
+		[id(7), helpstring(BROWSER_CLOSE_HELP), helpcontext(IDH_BROWSER_CLOSE)]
+			HRESULT Close(void);
+
+		[id(39), helpstring(BROWSER_CLOSE_POPUP), helpcontext(IDH_BROWSER_CLOSE_POPUP)]
+			HRESULT ClosePopup([in] BSTR bstrPopupText, [in] VARIANT vButton, [out, retval] BSTR* pPopupText);
+
+		[id(40), helpstring(BROWSER_CLOSE_PROMPT), helpcontext(IDH_BROWSER_CLOSE_PROMPT)]
+			HRESULT ClosePrompt([in] BSTR bstrPromptText, [in] BSTR bstrValue, [in] VARIANT vButton, [out, retval] BSTR* pPopupText);
+
+		[id(14), helpstring(BROWSER_FIND_ALL_ELEM_HELP), helpcontext(IDH_BROWSER_FIND_ALL_ELEMENTS)]
+			HRESULT FindAllElements([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElementList** ppElementList);
+
+		[id(11), helpstring(BROWSER_FIND_ELEMENT_HELP), helpcontext(IDH_BROWSER_FIND_ELEMENT)]
+			HRESULT FindElement([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElement** ppElement);
+		
+		[id(13), helpstring(BROWSER_FIND_FRAME_HELP), helpcontext(IDH_BROWSER_FIND_FRAME)]
+			HRESULT FindFrame([in] BSTR bstrCond, [out,retval] IFrame** ppFrame);
+
+		[id(34), helpstring(BROWSER_FIND_MODELESS_HTML_DIALOG), helpcontext(IDH_BROWSER_FIND_MODELESS_HTML_DLG)]
+			HRESULT FindModelessHtmlDialog([in] BSTR bstrCond, [out, retval] IFrame** ppFrame);
+
+		[id(35), helpstring(BROWSER_FIND_MODAL_HTML_DIALOG), helpcontext(IDH_BROWSER_FIND_MODAL_HTML_DLG)]
+			HRESULT FindModalHtmlDialog([out,retval] IFrame** ppFrame);
+
+		[id(6), helpstring(BROWSER_NAVIGATE_HELP), helpcontext(IDH_BROWSER_NAVIGATE)]
+			HRESULT Navigate([in] BSTR bstrUrl);
+
+		[id(5), helpstring(BROWSER_WAIT_TO_LOAD_HELP), helpcontext(IDH_BROWSER_WAIT_TO_LOAD)]
+			HRESULT WaitToLoad([in] BSTR bstrCond, [out, retval] VARIANT_BOOL* pVal);
+
+
+		// Properties.
+		[propget, id(10), helpstring(BROWSER_CORE_HELP), helpcontext(IDH_BROWSER_CORE)]
+			HRESULT core([out, retval] ICore** pVal);
+
+		[propget, id(4), helpstring(BROWSER_IS_LOADING_HELP), helpcontext(IDH_BROWSER_ISLOADING)]
+			HRESULT isLoading([out, retval] VARIANT_BOOL* pVal);
+
+		[propget, id(1), helpstring(BROWSER_NATIVE_BROWSER_HELP), helpcontext(IDH_BROWSER_NATIVE_BROWSER)]
+			HRESULT nativeBrowser([out, retval] IWebBrowser2** pVal);
+
+		[propget, id(23), helpstring(BROWSER_NAVIGATION_ERROR), helpcontext(IDH_BROWSER_NAVIGATION_ERR)]
+			HRESULT navigationError([out, retval] LONG* pVal);
+
+		[propget, id(12), helpstring(BROWSER_TOP_FRAME_HELP), helpcontext(IDH_BORWSER_TOP_FRAME)]
+			HRESULT topFrame([out, retval] IFrame** ppTopFrame);
+
+		[propget, id(2), helpstring(BROWSER_TITLE_HELP), helpcontext(IDH_BROWSER_TITLE)]
+			HRESULT title([out, retval] BSTR* pVal);
+
+		[propget, id(3), helpstring(BROWSER_URL_HELP), helpcontext(IDH_BROWSER_URL)]
+			HRESULT url([out, retval] BSTR* pVal);
+
+
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		// Methods and properties not yet implemented.
+		[id(28), hidden, helpstring(BROWSER_SAVE_SNAPSHOT), helpcontext(IDH_BROWSER_SAVE_SNAPSHOT)]
+			HRESULT SaveSnapshot([in] BSTR bstrImgFileName);
+
+		[id(38), hidden, helpstring(BROWSER_FIND_ELEMENT_BY_XPATH), helpcontext(IDH_BROWSER_FIND_ELEM_BY_XPATH)]
+			HRESULT FindElementByXPath([in] BSTR bstrXPath, [out,retval] IElement** ppElement);
+	};
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	[
+		object,
+		uuid(9D7F9F9F-AD45-4480-88AB-BCBAF7D6D3E6),
+		dual,
+		nonextensible,
+		helpstring("IFrame Interface"),
+		helpcontext(IDH_FRAME),
+		pointer_default(unique)
+	]
+	interface IFrame : IDispatch {
+		// Methods.
+		[id(1), helpstring(FRAME_FIND_ALL_ELEMENTS_HELP), helpcontext(IDH_FRAME_FIND_ALL_ELEMENTS)]
+			HRESULT FindAllElements([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElementList** ppElementList);
+
+		[id(2), helpstring(FRAME_FIND_CHILD_ELEMENT_HELP), helpcontext(IDH_FRAME_FIND_CHILD_ELEMENT)]
+			HRESULT FindChildElement([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElement** ppElement);
+
+		[id(3), helpstring(FRAME_FIND_CHILD_FRAME_HELP), helpcontext(IDH_FRAME_FIND_CHILD_FRAME)]
+			HRESULT FindChildFrame([in] BSTR bstrCond, [out,retval] IFrame** ppFrame);
+
+		[id(4), helpstring(FRAME_FIND_CHILDREN_ELEMENTS_HELP), helpcontext(IDH_FRAME_FIND_CHILDREN_ELEM)]
+			HRESULT FindChildrenElements([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElementList** ppElementList);
+
+		[id(5), helpstring(FRAME_FIND_ELEMENT_HELP), helpcontext(IDH_FRAME_FIND_ELEMENT)]
+			HRESULT FindElement([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElement** ppElement);
+		
+		[id(6), helpstring(FRAME_FIND_FRAME_HELP), helpcontext(IDH_FRAME_FIND_FRAME)]
+			HRESULT FindFrame([in] BSTR bstrCond, [out,retval] IFrame** ppFrame);
+
+
+		// Properties.
+		[propget, id(7), helpstring(FRAME_CORE_HELP), helpcontext(IDH_FRAME_CORE)]
+			HRESULT core([out, retval] ICore** pVal);
+
+		[propget, id(8), helpstring(FRAME_DOCUMENT_PROPERTY_HELP), helpcontext(IDH_FRAME_DOCUMENT_PROPERTY)]
+			HRESULT document([out, retval] IHTMLDocument2** pVal);
+		
+		[propget, id(9), helpstring(FRAME_NATIVE_FRAME_HELP), helpcontext(IDH_FRAME_NATIVE_FRAME)]
+			HRESULT nativeFrame([out, retval] IHTMLWindow2** pVal);
+
+		[propget, id(10), helpstring(FRAME_PARENT_BROWSER_HELP),  helpcontext(IDH_FRAME_PARENT_BROWSER)]
+			HRESULT parentBrowser([out, retval] IBrowser** pVal);
+
+		[propget, id(11), helpstring(FRAME_PARENT_FRAME_HELP), helpcontext(IDH_FRAME_PARENT_FRAME)]
+			HRESULT parentFrame([out, retval] IFrame** ppParentFrame);
+
+		/////////////////////////////////////////////////////////////////////////////////////////
+		// Methods and properties not yet implemented.
+		[propget, id(12), hidden, helpstring(FRAME_ELEMENT_HELP), helpcontext(IDH_FRAME_ELEMENT)]
+			HRESULT frameElement([out, retval] IElement** ppFrameElement);
+
+		[propget, id(13), helpstring(FRAME_TITLE_HELP), helpcontext(IDH_FRAME_TITLE)]
+			HRESULT title([out, retval] BSTR* pVal);
+
+		[propget, id(14), helpstring(FRAME_URL_HELP), helpcontext(IDH_FRAME_URL)]
+			HRESULT url([out, retval] BSTR* pVal);
+	};
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	[
+		object,
+		uuid(2EAAD582-9675-4005-86F4-A345694888DD),
+		dual,
+		nonextensible,
+		helpstring("IElement Interface"),
+		helpcontext(IDH_ELEMENT),
+		pointer_default(unique)
+	]
+	interface IElement : IDispatch {
+		// Methods.
+		[id(1), helpstring(ELEMENT_ADD_SELECTION_HELP), helpcontext(IDH_ELEMENT_ADD_SELECTION)]
+			HRESULT AddSelection([in] VARIANT vItems);
+
+		[id(2), helpstring(ELEMENT_ADD_SEL_RAGE_HELP), helpcontext(IDH_ELEMENT_ADD_SEL_RANGE)]
+			HRESULT AddSelectionRange([in] VARIANT vStart, [in] VARIANT vEnd);
+
+		[id(3),  helpstring(ELEMENT_CHECK_HELP), helpcontext(IDH_ELEMENT_CHECK)]
+			HRESULT Check();
+
+		[id(4), helpstring(ELEMENT_CLEAR_SELECTION_HELP), helpcontext(IDH_ELEMENT_CLEAR_SELECTION)]
+			HRESULT ClearSelection(void);
+
+		[id(5), helpstring(ELEMENT_CLICK_HELP), helpcontext(IDH_ELEMENT_CLICK)]
+			HRESULT Click();
+
+		[id(6), helpstring(ELEMENT_FIND_ALL_ELEMENTS_HELP), helpcontext(IDH_ELEMENT_FIND_ALL_ELEMENTS)]
+			HRESULT FindAllElements([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElementList** ppElementList);
+
+		[id(7), helpstring(ELEMENT_FIND_CHILD_ELEMENT_HELP), helpcontext(IDH_ELEMENT_FIND_CHILD_ELEMENT)]
+			HRESULT FindChildElement([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElement** ppElement);
+
+		[id(8), helpstring(ELEMENT_FIND_CHILDREN_ELEM_HELP), helpcontext(IDH_ELEMENT_FIND_CHILDREN_ELEM)]
+			HRESULT FindChildrenElements([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElementList** ppElementList);
+
+		[id(9), helpstring(ELEMENT_FIND_ELEMENT_HELP), helpcontext(IDH_ELEMENT_FIND_ELEMENT)]
+			HRESULT FindElement([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElement** ppElement);
+
+		[id(10), helpstring(ELEMENT_FIND_PARENT_HELP), helpcontext(IDH_ELEMENT_FIND_PARENT)]
+			HRESULT FindParentElement([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElement** ppElement);
+
+		[id(11), helpstring(ELEMENT_ALL_SELECTED_OPTNS_HELP), helpcontext(IDH_ELEMENT_ALL_SELECTED_OPTIONS)]
+			HRESULT GetAllSelectedOptions([out, retval] IElementList** ppSelectedOptionsList);
+
+		[id(12), helpstring(ELEMENT_GET_ATTRIBUTE_HELP), helpcontext(IDH_ELEMENT_GET_ATTRIBUTE)]
+			HRESULT GetAttribute([in] BSTR bstrAttrName, [out, retval] VARIANT* pVal);
+
+		[id(13), helpstring(ELEMENT_HIGHLIGHT_HELP), helpcontext(IDH_ELEMENT_HIGHLIGHT)]
+			HRESULT Highlight(void);
+
+		[id(14), helpstring(ELEMENT_INPUT_TEXT_HELP), helpcontext(IDH_ELEMET_INPUT_TEXT)]
+			HRESULT InputText([in] BSTR bstrText);
+
+		[id(15), helpstring(ELEMENT_REMOVE_ATTRIBUTE_HELP), helpcontext(IDH_ELEMENT_REMOVE_ATTRIBUTE)]
+			HRESULT RemoveAttribute([in] BSTR bstrAttrName);
+
+		[id(16), helpstring(ELEMENT_RIGHT_CLICK_HELP), helpcontext(IDH_ELEMENT_RIGHT_CLICK)]
+			HRESULT RightClick();
+
+		[id(17), helpstring(ELEMENT_SELECT_HELP), helpcontext(IDH_ELEMENT_SELECT)]
+			HRESULT Select([in] VARIANT vItems);
+
+		[id(18), helpstring(ELEMENT_SELECT_RANGE_HELP), helpcontext(IDH_ELEMENT_SELECT_RANGE)]
+			HRESULT SelectRange([in] VARIANT vStart, [in] VARIANT vEnd);
+
+		[id(19), helpstring(ELEMENT_SET_ATTRIBUTE_HELP), helpcontext(IDH_ELEMENT_SET_ATTRIBUTE)]
+			HRESULT SetAttribute([in] BSTR bstrAttrName, [in] VARIANT varValue);
+
+		[id(20), helpstring(ELEMENT_UNCHECK_HELP), helpcontext(IDH_ELEMENT_UNCHECK)]
+			HRESULT Uncheck();
+
+		// Properties.
+		[propget, id(21), helpstring(ELEMENT_CORE_HELP), helpcontext(IDH_ELEMENT_CORE)]
+			HRESULT core([out, retval] ICore** pVal);
+
+		[propget, id(22), helpstring(ELEMENT_IS_CHECKED_HELP), helpcontext(IDH_ELEMENT_IS_CHECKED)]
+			HRESULT isChecked([out, retval] VARIANT_BOOL* pIsChecked);
+
+		[propget, id(23), helpstring(ELEMENT_NATIVE_ELEMENT_HELP), helpcontext(IDH_ELEMENT_NATIVE_ELEMENT)]
+			HRESULT nativeElement([out, retval] IHTMLElement** pVal);
+
+		[propget, id(24), helpstring(ELEMENT_NEXT_SIBLING_HELP), helpcontext(IDH_ELEMENT_NEXT_SIBLING)]
+			HRESULT nextSiblingElement([out, retval] IElement** pVal);
+
+		[propget, id(25), helpstring(ELEMENT_PARENT_BROWSER_HELP), helpcontext(IDH_ELEMENT_PARENT_BROWSER)]
+			HRESULT parentBrowser([out, retval] IBrowser** pVal);
+
+		[propget, id(26), helpstring(ELEMENT_PARENT_ELEMENT_HELP), helpcontext(IDH_ELEMENT_PARENT_ELEMENT)]
+			HRESULT parentElement([out, retval] IElement** pVal);
+
+		[propget, id(27), helpstring(ELEMENT_PARENT_FRAME_HELP), helpcontext(IDH_ELEMENT_PARENT_FRAME)]
+			HRESULT parentFrame([out, retval] IFrame** pVal);
+
+		[propget, id(28), helpstring(ELEMENT_PREVIOUS_SIBLING_HELP), helpcontext(IDH_ELEMENT_PREVIOUS_SIBLING)]
+			HRESULT previousSiblingElement([out, retval] IElement** pVal);
+
+		[propget, id(29), helpstring(ELEMENT_SELECTED_OPTION_HELP), helpcontext(IDH_ELEMENT_SELECTED_OPTION)]
+			HRESULT selectedOption([out, retval] IElement** ppSelectedOption);
+
+		[propget, id(30), helpstring(ELEMENT_TAGNAME_HELP), helpcontext(IDH_ELEMENT_TAGNAME)]
+			HRESULT tagName([out, retval] BSTR* pVal);
+
+		[propget, id(31), helpstring(ELEMENT_UI_NAME_HELP), helpcontext(IDH_ELEMENT_UI_NAME)]
+			HRESULT uiName([out, retval] BSTR* pVal);
+	};
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	[
+		object,
+		uuid(F14D3BCF-6F7D-432e-94ED-7E3AE08EB055),
+		dual,
+		nonextensible,
+		helpstring("IElementList Interface"),
+		helpcontext(IDH_ELEMENT_LIST),
+		pointer_default(unique)
+	]
+	interface IElementList : IDispatch{
+		[propget, id(0), helpstring(ELEMENTLIST_ITEM_HELP), helpcontext(IDH_ELEMENT_LIST_ITEM), defaultcollelem]
+			HRESULT item(LONG nIndex, [out, retval] IElement** pVal);
+
+		[propget, id(1), helpstring(ELEMENTLIST_COUNT_HELP), helpcontext(IDH_ELEMENT_LIST_COUNT)]
+			HRESULT length([out, retval] LONG* pVal);
+
+		[propget, id(2), helpstring(ELEMENTLIST_CORE_HELP), helpcontext(IDH_ELEMENT_LIST_CORE)]
+			HRESULT core([out, retval] ICore** pVal);
+	};
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	[
+		uuid(7C3D11C2-14A2-45cb-A40F-6696D6685021),
+		helpstring("Core Class")
+	]
+	coclass Core
+	{
+		[default] interface ICore;
+	};
+};

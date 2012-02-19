@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="lastError" type="property">
+	<title>
+		Open Twebst Library | Documentation - lastError Property
+	</title>
+
+	<description>
+		Returns the error code for the last web automation operation.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var err = coreObj.lastError;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		All web automation methods and properties of the library modify the last error code. The <reference href="core.htm#constants">error codes</reference> are
+		constant properties of the Core object.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+	</seealso>
+</topic>

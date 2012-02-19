@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="url" type="property">
+	<title>
+		Open Twebst Library | Documentation - url Property
+	</title>
+
+	<description>
+		Returns the URL for the current IHTMLDocument2 document.
+	</description>
+
+	<apply>
+		<apply_item>Browser</apply_item>
+	</apply>
+
+	<call>
+		var u = browserObj.url;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		In case of failure this web automation property throws a script exception and the lastError property of the Core object is set to FAIL_ERROR or BROWSER_CONNECTION_LOST_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://www.codecentrix.com/");
+newBrowser.WaitToLoad();
+WScript.Echo(newBrowser.url);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Navigate</seealso_item>
+		<seealso_item>StartBrowser</seealso_item>
+		<seealso_item><reference>title</reference></seealso_item>
+	</seealso>
+</topic>

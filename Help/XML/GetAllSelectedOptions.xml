@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="GetAllSelectedOptions" type="method">
+	<title>
+		Open Twebst Library | Documentation - GetAllSelectedOptions Method
+	</title>
+
+	<description>
+		Retrieves the collection of selected options in a HTML list-box ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa768872(VS.85).aspx">IHTMLSelectElement</a> ) control.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var optionsList = elementObj.GetAllSelectedOptions();
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		If no option is selected inside dropdown/list-box then an empty IE automation ElementList object is returned after searchTimeout has expired. It can be applied only to &lt;select&gt; objects, otherwise
+		a script exception is thrown and the lastError property is set to INVALID_OPERATION_ERROR.
+		<br/><br/>
+		The time allocated for finding the selected options list is specified by the searchTimeout property. If loadTimeout is not zero, then the method waits the browser objects to be completely loaded in the amount of time specified by the property.
+		If the timeout has expired the lastError property is set to LOAD_TIMEOUT_ERROR. In this case, if loadTimeoutIsError property is true, then a IE macro exception is thrown.
+	</remarks>
+
+	<example>
+		<jscode>
+// Displays all selected options in a select object.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var browser = coreObj.StartBrowser("http://www.codecentrix.com/tests/qt3.htm");
+var select  = browser.FindElement("select", "");
+var optList = select.GetAllSelectedOptions();
+var text    = "";
+
+for (var i = 0; i &lt; optList.length; ++i)
+{
+	text += optList.item(i).uiName;
+	text += "\n";
+}
+
+WScript.Echo(text);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>AddSelection</seealso_item>
+		<seealso_item>AddSelectionRange</seealso_item>
+		<seealso_item>ClearSelection</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>ElementList</seealso_item>
+		<seealso_item>Select</seealso_item>
+		<seealso_item>selectedOption</seealso_item>
+		<seealso_item>SelectRange</seealso_item>
+	</seealso>
+</topic>

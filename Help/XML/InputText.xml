@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="InputText" type="method">
+	<title>
+		Open Twebst Library | Documentation - InputText Method
+	</title>
+
+	<description>
+		IE automation method that simulates users keystrokes inside web forms editable controls ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa703817(VS.85).aspx">IHTMLInputElement</a> and
+		<a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa741682(VS.85).aspx">IHTMLTextAreaElement</a> ).
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		elementObj.InputText("input_string");
+	</call>
+
+	<arguments>
+		<arg><code>input_string</code> is the string that contains the keystrokes to be automatically generated.</arg>
+	</arguments>
+
+	<remarks>
+		This IE automation method automatically fills out web forms by simulating keystrokes in HTML editable controls, using hardware or <i>Internet Explorer</i> HTML events, depending on useHardwareInputEvents property.
+		All necessary HTML events are fired up to simulate user's behavior (<b><i>onkeydown</i></b>, <b><i>onkeydown</i></b>, <b><i>onkeyup</i></b>, <b><i>onkeypress</i></b>, <b><i>onchange</i></b>).
+		If the method is applied to an Element that is not an editable control, then an IE automation exception is thrown and the lastError property is set to INVALID_OPERATION_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>
+// Assume nativeEdit is a &lt;input type="text"&gt; HTML element.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var e       = coreObj.AttachToNativeElement(nativeEdit);
+e.InputText("abcdefgh");
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>Click</seealso_item>
+		<seealso_item>Select</seealso_item>
+		<seealso_item>useHardwareInputEvents</seealso_item>
+	</seealso>
+</topic>

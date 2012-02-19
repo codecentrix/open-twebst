@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="loadTimeoutIsError" type="property">
+	<title>
+		Open Twebst Library | Documentation - loadTimeoutIsError Property
+	</title>
+
+	<description>
+		Web automation property that enables or disables web macro exception raising when the loadTimeout has expired.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		coreObj.loadTimeoutIsError = booleanValue;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		<i>booleanValue</i> is an expression evaluated to <i>true</i> or <i>false</i>.<br/>
+		If <i>booleanValue</i> is <i>true</i>, then a web macro exception is thrown when loadTimeout expires in one of the methods bellow.<br></br>
+		The default value of the web automation property is <i>true</i> (by default web macro exceptions are thrown when loadTimeout expires).<br></br>
+		The property affects the following methods: AddSelection, AddSelectionRange, FindElement, FindChildElement, FindFrame, FindChildFrame,
+		FindAllElements, FindChildrenElements, FindParentElement, GetAllSelectedOptions, Select, selectedOption, SelectRange, WaitToLoad.
+		When loadTimeout expires the lastError property is set to LOAD_TIMEOUT_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>lastError</seealso_item>
+		<seealso_item>loadTimeout</seealso_item>
+		<seealso_item>searchTimeout</seealso_item>
+	</seealso>
+</topic>

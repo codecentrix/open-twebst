@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\overview.xsl"?>
+
+<overview name="Frame" type="object">
+	<title>
+		Open Twebst Library | Documentation - Frame Object
+	</title>
+
+
+	<description>
+		This IE macro object represents a native <i>Internet Explorer</i> window object ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa741505(VS.85).aspx">IHTMLWindow2</a> )
+		corresponding to a <i>frame</i> or an <i>iframe</i> HTML element.
+		It provides methods for searching other Frame or Element IE macro objects inside the current frame.
+	</description>
+
+
+	<creation>
+		<creat_method>
+			var frame = browserObj.FindFrame(Search conditions);
+		</creat_method>
+
+		<creat_method>
+			var frame = frameObj.FindFrame(Search conditions);
+		</creat_method>
+		
+		<creat_method>
+			var frame = frameObj.FindChildFrame(Search conditions);
+		</creat_method>		
+		
+		<creat_method>
+			var frame = coreObj.AttachToNativeFrame(native frame);
+		</creat_method>
+
+		<creat_method>
+			var frame = elemObj.parentFrame;
+		</creat_method>
+	</creation>
+
+
+	<methods>
+		<method>
+			<method_name>FindAllElements</method_name>
+			<method_description>Searches in the current frame, the collection of all web controls that verify a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindChildElement</method_name>
+			<method_description>Searches in the current frame, a direct HTML child element that verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindChildFrame</method_name>
+			<method_description>Searches in the current frame, a direct child <i>frame</i> or <i>iframe</i> that verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindChildrenElements</method_name>
+			<method_description>Searches in the current frame, the collection of direct HTML child elements that verify a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindElement</method_name>
+			<method_description>Searches in the current frame, an HTML element that verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+
+		<method>
+			<method_name>FindFrame</method_name>
+			<method_description>Searches in the current frame, an HTML <i>frame</i> or <i>iframe</i> that verifies a list of <reference href="SearchCondition.htm">search conditions</reference>.</method_description>
+		</method>
+	</methods>
+
+
+
+	<properties>
+		<property>
+			<prop_name><reference href="coreProp.htm">core</reference></prop_name>
+			<prop_desc>Returns a reference to the parent Core web macro object of the frame.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name><reference>document</reference></prop_name>
+			<prop_desc>Returns the native HTML <i>document</i> object ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa752574.aspx">IHTMLDocument2</a> ) of the current library frame object.</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>nativeFrame</prop_name>
+			<prop_desc>Returns a native HTML <i>frame</i> or <i>iframe</i> object ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa741505(VS.85).aspx">IHTMLWindow2</a> )
+					   represented by the current web automation library frame object.
+			</prop_desc>
+		</property>
+
+		<property>
+			<prop_name>parentBrowser</prop_name>
+			<prop_desc>Returns the parent Browser IE macro object of the current frame.</prop_desc>
+		</property>
+		
+		<property>
+			<prop_name>parentFrame</prop_name>
+			<prop_desc>Returns the parent Frame web macro object of the current frame.</prop_desc>
+		</property>
+	</properties>
+
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>ElementList</seealso_item>
+	</seealso>
+</overview>

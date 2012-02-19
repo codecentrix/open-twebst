@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="ClosePrompt" type="method">
+	<title>
+		Open Twebst Library | Documentation - ClosePrompt Method
+	</title>
+
+	<description>
+		Closes a <a target="_blank" href="http://msdn.microsoft.com/en-us/library/ms536673(VS.85).aspx">window.prompt</a> popup window in <i>Internet Explorer</i> instance represented by the Browser web automation library object.
+	</description>
+
+	<apply>
+		<apply_item>Browser</apply_item>
+	</apply>
+
+	<call>
+		var text = browserObj.ClosePrompt("popup_text", "value", "button");
+	</call>
+
+	<arguments>
+		<arg><code>popup_text</code> specifies the text pattern of the <i>IE</i> popup window to be found. * and ? wildcards are accepted in the search pattern.</arg>
+		<arg><code>value</code> specifies the text used to fill out the edit field inside prompt popup window.</arg>
+		<arg><code>button</code> specifies the button to press; it is the button text or the button zero-based index order.</arg>
+	</arguments>
+
+	<remarks>
+		If <i>popup_text</i> parameter is emtpy then any <i>window.prompt</i> popup window will be closed.
+		This web automation method returns the text displayed by the pop-up window.
+		The time allocated for searching the popup is specified by the searchTimeout property.
+		The method throws a web macro exception if the popup or the button is not found.
+		In this case the lastError property of the Core object is set to FAIL_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>	
+var core    = new ActiveXObject("OpenTwebst.Core");
+var browser = core.StartBrowser("http://www.codecentrix.com/tests/testPopups.htm");
+
+// Use hardware events otherwise Click will be blocked until the popup is close!
+core.useHardwareInputEvents = true;
+browser.FindElement("input button", "text=Prompt").Click();
+browser.ClosePopup("Prompt text", "new value", "OK");
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>asyncHtmlEvents</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Close</seealso_item>
+		<seealso_item>closeBrowserPopups</seealso_item>
+		<seealso_item>ClosePopup</seealso_item>
+		<seealso_item>FindModalHtmlDialog</seealso_item>
+		<seealso_item>FindModelessHtmlDialog</seealso_item>
+	</seealso>
+</topic>

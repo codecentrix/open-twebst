@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="SetClipboardText" type="method">
+	<title>
+		Open Twebst Library | Documentation - SetClipboardText Method
+	</title>
+
+	<description>
+		This IE automation method places text on the clipboard.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		coreObj.SetClipboardText(text);
+	</call>
+
+	<arguments>
+    <arg>
+      <code>text</code> is the text to be placed on the clipboard.
+    </arg>
+	</arguments>
+
+	<remarks>
+		The <i>text</i> is placed on the clipboard in both ANSI and Unicode format.
+		The method throws a web macro exception if the clipboard operation fails.
+		In this case the lastError property of the	Core object is set to FAIL_ERROR.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+coreObj.SetClipboardText("Open Twebst Library");
+
+var clipboardText = coreObj.GetClipboardText();
+WScript.Echo(clipboardText);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>GetClipboardText</seealso_item>
+	</seealso>
+</topic>

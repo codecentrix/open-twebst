@@ -1,0 +1,27 @@
+HKCR
+{
+	OpenTwebst.Core.1 = s 'Core Class'
+	{
+		CLSID = s '{7C3D11C2-14A2-45cb-A40F-6696D6685021}'
+	}
+	OpenTwebst.Core = s 'Core Class'
+	{
+		CLSID = s '{7C3D11C2-14A2-45cb-A40F-6696D6685021}'
+		CurVer = s 'OpenTwebst.Core.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {7C3D11C2-14A2-45cb-A40F-6696D6685021} = s 'Core Class'
+		{
+			ProgID = s 'OpenTwebst.Core.1'
+			VersionIndependentProgID = s 'OpenTwebst.Core'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{EF32AD57-B622-412e-AE12-DFE0CEA941A1}'
+		}
+	}
+}

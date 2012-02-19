@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="searchTimeout" type="property">
+	<title>
+		Open Twebst Library | Documentation - searchTimeout Property
+	</title>
+
+	<description>
+		Web automation property that sets or retrieves the amount of time the automation library methods try to find HTML objects inside web pages DOM hierarchy.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		coreObj.searchTimeout = numericValue;
+	</call>
+
+	<arguments>
+		<arg_summary><i>numericValue</i> is the time to wait in milliseconds.</arg_summary>
+	</arguments>
+
+	<remarks>
+		The default value of this web automation property is 10,000 milliseconds (10 seconds).<br></br>
+		The property affects the following web automation methods:	AddSelection, AddSelectionRange, FindElement, FindChildElement, FindFrame, FindChildFrame,
+		FindAllElements, FindChildrenElements, FindParentElement, GetAllSelectedOptions, Select, selectedOption, SelectRange.
+		After the web page is completely loaded, these methods try to fo find HTML objects in the amount of time specified by the property.
+		This property is useful for AJAX web sites with dynamically created web controls.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>lastError</seealso_item>
+		<seealso_item>loadTimeout</seealso_item>
+		<seealso_item>loadTimeoutIsError</seealso_item>
+	</seealso>
+</topic>

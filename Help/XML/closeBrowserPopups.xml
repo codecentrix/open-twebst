@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="closeBrowserPopups" type="property">
+	<title>
+		Open Twebst Library | Documentation - closeBrowserPopups Property
+	</title>
+
+	<description>
+		IE automation property specifying if IE browser popups (security alerts, auto complete, errors) are automatically closed.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		coreObj.closeBrowserPopups = true;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		The default value of this web automation property is <i>false</i>. If set to <i>true</i>, every web automation library method/property will first close browser popups.
+	</remarks>
+
+	<example>
+		<jscode>
+// Automatically close IE popups (Security alerts, Errors and Auto complete) as they appear.
+var core = new ActiveXObject("OpenTwebst.Core");
+core.closeBrowserPopups = true;
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>asyncHtmlEvents</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Close</seealso_item>
+		<seealso_item>ClosePopup</seealso_item>
+		<seealso_item>ClosePrompt</seealso_item>
+		<seealso_item>FindModalHtmlDialog</seealso_item>
+		<seealso_item>FindModelessHtmlDialog</seealso_item>
+	</seealso>
+</topic>

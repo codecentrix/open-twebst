@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="nativeFrame" type="property">
+	<title>
+		Open Twebst Library | Documentation - nativeFrame Property
+	</title>
+
+	<description>
+		Returns a native MSHTML <i>frame</i> or <i>iframe</i> object ( <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa741505(VS.85).aspx">IHTMLWindow2</a> )
+		represented by the current web automation library Frame object.
+	</description>
+
+	<apply>
+		<apply_item>Frame</apply_item>
+	</apply>
+
+	<call>
+		var native = frameObj.nativeFrame;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		With this <i>Internet Explorer</i> automation property, get access to all methods and properties of the <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa741505(VS.85).aspx">IHTMLWindow2</a> native <i>frame</i> or <i>iframe</i> object.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://codecentrix.blogspot.com/");
+var frame      = newBrowser.topFrame.nativeFrame;
+
+frame.navigate("http://www.codecentrix.com");
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Frame</seealso_item>
+		<seealso_item>nativeBrowser</seealso_item>
+		<seealso_item>nativeElement</seealso_item>
+	</seealso>
+</topic>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="Select" type="method">
+	<title>
+		Open Twebst Library | Documentation - Select Method
+	</title>
+
+	<description>
+		Browser automation method that selects options in HTML combo-box (drop-down) or list-box web controls.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		elementObj.Select(item_to_select);
+	</call>
+
+	<arguments>
+		<arg><code>item_to_select</code> is the text or the ordinal position of the option to be selected.</arg>
+	</arguments>
+
+	<remarks>
+		Any previous selection in the HTML drop-down / listbox control is removed.<br></br>
+		The input parameter can be:
+		<ul>
+			<li>a number that represents the zero-based ordinal position of the option to be selected.</li>
+			<li>
+				a string that represents the text pattern of the option to be selected.
+				If the text pattern contains * and/or ? wildcards then:
+				<ul>
+					<li>For multiple selection list-box all the options that match the pattern are selected.</li>
+					<li>For combo-box (drop-down) and single selection list-box, the first option that matches the pattern is selected.</li>
+				</ul>
+			</li>
+		</ul>
+		If no option matches the input parameter, then a browser automation exception is thrown and the lastError property is set to NOT_FOUND_ERROR<br></br>
+		If the browser automation method is applied to an Element that is not a combo-box (drop-down) or list-box control, then a browser automation exception is
+		thrown and the lastError property is set to INVALID_OPERATION_ERROR.
+		
+		<br/><br/>
+		The time allocated for selecting the options is specified by the searchTimeout property. If loadTimeout is not zero, then the method waits the browser objects to be completely loaded in the amount of time specified by the property.
+		If the timeout has expired the lastError property is set to LOAD_TIMEOUT_ERROR. In this case, if loadTimeoutIsError property is true, then a script exception is thrown.		
+	</remarks>
+
+	<example>
+		<jscode>
+// Assume nativeCombo is a &lt;select&gt; HTML element.
+// Select the first item in the combo-box.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var combo   = coreObj.AttachToNativeElement(nativeCombo);
+combo.Select(0);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>AddSelection</seealso_item>
+		<seealso_item>AddSelectionRange</seealso_item>
+		<seealso_item>Click</seealso_item>
+		<seealso_item>ClearSelection</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>GetAllSelectedOptions</seealso_item>
+		<seealso_item>InputText</seealso_item>
+		<seealso_item>selectedOption</seealso_item>
+		<seealso_item>SelectRange</seealso_item>
+	</seealso>
+</topic>

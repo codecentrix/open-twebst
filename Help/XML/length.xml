@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="length" type="property">
+	<title>
+		Open Twebst Library | Documentation - length Property
+	</title>
+
+	<description>
+		Retrieves the number of objects in a web automation collection.
+	</description>
+
+	<apply>
+		<apply_item>ElementList</apply_item>
+	</apply>
+
+	<call>
+		var len = listObj.length;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		Web automation collection objects use zero-based indexes. The last index in a list is <i>length</i> - 1.
+	</remarks>
+
+	<example>
+		<jscode>
+// Displays all anchors in a web page.
+var coreObj = new ActiveXObject("OpenTwebst.Core");
+var browser = coreObj.StartBrowser("http://www.codecentrix.com/");
+var anchors = browser.FindAllElements("a", "");
+var text    = "";
+
+for (var i = 0; i &lt; anchors.length; ++i)
+{
+	text += anchors.item(i).uiName;
+	text += "\n";
+}
+
+WScript.Echo(text);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>ElementList</seealso_item>
+		<seealso_item><reference>item</reference></seealso_item>
+	</seealso>
+</topic>

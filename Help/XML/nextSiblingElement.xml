@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="nextSiblingElement" type="propety">
+	<title>
+		Open Twebst Library | Documentation - nextSiblingElement Property
+	</title>
+
+	<description>
+		Internet Explorer automation property that returns the next child of the parent for the object in the HTML DOM hierarchy.
+	</description>
+
+	<apply>
+		<apply_item>Element</apply_item>
+	</apply>
+
+	<call>
+		var e = elementObj.nextSiblingElement;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		If the current element is the last child in DOM hierarchy, then <i>null</i> is returned.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>parentElement</seealso_item>
+		<seealso_item>previousSiblingElement</seealso_item>
+	</seealso>
+</topic>

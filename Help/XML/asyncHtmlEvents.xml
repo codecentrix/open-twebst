@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="asyncHtmlEvents" type="property">
+	<title>
+		Open Twebst Library | Documentation - asyncHtmlEvents Property
+	</title>
+
+	<description>
+		Web macro property that determines whether HTML events will be fired up synchronously or asynchronously.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		coreObj.asyncHtmlEvents = booleanValue;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		If <i>booleanValue</i> is <i>false</i> (the default value) then HTML events are generated synchronously and methods like Click, InputText are blocked until
+		event handlers are executed. If <i>booleanValue</i> is true then HTML events are fired up asynchronously and methods above are executed in a non-blocking way.
+		Click and InputText use either HTML events or hardware events according to useHardwareInputEvents property.<br/><br/>
+		Setting asyncHtmlEvents to <i>true</i> makes sense when clicking a HTML element that triggers an <a target="_blank" href="http://msdn.microsoft.com/en-us/library/ms535933(VS.85).aspx">window.alert</a>, <a target="_blank" href="http://msdn.microsoft.com/en-us/library/ms536376(VS.85).aspx">window.confirm</a>
+		or <a target="_blank" href="http://msdn.microsoft.com/en-us/library/ms536673(VS.85).aspx">window.prompt</a> pop-up, otherwise Click
+		method is blocked until the pop-up is closed.
+	</remarks>
+
+	<example>
+		<jscode>
+None.
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>ClosePopup</seealso_item>
+		<seealso_item>ClosePrompt</seealso_item>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Click</seealso_item>
+		<seealso_item>FindModalHtmlDialog</seealso_item>
+		<seealso_item>InputText</seealso_item>
+		<seealso_item>useHardwareInputEvents</seealso_item>
+	</seealso>
+</topic>

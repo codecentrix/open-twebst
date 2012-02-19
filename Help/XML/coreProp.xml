@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="core" type="property">
+	<title>
+		Open Twebst Library | Documentation - core Property
+	</title>
+
+	<description>
+		Returns a reference to the Core parent of the current object.
+	</description>
+
+	<apply>
+		<apply_item>Browser</apply_item>
+		<apply_item>Element</apply_item>
+		<apply_item>ElementList</apply_item>
+		<apply_item>Frame</apply_item>
+	</apply>
+
+	<call>
+		var c = obj.core;
+	</call>
+
+	<arguments>
+		<arg_summary>None.</arg_summary>
+	</arguments>
+
+	<remarks>
+		Returns the core object used to create directly or indirectly the current web automation object.
+	</remarks>
+
+	<example>
+		<jscode>	
+var coreObj    = new ActiveXObject("OpenTwebst.Core");
+var newBrowser = coreObj.StartBrowser("http://codecentrix.blogspot.com/");
+WScript.Echo(newBrowser.core.lastError);
+		</jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>Element</seealso_item>
+		<seealso_item>Frame</seealso_item>
+	</seealso>
+</topic>
