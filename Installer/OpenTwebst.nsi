@@ -10,6 +10,9 @@ Name		"${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile		${SETUP_NAME}
 InstallDir	"$PROGRAMFILES\Codecentrix\OpenTwebst"
 
+; Request application privileges.
+RequestExecutionLevel admin
+
 ;Get installation folder from registry if available
 InstallDirRegKey HKLM "Software\CodeCentrix\OpenTwebst" "InstallDir"
 
@@ -166,6 +169,7 @@ Section "Uninstall"
 	Delete "$INSTDIR\Bin\*.dll"
 	Delete "$INSTDIR\Bin\*.exe"
 	Delete "$INSTDIR\Bin\*.ico"
+	Delete "$INSTDIR\Bin\*.txt"
 	Delete "$INSTDIR\Uninstall.exe"
 
 	;Delete help and samples
