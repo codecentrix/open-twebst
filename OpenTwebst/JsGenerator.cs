@@ -84,7 +84,7 @@ namespace CatStudio
 
         internal override void Play(String code)
         {
-            PlayScript(code, FileExt);
+            PlayWScript(code, FileExt);
         }
 
 

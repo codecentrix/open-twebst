@@ -98,14 +98,16 @@ namespace CatStudio
             }
 
             // Create target language objects.
-            BaseLanguageGenerator vbsLang   = new VbsGenerator();
-            BaseLanguageGenerator jsLang    = new JsGenerator();
-            BaseLanguageGenerator csLang    = new CSharpGenerator();
-            BaseLanguageGenerator vbNetLang = new VbNetGenerator();
+            BaseLanguageGenerator vbsLang    = new VbsGenerator();
+            BaseLanguageGenerator jsLang     = new JsGenerator();
+            BaseLanguageGenerator pythonLang = new PyGenerator();
+            BaseLanguageGenerator csLang     = new CSharpGenerator();
+            BaseLanguageGenerator vbNetLang  = new VbNetGenerator();
 
             // Populate language combo-box.
             this.codeToolStripLanguageCombo.Items.Add(vbsLang);
             this.codeToolStripLanguageCombo.Items.Add(jsLang);
+            this.codeToolStripLanguageCombo.Items.Add(pythonLang);
             this.codeToolStripLanguageCombo.Items.Add(csLang);
             this.codeToolStripLanguageCombo.Items.Add(vbNetLang);
 
@@ -333,7 +335,7 @@ namespace CatStudio
             {
                 // Save the file.
                 String     fileName   = this.saveScriptFileDialog.FileName;
-                TextWriter textWriter = new StreamWriter(fileName, false, Encoding.Unicode);
+                TextWriter textWriter = new StreamWriter(fileName, false, targetLang.GeneratorEncoding);
 
                 textWriter.Write(this.codeGen.GetAllDecoratedCode());
                 textWriter.Close();

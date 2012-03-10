@@ -281,7 +281,13 @@ namespace CatStudio
         }
 
 
-        protected void PlayScript(String code, String ext)
+        internal virtual Encoding GeneratorEncoding
+        {
+            get { return Encoding.Unicode; }
+        }
+
+
+        protected void PlayWScript(String code, String ext)
         {
             // Write the code to a .js/.vbs file.
             String     tempDir      = Path.GetTempPath();
@@ -297,6 +303,36 @@ namespace CatStudio
             scriptProc.StartInfo.WorkingDirectory = tempDir;
             scriptProc.StartInfo.Arguments        = tempFileName;
             scriptProc.StartInfo.UseShellExecute  = false;
+            scriptProc.Start();
+            scriptProc.WaitForExit(2000);
+            scriptProc.Close();
+
+            try
+            {
+                File.Delete(tempFileName);
+            }
+            catch (Exception)
+            {
+                Debug.Assert(false);
+            }
+        }
+
+
+        protected void PlayFile(String code, String ext)
+        {
+            // Write the code to a .js/.vbs file.
+            String     tempDir      = Path.GetTempPath();
+            String     tempFileName = Guid.NewGuid().ToString() + ext;
+            TextWriter textWriter   = new StreamWriter(tempDir + tempFileName, false, this.GeneratorEncoding);
+
+            textWriter.Write(code);
+            textWriter.Close();
+
+            // Execute the .js file.
+            Process scriptProc = new Process();
+            scriptProc.StartInfo.FileName         = tempFileName;
+            scriptProc.StartInfo.WorkingDirectory = tempDir;
+            scriptProc.StartInfo.UseShellExecute  = true;
             scriptProc.Start();
             scriptProc.WaitForExit(2000);
             scriptProc.Close();
