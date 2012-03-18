@@ -2243,6 +2243,76 @@ STDMETHODIMP CElement::get_tagName(BSTR* pVal)
 }
 
 
+HRESULT CElement::GetHandlerAttrText(BSTR bstrAttrName, VARIANT* pVal)
+{
+	ATLASSERT(bstrAttrName    != NULL);
+	ATLASSERT(pVal            != NULL);
+	ATLASSERT(m_spHtmlElement != NULL);
+	ATLASSERT(VT_EMPTY == pVal->vt);
+
+	try
+	{
+		CComQIPtr<IHTMLDOMNode> spNode = m_spHtmlElement;
+		if (!spNode)
+		{
+			traceLog << "Cannot get IHTMLDOMNode in CElement::GetHandlreAttrText";
+			throw -1;
+		}
+
+		CComQIPtr<IDispatch> spListAttrDisp;
+		HRESULT              hRes = spNode->get_attributes(&spListAttrDisp);
+
+		CComQIPtr<IHTMLAttributeCollection> spAttributesList = spListAttrDisp;
+		if (FAILED(hRes) || !spAttributesList)
+		{
+			traceLog << "Cannot get spAttributesList in CElement::GetHandlreAttrText";
+			throw -1;
+		}
+
+		CComVariant          vAttributeName = bstrAttrName;
+		CComQIPtr<IDispatch> spAttributeDisp;
+
+		hRes = spAttributesList->item(&vAttributeName, &spAttributeDisp);
+
+		CComQIPtr<IHTMLDOMAttribute> spAttribute = spAttributeDisp;
+		if (FAILED(hRes) || !spAttribute)
+		{
+			traceLog << "Cannot get spAttribute in CElement::GetHandlreAttrText";
+			throw -1;
+		}
+
+		CComVariant vAttrValue;
+		hRes = spAttribute->get_nodeValue(&vAttrValue);
+
+		if (FAILED(hRes))
+		{
+			traceLog << "Cannot get vAttrValue in CElement::GetHandlreAttrText";
+			throw -1;
+		}
+
+		if ((vAttrValue.vt != VT_BSTR) || (NULL == vAttrValue.bstrVal))
+		{
+			vAttrValue = L"";
+		}
+
+		hRes = vAttrValue.Detach(pVal);
+		if (FAILED(hRes))
+		{
+			traceLog << "vAttrValue.Detach failed in CElement::GetHandlreAttrText";
+			throw -1;
+		}
+
+		return HRES_OK;
+	}
+	catch (int)
+	{
+		SetComErrorMessage(IDS_METHOD_CALL_FAILED, ELEMENT_GET_ATTRIBUTE_METHOD, IDH_ELEMENT_GET_ATTRIBUTE);
+		SetLastErrorCode(ERR_FAIL);
+		return HRES_FAIL;
+	}
+}
+
+
 STDMETHODIMP CElement::GetAttribute(BSTR bstrAttrName, VARIANT* pVal)
 {
 	// Reset the lastError property.
@@ -2265,6 +2335,11 @@ STDMETHODIMP CElement::GetAttribute(BSTR bstrAttrName, VARIANT* pVal)
 	}
 
 	HRESULT hRes = m_spHtmlElement->getAttribute(bstrAttrName, 0, pVal); // Case insensitive search of attribute.
+	if (SUCCEEDED(hRes) && (VT_DISPATCH == pVal->vt))
+	{
+		::VariantClear(pVal); // Release the IDispatch inside pVal variant.
+		return GetHandlerAttrText(bstrAttrName, pVal);
+	}
 
 	if (FAILED(hRes) ||
 	    ((pVal->vt != VT_BOOL) && (pVal->vt != VT_BSTR) && (pVal->vt != VT_NULL) && (pVal->vt != VT_I4)) ||

@@ -133,7 +133,8 @@ private:
 	HRESULT Select                (const VARIANT& vStartItems, const VARIANT& vEndItems, const SelectCallContext& context);
 	BOOL    GetElemValue          (CComQIPtr<IHTMLElement> spHtmlElement, BSTR* pBstrInitialValue);
 	BOOL    IsWindowActive        (HWND hIEWnd);
-	BOOL    IsCheckable(CComQIPtr<IHTMLElement> spElement, BOOL bRadioIsNotCheckable = FALSE);
+	BOOL    IsCheckable           (CComQIPtr<IHTMLElement> spElement, BOOL bRadioIsNotCheckable = FALSE);
+	HRESULT GetHandlerAttrText    (BSTR bstrAttrName, VARIANT* pVal);
 
 	static BOOL FindFileDlgCallback(HWND hWnd, void* pObj);
 	static BOOL FindOpenBtnCallback(HWND hWnd, void* pObj);
