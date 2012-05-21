@@ -217,7 +217,6 @@ namespace CatStudio
         }
 
 
-
         private RawStatementType type;
         private String           tagName;
         private String           browserURL;

@@ -162,6 +162,7 @@
     <Compile Include="URLHistory.cs" />
     <Compile Include="VbNetGenerator.cs" />
     <Compile Include="VbsGenerator.cs" />
+    <Compile Include="WatirGerator.cs" />
     <Compile Include="Win32Api.cs" />
   </ItemGroup>
   <ItemGroup>

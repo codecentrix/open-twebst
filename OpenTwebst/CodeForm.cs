@@ -101,12 +101,14 @@ namespace CatStudio
             BaseLanguageGenerator vbsLang    = new VbsGenerator();
             BaseLanguageGenerator jsLang     = new JsGenerator();
             BaseLanguageGenerator pythonLang = new PyGenerator();
+            BaseLanguageGenerator watirEnv   = new WatirGenerator();
             BaseLanguageGenerator csLang     = new CSharpGenerator();
             BaseLanguageGenerator vbNetLang  = new VbNetGenerator();
 
             // Populate language combo-box.
             this.codeToolStripLanguageCombo.Items.Add(vbsLang);
             this.codeToolStripLanguageCombo.Items.Add(jsLang);
+            this.codeToolStripLanguageCombo.Items.Add(watirEnv);
             this.codeToolStripLanguageCombo.Items.Add(pythonLang);
             this.codeToolStripLanguageCombo.Items.Add(csLang);
             this.codeToolStripLanguageCombo.Items.Add(vbNetLang);
