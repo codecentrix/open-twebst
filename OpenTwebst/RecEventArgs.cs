@@ -204,9 +204,11 @@ namespace CatStudio
                 String nodeName  = ((String)(crntAttribute.nodeName)).ToLower();
                 if (nodeName != CatStudioConstants.HOOKED_BY_REC_ATTR)
                 {
-                    if ((nodeName == "src") || (nodeName == "href") ||
-                        (nodeName == "id")  || (nodeName == "name") ||
-                        (nodeName == "class"))
+                    if ((nodeName == "src")   || (nodeName == "href"  ) ||
+                        (nodeName == "id")    || (nodeName == "name"  ) ||
+                        (nodeName == "class") || (nodeName == "alt"   ) ||
+                        (nodeName == "title") || (nodeName == "action") ||
+                        (nodeName == "for")   || (nodeName == "value"))
                     {
                         String nodeValue = crntAttribute.nodeValue as String;
                         if (nodeValue != null)
@@ -224,7 +226,14 @@ namespace CatStudio
             // Skip too long texts or empty strings.
             if (!String.IsNullOrEmpty(textAttr) && (textAttr.Length <= CatStudioConstants.MAX_TEXT_ATTR_LEN_TO_RECORD))
             {
-                this.attributeMap.Add("uiName", textAttr);
+                this.attributeMap.Add("uiname", textAttr);
+            }
+
+            // Add innerText for Watir recorder.
+            String innerText = htmlElem.innerText;
+            if (!String.IsNullOrEmpty(innerText) && (innerText.Length <= CatStudioConstants.MAX_TEXT_ATTR_LEN_TO_RECORD))
+            {
+                this.attributeMap.Add("innertext", innerText);
             }
         }
 

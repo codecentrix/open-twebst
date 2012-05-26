@@ -159,10 +159,11 @@ namespace CatStudio
             IHTMLElement htmlTarget      = evt.TargetElement;
             String       searchCondition = null;
             IElementList elements        = null;
+            bool         isInnerText     = (attr == "innertext");
 
             htmlTarget.setAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR, uniqueValue, 0);
 
-            if ((attr != null) && (attrVal != null))
+            if ((attr != null) && (attrVal != null) && !isInnerText)
             {
                 searchCondition = String.Format("{0}={1}", attr, attrVal);
                 elements = evt.Browser.FindAllElements(twebstTagName, searchCondition);
@@ -172,22 +173,42 @@ namespace CatStudio
                 elements = evt.Browser.FindAllElements(twebstTagName, "");
             }
 
-            int          index    = 0;
-            int          length   = elements.length;
+            int index  = 0;
+            int length = elements.length;
 
             if (length <= 1)
             {
                 return 0;
             }
-            
-            for (int i = 0; i < length; ++i)
-            {
-                String findIndexAttrValue = (String)elements[i].GetAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR);
 
-                if (uniqueValue == findIndexAttrValue)
+            if (!isInnerText)
+            {
+                for (int i = 0; i < length; ++i)
                 {
-                    index = i;
-                    break;
+                    String findIndexAttrValue = (String)elements[i].GetAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR);
+
+                    if (uniqueValue == findIndexAttrValue)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                // Watir uses innerText but Twebst does not search for innerText.
+                for (int i = 0; i < length; ++i)
+                {
+                    String findIndexAttrValue = (String)elements[i].GetAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR);
+                    if (uniqueValue == findIndexAttrValue)
+                    {
+                        break;
+                    }
+
+                    if (attrVal == elements[i].nativeElement.innerText)
+                    {
+                        index++;
+                    }
                 }
             }
 
@@ -197,39 +218,21 @@ namespace CatStudio
 
         private bool GetAttrToRecord(RecEventArgs evt, out String attr, out String attrVal)
         {
-            if (IsTextAttrUsedFirst(evt.TagName, evt.InputType))
+            ICustomRecording customRec = this.languageGenerator as ICustomRecording;
+            if (customRec != null)
             {
-                return this.FindNonEmptyAttribute(evt, out attr, out attrVal, "uiName", "id", "name", "href", "class");
+                return this.FindNonEmptyAttribute(evt, out attr, out attrVal, customRec.GetRecordedAttributes(evt.TagName, evt.InputType));
             }
-            else
-            {
-                // href is for area, src is for img.
-                return this.FindNonEmptyAttribute(evt, out attr, out attrVal, "id", "name", "uiName", "src", "href", "class");
-            }
-        }
 
-
-        private bool IsTextAttrUsedFirst(String tagName, String inputType)
-        {
-            /*if ((tagName == "button") || (tagName == "a"))
-            {
-                return true;
-            }
-            else if (tagName == "input")
-            {
-                if ((inputType == "button") || (inputType == "submit") || (inputType == "reset"))
-                {
-                    return true;
-                }
-            }*/
-
-            // Alwasy prefer ID and Name before text for consistency and precission.
-            return false;
+            // href is for area, src is for img.
+            return this.FindNonEmptyAttribute(evt, out attr, out attrVal, "id", "name", "class", "uiname", "src", "href");
         }
 
 
         private bool FindNonEmptyAttribute(RecEventArgs evt, out String attr, out String attrVal, params Object[] attrNames)
         {
+            ICustomRecording customRec = this.languageGenerator as ICustomRecording;
+
             for (int i = 0; i < attrNames.Length; ++i)
             {
                 String crntAttr = (String)attrNames[i];
@@ -239,7 +242,7 @@ namespace CatStudio
                 {
                     attr = crntAttr;
 
-                    if (attr == "src")
+                    if ((attr == "src") && ((customRec == null) || customRec.ShortSrc))
                     {
                         // For src attribute of the image element keep only the file name if any.
                         int lastSlashIndex = val.LastIndexOf('/');

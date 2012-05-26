@@ -35,6 +35,12 @@ using System.Threading;
 
 namespace CatStudio
 {
+    internal interface ICustomRecording
+    {
+        Object[] GetRecordedAttributes(String tagName, String inputType);
+        bool ShortSrc { get; }
+    }
+
     public abstract class BaseLanguageGenerator
     {
         internal String Generate(RawStatement rs)
@@ -90,7 +96,7 @@ namespace CatStudio
                             String click   = CLICK_NO_INDEX_STATEMENT;
                             String attrVal = EscapeStr(rs.AttrValue);
 
-                            result = String.Format(click, EncodeHtmlTagName(rs.TagName), rs.AttrName, attrVal, action);
+                            result = String.Format(click, EncodeHtmlTagName(rs.TagName), EncodeAttrName(rs.AttrName), attrVal, action);
                         }
                         else
                         {
@@ -106,7 +112,7 @@ namespace CatStudio
                             String click   = CLICK_STATEMENT;
                             String attrVal = EscapeStr(rs.AttrValue);
 
-                            result = String.Format(click, EncodeHtmlTagName(rs.TagName), rs.AttrName, attrVal, rs.Index, action);
+                            result = String.Format(click, EncodeHtmlTagName(rs.TagName), EncodeAttrName(rs.AttrName), attrVal, EncodeIndex(rs.Index), action);
                         }
                         else
                         {
@@ -114,7 +120,7 @@ namespace CatStudio
                             String click   = CLICK_NO_ATTR_STATEMENT;
                             String attrVal = EscapeStr(rs.AttrValue);
 
-                            result = String.Format(click, EncodeHtmlTagName(rs.TagName), rs.Index, action);
+                            result = String.Format(click, EncodeHtmlTagName(rs.TagName), EncodeIndex(rs.Index), action);
                         }
                     }
 
@@ -130,7 +136,7 @@ namespace CatStudio
                             String textChange = TEXT_CHANGED_NO_INDEX_STATEMENT;
                             String attrVal    = EscapeStr(rs.AttrValue);
 
-                            result = String.Format(textChange, EncodeHtmlTagName(rs.TagName), rs.AttrName, attrVal, EscapeStr(rs.Values[0]));
+                            result = String.Format(textChange, EncodeHtmlTagName(rs.TagName), EncodeAttrName(rs.AttrName), attrVal, EscapeStr(rs.Values[0]));
                         }
                         else
                         {
@@ -145,14 +151,14 @@ namespace CatStudio
                             String textChange = TEXT_CHANGED_STATEMENT;
                             String attrVal    = EscapeStr(rs.AttrValue);
 
-                            result = String.Format(textChange, EncodeHtmlTagName(rs.TagName), rs.AttrName, attrVal, rs.Index, EscapeStr(rs.Values[0]));
+                            result = String.Format(textChange, EncodeHtmlTagName(rs.TagName), EncodeAttrName(rs.AttrName), attrVal, EncodeIndex(rs.Index), EscapeStr(rs.Values[0]));
                         }
                         else
                         {
                             String textChange = TEXT_CHANGED_NO_ATTR_STATEMENT;
                             String attrVal    = EscapeStr(rs.AttrValue);
 
-                            result = String.Format(textChange, EncodeHtmlTagName(rs.TagName), rs.Index, EscapeStr(rs.Values[0]));
+                            result = String.Format(textChange, EncodeHtmlTagName(rs.TagName), EncodeIndex(rs.Index), EscapeStr(rs.Values[0]));
                         }
                     }
 
@@ -180,7 +186,7 @@ namespace CatStudio
                         {
                             if ((rs.AttrValue != null) && (rs.AttrName != null))
                             {
-                                textSelChange = String.Format(SELECT_MULTIPLE_NO_INDEX_STATEMENT, varDecl, rs.TagName, rs.AttrName, attrVal);
+                                textSelChange = String.Format(SELECT_MULTIPLE_NO_INDEX_STATEMENT, varDecl, rs.TagName, EncodeAttrName(rs.AttrName), attrVal);
                             }
                             else
                             {
@@ -191,11 +197,11 @@ namespace CatStudio
                         {
                             if ((rs.AttrValue != null) && (rs.AttrName != null))
                             {
-                                textSelChange = String.Format(SELECT_MULTIPLE_STATEMENT, varDecl, EncodeHtmlTagName(rs.TagName), rs.AttrName, attrVal, rs.Index);
+                                textSelChange = String.Format(SELECT_MULTIPLE_STATEMENT, varDecl, EncodeHtmlTagName(rs.TagName), EncodeAttrName(rs.AttrName), attrVal, EncodeIndex(rs.Index));
                             }
                             else
                             {
-                                textSelChange = String.Format(SELECT_MULTIPLE_NO_ATTR_STATEMENT, varDecl, EncodeHtmlTagName(rs.TagName), rs.Index);
+                                textSelChange = String.Format(SELECT_MULTIPLE_NO_ATTR_STATEMENT, varDecl, EncodeHtmlTagName(rs.TagName), EncodeIndex(rs.Index));
                             }
                         }
 
@@ -219,7 +225,7 @@ namespace CatStudio
                                 String attrVal      = EscapeStr(rs.AttrValue);
                                 String selectChange = SELECT_NO_INDEX_STATEMENT;
 
-                                result = String.Format(selectChange, EncodeHtmlTagName(rs.TagName), rs.AttrName, attrVal, EscapeStr(rs.Values[0]));
+                                result = String.Format(selectChange, EncodeHtmlTagName(rs.TagName), EncodeAttrName(rs.AttrName), attrVal, EscapeStr(rs.Values[0]));
                             }
                             else
                             {
@@ -234,12 +240,12 @@ namespace CatStudio
                                 String attrVal      = EscapeStr(rs.AttrValue);
                                 String selectChange = SELECT_STATEMENT;
 
-                                result = String.Format(selectChange, EncodeHtmlTagName(rs.TagName), rs.AttrName, attrVal, rs.Index, EscapeStr(rs.Values[0]));
+                                result = String.Format(selectChange, EncodeHtmlTagName(rs.TagName), EncodeAttrName(rs.AttrName), attrVal, EncodeIndex(rs.Index), EscapeStr(rs.Values[0]));
                             }
                             else
                             {
                                 String selectChange = SELECT_NO_ATTR_STATEMENT;
-                                result = String.Format(selectChange, EncodeHtmlTagName(rs.TagName), rs.Index, EscapeStr(rs.Values[0]));
+                                result = String.Format(selectChange, EncodeHtmlTagName(rs.TagName), EncodeIndex(rs.Index), EscapeStr(rs.Values[0]));
                             }
                         }
                     }
@@ -413,9 +419,28 @@ namespace CatStudio
         }
 
 
+        protected virtual String EncodeAttrName(String attrName)
+        {
+            if (attrName == "innertext")
+            {
+                return "uiName";
+            }
+            else
+            {
+                return attrName;
+            }
+        }
+
+
         protected virtual String EncodeHtmlTagName(String tagName)
         {
             return tagName;
+        }
+
+
+        protected virtual int EncodeIndex(int index)
+        {
+            return index;
         }
 
 

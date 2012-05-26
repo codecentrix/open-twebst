@@ -30,7 +30,7 @@ using System.Text;
 
 namespace CatStudio
 {
-    class WatirGenerator : BaseLanguageGenerator
+    class WatirGenerator : BaseLanguageGenerator, ICustomRecording
     {
         public WatirGenerator()
         {
@@ -106,6 +106,26 @@ namespace CatStudio
             get { return Encoding.ASCII; }
         }
 
+        // ICustomRecording
+        public Object[] GetRecordedAttributes(String tagName, String inputType)
+        {
+            bool bDonUseValue = ((inputType == "text") || (inputType == "password") || (tagName == "textarea"));
+            if (bDonUseValue)
+            {
+                Object[] res = { "id", "name", "value", "class", "title" };
+                return res;
+            }
+            else
+            {
+                Object[] res = { "id", "name", "class", "title", "alt", "for", "href", "src", "action", "innertext" };
+                return res;
+            }
+        }
+
+        // Don't use short SRC (stripped down to file name as in Twebst).
+        public bool ShortSrc { get { return false; } }
+
+
         protected override String EncodeHtmlTagName(String tagName)
         {
             String watirTag;
@@ -118,6 +138,27 @@ namespace CatStudio
                 return tagName;
             }
         }
+
+
+        protected override String EncodeAttrName(String attrName)
+        {
+            if ((attrName == "innertext") || (attrName == "uiname"))
+            {
+                return "text";
+            }
+            else
+            {
+                return attrName;
+            }
+        }
+
+
+        protected override int EncodeIndex(int index)
+        {
+            // Watir indexes are 1-based (and not zero-based like in Twebst).
+            return index + 1;
+        }
+
 
         private void InitWatirTagDict()
         {
@@ -135,6 +176,7 @@ namespace CatStudio
             watirTags["tr"]             = "row";
             watirTags["img"]            = "image";
             watirTags["select"]         = "select_list";
+            watirTags["innertext"]      = "text";
         }
 
         private Dictionary<String, String> watirTags = new Dictionary<String,String>();
