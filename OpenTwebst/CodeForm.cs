@@ -197,21 +197,29 @@ namespace CatStudio
 
             if (this.codeGen.GetAllCode().Length > 0)
             {
-                DialogResult answer = MessageBox.Show(this, "Are you sure you want to exit and discard changes?",
+                DialogResult answer = MessageBox.Show(this, "Do you want to save changes?",
                                                       CatStudioConstants.TWEBST_PRODUCT_NAME,
-                                                      MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                                      MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.No)
-                {
-                    return false;
-                }
-                else
                 {
                     canCloseNow = true;
                     return true;
                 }
+                else if (answer == DialogResult.Yes)
+                {
+                    // Save the macro.
+                    return (canCloseNow = SaveScript());
+                }
+                else
+                {
+                    // Cancel button. Don't close.
+                    canCloseNow = false;
+                    return false;
+                }
             }
             else
             {
+                canCloseNow = true;
                 return true;
             }
         }
@@ -286,7 +294,7 @@ namespace CatStudio
         {
             if (this.codeGen.GetAllCode().Length > 0)
             {
-                DialogResult answer = MessageBox.Show(this, "Do you want to save the recorded macro?", CatStudioConstants.TWEBST_PRODUCT_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult answer = MessageBox.Show(this, "Do you want to save changes?", CatStudioConstants.TWEBST_PRODUCT_NAME, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 if (answer == DialogResult.Cancel)
                 {

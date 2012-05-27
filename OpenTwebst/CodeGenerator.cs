@@ -153,66 +153,99 @@ namespace CatStudio
             }
         }
 
+
         private int ComputeIndex(RecEventArgs evt, String twebstTagName, String attr, String attrVal)
         {
-            String       uniqueValue     = DateTime.Now.ToString();
-            IHTMLElement htmlTarget      = evt.TargetElement;
-            String       searchCondition = null;
-            IElementList elements        = null;
-            bool         isInnerText     = (attr == "innertext");
-
-            htmlTarget.setAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR, uniqueValue, 0);
-
-            if ((attr != null) && (attrVal != null) && !isInnerText)
+            try
             {
-                searchCondition = String.Format("{0}={1}", attr, attrVal);
-                elements = evt.Browser.FindAllElements(twebstTagName, searchCondition);
+                String           uniqueValue     = DateTime.Now.ToString();
+                IHTMLElement     htmlTarget      = evt.TargetElement;
+                String           searchCondition = null;
+                IElementList     elements        = null;
+                bool             isInnerText     = (attr == "innertext");
+                ICustomRecording customRec       = this.languageGenerator as ICustomRecording;
+
+                htmlTarget.setAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR, uniqueValue, 0);
+
+                if ((attr != null) && (attrVal != null) && !isInnerText)
+                {
+                    searchCondition = String.Format("{0}={1}", attr, attrVal);
+
+                    if ((customRec == null) || !customRec.LocalIndex)
+                    {
+                        elements = evt.Browser.FindAllElements(twebstTagName, searchCondition);
+                    }
+                    else
+                    {
+                        ICore    core       = CoreWrapper.Instance;
+                        IElement targetElem = core.AttachToNativeElement(evt.TargetElement);
+
+                        // Search only elements in current frame.
+                        elements = targetElem.parentFrame.FindChildrenElements(twebstTagName, searchCondition);
+                    }
+                }
+                else
+                {
+                    if ((customRec == null) || !customRec.LocalIndex)
+                    {
+                        elements = evt.Browser.FindAllElements(twebstTagName, "");
+                    }
+                    else
+                    {
+                        ICore    core       = CoreWrapper.Instance;
+                        IElement targetElem = core.AttachToNativeElement(evt.TargetElement);
+
+                        // Search only elements in current frame.
+                        elements = targetElem.parentFrame.FindChildrenElements(twebstTagName, "");
+                    }
+                }
+
+                int index = 0;
+                int length = elements.length;
+
+                if (length <= 1)
+                {
+                    return 0;
+                }
+
+                if (!isInnerText)
+                {
+                    for (int i = 0; i < length; ++i)
+                    {
+                        String findIndexAttrValue = (String)elements[i].GetAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR);
+
+                        if (uniqueValue == findIndexAttrValue)
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    // Watir uses innerText but Twebst does not search for innerText.
+                    for (int i = 0; i < length; ++i)
+                    {
+                        String findIndexAttrValue = (String)elements[i].GetAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR);
+                        if (uniqueValue == findIndexAttrValue)
+                        {
+                            break;
+                        }
+
+                        if (attrVal == elements[i].nativeElement.innerText)
+                        {
+                            index++;
+                        }
+                    }
+                }
+
+                return index;
             }
-            else
+            catch
             {
-                elements = evt.Browser.FindAllElements(twebstTagName, "");
-            }
-
-            int index  = 0;
-            int length = elements.length;
-
-            if (length <= 1)
-            {
+                // Something went wrong, give up using index.
                 return 0;
             }
-
-            if (!isInnerText)
-            {
-                for (int i = 0; i < length; ++i)
-                {
-                    String findIndexAttrValue = (String)elements[i].GetAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR);
-
-                    if (uniqueValue == findIndexAttrValue)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                // Watir uses innerText but Twebst does not search for innerText.
-                for (int i = 0; i < length; ++i)
-                {
-                    String findIndexAttrValue = (String)elements[i].GetAttribute(CatStudioConstants.FIND_INDEX_HELPER_ATTR);
-                    if (uniqueValue == findIndexAttrValue)
-                    {
-                        break;
-                    }
-
-                    if (attrVal == elements[i].nativeElement.innerText)
-                    {
-                        index++;
-                    }
-                }
-            }
-
-            return index;
         }
 
 
@@ -225,7 +258,7 @@ namespace CatStudio
             }
 
             // href is for area, src is for img.
-            return this.FindNonEmptyAttribute(evt, out attr, out attrVal, "id", "name", "class", "uiname", "src", "href");
+            return this.FindNonEmptyAttribute(evt, out attr, out attrVal, "id", "name", "uiname", "src", "href", "class");
         }
 
 
@@ -454,7 +487,6 @@ namespace CatStudio
                 this.CodeChanged(this, new CodeGenEventArgs(this.allCode));
             }
         }
-
 
 
         private String                allCode               = "";

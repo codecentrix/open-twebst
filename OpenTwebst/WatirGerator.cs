@@ -68,6 +68,11 @@ namespace CatStudio
 
             this.BACK_NAVIGATION_STATEMENT                  = "";
             this.FORWARD_NAVIGATION_STATEMENT               = "";
+
+            this.START_UP_STATEMENT = "# The current version of Twebst Web Recorder does NOT support recording in frames/iframes.\n" +
+                                      "# You have to manually add browser.frame statements.\n" +
+                                      "# See: http://wiki.openqa.org/display/WTR/Frames \n\n" + 
+                                      this.START_UP_STATEMENT;
         }
 
 
@@ -105,26 +110,6 @@ namespace CatStudio
             // Python code is ASCII encoded.
             get { return Encoding.ASCII; }
         }
-
-        // ICustomRecording
-        public Object[] GetRecordedAttributes(String tagName, String inputType)
-        {
-            bool bDonUseValue = ((inputType == "text") || (inputType == "password") || (tagName == "textarea"));
-            if (bDonUseValue)
-            {
-                Object[] res = { "id", "name", "value", "class", "title" };
-                return res;
-            }
-            else
-            {
-                Object[] res = { "id", "name", "class", "title", "alt", "for", "href", "src", "action", "innertext" };
-                return res;
-            }
-        }
-
-        // Don't use short SRC (stripped down to file name as in Twebst).
-        public bool ShortSrc { get { return false; } }
-
 
         protected override String EncodeHtmlTagName(String tagName)
         {
@@ -180,5 +165,27 @@ namespace CatStudio
         }
 
         private Dictionary<String, String> watirTags = new Dictionary<String,String>();
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ICustomRecording
+        public Object[] GetRecordedAttributes(String tagName, String inputType)
+        {
+            bool bDonUseValue = ((inputType == "text") || (inputType == "password") || (tagName == "textarea"));
+            if (bDonUseValue)
+            {
+                Object[] res = { "id", "name", "value", "class", "title" };
+                return res;
+            }
+            else
+            {
+                Object[] res = { "id", "name", "class", "title", "alt", "for", "href", "src", "action", "innertext" };
+                return res;
+            }
+        }
+
+        // Don't use short SRC (stripped down to file name as in Twebst).
+        public bool ShortSrc      { get { return false; } }
+        public bool IncludeFrames { get { return true;  } }
+        public bool LocalIndex    { get { return true;  } }
     }
 }

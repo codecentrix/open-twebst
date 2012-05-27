@@ -38,7 +38,10 @@ namespace CatStudio
     internal interface ICustomRecording
     {
         Object[] GetRecordedAttributes(String tagName, String inputType);
-        bool ShortSrc { get; }
+
+        bool ShortSrc      { get; }
+        bool IncludeFrames { get; }
+        bool LocalIndex    { get; }
     }
 
     public abstract class BaseLanguageGenerator
