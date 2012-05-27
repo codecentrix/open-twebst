@@ -250,17 +250,36 @@ namespace CatStudio
 
         private void codeToolStripLanguageCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BaseLanguageGenerator targetLang = (BaseLanguageGenerator)this.codeToolStripLanguageCombo.SelectedItem;
+            BaseLanguageGenerator targetLang    = (BaseLanguageGenerator)this.codeToolStripLanguageCombo.SelectedItem;
+            bool                  resetRecorder = ((this.crntLang is WatirGenerator) || (targetLang is WatirGenerator));
 
-            if (targetLang != null)
+            this.crntLang = targetLang;
+
+            if (resetRecorder)
             {
-                this.codeGen.Language = targetLang;
-            }
+                // Reset the recorder.
+                this.codeGen.Reset();
+                this.isDirty = false;
 
-            this.toolStripStatusLanguageLabel.Text = targetLang.ToString();
-            this.codeRichTextBox.Focus();
-            this.codeRichTextBox.Select(0, 0);
-            this.codeRichTextBox.ScrollToCaret();
+                if (targetLang != null)
+                {
+                    this.codeGen.Language = targetLang;
+                }
+
+                this.SetRichEditBoxText("Switching between Twebst <-> Watir is not supported!\nRecording session restarted ...");
+            }
+            else
+            {
+                if (targetLang != null)
+                {
+                    this.codeGen.Language = targetLang;
+                }
+
+                this.toolStripStatusLanguageLabel.Text = targetLang.ToString();
+                this.codeRichTextBox.Focus();
+                this.codeRichTextBox.Select(0, 0);
+                this.codeRichTextBox.ScrollToCaret();
+            }
         }
 
 
@@ -617,12 +636,12 @@ namespace CatStudio
             OpenURL(CatStudioConstants.TWEBST_NEWSLETTER_URL);
         }
 
-
-        private CodeGenerator codeGen     = null;
-        private BrowserForm   browserForm = null;
-        private bool          canCloseNow = false;
-        private bool          closed      = false;
-        private bool          isDirty     = false;
+        private  BaseLanguageGenerator crntLang    = null;
+        private CodeGenerator          codeGen     = null;
+        private BrowserForm            browserForm = null;
+        private bool                   canCloseNow = false;
+        private bool                   closed      = false;
+        private bool                   isDirty     = false;
     }
 
 
