@@ -36,6 +36,8 @@ namespace CatStudio
     {
         public static RecEventArgs CreateRecEvent(IHTMLElement htmlElem, IBrowser twbstBrowser)
         {
+            htmlElem = FilterHtmlElement(htmlElem);
+
             RecEventArgs result = new RecEventArgs();
             String       topURL = twbstBrowser.url;
 
@@ -235,6 +237,39 @@ namespace CatStudio
             {
                 this.attributeMap.Add("innertext", innerText);
             }
+        }
+
+
+        private static IHTMLElement FilterHtmlElement(IHTMLElement htmlElem)
+        {
+            String[] tags = { "b", "i", "u", "font", "em", "cite", "mark", "strong", "small", "sub", "sup", "q", "s", "kbd", "ins" };
+            String   tag  = htmlElem.tagName.ToLower();
+
+            if (Array.IndexOf(tags, tag) >= 0)
+            {
+                // Find a good parent.
+                String[]     parentTags = { "a", "label", "li", "ol", "ul", "dd", "dt" };
+                IHTMLElement crntElem = htmlElem;
+
+                while (true)
+                {
+                    IHTMLElement parentElem = crntElem.parentElement;
+                    if (parentElem == null)
+                    {
+                        return htmlElem;
+                    }
+
+                    String parentTag = parentElem.tagName.ToLower();
+                    if (Array.IndexOf(parentTags, parentTag) >= 0)
+                    {
+                        return parentElem;
+                    }
+
+                    crntElem = parentElem;
+                }
+            }
+
+            return htmlElem;
         }
 
 
