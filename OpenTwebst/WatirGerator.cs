@@ -44,12 +44,12 @@ namespace CatStudio
 
             this.CLICK_NO_INDEX_STATEMENT                   = "browser.{0}(:{1} => '{2}').{3}";
             this.CLICK_NO_INDEX_NO_ATTR_STATEMENT           = "browser.{0}().{1}";
-            this.CLICK_STATEMENT                            = "browser.{0}(:{1} => '{2}', :index={3}).{4}";
+            this.CLICK_STATEMENT                            = "browser.{0}(:{1} => '{2}', :index => {3}).{4}";
             this.CLICK_NO_ATTR_STATEMENT                    = "browser.{0}(:index => {1}).{2}";
 
             this.TEXT_CHANGED_NO_INDEX_STATEMENT            = "browser.{0}(:{1} => '{2}').set '{3}'";
             this.TEXT_CHANGED_NO_INDEX_NO_ATTR_STATEMENT    = "browser{0}().set '{1}'";
-            this.TEXT_CHANGED_STATEMENT                     = "browser{0}(:{1} => '{2}', :index={3}).set '{4}'";
+            this.TEXT_CHANGED_STATEMENT                     = "browser{0}(:{1} => '{2}', :index => {3}).set '{4}'";
             this.TEXT_CHANGED_NO_ATTR_STATEMENT             = "browser{0}(:index => {1}).set '{2}'";
             this.TEXT_CHANGED_ON_FILE_IE8_COMMENT           = "# Because of new HTML 5 security specifications, IE8 - IE9 does not reveal the real local path of the file you have selected. You have to manually change the code";
 
@@ -57,14 +57,14 @@ namespace CatStudio
             this.SELECT_MULTIPLE_FIRST_ITEM_STATEMENT       = "s.select '{0}'";
             this.SELECT_MULTIPLE_NO_INDEX_STATEMENT         = "{0}s = browser.{1}(:{2} => '{3}')\n";
             this.SELECT_MULTIPLE_NO_INDEX_NO_ATTR_STATEMENT = "{0}s = browser.{1}()\n";
-            this.SELECT_MULTIPLE_STATEMENT                  = "{0}s = browser.{1}(:{2} => '{3}', :index=4')\n";
+            this.SELECT_MULTIPLE_STATEMENT                  = "{0}s = browser.{1}(:{2} => '{3}', :index => {4})\n";
             this.SELECT_MULTIPLE_NO_ATTR_STATEMENT          = "{0}s = browser.{1}(:index => {2})\n";
             this.ADD_SELECTION_STATEMENT                    = "\ns.select '{0}'";
 
             this.SELECT_NO_INDEX_STATEMENT                  = "browser.{0}(:{1} => '{2}').select '{3}'";
             this.SELECT_NO_INDEX_NO_ATTR_STATEMENT          = "browser.{0}().select '{1}'";
-            this.SELECT_STATEMENT                           = "browser.{0}(:{1} => '{2}', :index={3}).select '{4}'";
-            this.SELECT_NO_ATTR_STATEMENT                   = "browser.{0}(:index => '{1}').select '{2}'";
+            this.SELECT_STATEMENT                           = "browser.{0}(:{1} => '{2}', :index => {3}).select '{4}'";
+            this.SELECT_NO_ATTR_STATEMENT                   = "browser.{0}(:index => {1}).select '{2}'";
 
             this.BACK_NAVIGATION_STATEMENT                  = "";
             this.FORWARD_NAVIGATION_STATEMENT               = "";
