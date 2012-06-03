@@ -16,10 +16,8 @@
 // Neutral resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
-#ifdef _WIN32
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -36,8 +34,8 @@ IDI_TWBST_ICON          ICON                    "res\\twbst.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
- PRODUCTVERSION 1,0,0,0
+ FILEVERSION 1,1,0,0
+ PRODUCTVERSION 1,1,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -55,12 +53,12 @@ BEGIN
             VALUE "Comments", "www.codecentrix.com"
             VALUE "CompanyName", "Codecentrix Software"
             VALUE "FileDescription", "Open Twebst Library"
-            VALUE "FileVersion", "1.0.0.0"
+            VALUE "FileVersion", "1.1.0.0"
             VALUE "InternalName", "OpenTwebstLib.dll"
             VALUE "LegalCopyright", "(c) 2012 Codecentrix Software."
             VALUE "OriginalFilename", "OpenTwebstLib.dll"
             VALUE "ProductName", "Open Twebst"
-            VALUE "ProductVersion", "1.0.0.0"
+            VALUE "ProductVersion", "1.1.0.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -75,7 +73,7 @@ END
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_PROJNAME            "CatCLSLib"
     IDS_BUY_NOW             "Purchase now"
@@ -83,7 +81,7 @@ BEGIN
     IDS_VERSION_STATIC_TEXT "Twebst Library version "
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_ERR_CAN_NOT_START_BROWSER 
                             "Failed to start ""Internet Explorer"" browser!"
@@ -91,7 +89,7 @@ BEGIN
                             "Can not properly create a new browser object. It is possible that OTWBSTPlugin.dll is not properly registered!"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_WAIT_TO_LOAD_TIMEOUT "Page loading timeout in WaitToLoad method call!"
     IDS_FIND_ALL_BRWS_LOAD_TIMEOUT 
@@ -106,7 +104,7 @@ BEGIN
     IDS_ERR_CAN_NOT_CREATE_ELEMENT "Can not create a new Element object!"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_ERR_CAN_NOT_CREATE_FRAME "Can not create a new Frame object!"
     IDS_ERR_FIND_CHILD_ELEMENT_INVALID_PARAM 
@@ -125,7 +123,7 @@ BEGIN
     IDS_ERR_FIND_CHILD_FRAME_FAILED "FindChildFrame method call failed!"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_ERR_FIND_ALL_ELEMENTS_INVALID_PARAM 
                             "Invalid parameter list in FindAllElements method call!"
@@ -153,7 +151,7 @@ BEGIN
                             "Page load timeout in FindAllFrames method call!"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_ERR_FIND_CHILDREN_FRAMES_INVALID_PARAM 
                             "Invalid parameter list in FindChildrenFrames method call!"
@@ -169,7 +167,7 @@ BEGIN
     IDS_METHOD_CALL_FAILED  "%s method call failed!"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_PROPERTY_FAILED     "%s property failed!"
     IDS_OPTION_ELEMENT_NOT_FOUND "Item(s) not found in <select> html element!"
@@ -198,7 +196,7 @@ BEGIN
                             "Invalid parameter list in selectedOption property call!"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_ERR_SELECTED_OPTION_FAILED "selectedOption property call failed!"
     IDS_SELECTED_OPTION_LOAD_TIMEOUT 
@@ -226,13 +224,11 @@ END
 
 
 /////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -244,7 +240,7 @@ IDR_BROWSER             REGISTRY                "Browser.rgs"
 IDR_FRAME               REGISTRY                "Frame.rgs"
 IDR_ELEMENT             REGISTRY                "Element.rgs"
 IDR_ELEMENTLIST         REGISTRY                "ElementList.rgs"
-#endif    // English (U.S.) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -252,10 +248,8 @@ IDR_ELEMENTLIST         REGISTRY                "ElementList.rgs"
 // French (France) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)
-#ifdef _WIN32
 LANGUAGE LANG_FRENCH, SUBLANG_FRENCH
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
