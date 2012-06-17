@@ -22,6 +22,7 @@
 #define IDH_CORE_SET_CLIPBOARD_TEXT        1023
 #define IDH_CORE_ASYNC_HTML_EVENTS         1031
 #define IDH_CORE_CLOSE_BROWSER_POPUPS      1036
+#define IDH_CORE_ELEMENT_FROM_POINT        1037
 
 
 // IBrowser help context IDs.

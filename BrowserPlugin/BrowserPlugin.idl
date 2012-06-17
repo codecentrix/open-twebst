@@ -76,6 +76,7 @@ library OpenTwebstPluginLib
 			[id(25)]HRESULT ClickElementAtAsync    ([in] IHTMLElement* pElement, [in] LONG x, [in] LONG y, [in] LONG nRightClick);
 			[id(26)]HRESULT FindSelectedOption     ([in] IHTMLElement* pElement, [out] IHTMLElement** ppSelectedOption);
 			[id(27)]HRESULT FindAllSelectedOptions ([in] IHTMLElement* pElement, [out] IUnknown** ppResult);
+			[id(28)]HRESULT FindElementFromPoint   ([in] LONG x, [in] LONG y, [out] IHTMLElement** ppElem);
 	};
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

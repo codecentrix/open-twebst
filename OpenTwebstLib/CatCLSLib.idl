@@ -90,6 +90,9 @@ library OpenTwebstLib
 		[id(8), helpstring(CORE_START_BROWSER_HELP), helpcontext(IDH_CORE_START_BROWSER)]
 			HRESULT StartBrowser([in] BSTR bstrUrl, [out, retval] IBrowser** ppNewBrowser);
 
+		[id(28), helpstring(CORE_ELEMENT_FROM_POINT_HELP), helpcontext(IDH_CORE_ELEMENT_FROM_POINT)]
+			HRESULT FindElementFromPoint([in] LONG x, [in] LONG y, [out, retval] IElement** ppElement);
+
 
 		// Properties.
 		[propget, id(9), helpstring(CORE_ASYNC_HTML_EVENTS_HELP), helpcontext(IDH_CORE_ASYNC_HTML_EVENTS)]
@@ -244,6 +247,7 @@ library OpenTwebstLib
 
 		[id(38), hidden, helpstring(BROWSER_FIND_ELEMENT_BY_XPATH), helpcontext(IDH_BROWSER_FIND_ELEM_BY_XPATH)]
 			HRESULT FindElementByXPath([in] BSTR bstrXPath, [out,retval] IElement** ppElement);
+
 	};
 
 

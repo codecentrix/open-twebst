@@ -170,13 +170,6 @@ STDMETHODIMP CExplorerPlugin::GetNativeBrowser(IWebBrowser2** ppWebBrowser)
 		return hRes;
 	}
 
-	/* An [out]-only parameter is assumed to be undefined when the remote procedure is called and
-	   memory for the object is allocated by the server. 
-	if (*ppWebBrowser != NULL)
-	{
-		(*ppWebBrowser)->Release();
-	}*/
-
 	*ppWebBrowser = pWebBrws;
 	traceLog << "CExplorerPlugin::GetNativeBrowser ends\n";
 	return S_OK;
@@ -1604,11 +1597,6 @@ STDMETHODIMP CExplorerPlugin::GetDocumentFromWindow(IHTMLWindow2* pWindow, IHTML
 	// Get the document from the window.
 	CComQIPtr<IHTMLDocument2> spDoc = HtmlHelpers::HtmlWindowToHtmlDocument(pWindow);
 
-	/*if (*ppDocument != NULL)
-	{
-		(*ppDocument)->Release();
-	}*/
-
 	*ppDocument = spDoc.Detach();
 	return S_OK;
 }
@@ -1630,14 +1618,6 @@ STDMETHODIMP CExplorerPlugin::GetBrowserTitle(BSTR* pBstrTitle)
 			traceLog << "GetBrowserTitle(String*) failed\n";
 			return E_FAIL;
 		}
-
-		// An [out]-only parameter is assumed to be undefined when the remote procedure is called
-		// and memory for the object is allocated by the server.
-		/*if (*pBstrTitle != NULL)
-		{
-			// Release any previous allocated bstr?
-			::SysFreeString(*pBstrTitle);
-		}*/
 
 		*pBstrTitle = CComBSTR(sTitle.c_str()).Detach();
 	}
@@ -2045,4 +2025,11 @@ STDMETHODIMP CExplorerPlugin::SetForceLoaded(LONG nIeWnd)
 	m_hIeWnd         = hIeWnd;
 
 	return S_OK;
+}
+
+
+STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement** ppElem)
+{
+	x, y, ppElem;
+	return E_NOTIMPL;
 }

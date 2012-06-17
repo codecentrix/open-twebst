@@ -1420,7 +1420,7 @@ STDMETHODIMP CCore::AttachToNativeElement(IHTMLElement* pHtmlElement, IElement**
 			throw CreateException(_T("Can NOT find plug-in in ROT in CCore::AttachToNativeElement\n"));
 		}
 
-		// Create a new frame object.
+		// Create a new element object.
 		IElement* pNewElement = NULL;
 		HRESULT hRes        = CComCoClass<CElement>::CreateInstance(&pNewElement);
 		if (pNewElement != NULL)
@@ -2226,108 +2226,6 @@ STDMETHODIMP CCore::put_asyncHtmlEvents(VARIANT_BOOL newVal)
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// ICoreVba
-/*STDMETHODIMP CCore::StartBrowserVba(BSTR bstrUrl, IBrowserVba** ppNewBrowser)
-{
-	if (NULL == ppNewBrowser)
-	{
-		return E_INVALIDARG;
-	}
-
-	CComQIPtr<IBrowser> spBrowser;
-	HRESULT hRes = StartBrowser(bstrUrl, &spBrowser);
-
-	CComQIPtr<IBrowserVba> spBrowserVba = spBrowser;
-	*ppNewBrowser = spBrowserVba.Detach();
-
-	return hRes;
-}
-
-
-STDMETHODIMP CCore::StartHiddenBrowserVba(BSTR bstrUrl, IBrowserVba** ppNewBrowser)
-{
-	if (NULL == ppNewBrowser)
-	{
-		return E_INVALIDARG;
-	}
-
-	CComQIPtr<IBrowser> spBrowser;
-	HRESULT hRes = StartBrowser(bstrUrl, &spBrowser);
-
-	CComQIPtr<IBrowserVba> spBrowserVba = spBrowser;
-	*ppNewBrowser = spBrowserVba.Detach();
-
-	return hRes;
-}
-
-
-STDMETHODIMP CCore::FindBrowserVba(BSTR bstrCond, IBrowserVba** ppNewBrowser)
-{
-	if (NULL == ppNewBrowser)
-	{
-		return E_INVALIDARG;
-	}
-
-	CComQIPtr<IBrowser>    spBrowser;
-	SearchCondition        sc           = bstrCond;
-	HRESULT                hRes         = FindBrowser(sc, &spBrowser);
-	CComQIPtr<IBrowserVba> spBrowserVba = spBrowser;
-
-	*ppNewBrowser = spBrowserVba.Detach();
-	return hRes;
-}
-
-
-STDMETHODIMP CCore::FindAllBrowsersVba(BSTR bstrCond, IBrowserListVba** pFoundBrowserList)
-{
-	if (NULL == pFoundBrowserList)
-	{
-		return E_INVALIDARG;
-	}
-
-	CComQIPtr<IBrowserList>    spBrowserList;
-	SearchCondition            sc               = bstrCond;
-	HRESULT                    hRes             = FindAllBrowsers(sc, &spBrowserList);
-	CComQIPtr<IBrowserListVba> spBrowserListVba = spBrowserList;
-
-	*pFoundBrowserList = spBrowserListVba.Detach();
-	return hRes;
-}
-
-
-STDMETHODIMP CCore::AttachToNativeElementVba(IHTMLElement* pHtmlElement, IElementVba** ppElement)
-{
-	if (NULL == ppElement)
-	{
-		return E_INVALIDARG;
-	}
-
-	CComQIPtr<IElement>    spElement;
-	HRESULT                hRes         = AttachToNativeElement(pHtmlElement, &spElement);
-	CComQIPtr<IElementVba> spElementVba = spElement;
-
-	*ppElement = spElementVba.Detach();
-	return hRes;
-}
-
-
-STDMETHODIMP CCore::get_foregroundBrowserVba(IBrowserVba** pFgBrowser)
-{
-	if (NULL == pFgBrowser)
-	{
-		return E_INVALIDARG;
-	}
-
-	CComQIPtr<IBrowser>    spBrowser;
-	HRESULT                hRes         = get_foregroundBrowser(&spBrowser);
-	CComQIPtr<IBrowserVba> spBrowserVba = spBrowser;
-
-	*pFgBrowser = spBrowserVba.Detach();
-	return hRes;
-}*/
-
-
 void CCore::ProcessMessagesOrSleep()
 {
 /*
@@ -2348,4 +2246,78 @@ void CCore::ProcessMessagesOrSleep()
 */
 
 	::Sleep(Common::INTERNAL_GLOBAL_PAUSE);
+}
+
+
+STDMETHODIMP CCore::FindElementFromPoint(LONG x, LONG y, IElement** ppElement)
+{
+	if (!ppElement)
+	{
+		traceLog << "Invalid arg in CCore::FindElementFromPoint\n";
+
+		SetComErrorMessage(IDS_INVALID_PARAM_LIST_IN_METHOD, CORE_FIND_ELEM_FROM_POINT, IDH_CORE_ELEMENT_FROM_POINT);
+		SetLastErrorCode(ERR_INVALID_ARG);
+
+		return HRES_INVALID_ARG;
+	}
+
+	// Reset the lastError property.
+	SetLastErrorCode(ERR_OK);
+
+	HWND hIEWnd = HtmlHelpers::GetIEServerFromScrPt(x, y);
+	if (NULL == hIEWnd)
+	{
+		traceLog << "No 'Internet Explorer_Server' window found in  CCore::FindElementFromPoint\n";
+		return HRES_OK;
+	}
+
+	ATLASSERT(Common::GetWndClass(hIEWnd) == _T("Internet Explorer_Server"));
+
+	CComQIPtr<IExplorerPlugin> spPlugin = NewMarshalService::FindBrwsPluginByIeWnd(hIEWnd);
+	if (spPlugin == NULL)
+	{
+		traceLog << "FindBrwsPluginByIeWnd returned NULL in CCore::FindElementFromPoint\n";
+		SetComErrorMessage(IDS_METHOD_CALL_FAILED, CORE_FIND_ELEM_FROM_POINT, IDH_CORE_ELEMENT_FROM_POINT);
+		SetLastErrorCode(ERR_FAIL);
+
+		return HRES_FAIL;
+	}
+
+	CComQIPtr<IHTMLElement> spElem;
+	HRESULT hRes = spPlugin->FindElementFromPoint(x, y, &spElem);
+	if (FAILED(hRes) || !spElem)
+	{
+		traceLog << "spPlugin->FindElementFromPoint failed in CCore::FindElementFromPoint\n";
+		SetComErrorMessage(IDS_METHOD_CALL_FAILED, CORE_FIND_ELEM_FROM_POINT, IDH_CORE_ELEMENT_FROM_POINT);
+		SetLastErrorCode(ERR_FAIL);
+
+		return HRES_FAIL;
+	}
+
+	// Create a new element object.
+	IElement* pNewElement = NULL;
+	hRes = CComCoClass<CElement>::CreateInstance(&pNewElement);
+
+	if (pNewElement != NULL)
+	{
+		ATLASSERT(SUCCEEDED(hRes));
+		CElement* pElementObject = static_cast<CElement*>(pNewElement); // Down cast !!!
+		ATLASSERT(pElementObject != NULL);
+
+		pElementObject->SetPlugin(spPlugin);
+		pElementObject->SetCore(this);
+		pElementObject->SetHtmlElement(spElem);
+
+		// Set the object reference into the output pointer.
+		*ppElement = pNewElement;
+		return HRES_OK;
+	}
+	else
+	{
+		traceLog << "Can not create a Element object in CCore::AttachToNativeElement\n";
+		SetComErrorMessage(IDS_ERR_CAN_NOT_CREATE_ELEMENT, IDH_CORE_ELEMENT_FROM_POINT);
+		SetLastErrorCode(ERR_FAIL);
+
+		return HRES_FAIL;
+	}
 }

@@ -150,6 +150,7 @@ public:
 	STDMETHOD(FindSelectedOption)     (IHTMLElement* pElement, IHTMLElement** ppSelectedOption);
 	STDMETHOD(FindAllSelectedOptions) (IHTMLElement* pElement, IUnknown** ppResult);
 	STDMETHOD(SetForceLoaded)         (LONG nIeWnd);
+	STDMETHOD(FindElementFromPoint)   (LONG x, LONG y, IHTMLElement** ppElem);
 
 	// IDispatch interface.
 	STDMETHOD(Invoke)(DISPID dispidMember,REFIID riid, LCID lcid, WORD nFlags,

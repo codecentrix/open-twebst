@@ -47,6 +47,7 @@ namespace HtmlHelpers
 	BOOL     GetElementScreenLocation (IHTMLElement* pElement, RECT* pRect, int nZoomLevel);
 	HRESULT  GetIEServerWndFromElement(IHTMLElement* pElement, HWND* pIeServerWnd);
 	HWND     GetIEWndFromBrowser      (CComQIPtr<IWebBrowser2> spBrowser);
+	HWND     GetIEServerFromScrPt     (LONG x, LONG y);
 
 	// Rise HTML events.
 	HRESULT ClickElementAt    (IHTMLElement* pElement, LONG x, LONG y, BOOL bRightClick);

@@ -97,3 +97,4 @@
 #define CORE_ASYNC_HTML_EVENTS               _T("asyncHtmlEvents")
 #define BROWSER_IS_TAB_ACTIVE                _T("isTabActive")
 #define BROWSER_ACTIVE_TAB                   _T("activeTab")
+#define CORE_FIND_ELEM_FROM_POINT            _T("FindElementFromPoint")

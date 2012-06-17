@@ -1661,3 +1661,55 @@ CComQIPtr<IWebBrowser2> HtmlHelpers::GetBrowserFromIEServerWnd(HWND hIeWnd)
 
 	return HtmlWindowToHtmlWebBrowser(spTopWindow);
 }
+
+
+HWND HtmlHelpers::GetIEServerFromScrPt(LONG x, LONG y)
+{
+	// First find the top parent from screen point.
+	POINT pt = { x, y };
+	HWND   hResult  = NULL;
+	HWND   hCrntWnd = ::ChildWindowFromPointEx(::GetDesktopWindow(), pt, CWP_SKIPTRANSPARENT | CWP_SKIPINVISIBLE);
+
+	if (!hCrntWnd)
+	{
+		traceLog << "Can NOT get top window in HtmlHelpers::GetIEServerFromScrPt\n";
+		return hResult;
+	}
+
+	::ScreenToClient(hCrntWnd, &pt);
+
+	// Search for "Internet Explorer_Server" child.
+	while (TRUE)
+	{
+		HWND hChildWnd = ::ChildWindowFromPointEx(hCrntWnd, pt, CWP_SKIPTRANSPARENT | CWP_SKIPINVISIBLE);
+		if (!hChildWnd)
+		{
+			traceLog << "Can NOT get child window in HtmlHelpers::GetIEServerFromScrPt\n";
+			break;
+		}
+
+		if (Common::GetWndClass(hChildWnd) == _T("Internet Explorer_Server"))
+		{
+			// We have found what we are looking for.
+			hResult = hChildWnd;
+			break;
+		}
+
+		if (hChildWnd == hCrntWnd)
+		{
+			// The end, no more children.
+			break;
+		}
+
+		BOOL bRes = ::MapWindowPoints(hCrntWnd, hChildWnd, &pt, 1);
+		if (!bRes && (::GetLastError() != ERROR_SUCCESS))
+		{
+			traceLog << "MapWindowPoints failed in HtmlHelpers::GetIEServerFromScrPt\n";
+			break;
+		}
+
+		hChildWnd = hCrntWnd;
+	}
+
+	return hResult;
+}

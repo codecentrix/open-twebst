@@ -82,6 +82,7 @@ public:
 	STDMETHOD(AttachToNativeElement)            (IHTMLElement* pHtmlElement, IElement** ppElement);
 	STDMETHOD(AttachToNativeBrowser)            (IWebBrowser2* pWebBrowser,  IBrowser** ppBrowser);
 	STDMETHOD(Reset)                            ();
+	STDMETHOD(FindElementFromPoint)             (LONG x, LONG y, IElement** ppElement);
 	STDMETHOD(get_INDEX_OUT_OF_BOUND_ERROR)     (LONG* pVal);
 	STDMETHOD(get_BROWSER_CONNECTION_LOST_ERROR)(LONG* pVal);
 	STDMETHOD(get_INVALID_OPERATION_ERROR)      (LONG* pVal);
