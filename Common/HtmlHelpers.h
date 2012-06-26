@@ -33,6 +33,7 @@ namespace HtmlHelpers
 	CComQIPtr<IHTMLWindow2>    HtmlWebBrowserToHtmlWindow (CComQIPtr<IWebBrowser2> spBrowser);
 	CComQIPtr<IAccessible>     HtmlElementToAccessible    (CComQIPtr<IHTMLElement> spHtmlElement);
 	CComQIPtr<IHTMLElement>    AccessibleToHtmlElement    (CComQIPtr<IAccessible> spAccessible);
+	CComQIPtr<IHTMLWindow2>    AccessibleToHtmlWindow     (CComQIPtr<IAccessible> spAccessible);
 	CComQIPtr<IAccessible>     HtmlDocumentToAccessible   (CComQIPtr<IHTMLDocument2> spDocument);
 	CComQIPtr<IHTMLImgElement> GetAreaImage               (CComQIPtr<IHTMLAreaElement> spArea);
 	CComQIPtr<IHTMLElement>    GetHtmlElementFromScreenPos(CComQIPtr<IHTMLDocument2> spDocument, long lX, long lY);

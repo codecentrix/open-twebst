@@ -2030,6 +2030,84 @@ STDMETHODIMP CExplorerPlugin::SetForceLoaded(LONG nIeWnd)
 
 STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement** ppElem)
 {
-	x, y, ppElem;
-	return E_NOTIMPL;
+	if (Common::GetWndClass(m_hIeWnd) != _T("Internet Explorer_Server"))
+	{
+		return S_OK;
+	}
+
+	CComQIPtr<IAccessible> spWndAcc;
+	HRESULT hRes = ::AccessibleObjectFromWindow(m_hIeWnd, OBJID_WINDOW, IID_IAccessible, (void**)&spWndAcc);
+	if (FAILED(hRes) || !spWndAcc)
+	{
+		traceLog << "AccessibleObjectFromWindow failed in CExplorerPlugin::FindElementFromPoint\n";
+		return S_OK;
+	}
+
+	CComQIPtr<IAccessible> spLastPane;
+	CComQIPtr<IAccessible> spCrntAcc = spWndAcc;
+
+	while (TRUE)
+	{
+		// Get the role of the current AA object.
+		CComVariant vRole;
+		hRes = spCrntAcc->get_accRole(CComVariant(CHILDID_SELF), &vRole);
+
+		// Keep the last pane object.
+		if (SUCCEEDED(hRes) && (VT_I4 == vRole.vt) && (ROLE_SYSTEM_PANE == vRole.lVal))
+		{
+			spLastPane = spCrntAcc;
+		}
+
+		CComVariant vAccCrntChild;
+		hRes = spCrntAcc->accHitTest(x, y, &vAccCrntChild);
+
+		if (FAILED(hRes) || (VT_EMPTY == vAccCrntChild.vt))
+		{
+			traceLog << "accHitTest failed in CExplorerPlugin::FindElementFromPoint\n";
+			return S_OK;
+		}
+
+		if ((VT_DISPATCH == vAccCrntChild.vt) && (vAccCrntChild.pdispVal != NULL))
+		{
+			spCrntAcc = vAccCrntChild.pdispVal;
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	if (!spLastPane)
+	{
+		traceLog << "spLastPane is NULL in CExplorerPlugin::FindElementFromPoint\n";
+		return S_OK;
+	}
+
+	// Get screen position of the accessible object.
+	LONG nScrLeft = 0;
+	LONG nScrTop  = 0;
+	LONG nWidth  = 0;
+	LONG nHeight = 0;
+
+	hRes = spLastPane->accLocation(&nScrLeft, &nScrTop, &nWidth, &nHeight, CComVariant(CHILDID_SELF));
+	if (FAILED(hRes))
+	{
+		traceLog << "accLocation failed in CExplorerPlugin::FindElementFromPoint\n";
+		return S_OK;
+	}
+
+	CComQIPtr<IHTMLWindow2> spHtmlWindow = HtmlHelpers::AccessibleToHtmlWindow(spLastPane);
+	if (!spHtmlWindow)
+	{
+		traceLog << "HtmlHelpers::AccessibleToHtmlWindow failed in CExplorerPlugin::FindElementFromPoint\n";
+		return S_OK;
+	}
+
+	// TODO: Adjust for zoom-level.
+	LONG nDocX = x - nScrLef;
+	LONG nDocY = y - nScrTop;
+
+
+
+	return S_OK;
 }

@@ -397,6 +397,33 @@ CComBSTR HtmlHelpers::GetLeftText(CComQIPtr<IHTMLDOMNode> spNode)
 }
 
 
+CComQIPtr<IHTMLWindow2> HtmlHelpers::AccessibleToHtmlWindow(CComQIPtr<IAccessible> spAccessible)
+{
+	ATLASSERT(spAccessible != NULL);
+
+	CComQIPtr<IServiceProvider>	spServProvider = spAccessible;
+	if (spServProvider != NULL)
+	{
+		CComQIPtr<IHTMLWindow2> spHtmlWindow;
+		HRESULT hRes = spServProvider->QueryService(IID_IHTMLWindow2, IID_IHTMLWindow2, (void**)&spHtmlWindow);
+		if (spHtmlWindow != NULL)
+		{
+			return spHtmlWindow;
+		}
+		else
+		{
+			traceLog << "QueryService failed in HtmlHelpers::AccessibleToHtmlWindow with code:" << hRes << "\n";
+		}
+	}
+	else
+	{
+		traceLog << "Can not get IServiceProvider from IAccessible in HtmlHelpers::AccessibleToHtmlWindow\n";
+	}
+
+	return CComQIPtr<IHTMLWindow2>();
+}
+
+
 CComQIPtr<IHTMLElement> HtmlHelpers::AccessibleToHtmlElement(CComQIPtr<IAccessible> spAccessible)
 {
 	ATLASSERT(spAccessible != NULL);
