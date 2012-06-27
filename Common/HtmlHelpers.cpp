@@ -424,6 +424,33 @@ CComQIPtr<IHTMLWindow2> HtmlHelpers::AccessibleToHtmlWindow(CComQIPtr<IAccessibl
 }
 
 
+CComQIPtr<IHTMLDocument2> HtmlHelpers::AccessibleToHtmlDocument(CComQIPtr<IAccessible> spAccessible)
+{
+	ATLASSERT(spAccessible != NULL);
+
+	CComQIPtr<IServiceProvider>	spServProvider = spAccessible;
+	if (spServProvider != NULL)
+	{
+		CComQIPtr<IHTMLDocument2> spHtmlDoc;
+		HRESULT hRes = spServProvider->QueryService(IID_IHTMLDocument2, IID_IHTMLDocument2, (void**)&spHtmlDoc);
+		if (spHtmlDoc != NULL)
+		{
+			return spHtmlDoc;
+		}
+		else
+		{
+			traceLog << "QueryService failed in HtmlHelpers::AccessibleToHtmlDocument with code:" << hRes << "\n";
+		}
+	}
+	else
+	{
+		traceLog << "Can not get IServiceProvider from IAccessible in HtmlHelpers::AccessibleToHtmlDocument\n";
+	}
+
+	return CComQIPtr<IHTMLDocument2>();
+}
+
+
 CComQIPtr<IHTMLElement> HtmlHelpers::AccessibleToHtmlElement(CComQIPtr<IAccessible> spAccessible)
 {
 	ATLASSERT(spAccessible != NULL);
@@ -1694,8 +1721,8 @@ HWND HtmlHelpers::GetIEServerFromScrPt(LONG x, LONG y)
 {
 	// First find the top parent from screen point.
 	POINT pt = { x, y };
-	HWND   hResult  = NULL;
-	HWND   hCrntWnd = ::ChildWindowFromPointEx(::GetDesktopWindow(), pt, CWP_SKIPTRANSPARENT | CWP_SKIPINVISIBLE);
+	HWND  hResult  = NULL;
+	HWND  hCrntWnd = ::ChildWindowFromPointEx(::GetDesktopWindow(), pt, CWP_SKIPTRANSPARENT | CWP_SKIPINVISIBLE);
 
 	if (!hCrntWnd)
 	{
@@ -1735,7 +1762,7 @@ HWND HtmlHelpers::GetIEServerFromScrPt(LONG x, LONG y)
 			break;
 		}
 
-		hChildWnd = hCrntWnd;
+		hCrntWnd = hChildWnd;
 	}
 
 	return hResult;

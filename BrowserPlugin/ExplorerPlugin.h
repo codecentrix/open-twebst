@@ -177,6 +177,8 @@ private:
 	void    CleanAyncActionsQueue  ();
 	HRESULT IsEmptyCollection      (CComQIPtr<ILocalElementCollection> spColl, BOOL& bIsEmpty);
 
+	CComQIPtr<IHTMLDocument2> FindDocumentFromPoint(LONG x, LONG y);
+
 private:
 	DWORD               m_dwEventsCookie;
 	LONG                m_nLastNavigationErr;

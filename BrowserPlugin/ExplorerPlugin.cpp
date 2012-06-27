@@ -2028,19 +2028,19 @@ STDMETHODIMP CExplorerPlugin::SetForceLoaded(LONG nIeWnd)
 }
 
 
-STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement** ppElem)
+CComQIPtr<IHTMLDocument2> CExplorerPlugin::FindDocumentFromPoint(LONG x, LONG y)
 {
 	if (Common::GetWndClass(m_hIeWnd) != _T("Internet Explorer_Server"))
 	{
-		return S_OK;
+		return CComQIPtr<IHTMLDocument2>();
 	}
 
 	CComQIPtr<IAccessible> spWndAcc;
 	HRESULT hRes = ::AccessibleObjectFromWindow(m_hIeWnd, OBJID_WINDOW, IID_IAccessible, (void**)&spWndAcc);
 	if (FAILED(hRes) || !spWndAcc)
 	{
-		traceLog << "AccessibleObjectFromWindow failed in CExplorerPlugin::FindElementFromPoint\n";
-		return S_OK;
+		traceLog << "AccessibleObjectFromWindow failed in CExplorerPlugin::FindDocumentFromPoint\n";
+		return CComQIPtr<IHTMLDocument2>();
 	}
 
 	CComQIPtr<IAccessible> spLastPane;
@@ -2053,7 +2053,7 @@ STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement*
 		hRes = spCrntAcc->get_accRole(CComVariant(CHILDID_SELF), &vRole);
 
 		// Keep the last pane object.
-		if (SUCCEEDED(hRes) && (VT_I4 == vRole.vt) && (ROLE_SYSTEM_PANE == vRole.lVal))
+		if (SUCCEEDED(hRes) && (VT_I4 == vRole.vt) && (ROLE_SYSTEM_CLIENT == vRole.lVal))
 		{
 			spLastPane = spCrntAcc;
 		}
@@ -2063,8 +2063,8 @@ STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement*
 
 		if (FAILED(hRes) || (VT_EMPTY == vAccCrntChild.vt))
 		{
-			traceLog << "accHitTest failed in CExplorerPlugin::FindElementFromPoint\n";
-			return S_OK;
+			traceLog << "accHitTest failed in CExplorerPlugin::FindDocumentFromPoint\n";
+			return CComQIPtr<IHTMLDocument2>();
 		}
 
 		if ((VT_DISPATCH == vAccCrntChild.vt) && (vAccCrntChild.pdispVal != NULL))
@@ -2079,35 +2079,41 @@ STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement*
 
 	if (!spLastPane)
 	{
-		traceLog << "spLastPane is NULL in CExplorerPlugin::FindElementFromPoint\n";
-		return S_OK;
-	}
-
-	// Get screen position of the accessible object.
-	LONG nScrLeft = 0;
-	LONG nScrTop  = 0;
-	LONG nWidth  = 0;
-	LONG nHeight = 0;
-
-	hRes = spLastPane->accLocation(&nScrLeft, &nScrTop, &nWidth, &nHeight, CComVariant(CHILDID_SELF));
-	if (FAILED(hRes))
-	{
-		traceLog << "accLocation failed in CExplorerPlugin::FindElementFromPoint\n";
-		return S_OK;
+		traceLog << "spLastPane is NULL in CExplorerPlugin::FindDocumentFromPoint\n";
+		return CComQIPtr<IHTMLDocument2>();
 	}
 
 	CComQIPtr<IHTMLWindow2> spHtmlWindow = HtmlHelpers::AccessibleToHtmlWindow(spLastPane);
 	if (!spHtmlWindow)
 	{
-		traceLog << "HtmlHelpers::AccessibleToHtmlWindow failed in CExplorerPlugin::FindElementFromPoint\n";
+		traceLog << "HtmlHelpers::AccessibleToHtmlWindow failed in CExplorerPlugin::FindDocumentFromPoint\n";
+		return CComQIPtr<IHTMLDocument2>();
+	}
+
+	CComQIPtr<IHTMLDocument2> spDoc = HtmlHelpers::HtmlWindowToHtmlDocument(spHtmlWindow);
+	if (!spDoc)
+	{
+		traceLog << "Cannot get document in CExplorerPlugin::FindDocumentFromPoint\n";
+	}
+
+	return spDoc;
+}
+
+
+STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement** ppElem)
+{
+	CComQIPtr<IHTMLDocument2> spDoc = FindDocumentFromPoint(x, y);
+	if (!spDoc)
+	{
+		traceLog << "Cannot get spDoc in CExplorerPlugin::FindElementFromPoint\n";
 		return S_OK;
 	}
 
-	// TODO: Adjust for zoom-level.
-	LONG nDocX = x - nScrLef;
-	LONG nDocY = y - nScrTop;
-
-
+	// TODO:
+	// Get document screen rectangle.
+	// Convert x, y in doc coordinates.
+	// Find zoom-level.
+	// Get element from point.
 
 	return S_OK;
 }

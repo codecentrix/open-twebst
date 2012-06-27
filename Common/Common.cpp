@@ -91,15 +91,6 @@ namespace Common
 }
 
 
-/*String Common::GetPluginRotName(DWORD dwThreadID)
-{
-	const TCHAR PLUGIN_PREFIX_NAME[] = _T("{67850823-5AF3-4188-81F0-3FC00AF78281}+");
-	Ostringstream os;
-	os << dwThreadID;
-	return PLUGIN_PREFIX_NAME + os.str();
-}*/
-
-
 String Common::GetWndClass(HWND hWnd)
 {
 	if (!::IsWindow(hWnd))
