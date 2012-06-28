@@ -162,20 +162,22 @@ private:
 	HRESULT UnInit();
 	void    OnQuit();
 
-	BOOL GetBrowserTitle           (String* pTitle);
-	BOOL GetBrowserUrl             (String* pUrl);
-	void GetBrowserPid             (String* pPid);
-	void GetBrowserTid             (String* pTid);
-	BOOL GetBrowserAttributeValue  (const String& sAttributeName, String* pAttributeValue);
-	BOOL SelectComboItem           (CComQIPtr<IHTMLSelectElement> spSelectElem, DWORD dwItem);
-	BOOL SelectSingleListItem      (CComQIPtr<IHTMLSelectElement> spSelectElem,  DWORD dwItem);
-	BOOL SelectMultipleListItem    (CComQIPtr<IHTMLSelectElement> spSelectElem, const list<DWORD>& itemsToSelect);
-	void ClearSelection            (CComQIPtr<IHTMLSelectElement> spSelectElem, BOOL bFireEvent);
-	BOOL AddToSelection            (CComQIPtr<IHTMLSelectElement> spSelectElem, const list<DWORD>& itemsToSelect);
-	list<DWORD> FindItemsToSelect  (VARIANT vItems, IHTMLElement* pElement, LONG nFlags);
-	list<DWORD> FindItemsToSelect  (VARIANT vStart, VARIANT vEnd, IHTMLElement* pElement, LONG nFlags);
-	void    CleanAyncActionsQueue  ();
-	HRESULT IsEmptyCollection      (CComQIPtr<ILocalElementCollection> spColl, BOOL& bIsEmpty);
+	BOOL GetBrowserTitle         (String* pTitle);
+	BOOL GetBrowserUrl           (String* pUrl);
+	void GetBrowserPid           (String* pPid);
+	void GetBrowserTid           (String* pTid);
+	BOOL GetBrowserAttributeValue(const String& sAttributeName, String* pAttributeValue);
+	BOOL SelectComboItem         (CComQIPtr<IHTMLSelectElement> spSelectElem, DWORD dwItem);
+	BOOL SelectSingleListItem    (CComQIPtr<IHTMLSelectElement> spSelectElem,  DWORD dwItem);
+	BOOL SelectMultipleListItem  (CComQIPtr<IHTMLSelectElement> spSelectElem, const list<DWORD>& itemsToSelect);
+	void ClearSelection          (CComQIPtr<IHTMLSelectElement> spSelectElem, BOOL bFireEvent);
+	BOOL AddToSelection          (CComQIPtr<IHTMLSelectElement> spSelectElem, const list<DWORD>& itemsToSelect);
+	void CleanAyncActionsQueue   ();
+	int  GetZoomLevel            ();
+
+	list<DWORD> FindItemsToSelect(VARIANT vItems, IHTMLElement* pElement, LONG nFlags);
+	list<DWORD> FindItemsToSelect(VARIANT vStart, VARIANT vEnd, IHTMLElement* pElement, LONG nFlags);
+	HRESULT     IsEmptyCollection(CComQIPtr<ILocalElementCollection> spColl, BOOL& bIsEmpty);
 
 	CComQIPtr<IHTMLDocument2> FindDocumentFromPoint(LONG x, LONG y);
 

@@ -798,26 +798,11 @@ STDMETHODIMP CExplorerPlugin::GetScreenClickPoint(IHTMLElement* pElement, LONG n
 		return hRes;
 	}
 
-	// Get the IWebBrowser2 pointer.
-	int                     nZoomLevel = 100;
-	CComQIPtr<IWebBrowser2> spBrws;
-	hRes = GetSite(IID_IWebBrowser2, (void**)&spBrws);
-
-	if (SUCCEEDED(hRes) && spBrws)
-	{
-		// It seems the call below does NOT work from outside IE.
-		CComVariant vZoom;
-		hRes = spBrws->ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, NULL, &vZoom);
-
-		if (SUCCEEDED(hRes))
-		{
-			nZoomLevel = vZoom.lVal;
-		}
-	}
-
 	// Get the click point.
-	POINT pClickScreenPoint;
-	BOOL bRes = HtmlHelpers::GetElemClickScreenPoint(spElementToScrollIntoView, &pClickScreenPoint, nGetInputFileButton, nZoomLevel);
+	POINT pClickScreenPoint = { 0 };
+	int   nZoomLevel = GetZoomLevel();
+	BOOL  bRes       = HtmlHelpers::GetElemClickScreenPoint(spElementToScrollIntoView, &pClickScreenPoint, nGetInputFileButton, nZoomLevel);
+
 	if (!bRes)
 	{
 		traceLog << "GetElemClickScreenPoint failed in CExplorerPlugin::ClickHtmlElement\n";
@@ -2102,6 +2087,11 @@ CComQIPtr<IHTMLDocument2> CExplorerPlugin::FindDocumentFromPoint(LONG x, LONG y)
 
 STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement** ppElem)
 {
+	if (!ppElem)
+	{
+		return E_INVALIDARG;
+	}
+
 	CComQIPtr<IHTMLDocument2> spDoc = FindDocumentFromPoint(x, y);
 	if (!spDoc)
 	{
@@ -2109,11 +2099,73 @@ STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement*
 		return S_OK;
 	}
 
-	// TODO:
-	// Get document screen rectangle.
+	// Get AA object coresponding to HTML document.
+	CComQIPtr<IAccessible> spDocAcc = HtmlHelpers::HtmlDocumentToAccessible(spDoc);
+	if (!spDocAcc)
+	{
+		traceLog << "Cannot get spDocAcc in CExplorerPlugin::FindElementFromPoint\n";
+		return S_OK;
+	}
+
+	// Get AA document screen rectangle.
+	long nScrDocLeft = 0;
+	long nScrDocTop  = 0;
+	long nDocWidth   = 0;
+	long nDocHeight  = 0;
+
+	HRESULT hRes = spDocAcc->accLocation(&nScrDocLeft, &nScrDocTop, &nDocWidth, &nDocHeight, CComVariant(CHILDID_SELF));
+	if (FAILED(hRes))
+	{
+		traceLog << "spDocAcc->accLocation failed in CExplorerPlugin::FindElementFromPoint\n";
+		return S_OK;
+	}
+
 	// Convert x, y in doc coordinates.
+	x = x - nScrDocLeft;
+	y = y - nScrDocTop;
+
 	// Find zoom-level.
+	int nZoomLevel = GetZoomLevel();
+
+	// Scale x, y with zoom level.
+	x = (LONG)((x * 100.0) / nZoomLevel);
+	y = (LONG)((y * 100.0) / nZoomLevel);
+
 	// Get element from point.
+	CComQIPtr<IHTMLElement> spResElem;
+	hRes = spDoc->elementFromPoint(x, y, &spResElem);
+
+	if (SUCCEEDED(hRes) && spResElem)
+	{
+		*ppElem = spResElem.Detach();
+	}
+	else
+	{
+		traceLog << "spDoc->elementFromPoint failed in CExplorerPlugin::FindElementFromPoint\n";
+	}
 
 	return S_OK;
+}
+
+
+int CExplorerPlugin::GetZoomLevel()
+{
+	// Get the IWebBrowser2 pointer.
+	int                     nZoomLevel = 100;
+	CComQIPtr<IWebBrowser2> spBrws;
+	HRESULT                 hRes = GetSite(IID_IWebBrowser2, (void**)&spBrws);
+
+	if (SUCCEEDED(hRes) && spBrws)
+	{
+		// It seems the call below does NOT work from outside IE.
+		CComVariant vZoom;
+		hRes = spBrws->ExecWB(OLECMDID_OPTICAL_ZOOM, OLECMDEXECOPT_DODEFAULT, NULL, &vZoom);
+
+		if (SUCCEEDED(hRes))
+		{
+			nZoomLevel = vZoom.lVal;
+		}
+	}
+
+	return nZoomLevel;
 }
