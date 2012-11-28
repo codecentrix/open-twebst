@@ -2104,7 +2104,7 @@ STDMETHODIMP CExplorerPlugin::FindElementFromPoint(LONG x, LONG y, IHTMLElement*
 	}
 
 	// TODO: Adjust for zoom-level.
-	LONG nDocX = x - nScrLef;
+	LONG nDocX = x - nScrLeft;
 	LONG nDocY = y - nScrTop;
 
 
