@@ -180,8 +180,25 @@ namespace CatStudio
                         if (crntOption.selected)
                         {
                             // I don't know why spaces appears like 0xA0 (no break space).
-                            String crntOptionText = crntOption.text.Replace('\xA0', '\x20');
-                            this.values.Add(crntOptionText);
+                            String crntOptionText = crntOption.text;
+                            if (crntOptionText != null)
+                            {
+                                crntOptionText = crntOptionText.Replace('\xA0', '\x20');
+                                this.values.Add(crntOptionText);
+                            }
+                            else
+                            {
+                                IHTMLOptionElement3 crntOption3 = crntOption as IHTMLOptionElement3;
+                                if (crntOption3 != null)
+                                {
+                                    crntOptionText = crntOption3.label;
+                                    if (crntOptionText != null)
+                                    {
+                                        crntOptionText = crntOptionText.Replace('\xA0', '\x20');
+                                        this.values.Add(crntOptionText);
+                                    }
+                                }
+                            }
                         }
                     }
                 }

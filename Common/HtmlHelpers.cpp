@@ -881,6 +881,21 @@ CComBSTR HtmlHelpers::GetTextAttributeValue(CComQIPtr<IHTMLElement> spHtmlElemen
 		{
 			return bstrResultText;
 		}
+		else
+		{
+			// <select> options can have emtpy inner text but a label attribute.
+			CComQIPtr<IHTMLOptionElement3> spOption3 = spHtmlElement;
+			if (spOption3 != NULL)
+			{
+				CComBSTR bstrLabelText;
+				hRes = spOption3->get_label(&bstrLabelText);
+
+				if ((hRes == S_OK) && (bstrLabelText.Length() > 0))
+				{
+					return bstrLabelText;
+				}
+			}
+		}
 	}
 
 	if (IsValidForComputingTextUsingAA(spHtmlElement))
