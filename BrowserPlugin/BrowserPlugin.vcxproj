@@ -370,6 +370,7 @@
     <ClCompile Include="..\Common\SearchCondition.cpp" />
     <ClCompile Include="SearchElementVisitor.cpp" />
     <ClCompile Include="SearchFrameVisitor.cpp" />
+    <ClCompile Include="SelectAsyncAction.cpp" />
     <ClCompile Include="SetFocusAsyncAction.cpp" />
     <ClCompile Include="SetFocusAwayAsyncAction.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -417,6 +418,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="..\Common\SearchCondition.h" />
     <ClInclude Include="SearchElementVisitor.h" />
+    <ClInclude Include="SelectAsyncAction.h" />
     <ClInclude Include="SetFocusAsyncAction.h" />
     <ClInclude Include="SetFocusAwayAsyncAction.h" />
     <ClInclude Include="stdafx.h" />

@@ -1907,9 +1907,25 @@ HRESULT CElement::Select(const VARIANT& vStartItems, const VARIANT& vEndItems, c
 		return HRES_FAIL;
 	}
 
+	VARIANT_BOOL vbSelectAsync = VARIANT_FALSE;
+	hRes = m_spCore->get_asyncHtmlEvents(&vbSelectAsync);
+
+	if (FAILED(hRes))
+	{
+		traceLog << "ICore::get_asyncHtmlEvents failed in CElement::Select with code " << hRes << "\n";
+		SetComErrorMessage(IDS_METHOD_CALL_FAILED, context.m_szFunctionName, context.m_dwHelpContextID);
+		SetLastErrorCode(ERR_FAIL);
+		return HRES_FAIL;
+	}
+
 	try
 	{
 		LONG nFlags = context.m_nSearchFlags;
+		if (VARIANT_TRUE == vbSelectAsync)
+		{
+			nFlags |= Common::PERFORM_ASYNC_ACTION;
+		}
+
 		SelectOptionsInContainer selecter(m_spHtmlElement, m_spPlugin, vStartItems, vEndItems, nFlags, m_spCore);
 		BOOL bLoadTimeout = FinderInTimeout::Find(&selecter, nSearchTimeout, nLoadTimeout, vbLoadTimeoutIsErr, this, this);
 

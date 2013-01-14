@@ -76,6 +76,9 @@
     <ClCompile Include="BrowserPlugin_i.c">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="SelectAsyncAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="BrowserPlugin.def">
@@ -152,6 +155,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectAsyncAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

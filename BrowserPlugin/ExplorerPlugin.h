@@ -43,6 +43,8 @@ class ATL_NO_VTABLE CExplorerPlugin :
 	public CWindowImpl<CExplorerPlugin>,
 	public IServiceProviderImpl<CExplorerPlugin>
 {
+friend class SelectAsyncAction;
+
 public:
 	CExplorerPlugin()
 	{
@@ -140,7 +142,7 @@ public:
 	STDMETHOD(ClearSelection)         (IHTMLElement* pElement);
 	STDMETHOD(GetBrowserTitle)        (BSTR* pBstrTitle);
 	STDMETHOD(GetBrowserThreadID)     (LONG* pThID);
-	STDMETHOD(GetBrowserProcessID)     (LONG* pProcID);
+	STDMETHOD(GetBrowserProcessID)    (LONG* pProcID);
 	STDMETHOD(SetFocusOnElement)      (IHTMLElement* pTargetElement, VARIANT_BOOL vbAsync);
 	STDMETHOD(SetFocusAwayFromElement)(IHTMLElement* pTargetElement, BOOL bGenerateOnChange, VARIANT_BOOL vbAsync);
 	STDMETHOD(FireEventOnElement)     (IHTMLElement* pTargetElement, BSTR bstrEventName, LONG wCharToRise, VARIANT_BOOL vbAsync);
@@ -178,6 +180,9 @@ private:
 	list<DWORD> FindItemsToSelect(VARIANT vItems, IHTMLElement* pElement, LONG nFlags);
 	list<DWORD> FindItemsToSelect(VARIANT vStart, VARIANT vEnd, IHTMLElement* pElement, LONG nFlags);
 	HRESULT     IsEmptyCollection(CComQIPtr<ILocalElementCollection> spColl, BOOL& bIsEmpty);
+
+	HRESULT FindInfoForSelect(IHTMLElement* pElement, VARIANT vStart, VARIANT vEnd, LONG nFlags, list<DWORD>& outItemsToSelect, BOOL& bOutIsCombo, BOOL& bOutMultiple);
+	HRESULT DoSelectOptions  (IHTMLElement* pElement, const list<DWORD>& itemsToSelect, BOOL bIsCombo, BOOL bMultiple, LONG nFlags);
 
 	CComQIPtr<IHTMLDocument2> FindDocumentFromPoint(LONG x, LONG y);
 

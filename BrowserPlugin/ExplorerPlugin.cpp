@@ -36,6 +36,8 @@
 #include "SetFocusAsyncAction.h"
 #include "SetFocusAwayAsyncAction.h"
 #include "FireEventAsyncAction.h"
+#include "SelectAsyncAction.h"
+
 using namespace Common;
 
 #ifdef min
@@ -829,21 +831,30 @@ STDMETHODIMP CExplorerPlugin::GetScreenClickPoint(IHTMLElement* pElement, LONG n
 	return S_OK;
 }
 
-
-STDMETHODIMP CExplorerPlugin::SelectOptions(IHTMLElement* pElement, VARIANT vStart, VARIANT vEnd, LONG nFlags)
+HRESULT CExplorerPlugin::FindInfoForSelect
+	(
+		IHTMLElement* pElement,
+		VARIANT       vStart,
+		VARIANT       vEnd,
+		LONG          nFlags,
+		
+		list<DWORD>& outItemsToSelect,
+		BOOL&        bOutIsCombo,
+		BOOL&        bOutMultiple
+	)
 {
 	// Check parameter.
 	if (!Common::IsValidOptionVariant(vStart) ||
 	    ((VT_EMPTY != vEnd.vt) && !Common::IsValidOptionVariant(vEnd)))
 	{
-		traceLog << "Invalid parameters in CExplorerPlugin::SelectOptions\n";
+		traceLog << "Invalid parameters in CExplorerPlugin::FindInfoForSelect\n";
 		return E_INVALIDARG;
 	}
 
 	CComQIPtr<IHTMLSelectElement> spSelect = pElement;
 	if (spSelect == NULL)
 	{
-		traceLog << "pElement is not a <select> html element in CExplorerPlugin::SelectOptions\n";
+		traceLog << "pElement is not a <select> html element in CExplorerPlugin::FindInfoForSelect\n";
 		return HRES_OPERATION_NOT_APPLICABLE;
 	}
 
@@ -855,7 +866,7 @@ STDMETHODIMP CExplorerPlugin::SelectOptions(IHTMLElement* pElement, VARIANT vSta
 		HRESULT      hRes = spSelect->get_multiple(&vbMultiple);
 		if (FAILED(hRes))
 		{
-			traceLog << "IHTMLSelectElement::get_multiple failed with code " << hRes << " in CExplorerPlugin::SelectOptions\n";
+			traceLog << "IHTMLSelectElement::get_multiple failed with code " << hRes << " in CExplorerPlugin::FindInfoForSelect\n";
 			return E_FAIL;
 		}
 
@@ -872,16 +883,16 @@ STDMETHODIMP CExplorerPlugin::SelectOptions(IHTMLElement* pElement, VARIANT vSta
 
 	if (!bMultiple && ((nFlags & Common::ADD_SELECTION) || (VT_EMPTY != vEnd.vt)))
 	{
-		traceLog << "Can not add selection for combo or simple selection list in CExplorerPlugin::SelectOptions\n";
+		traceLog << "Can not add selection for combo or simple selection list in CExplorerPlugin::FindInfoForSelect\n";
 		return HRES_OPERATION_NOT_APPLICABLE;
 	}
 
 
 	// Find the items to select.
-	list<DWORD> itemsToSelect;
 	try
 	{
-		itemsToSelect = FindItemsToSelect(vStart, vEnd, pElement, nFlags);
+		outItemsToSelect.clear();
+		outItemsToSelect = FindItemsToSelect(vStart, vEnd, pElement, nFlags);
 	}
 	catch (const ExceptionServices::InvalidParamException& except)
 	{
@@ -894,10 +905,32 @@ STDMETHODIMP CExplorerPlugin::SelectOptions(IHTMLElement* pElement, VARIANT vSta
 		return E_FAIL;
 	}
 
-	if (itemsToSelect.size() == 0)
+	if (outItemsToSelect.size() == 0)
 	{
-		traceLog << "Options not found in CExplorerPlugin::SelectOptions\n";
+		traceLog << "Options not found in CExplorerPlugin::FindInfoForSelect\n";
 		return HRES_NOT_FOUND_ERR;
+	}
+
+	bOutIsCombo  = bIsCombo;
+	bOutMultiple = bMultiple;
+
+	return S_OK;
+}
+
+
+HRESULT CExplorerPlugin::DoSelectOptions(IHTMLElement* pElement, const list<DWORD>& itemsToSelect, BOOL bIsCombo, BOOL bMultiple, LONG nFlags)
+{
+	if (!pElement)
+	{
+		traceLog << "pElement is NULL in CExplorerPlugin::DoSelectOptions\n";
+		return E_INVALIDARG;
+	}
+
+	CComQIPtr<IHTMLSelectElement> spSelect = pElement;
+	if (!spSelect)
+	{
+		traceLog << "Not a IHTMLSelectElement in CExplorerPlugin::DoSelectOptions\n";
+		return HRES_OPERATION_NOT_APPLICABLE;
 	}
 
 	try
@@ -906,7 +939,7 @@ STDMETHODIMP CExplorerPlugin::SelectOptions(IHTMLElement* pElement, VARIANT vSta
 		{
 			if (!SelectComboItem(spSelect, *itemsToSelect.begin()))
 			{
-				traceLog << "Index out of bound for SelectComboItem in CExplorerPlugin::SelectOptions\n";
+				traceLog << "Index out of bound for SelectComboItem in CExplorerPlugin::DoSelectOptions\n";
 				return HRES_INDEX_OUT_OF_BOUND_ERR;
 			}
 		}
@@ -914,7 +947,7 @@ STDMETHODIMP CExplorerPlugin::SelectOptions(IHTMLElement* pElement, VARIANT vSta
 		{
 			if (!SelectSingleListItem(spSelect, *itemsToSelect.begin()))
 			{
-				traceLog << "Index out of bound for SelectListItem in CExplorerPlugin::SelectOptions\n";
+				traceLog << "Index out of bound for SelectListItem in CExplorerPlugin::DoSelectOptions\n";
 				return HRES_INDEX_OUT_OF_BOUND_ERR;
 			}
 		}
@@ -924,13 +957,13 @@ STDMETHODIMP CExplorerPlugin::SelectOptions(IHTMLElement* pElement, VARIANT vSta
 			{
 				if  (!SelectMultipleListItem(spSelect, itemsToSelect))
 				{
-					traceLog << "Index out of bound for AddToSelection in CExplorerPlugin::SelectOptions\n";
+					traceLog << "Index out of bound for AddToSelection in CExplorerPlugin::DoSelectOptions\n";
 					return HRES_INDEX_OUT_OF_BOUND_ERR;
 				}
 			}
 			else if (!AddToSelection(spSelect, itemsToSelect))
 			{
-				traceLog << "Index out of bound for AddToSelection in CExplorerPlugin::SelectOptions\n";
+				traceLog << "Index out of bound for AddToSelection in CExplorerPlugin::DoSelectOptions\n";
 				return HRES_INDEX_OUT_OF_BOUND_ERR;
 			}
 		}
@@ -944,6 +977,36 @@ STDMETHODIMP CExplorerPlugin::SelectOptions(IHTMLElement* pElement, VARIANT vSta
 	return S_OK;
 }
 
+
+STDMETHODIMP CExplorerPlugin::SelectOptions(IHTMLElement* pElement, VARIANT vStart, VARIANT vEnd, LONG nFlags)
+{
+
+	list<DWORD> itemsToSelect;
+	BOOL bIsCombo  = FALSE;
+	BOOL bMultiple = FALSE;
+
+	HRESULT hRes = CExplorerPlugin::FindInfoForSelect(pElement, vStart, vEnd, nFlags, itemsToSelect, bIsCombo, bMultiple);
+	if (FAILED(hRes))
+	{
+		traceLog << "FindInfoForSelect failed in CExplorerPlugin::SelectOptions\n";
+		return hRes;
+	}
+
+	if (Common::PERFORM_ASYNC_ACTION & nFlags)
+	{
+		SelectAsyncAction* pSelectAsync = new SelectAsyncAction(this, pElement, itemsToSelect, bIsCombo, bMultiple, nFlags);
+
+		// Put the action object into the queue and post a message.
+		m_asyncActionsQueue.push_back(pSelectAsync);
+		this->PostMessage(WM_APP_ASYNC_ACTION);
+
+		return S_OK;
+	}
+	else
+	{
+		return DoSelectOptions(pElement, itemsToSelect, bIsCombo, bMultiple, nFlags);
+	}
+}
 
 BOOL CExplorerPlugin::SelectMultipleListItem(CComQIPtr<IHTMLSelectElement> spSelectElem, const list<DWORD>& itemsToSelect)
 {
@@ -1737,7 +1800,7 @@ LRESULT CExplorerPlugin::OnAsyncAction(UINT uMsg, WPARAM /*wParam*/, LPARAM /*lP
 	else
 	{
 		traceLog << "m_asyncActionsQueue is empty in CExplorerPlugin::OnAsyncAction\n";
-		ATLASSERT(FALSE);
+		ATLASSERT(FALSE && _T("m_asyncActionsQueue is empty in CExplorerPlugin::OnAsyncAction"));
 	}
 
 	return 0;

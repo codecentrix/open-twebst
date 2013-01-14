@@ -75,6 +75,7 @@ namespace Common
 	const ULONG SEARCH_MODAL_HTML_DLG  = 0x40;
 	const ULONG SEARCH_PARENT_ELEM     = 0x80;
 	const ULONG SEARCH_SELECTED_OPTION = 0x100;
+	const ULONG PERFORM_ASYNC_ACTION   = 0x200;
 
 	// Extra info used to generate hardware events.
 	const DWORD HARDWARE_EVENT_EXTRA_INFO = 0x2C1016BA;
