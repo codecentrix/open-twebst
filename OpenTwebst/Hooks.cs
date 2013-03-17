@@ -25,7 +25,7 @@
 using System;
 using System.Text;
 using System.Runtime.InteropServices;
-
+using System.Drawing;
 
 
 namespace CatStudio
@@ -169,7 +169,7 @@ namespace CatStudio
                         // app calls ::PeekMessage, Windows calls your hook with WPARAM set to PM_NOREMOVE.
                         if (wParam.ToInt32() == Win32Api.PM_REMOVE)
                         {
-                            if (IsIEServerOrChild(msgStruct.hwnd))
+                            if (Win32Api.IsIEServerOrChild(msgStruct.hwnd))
                             {
                                 //System.Diagnostics.Trace.WriteLine("OnNewWin32Msg event rised for " + msgStruct.message + " on " + msgStruct.hwnd);
                                 Win32HookMsgEventArgs.HookMsgType msgType = GetMsgType(msgStruct.message);
@@ -184,7 +184,7 @@ namespace CatStudio
                     {
                         if (wParam.ToInt32() == Win32Api.PM_REMOVE)
                         {
-                            if (IsIEServerOrChild(msgStruct.hwnd))
+                            if (Win32Api.IsIEServerOrChild(msgStruct.hwnd))
                             {
                                 OnNewWin32Msg(msgStruct.hwnd, Win32HookMsgEventArgs.HookMsgType.KEY_PRESSED_MSG);
                             }
@@ -208,44 +208,118 @@ namespace CatStudio
         }
 
 
-        private bool IsIEServerWindow(IntPtr hWnd)
+        private Win32Api.HookProc getMsgHookProcedure = null;
+        private int hHook  = 0;
+
+        #endregion
+    }
+
+
+    class Win32MouseLLEventArgs : EventArgs
+    {
+        public Win32MouseLLEventArgs(int msg, int x, int y)
         {
-            StringBuilder className = new StringBuilder(100);
-            int           res       = Win32Api.GetClassName(hWnd, className, className.Capacity);
-            if (res != 0)
+            this.message = msg;
+            this.screenPoint = new Point(x, y);
+        }
+
+        public Point ScreenPoint
+        {
+            get { return this.screenPoint; }
+        }
+
+        public int Message
+        {
+            get { return this.message; }
+        }
+
+        private Point screenPoint;
+        private int   message;
+    }
+
+
+    class Win32LLMouseHook
+    {
+        #region Public Area
+
+        public event EventHandler<Win32MouseLLEventArgs> Win32HookMouseMsg;
+
+        public void Install()
+        {
+            if ((hHook != 0) || (mouseHookProcedure != null))
             {
-                return ("Internet Explorer_Server" == className.ToString());
+                throw new Exception("Hook already installed in Win32LLMouseHook.Install");
+            }
+
+            mouseHookProcedure = new Win32Api.HookProc(MouseHookProc);
+            hHook = Win32Api.SetWindowsHookEx(Win32Api.WH_MOUSE_LL, mouseHookProcedure, (IntPtr)0, 0);
+            if (hHook == 0)
+            {
+                throw new Exception("SetWindowsHookEx failed in Win32LLMouseHook.Install");
+            }
+        }
+
+
+        public void UnInstall()
+        {
+            if (0 == hHook)
+            {
+                // Not installed.
+                return;
+            }
+
+            bool ret = Win32Api.UnhookWindowsHookEx(hHook);
+            if (ret == false)
+            {
+                throw new Exception("UnhookWindowsHookEx failed in Win32LLMouseHook.Install");
+            }
+
+            hHook = 0;
+            mouseHookProcedure = null;
+        }
+
+        #endregion
+
+        #region Private Area
+        private int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
+        {
+            if (nCode < 0)
+            {
+                // If nCode is less than zero, the hook procedure must pass the message to the CallNextHookEx
+                // function without further processing and should return the value returned by CallNextHookEx.
+                return Win32Api.CallNextHookEx(hHook, nCode, wParam, lParam);
             }
             else
             {
-                return false;
-            }
-        }
-
-
-        private bool IsIEServerOrChild(IntPtr hWnd)
-        {
-            // On IE6 combo-boxes are implemented as child windows.
-            IntPtr hCrntWnd = hWnd;
-
-            while (true)
-            {
-                if (!Win32Api.IsWindow(hCrntWnd))
+                if (Win32HookMouseMsg != null)
                 {
-                    return false;
+                    MouseLLHookStruct msgStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
+                    int msg = wParam.ToInt32();
+                    switch (msg)
+                    {
+                        case Win32Api.WM_LBUTTONDOWN:
+                        case Win32Api.WM_LBUTTONUP:
+                        {
+                            Win32HookMouseMsg(this, new Win32MouseLLEventArgs(msg, msgStruct.pt.x, msgStruct.pt.y));
+                            return 0; // Prevent the message being dispatched to target window.
+                            // TODO: it seems the messages are always dispatched to target window.
+                            // which is a good thing for non-IE windows.
+                        }
+
+                        case Win32Api.WM_MOUSEMOVE:
+                        {
+                            Win32HookMouseMsg(this, new Win32MouseLLEventArgs(msg, msgStruct.pt.x, msgStruct.pt.y));
+                            return Win32Api.CallNextHookEx(hHook, nCode, wParam, lParam);
+                        }
+                    }
                 }
 
-                if (IsIEServerWindow(hCrntWnd))
-                {
-                    return true;
-                }
-
-                hCrntWnd = Win32Api.GetParent(hCrntWnd);
+                return Win32Api.CallNextHookEx(hHook, nCode, wParam, lParam);
             }
         }
-
-        private Win32Api.HookProc getMsgHookProcedure = null;
-        private static int hHook  = 0;
+        
+        private Win32Api.HookProc mouseHookProcedure = null;
+        private int hHook  = 0;
 
         #endregion
     }

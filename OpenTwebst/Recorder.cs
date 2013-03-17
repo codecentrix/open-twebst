@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Accessibility;
 using System.Drawing;
+using System.Diagnostics;
 
 
 namespace CatStudio
@@ -22,6 +23,7 @@ namespace CatStudio
         public event EventHandler<RecEventArgs> ChangeAction;
         public event EventHandler<EventArgs>    BackAction;
         public event EventHandler<EventArgs>    ForwardAction;
+        public event EventHandler<RecEventArgs> ElementSelected;
 
         public static Recorder Instance
         {
@@ -34,7 +36,18 @@ namespace CatStudio
 
         public void StartRec()
         {
-            this.isRecording = true;
+            if (this.recorderMode == RecorderMode.RECORDING_MODE)
+            {
+                // Already recording.
+                return;
+            }
+            else if (this.recorderMode == RecorderMode.SELECTION_MODE)
+            {
+                StopSelection();
+            }
+
+            Debug.Assert(this.recorderMode == RecorderMode.STOP_MODE);
+            this.recorderMode = RecorderMode.RECORDING_MODE;
 
             if (RecStarted != null)
             {
@@ -45,8 +58,13 @@ namespace CatStudio
 
         public void StopRec()
         {
-            this.isRecording = false;
+            if (this.recorderMode != RecorderMode.RECORDING_MODE)
+            {
+                // Not recording.
+                return;
+            }
 
+            this.recorderMode = RecorderMode.STOP_MODE;
             if (RecStopped != null)
             {
                 RecStopped(this, EventArgs.Empty);
@@ -56,13 +74,45 @@ namespace CatStudio
 
         public bool IsRecording
         {
-            get { return this.isRecording; }
+            get { return this.recorderMode == RecorderMode.RECORDING_MODE; }
+        }
+
+
+        public bool IsSelecting
+        {
+            get { return this.recorderMode == RecorderMode.SELECTION_MODE; }
+        }
+
+        public void StartSelection()
+        {
+            if (this.recorderMode == RecorderMode.RECORDING_MODE)
+            {
+                StopRec();
+            }
+
+            Debug.Assert(this.recorderMode == RecorderMode.STOP_MODE);
+            this.recorderMode = RecorderMode.SELECTION_MODE;
+            this.win32MouseHook.Install();
+        }
+
+
+        public void StopSelection()
+        {
+            if (this.recorderMode != RecorderMode.SELECTION_MODE)
+            {
+                // Not in selection mode.
+                return;
+            }
+
+            this.recorderMode = RecorderMode.STOP_MODE;
+            this.win32MouseHook.UnInstall();
+            RemoveHighlight();
         }
 
 
         public void RecordForward()
         {
-            if (this.isRecording && (this.ForwardAction != null))
+            if (this.IsRecording && (this.ForwardAction != null))
             {
                 this.ForwardAction(this, EventArgs.Empty);
             }
@@ -71,7 +121,7 @@ namespace CatStudio
 
         public void RecordBack()
         {
-            if (this.isRecording && (this.BackAction != null))
+            if (this.IsRecording && (this.BackAction != null))
             {
                 this.BackAction(this, EventArgs.Empty);
             }
@@ -88,6 +138,8 @@ namespace CatStudio
 
             this.win32Hook.Win32HookMsg += OnWin32HookMsg;
             this.win32Hook.Install();
+
+            this.win32MouseHook.Win32HookMouseMsg += OnMouseMsg;
         }
 
 
@@ -96,16 +148,33 @@ namespace CatStudio
             this.win32Hook.Win32HookMsg -= OnWin32HookMsg;
             this.win32Hook.UnInstall();
 
-            isRecording        = false;
+            this.win32MouseHook.Win32HookMouseMsg -= OnMouseMsg;
+            this.win32MouseHook.UnInstall();
+
+            this.recorderMode  = RecorderMode.STOP_MODE;
             this.twebstBrowser = null;
             this.twebstCore.Reset();
         }
         #endregion
 
         #region Private section
+        private void OnMouseMsg(Object sender, Win32MouseLLEventArgs e)
+        {
+            if (e.Message == Win32Api.WM_LBUTTONUP)
+            {
+                // The hook procedure should process a message in less than a registry specified time
+                // otherwise the OS will silently removed the hook.
+                Win32Api.PostMessage(this.Handle, WM_DELAYED_SELECTED, e.ScreenPoint.X, e.ScreenPoint.Y);
+            }
+            else if (e.Message == Win32Api.WM_MOUSEMOVE)
+            {
+                Win32Api.PostMessage(this.Handle, WM_DELAYED_SELECTING, e.ScreenPoint.X, e.ScreenPoint.Y);
+            }
+        }
+
         private void OnWin32HookMsg(Object sender, Win32HookMsgEventArgs e)
         {
-            if (this.isRecording)
+            if (this.IsRecording)
             {
                 this.pendingWin32Action = true;
                 this.lastWin32Time      = DateTime.Now;
@@ -213,7 +282,7 @@ namespace CatStudio
 
         private void OnHtmlChange(object sender, EventArgs e)
         {
-            if (this.isRecording && (this.ChangeAction != null))
+            if (this.IsRecording && (this.ChangeAction != null))
             {
                 HtmlHandler  htmlHandler = (HtmlHandler)sender;
                 IHTMLElement htmlSource  = htmlHandler.SourceHTMLWindow.@event.srcElement;
@@ -233,7 +302,7 @@ namespace CatStudio
 
             // On www.xero.com the source element we get on click event is messed up I don't know why.
             // Just keep the source recorder package we correctly get on mouseup event and use it with onclick event.
-            if (this.isRecording && (this.ClickAction != null))
+            if (this.IsRecording && (this.ClickAction != null))
             {
                 HtmlHandler  htmlHandler = (HtmlHandler)sender;
                 IHTMLElement htmlSource  = htmlHandler.SourceHTMLWindow.@event.srcElement;
@@ -263,7 +332,7 @@ namespace CatStudio
 
         private void OnHtmlClick(object sender, EventArgs e)
         {
-            if (this.isRecording && (this.ClickAction != null) && (this.recLastMouseUpPackage != null))
+            if (this.IsRecording && (this.ClickAction != null) && (this.recLastMouseUpPackage != null))
             {
                 this.pendingWin32Click = false;
 
@@ -323,7 +392,7 @@ namespace CatStudio
             if (WM_PENDING_WIN32_CLICK == m.Msg)
             {
                 //System.Diagnostics.Trace.WriteLine("WM_PENDING_WIN32_CLICK received");
-                if (this.isRecording && this.pendingWin32Click)
+                if (this.IsRecording && this.pendingWin32Click)
                 {
                     //System.Diagnostics.Trace.WriteLine("WM_PENDING_WIN32_CLICK to be processed");
                     this.pendingWin32Click = false;
@@ -332,14 +401,118 @@ namespace CatStudio
                     OnCanceledClick(m.LParam, screenPos);
                 }
             }
+            else if (WM_DELAYED_SELECTED == m.Msg)
+            {
+                if (this.IsSelecting)
+                {
+                    int x = m.WParam.ToInt32();
+                    int y = m.LParam.ToInt32();
+                    OnScreenSelected(x, y);
+                }
+            }
+            else if (WM_DELAYED_SELECTING == m.Msg)
+            {
+                if (this.IsSelecting)
+                {
+                    int x = m.WParam.ToInt32();
+                    int y = m.LParam.ToInt32();
+                    OnScreenSelecting(x, y);
+                }
+            }
 
             base.WndProc(ref m);
+        }
+
+
+        private void OnScreenSelected(int x, int y)
+        {
+            Debug.Assert(this.IsSelecting);
+
+            if (this.ElementSelected != null)
+            {
+                try
+                {
+                    IElement elem = this.twebstCore.FindElementFromPoint(x, y);
+                    if (elem != null)
+                    {
+                        IHTMLElement htmlElem = elem.nativeElement;
+                        RecEventArgs recPackage = RecEventArgs.CreateRecEvent(htmlElem, elem.parentBrowser);
+                        this.ElementSelected(this, recPackage);
+                    }
+                }
+                catch (COMException ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+
+
+        private void RemoveHighlight()
+        {
+            try
+            {
+                if (this.lastSelectingElem != null)
+                {
+                    this.lastSelectingElem.nativeElement.style.border = this.savedHighlightInfo;
+                    this.lastSelectingElem.nativeElement.style.border = "";
+                    this.lastSelectingElem.RemoveAttribute(CatStudioConstants.CRNT_SELECTION_ATTR);
+
+                    // Cleanup.
+                    Marshal.ReleaseComObject(this.lastSelectingElem);
+                    this.lastSelectingElem = null;
+                    this.savedHighlightInfo = null;
+                }
+            }
+            catch (COMException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+
+        private void PutHighlight(IElement elem)
+        {
+            Debug.Assert(this.lastSelectingElem == null);
+
+            this.lastSelectingElem = elem;
+            this.savedHighlightInfo = elem.nativeElement.style.border;
+            elem.nativeElement.style.border = CatStudioConstants.TWEBST_SELECT_HIGHLIGHT;
+            elem.SetAttribute(CatStudioConstants.CRNT_SELECTION_ATTR, "1");
+        }
+
+
+        private void OnScreenSelecting(int x, int y)
+        {
+            Debug.Assert(this.IsSelecting);
+
+            if (this.ElementSelected != null)
+            {
+                try
+                {
+                    IElement elem = this.twebstCore.FindElementFromPoint(x, y);
+                    if (elem != null)
+                    {
+                        // Check if new element.
+                        if (String.IsNullOrEmpty(((String)elem.GetAttribute(CatStudioConstants.CRNT_SELECTION_ATTR))))
+                        {
+                            // Remove selection highlight on old elem.
+                            RemoveHighlight();
+                            PutHighlight(elem);
+                        }
+                    }
+                }
+                catch (COMException ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
         }
 
         
         private void OnRightClick(IntPtr ieWnd, Point screenPos)
         {
-            if (this.isRecording && (this.RightClickAction != null))
+            if (this.IsRecording && (this.RightClickAction != null))
             {
                 IHTMLElement htmlElem = GetHtmlElementFromScreenPoint(ieWnd, screenPos);
                 if (htmlElem == null)
@@ -410,21 +583,33 @@ namespace CatStudio
             this.ClickAction(this, recPackage);
         }
 
+        private enum RecorderMode
+        {
+            STOP_MODE,
+            RECORDING_MODE,
+            SELECTION_MODE,
+        }
 
         private static readonly Recorder singleInstance = new Recorder();
 
-        private RecEventArgs    recLastMouseUpPackage           = null;
-        private Win32GetMsgHook win32Hook                       = new Win32GetMsgHook();
-        private ICore           twebstCore                      = CoreWrapper.Instance;
-        private IBrowser        twebstBrowser                   = null;
-        private bool            isRecording                     = false;
-        private DateTime        lastWin32Time                   = DateTime.Now;
-        private bool            pendingWin32Action              = false;
-        private bool            pendingWin32Click               = false;
-        private const int       MAXIMUM_TIME_FOR_PENDING_CLICKS = 1000;
-        private const int       WM_APP                          = 0x8000;
-        private const int       WM_PENDING_WIN32_CLICK          = WM_APP + 1;
-        
+        private RecEventArgs     recLastMouseUpPackage           = null;
+        private Win32GetMsgHook  win32Hook                       = new Win32GetMsgHook();
+        private Win32LLMouseHook win32MouseHook                  = new Win32LLMouseHook();
+        private ICore            twebstCore                      = CoreWrapper.Instance;
+        private IBrowser         twebstBrowser                   = null;
+        private RecorderMode     recorderMode                    = RecorderMode.STOP_MODE;
+        private DateTime         lastWin32Time                   = DateTime.Now;
+        private IElement         lastSelectingElem               = null;
+        private String           savedHighlightInfo              = null;
+        private bool             pendingWin32Action              = false;
+        private bool             pendingWin32Click               = false;
+        private const int        MAXIMUM_TIME_FOR_PENDING_CLICKS = 1000;
+        private const int        WM_APP                          = 0x8000;
+        private const int        WM_PENDING_WIN32_CLICK          = WM_APP + 1;
+        private const int        WM_DELAYED_SELECTED             = WM_APP + 2;
+        private const int        WM_DELAYED_SELECTING            = WM_APP + 3;
+
+        //private bool isRecording = false;
         #endregion
     }
 }

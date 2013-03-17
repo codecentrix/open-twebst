@@ -104,7 +104,16 @@ namespace CatStudio
             }
 
             this.codeForm.Show();
-            this.recorder.Init(this.webBrowser);
+
+            try
+            {
+                this.recorder.Init(this.webBrowser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, CatStudioConstants.TWEBST_PRODUCT_NAME,  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Environment.Exit(-1);
+            }
 
             // Navigate to intro page if enabled.
             if (showIntroWebPage)

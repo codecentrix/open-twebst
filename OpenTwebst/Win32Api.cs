@@ -68,6 +68,17 @@ namespace CatStudio
     }
 
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MouseLLHookStruct
+    {
+        public POINT pt;
+        public UInt32 mouseData;
+        public UInt32 flags;
+        public UInt32 time;
+        public IntPtr dwExtraInfo;
+    }
+
+
     class Win32Api
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
@@ -156,14 +167,51 @@ namespace CatStudio
             }
         }
 
+        public static bool IsIEServerWindow(IntPtr hWnd)
+        {
+            StringBuilder className = new StringBuilder(100);
+            int           res       = Win32Api.GetClassName(hWnd, className, className.Capacity);
+            if (res != 0)
+            {
+                return ("Internet Explorer_Server" == className.ToString());
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool IsIEServerOrChild(IntPtr hWnd)
+        {
+            // On IE6 combo-boxes are implemented as child windows.
+            IntPtr hCrntWnd = hWnd;
+
+            while (true)
+            {
+                if (!Win32Api.IsWindow(hCrntWnd))
+                {
+                    return false;
+                }
+
+                if (IsIEServerWindow(hCrntWnd))
+                {
+                    return true;
+                }
+
+                hCrntWnd = Win32Api.GetParent(hCrntWnd);
+            }
+        }
+
         public delegate int HookProc(int nCode, IntPtr wParam, IntPtr lParam);
 
         public const int WM_KEYDOWN            = 0x0100;
+        public const int WM_MOUSEMOVE          = 0x0200;
         public const int WM_LBUTTONUP          = 0x0202;
         public const int WM_LBUTTONDOWN        = 0x0201;
         public const int WM_RBUTTONDOWN        = 0x0204;
         public const int WM_RBUTTONUP          = 0x0205;
         public const int WH_GETMESSAGE         = 3;
+        public const int WH_MOUSE_LL           = 14;
         public const int PM_REMOVE             = 0x0001;
         public const int WM_MOUSEACTIVATE      = 0x21;
         public const int MA_ACTIVATE           = 1;

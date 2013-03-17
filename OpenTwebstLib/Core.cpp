@@ -1556,7 +1556,7 @@ STDMETHODIMP CCore::AttachToNativeBrowser(IWebBrowser2* pWebBrowser, IBrowser** 
 	catch (const ExceptionServices::Exception& except)
 	{
 		traceLog << except << "\n";
-		SetComErrorMessage(IDS_METHOD_CALL_FAILED, ATTACH_TO_BROWSER, IDH_CORE_CREATE_BROWSER);
+		SetComErrorMessage(IDS_ERR_CAN_NOT_CREATE_BROWSER, ATTACH_TO_BROWSER, IDH_CORE_CREATE_BROWSER);
 		SetLastErrorCode(ERR_FAIL);
 		return HRES_FAIL;
 	}

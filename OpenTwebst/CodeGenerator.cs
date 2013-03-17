@@ -65,6 +65,7 @@ namespace CatStudio
             Recorder.Instance.ChangeAction     += OnChangeAction;
             Recorder.Instance.RecStopped       += OnRecordStopped;
             Recorder.Instance.RecStarted       += OnRecordStart;
+            Recorder.Instance.ElementSelected  += OnElementSelected;
 
             // Better not record that! To play back/forward with C#/VB.Net is hard because Microsoft.mshtml.dll is referenced.
             //Recorder.Instance.BackAction    += OnRecordBack;
@@ -347,6 +348,13 @@ namespace CatStudio
         private void OnClickAction(Object sender, RecEventArgs evt)
         {
             OnClick(sender, evt, false);
+        }
+
+
+        private void OnElementSelected(Object sender, RecEventArgs evt)
+        {
+            IHTMLElement elem = evt.TargetElement;
+            Recorder.Instance.StopSelection();
         }
 
 

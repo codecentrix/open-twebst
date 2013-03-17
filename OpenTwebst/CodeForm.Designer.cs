@@ -54,6 +54,7 @@
             this.twebstGoogleGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.twebstLinkedinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.followUsOnTwitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signUpForNewsletterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tutorialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fAQsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -64,11 +65,11 @@
             this.codeToolStripBtnNew = new System.Windows.Forms.ToolStripButton();
             this.codeToolStripBtnSave = new System.Windows.Forms.ToolStripButton();
             this.codeToolStripBtnRun = new System.Windows.Forms.ToolStripButton();
+            this.toolSpyButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRec = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.codeToolStripLanguageCombo = new System.Windows.Forms.ToolStripComboBox();
-            this.signUpForNewsletterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.codeContextMenu.SuspendLayout();
             this.codeStatusStrip.SuspendLayout();
             this.menuMain.SuspendLayout();
@@ -280,6 +281,13 @@
             this.followUsOnTwitterToolStripMenuItem.Text = "Follow us on &Twitter";
             this.followUsOnTwitterToolStripMenuItem.Click += new System.EventHandler(this.followUsOnTwitterToolStripMenuItem_Click);
             // 
+            // signUpForNewsletterToolStripMenuItem
+            // 
+            this.signUpForNewsletterToolStripMenuItem.Name = "signUpForNewsletterToolStripMenuItem";
+            this.signUpForNewsletterToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.signUpForNewsletterToolStripMenuItem.Text = "Sign up for &newsletter";
+            this.signUpForNewsletterToolStripMenuItem.Click += new System.EventHandler(this.signUpForNewsletterToolStripMenuItem_Click);
+            // 
             // tutorialsToolStripMenuItem
             // 
             this.tutorialsToolStripMenuItem.Name = "tutorialsToolStripMenuItem";
@@ -326,6 +334,7 @@
             this.codeToolStripBtnNew,
             this.codeToolStripBtnSave,
             this.codeToolStripBtnRun,
+            this.toolSpyButton,
             this.toolStripButtonRec,
             this.toolStripButtonDel,
             this.toolStripSeparator3,
@@ -333,7 +342,7 @@
             this.codeToolStrip.Location = new System.Drawing.Point(0, 24);
             this.codeToolStrip.Name = "codeToolStrip";
             this.codeToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.codeToolStrip.Size = new System.Drawing.Size(357, 25);
+            this.codeToolStrip.Size = new System.Drawing.Size(411, 25);
             this.codeToolStrip.TabIndex = 0;
             this.codeToolStrip.Text = "Code";
             // 
@@ -367,6 +376,16 @@
             this.codeToolStripBtnRun.ToolTipText = "Run Macro";
             this.codeToolStripBtnRun.Click += new System.EventHandler(this.codeToolStripBtnRun_Click);
             // 
+            // toolSpyButton
+            // 
+            this.toolSpyButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolSpyButton.Image = ((System.Drawing.Image)(resources.GetObject("toolSpyButton.Image")));
+            this.toolSpyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSpyButton.Name = "toolSpyButton";
+            this.toolSpyButton.Size = new System.Drawing.Size(23, 22);
+            this.toolSpyButton.Text = "Web Spy: works on any IE window!";
+            this.toolSpyButton.Click += new System.EventHandler(this.toolSpyButton_Click);
+            // 
             // toolStripButtonRec
             // 
             this.toolStripButtonRec.Image = global::CatStudio.Properties.Resources.record_16;
@@ -398,13 +417,6 @@
             this.codeToolStripLanguageCombo.Name = "codeToolStripLanguageCombo";
             this.codeToolStripLanguageCombo.Size = new System.Drawing.Size(110, 25);
             this.codeToolStripLanguageCombo.SelectedIndexChanged += new System.EventHandler(this.codeToolStripLanguageCombo_SelectedIndexChanged);
-            // 
-            // signUpForNewsletterToolStripMenuItem
-            // 
-            this.signUpForNewsletterToolStripMenuItem.Name = "signUpForNewsletterToolStripMenuItem";
-            this.signUpForNewsletterToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.signUpForNewsletterToolStripMenuItem.Text = "Sign up for &newsletter";
-            this.signUpForNewsletterToolStripMenuItem.Click += new System.EventHandler(this.signUpForNewsletterToolStripMenuItem_Click);
             // 
             // CodeForm
             // 
@@ -478,5 +490,6 @@
         private System.Windows.Forms.ToolStripMenuItem tutorialsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem twebstLinkedinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem signUpForNewsletterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolSpyButton;
     }
 }

@@ -36,6 +36,7 @@ namespace CatStudio
         public static readonly String TWEBST_PRODUCT_NAME         = "Open Twebst";
         public static readonly String HOOKED_BY_REC_ATTR          = "hooked_by_twebst_rec";
         public static readonly String FIND_INDEX_HELPER_ATTR      = "twebst_find_index_rec";
+        public static readonly String CRNT_SELECTION_ATTR         = "twebst_crnt_selected";
         public static readonly int    MAX_TEXT_ATTR_LEN_TO_RECORD = 128;
         public static readonly String CODECENTRIX_HOME_URL        = "http://open-twebst.codecentrix.com/";
         public static readonly String TWEBST_ONLINE_HELP_URL      = "http://doc.codecentrix.com/";
@@ -47,6 +48,7 @@ namespace CatStudio
         public static readonly String TWEBST_NEWSLETTER_URL       = "http://eepurl.com/i-9Nr";
         public static readonly String TWEBST_EMAIL_URL            = "mailto:adrian.dorache@codecentrix.com";
         public static readonly String TWEBST_CHM_FILE_NAME        = "OpenTwebst.chm";
+        public static readonly String TWEBST_SELECT_HIGHLIGHT     = "1px solid red";
 
         // Check for updates.
         public static readonly String TWEBST_CHECK_UPDATES_URL         = "http://doc.codecentrix.com/opentwbstupd.xml";

@@ -86,7 +86,7 @@ BEGIN
     IDS_ERR_CAN_NOT_START_BROWSER 
                             "Failed to start ""Internet Explorer"" browser!"
     IDS_ERR_CAN_NOT_START_BROWSER_BECAUSE_OF_PROXY 
-                            "Can not properly create a new browser object. It is possible that OTWBSTPlugin.dll is not properly registered!"
+                            "Can not attach to browser object!\nYou may ""run as admin"" regsvr32 on OTWBSTPlugin.dll, oleacc.dll"
 END
 
 STRINGTABLE

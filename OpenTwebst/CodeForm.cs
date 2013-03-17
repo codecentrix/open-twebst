@@ -636,6 +636,20 @@ namespace CatStudio
             OpenURL(CatStudioConstants.TWEBST_NEWSLETTER_URL);
         }
 
+
+        private void toolSpyButton_Click(object sender, EventArgs e)
+        {
+            if (!Recorder.Instance.IsSelecting)
+            {
+                Recorder.Instance.StartSelection();
+            }
+            else
+            {
+                Recorder.Instance.StopSelection();
+            }
+        }
+
+
         private  BaseLanguageGenerator crntLang    = null;
         private CodeGenerator          codeGen     = null;
         private BrowserForm            browserForm = null;
