@@ -220,4 +220,13 @@ namespace CatStudio
         public const int MA_NOACTIVATEANDEAT   = 4;
         public static Guid IID_IHTMLElement    = new Guid("{3050f1ff-98b5-11cf-bb82-00aa00bdce0b}");
     }
+
+
+    [Guid("30510480-98b5-11cf-bb82-00aa00bdce0b")]
+    [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch)]
+    public interface IHTMLStyle6
+    {
+        [DispId(-2147412890)]
+        String outline { get; set; }
+    }
 }

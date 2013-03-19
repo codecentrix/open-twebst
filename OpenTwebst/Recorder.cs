@@ -454,8 +454,7 @@ namespace CatStudio
             {
                 if (this.lastSelectingElem != null)
                 {
-                    this.lastSelectingElem.nativeElement.style.border = this.savedHighlightInfo;
-                    this.lastSelectingElem.nativeElement.style.border = "";
+                    ((IHTMLStyle6)(this.lastSelectingElem.nativeElement.style)).outline = this.savedHighlightInfo;
                     this.lastSelectingElem.RemoveAttribute(CatStudioConstants.CRNT_SELECTION_ATTR);
 
                     // Cleanup.
@@ -476,8 +475,8 @@ namespace CatStudio
             Debug.Assert(this.lastSelectingElem == null);
 
             this.lastSelectingElem = elem;
-            this.savedHighlightInfo = elem.nativeElement.style.border;
-            elem.nativeElement.style.border = CatStudioConstants.TWEBST_SELECT_HIGHLIGHT;
+            this.savedHighlightInfo = ((IHTMLStyle6)(elem.nativeElement.style)).outline;
+            ((IHTMLStyle6)(elem.nativeElement.style)).outline = CatStudioConstants.TWEBST_SELECT_HIGHLIGHT;
             elem.SetAttribute(CatStudioConstants.CRNT_SELECTION_ATTR, "1");
         }
 
