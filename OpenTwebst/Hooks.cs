@@ -300,15 +300,24 @@ namespace CatStudio
                         case Win32Api.WM_LBUTTONDOWN:
                         case Win32Api.WM_LBUTTONUP:
                         {
-                            Win32HookMouseMsg(this, new Win32MouseLLEventArgs(msg, msgStruct.pt.x, msgStruct.pt.y));
-                            return 0; // Prevent the message being dispatched to target window.
-                            // TODO: it seems the messages are always dispatched to target window.
-                            // which is a good thing for non-IE windows.
+                            IntPtr topWnd = Win32Api.WindowFromPoint(msgStruct.pt);
+                            if (Win32Api.IsIEServerWindow(topWnd))
+                            {
+                                Win32HookMouseMsg(this, new Win32MouseLLEventArgs(msg, msgStruct.pt.x, msgStruct.pt.y));
+                                return 1; // Prevent the message being dispatched to target window.
+                            }
+
+                            return Win32Api.CallNextHookEx(hHook, nCode, wParam, lParam); 
                         }
 
                         case Win32Api.WM_MOUSEMOVE:
                         {
-                            Win32HookMouseMsg(this, new Win32MouseLLEventArgs(msg, msgStruct.pt.x, msgStruct.pt.y));
+                            IntPtr topWnd = Win32Api.WindowFromPoint(msgStruct.pt);
+                            if (Win32Api.IsIEServerWindow(topWnd))
+                            {
+                                Win32HookMouseMsg(this, new Win32MouseLLEventArgs(msg, msgStruct.pt.x, msgStruct.pt.y));
+                            }
+
                             return Win32Api.CallNextHookEx(hHook, nCode, wParam, lParam);
                         }
                     }
