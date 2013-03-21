@@ -454,18 +454,27 @@ namespace CatStudio
             {
                 if (this.lastSelectingElem != null)
                 {
-                    ((IHTMLStyle6)(this.lastSelectingElem.nativeElement.style)).outline = this.savedHighlightInfo;
+                    // Restore background.
+                    this.lastSelectingElem.nativeElement.style.backgroundColor = this.savedSelectBackground;
+
+                    if (ie8orLater)
+                    {
+                        ((IHTMLStyle6)(this.lastSelectingElem.nativeElement.style)).outline = this.savedSelectOutline;
+                    }
+
                     this.lastSelectingElem.RemoveAttribute(CatStudioConstants.CRNT_SELECTION_ATTR);
 
                     // Cleanup.
                     Marshal.ReleaseComObject(this.lastSelectingElem);
-                    this.lastSelectingElem = null;
-                    this.savedHighlightInfo = null;
+                    this.lastSelectingElem     = null;
+                    this.savedSelectBackground = null;
+                    this.savedSelectOutline    = null;
                 }
             }
-            catch (COMException ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+                this.lastSelectingElem = null;
             }
         }
 
@@ -474,10 +483,25 @@ namespace CatStudio
         {
             Debug.Assert(this.lastSelectingElem == null);
 
-            this.lastSelectingElem = elem;
-            this.savedHighlightInfo = ((IHTMLStyle6)(elem.nativeElement.style)).outline;
-            ((IHTMLStyle6)(elem.nativeElement.style)).outline = CatStudioConstants.TWEBST_SELECT_HIGHLIGHT;
+            // Set the background.
+            IHTMLElement2     elem2 = (IHTMLElement2)(elem.nativeElement);
+            IHTMLCurrentStyle crntStyle = elem2.currentStyle;
+
+            this.savedSelectBackground = crntStyle.backgroundColor;
+            elem.nativeElement.style.backgroundColor = CatStudioConstants.TWEBST_SELECT_BCKG;
+
+            // outline style is available starting with IE8.
+            if (ie8orLater)
+            {
+                IHTMLStyle6        style = (IHTMLStyle6)(elem.nativeElement.style);
+                IHTMLCurrentStyle5 crntStyle5 = (IHTMLCurrentStyle5)crntStyle;
+
+                this.savedSelectOutline = crntStyle5.outline;
+                style.outline = CatStudioConstants.TWEBST_SELECT_OUTLINE;
+            }
+
             elem.SetAttribute(CatStudioConstants.CRNT_SELECTION_ATTR, "1");
+            this.lastSelectingElem  = elem;
         }
 
 
@@ -595,11 +619,13 @@ namespace CatStudio
         private Win32GetMsgHook  win32Hook                       = new Win32GetMsgHook();
         private Win32LLMouseHook win32MouseHook                  = new Win32LLMouseHook();
         private ICore            twebstCore                      = CoreWrapper.Instance;
+        private bool             ie8orLater                      = (CoreWrapper.Instance.IEVersion.CompareTo("8") >= 0);
         private IBrowser         twebstBrowser                   = null;
         private RecorderMode     recorderMode                    = RecorderMode.STOP_MODE;
         private DateTime         lastWin32Time                   = DateTime.Now;
         private IElement         lastSelectingElem               = null;
-        private String           savedHighlightInfo              = null;
+        private Object           savedSelectBackground           = null;
+        private String           savedSelectOutline              = null;
         private bool             pendingWin32Action              = false;
         private bool             pendingWin32Click               = false;
         private const int        MAXIMUM_TIME_FOR_PENDING_CLICKS = 1000;

@@ -229,4 +229,12 @@ namespace CatStudio
         [DispId(-2147412890)]
         String outline { get; set; }
     }
+
+    [Guid("30510481-98b5-11cf-bb82-00aa00bdce0b")]
+    [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIDispatch)]
+    public interface IHTMLCurrentStyle5
+    {
+        [DispId(-2147412890)]
+        String outline { get; }
+    }
 }
