@@ -161,7 +161,21 @@ namespace CatStudio
 
             if ("input" == tagName)
             {
-                this.values.Add(((IHTMLInputElement)htmlElem).value);
+                String val = ((IHTMLInputElement)htmlElem).value;
+                if (String.IsNullOrEmpty(val))
+                {
+                    String type = ((IHTMLInputElement)htmlElem).type;
+                    if ((type != null) && type.ToLower() == "file")
+                    {
+                        val = "insert file path here";   
+                    }
+                    else
+                    {
+                        val = "insert text here";
+                    }
+                }
+
+                this.values.Add(val);
             }
             else if ("select" == tagName)
             {
@@ -205,7 +219,13 @@ namespace CatStudio
             }
             else if ("textarea" == tagName)
             {
-                this.values.Add(((IHTMLTextAreaElement)htmlElem).value);
+                String val = ((IHTMLInputElement)htmlElem).value;
+                if (String.IsNullOrEmpty(val))
+                {
+                    val = "insert your text here";
+                }
+
+                this.values.Add(val);
             }
         }
 

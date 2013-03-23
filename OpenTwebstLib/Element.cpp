@@ -504,8 +504,8 @@ HRESULT CElement::Click(const ClickCallContext& clickCtx, BOOL bClickFileInputBu
 				return HRES_FAIL;
 			}
 
-			nScreenX++;
-			nScreenY++;
+			nScreenX += 2;
+			nScreenY += 2;
 
 			if (!clickCtx.m_bRightClick)
 			{

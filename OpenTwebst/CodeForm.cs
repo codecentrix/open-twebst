@@ -415,22 +415,34 @@ namespace CatStudio
         }
 
 
-        private void toolStripButtonRec_Click(object sender, EventArgs e)
+        private void RecordingUI(bool recorderOn)
         {
-            if (!Recorder.Instance.IsRecording)
+            if (recorderOn)
             {
+                SelectionUI(false);
+
                 this.toolStripButtonRec.Checked     = true;
                 this.toolStripButtonRec.Text        = "Stop Rec";
                 this.toolStripStatusStateLabel.Text = "Recording...";
-
-                Recorder.Instance.StartRec();
             }
             else
             {
                 this.toolStripButtonRec.Checked     = false;
                 this.toolStripButtonRec.Text        = "Start Rec";
                 this.toolStripStatusStateLabel.Text = "";
+            }
+        }
 
+        private void toolStripButtonRec_Click(object sender, EventArgs e)
+        {
+            if (!Recorder.Instance.IsRecording)
+            {
+                RecordingUI(true);
+                Recorder.Instance.StartRec();
+            }
+            else
+            {
+                RecordingUI(false);
                 Recorder.Instance.StopRec();
             }
         }
@@ -637,14 +649,32 @@ namespace CatStudio
         }
 
 
+        private void SelectionUI(bool selectionOn)
+        {
+            if (selectionOn)
+            {
+                RecordingUI(false);
+                this.toolSpyButton.Checked = true;
+                this.toolStripStatusStateLabel.Text = "Selection...";
+            }
+            else
+            {
+                this.toolSpyButton.Checked = false;
+                this.toolStripStatusStateLabel.Text = "";
+            }
+        }
+
+
         private void toolSpyButton_Click(object sender, EventArgs e)
         {
             if (!Recorder.Instance.IsSelecting)
             {
+                SelectionUI(true);
                 Recorder.Instance.StartSelection();
             }
             else
             {
+                SelectionUI(false);
                 Recorder.Instance.StopSelection();
             }
         }

@@ -160,10 +160,11 @@ namespace CatStudio
         #region Private section
         private void OnMouseMsg(Object sender, Win32MouseLLEventArgs e)
         {
+            // The hook procedure should process a message in less than a registry specified time
+            // otherwise the OS will silently removed the hook. The registry value is 5 seconds.
             if (e.Message == Win32Api.WM_LBUTTONUP)
             {
-                // The hook procedure should process a message in less than a registry specified time
-                // otherwise the OS will silently removed the hook.
+
                 Win32Api.PostMessage(this.Handle, WM_DELAYED_SELECTED, e.ScreenPoint.X, e.ScreenPoint.Y);
             }
             else if (e.Message == Win32Api.WM_MOUSEMOVE)
@@ -432,7 +433,7 @@ namespace CatStudio
             {
                 try
                 {
-                    IElement elem = this.twebstCore.FindElementFromPoint(x, y);
+                    IElement elem = this.lastSelectingElem; //this.twebstCore.FindElementFromPoint(x, y);
                     if (elem != null)
                     {
                         IHTMLElement htmlElem = elem.nativeElement;
@@ -493,7 +494,7 @@ namespace CatStudio
             // outline style is available starting with IE8.
             if (ie8orLater)
             {
-                IHTMLStyle6        style = (IHTMLStyle6)(elem.nativeElement.style);
+                IHTMLStyle6 style = (IHTMLStyle6)(elem.nativeElement.style);
                 IHTMLCurrentStyle5 crntStyle5 = (IHTMLCurrentStyle5)crntStyle;
 
                 this.savedSelectOutline = crntStyle5.outline;
@@ -634,7 +635,6 @@ namespace CatStudio
         private const int        WM_DELAYED_SELECTED             = WM_APP + 2;
         private const int        WM_DELAYED_SELECTING            = WM_APP + 3;
 
-        //private bool isRecording = false;
         #endregion
     }
 }

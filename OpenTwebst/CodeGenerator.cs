@@ -353,8 +353,25 @@ namespace CatStudio
 
         private void OnElementSelected(Object sender, RecEventArgs evt)
         {
-            IHTMLElement elem = evt.TargetElement;
-            Recorder.Instance.StopSelection();
+            if ((evt.TagName == "select") || (evt.TagName == "textarea"))
+            {
+                this.OnChangeAction(sender, evt);
+            }
+            else if (evt.TagName == "input")
+            {
+                if ((evt.InputType == "text") || (evt.InputType == "password") || (evt.InputType == "file"))
+                {
+                    this.OnChangeAction(sender, evt);
+                }
+                else
+                {
+                    OnClick(sender, evt, false);
+                }
+            }
+            else
+            {
+                OnClick(sender, evt, false);
+            }
         }
 
 
