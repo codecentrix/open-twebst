@@ -393,7 +393,7 @@
             this.toolSpyButton.Name = "toolSpyButton";
             this.toolSpyButton.Size = new System.Drawing.Size(73, 24);
             this.toolSpyButton.Text = "Web Spy";
-            this.toolSpyButton.ToolTipText = "Web Spy - works in any IE window!";
+            this.toolSpyButton.ToolTipText = "Web Spy - works in any IE window";
             this.toolSpyButton.Click += new System.EventHandler(this.toolSpyButton_Click);
             // 
             // toolStripButtonDel

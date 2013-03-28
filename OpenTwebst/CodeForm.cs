@@ -59,6 +59,14 @@ namespace CatStudio
         }
 
 
+        public void StartSelection()
+        {
+            if (!Recorder.Instance.IsSelecting)
+            {
+                this.toolSpyButton_Click(null, null);
+            }
+        }
+
         private void CodeForm_Load(object sender, EventArgs e)
         {
             // Restore position from registry.

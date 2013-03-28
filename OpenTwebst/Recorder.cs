@@ -151,7 +151,7 @@ namespace CatStudio
             this.win32MouseHook.Win32HookMouseMsg -= OnMouseMsg;
             this.win32MouseHook.UnInstall();
 
-            this.recorderMode  = RecorderMode.STOP_MODE;
+            this.StopSelection();
             this.twebstBrowser = null;
             this.twebstCore.Reset();
         }

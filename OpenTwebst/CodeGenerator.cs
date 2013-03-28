@@ -359,7 +359,8 @@ namespace CatStudio
             }
             else if (evt.TagName == "input")
             {
-                if ((evt.InputType == "text") || (evt.InputType == "password") || (evt.InputType == "file"))
+                if ((evt.InputType == "text") || (evt.InputType == "password") ||
+                    (evt.InputType == "file") || (evt.InputType == "email"))
                 {
                     this.OnChangeAction(sender, evt);
                 }
