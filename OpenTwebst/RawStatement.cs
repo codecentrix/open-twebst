@@ -33,6 +33,7 @@ namespace CatStudio
     enum RawStatementType
     {
         START_UP,
+        FIND_BROWSER,
         CLICK,
         TEXT_CHANGE,
         SELECTION_CHANGE,
@@ -46,18 +47,33 @@ namespace CatStudio
     {
         #region Public Area
 
-        static public RawStatement CreateStartupStatement(String url)
+        static public RawStatement CreateStartBrowserStatement(String url, int brwsNameIndex, int brwsHwnd)
         {
             RawStatement result = new RawStatement();
 
-            result.type       = RawStatementType.START_UP;
-            result.browserURL = url;
+            result.type           = RawStatementType.START_UP;
+            result.browserURL     = url;
+            result.browserNameIdx = brwsNameIndex;
+            result.browserHWND    = brwsHwnd;
 
             return result;
         }
 
 
-        static public RawStatement CreateClickStatement(String tag, String attr, String attrVal, int index, bool isChecked, bool isRightClick)
+        static public RawStatement CreateFindBrowserStatement(String url, int brwsNameIndex, int brwsHwnd)
+        {
+            RawStatement result = new RawStatement();
+
+            result.type          = RawStatementType.FIND_BROWSER;
+            result.browserURL    = url;
+            result.browserNameIdx = brwsNameIndex;
+            result.browserHWND    = brwsHwnd;
+
+            return result;
+        }
+
+
+        static public RawStatement CreateClickStatement(String tag, String attr, String attrVal, int index, bool isChecked, bool isRightClick, int brwsNameIndex)
         {
             RawStatement result = new RawStatement();
 
@@ -72,16 +88,19 @@ namespace CatStudio
         }
 
 
-        static public RawStatement CreateTextChangeStatement(String tag, String attr, String attrVal, List<String> val, int index)
+        static public RawStatement CreateTextChangeStatement(String tag, String attr, String attrVal, List<String> val, int index, int brwsNameIndex)
         {
-            return CreateChangeStatement(RawStatementType.TEXT_CHANGE, tag, attr, attrVal, val, index);
+            return CreateChangeStatement(RawStatementType.TEXT_CHANGE, tag, attr, attrVal, val, index, brwsNameIndex);
         }
 
 
         static public RawStatement CreateSelectionChangeStatement
-            (String tag, String attr, String attrVal, List<String> val, bool isMultipleSel, bool genVarForSelect, int index)
+            (
+                String tag, String attr, String attrVal, List<String> val, bool isMultipleSel,
+                bool genVarForSelect, int index, int brwsNameIndex
+            )
         {
-            RawStatement rs = CreateChangeStatement(RawStatementType.SELECTION_CHANGE, tag, attr, attrVal, val, index);
+            RawStatement rs = CreateChangeStatement(RawStatementType.SELECTION_CHANGE, tag, attr, attrVal, val, index, brwsNameIndex);
 
             rs.generateVarForSelect = genVarForSelect && isMultipleSel && (val.Count > 1);
             rs.isMultipleSelection  = isMultipleSel;
@@ -192,12 +211,28 @@ namespace CatStudio
             set { this.generateVarForSelect = value; }
         }
 
+        
+        public int BrowserNameIdx
+        {
+            get { return this.browserNameIdx; }
+        }
+
+
+        public int BrowserHWND
+        {
+            get { return this.browserHWND; }
+        }
+
         #endregion
 
 
         #region Private Area
 
-        static private RawStatement CreateChangeStatement(RawStatementType t, String tag, String attr, String attrVal, List<String> val, int index)
+        static private RawStatement CreateChangeStatement
+            (
+                RawStatementType t, String tag, String attr,
+                String attrVal, List<String> val, int index, int brwsNameIndex
+            )
         {
             RawStatement result = new RawStatement();
 
@@ -227,6 +262,8 @@ namespace CatStudio
         private bool             isMultipleSelection  = false;
         private int              index                = 0;
         private bool             isChecked            = false;
+        private int              browserNameIdx       = 0;
+        private int              browserHWND          = -1;
 
         #endregion
     }

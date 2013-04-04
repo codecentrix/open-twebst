@@ -45,6 +45,7 @@ namespace CatStudio
             result.browser        = twbstBrowser;
             result.tagName        = htmlElem.tagName.ToLower();
             result.browserURL     = topURL;
+            result.browserHwnd    = twbstBrowser.nativeBrowser.HWND;
             result.BuildAttributeDictionary(htmlElem);
             result.BuildValuesList(htmlElem);
 
@@ -102,6 +103,12 @@ namespace CatStudio
         public String BrowserURL
         {
             get { return this.browserURL; }
+        }
+
+
+        public int BrowserHWND
+        {
+            get { return this.browserHwnd; }
         }
 
         public bool IsMultipleSelection
@@ -315,6 +322,7 @@ namespace CatStudio
         private String                     tagName;
         private String                     inputType;
         private String                     browserURL;
+        private int                        browserHwnd         = 0;
         private bool                       isMultipleSelection = false;
         private bool                       isChecked           = false;
         private List<String>               values              = new List<String>();

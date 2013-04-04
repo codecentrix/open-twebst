@@ -67,7 +67,6 @@ namespace CatStudio
             Recorder.Instance.RecStarted       += OnRecordStart;
             Recorder.Instance.ElementSelected  += OnElementSelected;
 
-            // Better not record that! To play back/forward with C#/VB.Net is hard because Microsoft.mshtml.dll is referenced.
             //Recorder.Instance.BackAction    += OnRecordBack;
             //Recorder.Instance.ForwardAction += OnRecordForward;
         }
@@ -102,18 +101,9 @@ namespace CatStudio
 
         public void Reset()
         {
-            this.startupCodeGenerated  = false;
-            this.snapshotCodeGenerated = false;
-            this.allCode               = "";
+            this.allCode = "";
             this.rawStatements.Clear();
-        }
-
-
-        // On first action a snapshot of all controls will be generated according to this settings.
-        public bool GenerateSnapshot
-        {
-            get { return this.generateSnapshot; }
-            set { this.generateSnapshot = value; }
+            this.hwndBrowserToIndex.Clear();
         }
 
 
@@ -121,8 +111,13 @@ namespace CatStudio
         {
             if (this.rawStatements.Count > 0)
             {
-                this.rawStatements.RemoveAt(this.rawStatements.Count - 1);
+                RawStatement lastStatement = this.rawStatements[this.rawStatements.Count - 1];
+                if (lastStatement.BrowserHWND != -1)
+                {
+                    this.hwndBrowserToIndex.Remove(lastStatement.BrowserHWND);
+                }
 
+                this.rawStatements.RemoveAt(this.rawStatements.Count - 1);
                 if (this.rawStatements.Count == 0)
                 {
                     this.Reset();
@@ -311,7 +306,7 @@ namespace CatStudio
         
         private void OnRecordBack(Object sender, EventArgs evt)
         {
-            if (this.startupCodeGenerated)
+            if (this.hwndBrowserToIndex.Count > 0)
             {
                 RawStatement backStatement = RawStatement.CreateBackStatement();
                 this.AddStatement(backStatement);
@@ -321,7 +316,7 @@ namespace CatStudio
 
         private void OnRecordForward(Object sender, EventArgs evt)
         {
-            if (this.startupCodeGenerated)
+            if (this.hwndBrowserToIndex.Count > 0)
             {
                 RawStatement fwdtatement = RawStatement.CreateForwardStatement();
                 this.AddStatement(fwdtatement);
@@ -378,8 +373,7 @@ namespace CatStudio
 
         private void OnClick(Object sender, RecEventArgs evt, bool isRightClick)
         {
-            GenStartup(evt.BrowserURL);
-            GenSnapshot(evt.Browser);
+            int brwsNameIndex = GenBrowserCode(evt.BrowserURL, evt.BrowserHWND);
 
             String attr;
             String attrVal;
@@ -389,7 +383,7 @@ namespace CatStudio
 
             // What to do if no attribute (success is false). Use only index or don't record anything?
             int          index = ComputeIndex(evt, twebstTagName, attr, attrVal);
-            RawStatement rs    = RawStatement.CreateClickStatement(twebstTagName, attr, attrVal, index, evt.IsChecked, isRightClick);
+            RawStatement rs    = RawStatement.CreateClickStatement(twebstTagName, attr, attrVal, index, evt.IsChecked, isRightClick, brwsNameIndex);
 
             this.AddStatement(rs);
         }
@@ -397,8 +391,7 @@ namespace CatStudio
 
         private void OnChangeAction(Object sender, RecEventArgs evt)
         {
-            GenStartup(evt.BrowserURL);
-            GenSnapshot(evt.Browser);
+            int brwsNameIndex = GenBrowserCode(evt.BrowserURL, evt.BrowserHWND);
 
             String attr;
             String attrVal;
@@ -409,7 +402,7 @@ namespace CatStudio
 
             if (evt.TagName == "select")
             {
-                RawStatement rs = RawStatement.CreateSelectionChangeStatement(twebstTagName, attr, attrVal, evt.Values, evt.IsMultipleSelection, !this.IsSelectVarDeclared, index);
+                RawStatement rs = RawStatement.CreateSelectionChangeStatement(twebstTagName, attr, attrVal, evt.Values, evt.IsMultipleSelection, !this.IsSelectVarDeclared, index, brwsNameIndex);
 
                 if (evt.IsMultipleSelection)
                 {
@@ -438,30 +431,35 @@ namespace CatStudio
             }
             else
             {
-                RawStatement rs = RawStatement.CreateTextChangeStatement(twebstTagName, attr, attrVal, evt.Values, index);
+                RawStatement rs = RawStatement.CreateTextChangeStatement(twebstTagName, attr, attrVal, evt.Values, index, brwsNameIndex);
                 this.AddStatement(rs);
             }
         }
 
 
-        private void GenStartup(String url)
+        private int GenBrowserCode(String url, int hBrwsWnd)
         {
-            if (!this.startupCodeGenerated)
+            if (!this.hwndBrowserToIndex.ContainsKey(hBrwsWnd))
             {
-                RawStatement startup = RawStatement.CreateStartupStatement(url);
+                RawStatement startup = null;
+                int nIndex = this.hwndBrowserToIndex.Count;
+                this.hwndBrowserToIndex.Add(hBrwsWnd, nIndex);
+
+                if (nIndex == 0)
+                {
+                    startup = RawStatement.CreateStartBrowserStatement(url, nIndex, hBrwsWnd);
+                }
+                else
+                {
+                    startup = RawStatement.CreateFindBrowserStatement(url, nIndex, hBrwsWnd);
+                }
 
                 this.AddStatement(startup);
-                this.startupCodeGenerated = true;
+                return nIndex;
             }
-        }
-
-
-        private void GenSnapshot(IBrowser browser)
-        {
-            if (this.generateSnapshot && !this.snapshotCodeGenerated)
+            else
             {
-                // TODO: Generate snapshot code for browser.
-                this.snapshotCodeGenerated = true;
+                return this.hwndBrowserToIndex[hBrwsWnd];
             }
         }
 
@@ -516,11 +514,9 @@ namespace CatStudio
 
 
         private String                allCode               = "";
-        private bool                  startupCodeGenerated  = false;
-        private bool                  snapshotCodeGenerated = false;
-        private bool                  generateSnapshot      = false;
         private BaseLanguageGenerator languageGenerator     = null;
         private List<RawStatement>    rawStatements         = new List<RawStatement>();
+        private Dictionary<int, int>  hwndBrowserToIndex    = new Dictionary<int,int>();
 
         #endregion
     }
