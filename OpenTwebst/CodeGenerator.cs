@@ -373,7 +373,7 @@ namespace CatStudio
 
         private void OnClick(Object sender, RecEventArgs evt, bool isRightClick)
         {
-            int brwsNameIndex = GenBrowserCode(evt.BrowserURL, evt.BrowserHWND);
+            int brwsNameIndex = GenBrowserCode(evt.BrowserURL, evt.BrowserTitle, evt.BrowserAppName, evt.BrowserHWND);
 
             String attr;
             String attrVal;
@@ -391,7 +391,7 @@ namespace CatStudio
 
         private void OnChangeAction(Object sender, RecEventArgs evt)
         {
-            int brwsNameIndex = GenBrowserCode(evt.BrowserURL, evt.BrowserHWND);
+            int brwsNameIndex = GenBrowserCode(evt.BrowserURL, evt.BrowserTitle, evt.BrowserAppName, evt.BrowserHWND);
 
             String attr;
             String attrVal;
@@ -437,7 +437,7 @@ namespace CatStudio
         }
 
 
-        private int GenBrowserCode(String url, int hBrwsWnd)
+        private int GenBrowserCode(String url, String title, String appName, int hBrwsWnd)
         {
             if (!this.hwndBrowserToIndex.ContainsKey(hBrwsWnd))
             {
@@ -451,7 +451,7 @@ namespace CatStudio
                 }
                 else
                 {
-                    startup = RawStatement.CreateFindBrowserStatement(url, nIndex, hBrwsWnd);
+                    startup = RawStatement.CreateFindBrowserStatement(url, title, appName, nIndex, hBrwsWnd);
                 }
 
                 this.AddStatement(startup);

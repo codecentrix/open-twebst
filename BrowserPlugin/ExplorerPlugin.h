@@ -141,6 +141,7 @@ public:
 	STDMETHOD(SelectOptions)          (IHTMLElement* pElement, VARIANT vStart, VARIANT vEnd, LONG nFlags);
 	STDMETHOD(ClearSelection)         (IHTMLElement* pElement);
 	STDMETHOD(GetBrowserTitle)        (BSTR* pBstrTitle);
+	STDMETHOD(GetAppName)             (BSTR* pBstrApp);
 	STDMETHOD(GetBrowserThreadID)     (LONG* pThID);
 	STDMETHOD(GetBrowserProcessID)    (LONG* pProcID);
 	STDMETHOD(SetFocusOnElement)      (IHTMLElement* pTargetElement, VARIANT_BOOL vbAsync);

@@ -1649,6 +1649,40 @@ STDMETHODIMP CExplorerPlugin::GetDocumentFromWindow(IHTMLWindow2* pWindow, IHTML
 	return S_OK;
 }
 
+
+STDMETHODIMP CExplorerPlugin::GetAppName(BSTR* pBstrApp)
+{
+	if (NULL == pBstrApp)
+	{
+		traceLog << "Invalid parameters in CExplorerPlugin::GetAppName\n";
+		return E_INVALIDARG;
+	}
+
+	HMODULE hExe = ::GetModuleHandle(NULL);
+	if (NULL == hExe)
+	{
+		traceLog << "GetModuleHandle failed in CExplorerPlugin::GetAppName\n";
+		return E_FAIL;
+	}
+
+	TCHAR szFullPath[MAX_PATH + 1] = { 0 };
+	DWORD dwRes = ::GetModuleFileName(hExe, szFullPath, sizeof(szFullPath) / sizeof(szFullPath[0]) - 1);
+	if ((0 == dwRes) || (ERROR_INSUFFICIENT_BUFFER == ::GetLastError()))
+	{
+		traceLog << "GetModuleFileName failed in CExplorerPlugin::GetAppName\n";
+		return E_FAIL;
+	}
+
+	CPath path(szFullPath);
+	path.StripPath();
+
+	CComBSTR bstrAppName = path.m_strPath.MakeLower();
+	*pBstrApp = bstrAppName.Detach();
+
+	return S_OK;
+}
+
+
 STDMETHODIMP CExplorerPlugin::GetBrowserTitle(BSTR* pBstrTitle)
 {
 	if (NULL == pBstrTitle)

@@ -239,6 +239,8 @@ library OpenTwebstLib
 		[propget, id(3), helpstring(BROWSER_URL_HELP), helpcontext(IDH_BROWSER_URL)]
 			HRESULT url([out, retval] BSTR* pVal);
 
+		[propget, id(41), helpstring(BROWSER_APP_HELP), helpcontext(IDH_BROWSER_APP)]
+			HRESULT app([out, retval] BSTR* pVal);
 
 		/////////////////////////////////////////////////////////////////////////////////////////////
 		// Methods and properties not yet implemented.

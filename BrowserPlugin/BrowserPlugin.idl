@@ -77,6 +77,7 @@ library OpenTwebstPluginLib
 			[id(26)]HRESULT FindSelectedOption     ([in] IHTMLElement* pElement, [out] IHTMLElement** ppSelectedOption);
 			[id(27)]HRESULT FindAllSelectedOptions ([in] IHTMLElement* pElement, [out] IUnknown** ppResult);
 			[id(28)]HRESULT FindElementFromPoint   ([in] LONG x, [in] LONG y, [out] IHTMLElement** ppElem);
+			[id(29)]HRESULT GetAppName             ([out] BSTR* pBstrApp);
 	};
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

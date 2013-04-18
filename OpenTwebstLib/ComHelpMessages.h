@@ -60,6 +60,7 @@
 #define BROWSER_NATIVE_BROWSER_HELP       "Gets the IWebBrowser object for the connected Internet Explorer instance."
 #define BROWSER_TITLE_HELP                "Gets the title of the browser."
 #define BROWSER_URL_HELP                  "Gets the url of the browser."
+#define BROWSER_APP_HELP                  "Gets the name of the EXE file of the browser."
 #define BROWSER_IS_LOADING_HELP           "The property is true if the browser is still loading the html page, false otherwise."
 #define BROWSER_WAIT_TO_LOAD_HELP         "Waits the browser to load and verify it matches a list of search conditions."
 #define BROWSER_NAVIGATE_HELP             "Navigates to a given url."

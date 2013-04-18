@@ -4,6 +4,7 @@
 #define FIND_BROWSER_METHOD                  _T("FindBrowser")
 #define TITLE_PROPERTY                       _T("title")
 #define URL_PROPERTY                         _T("url")
+#define APP_PROPERTY                         _T("app")
 #define IS_LOADING_PROPERTY                  _T("isLoading")
 #define WAIT_TO_LOAD_METHOD                  _T("WaitToLoad")
 #define NAVIGATE_METHOD                      _T("Navigate")

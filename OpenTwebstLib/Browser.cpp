@@ -190,6 +190,46 @@ STDMETHODIMP CBrowser::get_title(BSTR* pVal)
 }
 
 
+STDMETHODIMP CBrowser::get_app(BSTR* pVal)
+{
+	// Reset the lastError property.
+	SetLastErrorCode(ERR_OK);
+
+	if (NULL == pVal)
+	{
+		traceLog << "pVal parameter is NULL in CBrowser::get_app\n";
+		SetComErrorMessage(IDS_PROPERTY_FAILED, APP_PROPERTY, IDH_BROWSER_APP);
+		SetLastErrorCode(ERR_INVALID_ARG);
+		return HRES_INVALID_ARG;
+	}
+
+	if (!IsValidState(IDS_PROPERTY_FAILED, APP_PROPERTY, IDH_BROWSER_APP))
+	{
+		traceLog << "Invalid state in CBrowser::get_app\n";
+		return HRES_FAIL;
+	}
+
+	HRESULT hRes = m_spPlugin->GetAppName(pVal);
+	if (HRESULT_CODE(hRes) == RPC_S_SERVER_UNAVAILABLE)
+	{
+		traceLog << "Connection with the browser lost while calling m_spPlugin->IsLoading in CBrowser::get_app\n";
+		SetComErrorMessage(IDS_ERR_BROWSER_DISCONNECTED, IDH_BROWSER_APP);
+		SetLastErrorCode(ERR_BRWS_CONNECTION_LOST);
+		return HRES_BRWS_CONNECTION_LOST_ERR;
+	}
+
+	if (FAILED(hRes))
+	{
+		traceLog << "m_spPlugin->GetAppName failed in CBrowser::get_app\n";
+		SetComErrorMessage(IDS_PROPERTY_FAILED, APP_PROPERTY, IDH_BROWSER_APP);
+		SetLastErrorCode(ERR_FAIL);
+		return HRES_FAIL;
+	}
+
+	return HRES_OK;
+}
+
+
 STDMETHODIMP CBrowser::get_url(BSTR* pVal)
 {
 	// Reset the lastError property.
@@ -579,13 +619,6 @@ STDMETHODIMP CBrowser::get_core(ICore** pVal)
 		SetLastErrorCode(ERR_FAIL);
 		return HRES_FAIL;	
 	}
-
-	/* An [out]-only parameter is assumed to be undefined when the remote procedure is called and
-	   memory for the object is allocated by the server. 
-	if (*pVal != NULL)
-	{
-		(*pVal)->Release();
-	}*/
 
 	CComQIPtr<ICore> spCore = m_spCore;
 	*pVal = spCore.Detach();

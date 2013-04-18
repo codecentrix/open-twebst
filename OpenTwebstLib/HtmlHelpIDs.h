@@ -47,6 +47,7 @@
 #define IDH_BROWSER_FIND_ELEM_BY_XPATH     2037
 #define IDH_BROWSER_CLOSE_POPUP            2038
 #define IDH_BROWSER_CLOSE_PROMPT           2039
+#define IDH_BROWSER_APP                    2040
 
 
 // IFrame help context IDs.

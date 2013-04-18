@@ -60,14 +60,23 @@ namespace CatStudio
         }
 
 
-        static public RawStatement CreateFindBrowserStatement(String url, int brwsNameIndex, int brwsHwnd)
+        static public RawStatement CreateFindBrowserStatement
+            (
+                String url,
+                String title,
+                String appName,
+                int brwsNameIndex,
+                int brwsHwnd
+            )
         {
             RawStatement result = new RawStatement();
 
             result.type          = RawStatementType.FIND_BROWSER;
-            result.browserURL    = url;
+            result.browserURL     = url;
             result.browserNameIdx = brwsNameIndex;
             result.browserHWND    = brwsHwnd;
+            result.browserAppName = appName;
+            result.browserTitle   = title;
 
             return result;
         }
@@ -223,6 +232,16 @@ namespace CatStudio
             get { return this.browserHWND; }
         }
 
+        public String BrowserTitle
+        {
+            get { return this.browserTitle; }
+        }
+
+        public String BrowserAppName
+        {
+            get { return this.browserTitle; }
+        }
+
         #endregion
 
 
@@ -255,6 +274,8 @@ namespace CatStudio
         private RawStatementType type;
         private String           tagName;
         private String           browserURL;
+        private String           browserTitle;
+        private String           browserAppName;
         private List<String>     values;
         private String           attributeName;
         private String           attributeValue;

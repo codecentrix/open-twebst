@@ -78,6 +78,7 @@ public:
 	STDMETHOD(get_isLoading)         (VARIANT_BOOL* pVal);
 	STDMETHOD(get_title)             (BSTR* pVal);
 	STDMETHOD(get_url)               (BSTR* pVal);
+	STDMETHOD(get_app)               (BSTR* pVal);
 	STDMETHOD(get_core)              (ICore** pVal);
 	STDMETHOD(get_topFrame)          (IFrame** ppTopFrame);
 	STDMETHOD(get_navigationError)   (LONG* pVal);
