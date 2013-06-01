@@ -47,7 +47,7 @@
 					<i>
 						<a target="_blank" href="http://www.codecentrix.com">
 							<xsl:text disable-output-escaping="yes">&amp;copy;</xsl:text>
-							2012 CodeCentrix Software. All rights reserved.
+							2013 CodeCentrix Software. All rights reserved.
 						</a>
 					</i>
 				</small>
