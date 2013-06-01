@@ -422,7 +422,7 @@ namespace CatStudio
         }
 
 
-        private void OnIntroOpenSamples()
+        public void OnIntroOpenSamples()
         {
             try
             {

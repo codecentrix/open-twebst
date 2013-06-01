@@ -688,7 +688,13 @@ namespace CatStudio
         }
 
 
-        private  BaseLanguageGenerator crntLang    = null;
+        private void samplesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.browserForm.OnIntroOpenSamples();
+        }
+
+
+        private BaseLanguageGenerator crntLang    = null;
         private CodeGenerator          codeGen     = null;
         private BrowserForm            browserForm = null;
         private bool                   canCloseNow = false;
