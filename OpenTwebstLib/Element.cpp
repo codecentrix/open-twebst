@@ -2353,6 +2353,28 @@ STDMETHODIMP CElement::GetAttribute(BSTR bstrAttrName, VARIANT* pVal)
 	HRESULT hRes = m_spHtmlElement->getAttribute(bstrAttrName, 0, pVal); // Case insensitive search of attribute.
 	if (SUCCEEDED(hRes) && (VT_DISPATCH == pVal->vt))
 	{
+		CComQIPtr<IHTMLStyle> spStyle = pVal->pdispVal;
+		if (spStyle)
+		{
+			::VariantClear(pVal);
+			
+			CComBSTR bstrStyle;
+			hRes = spStyle->get_cssText(&bstrStyle);
+			if (FAILED(hRes))
+			{
+				traceLog << "spStyle->toString failed with code=" << hRes <<"\n";
+				return hRes;
+			}
+
+			if (!bstrStyle)
+			{
+				bstrStyle = L"";
+			}
+
+			CComVariant vStyle = bstrStyle;
+			return vStyle.Detach(pVal);
+		}
+
 		::VariantClear(pVal); // Release the IDispatch inside pVal variant.
 		return GetHandlerAttrText(bstrAttrName, pVal);
 	}
