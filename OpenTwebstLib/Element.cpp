@@ -117,11 +117,6 @@ STDMETHODIMP CElement::get_core(ICore** pVal)
 		return HRES_FAIL;	
 	}
 
-	/*if (*pVal != NULL)
-	{
-		(*pVal)->Release();
-	}*/
-
 	CComQIPtr<ICore> spCore = m_spCore;
 	*pVal = spCore.Detach();
 
@@ -150,11 +145,6 @@ STDMETHODIMP CElement::get_nativeElement(IHTMLElement** pVal)
 		SetLastErrorCode(ERR_FAIL);
 		return HRES_FAIL;
 	}
-
-	/*if (*pVal != NULL)
-	{
-		(*pVal)->Release();
-	}*/
 
 	*pVal = spElement.Detach();
 	return HRES_OK;

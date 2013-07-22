@@ -82,11 +82,6 @@ STDMETHODIMP CFrame::get_core(ICore** pVal)
 		return HRES_FAIL;	
 	}
 
-	/*if (*pVal != NULL)
-	{
-		(*pVal)->Release();
-	}*/
-
 	CComQIPtr<ICore> spCore = m_spCore;
 	*pVal = spCore.Detach();
 
@@ -115,11 +110,6 @@ STDMETHODIMP CFrame::get_nativeFrame(IHTMLWindow2** pVal)
 		SetLastErrorCode(ERR_FAIL);
 		return HRES_FAIL;
 	}
-
-	/*if (*pVal != NULL)
-	{
-		(*pVal)->Release();
-	}*/
 
 	*pVal = spWindow.Detach();
 	return HRES_OK;

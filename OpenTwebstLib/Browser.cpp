@@ -141,11 +141,6 @@ HRESULT CBrowser::GetWebBrowser(IWebBrowser2** ppWebBrowser)
 		return hRes;
 	}
 
-	if (*ppWebBrowser != NULL)
-	{
-		hRes = (*ppWebBrowser)->Release();
-	}
-
 	*ppWebBrowser = spBrws.Detach();
 	return S_OK;
 }

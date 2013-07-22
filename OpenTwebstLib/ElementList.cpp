@@ -253,11 +253,6 @@ STDMETHODIMP CElementList::get_core(ICore** pVal)
 		return HRES_FAIL;	
 	}
 
-	if (*pVal != NULL)
-	{
-		(*pVal)->Release();
-	}
-
 	CComQIPtr<ICore> spCore = m_spCore;
 	*pVal = spCore.Detach();
 
