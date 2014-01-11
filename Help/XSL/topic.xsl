@@ -7,23 +7,6 @@
 				</title>
 
 				<link href="./CSS/help.css" rel="stylesheet" type="text/css" />
-
-				<!-- Start of Google Analytics Code -->
-				<script type="text/javascript">
-
-				  var _gaq = _gaq || [];
-				  _gaq.push(['_setAccount', 'UA-28744884-1']);
-				  _gaq.push(['_trackPageview']);
-
-				  (function() {
-					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				  })();
-
-				</script>
-				<!-- End of Google Analytics Code -->
-
 			</head>
 
 			<body>
@@ -73,9 +56,21 @@
 				<small><i>
 					<a target="_blank" href="http://www.codecentrix.com">
 						<xsl:text disable-output-escaping="yes">&amp;copy;</xsl:text>
-						2013 CodeCentrix Software. All rights reserved.
+						2014 CodeCentrix Software. All rights reserved.
 					</a>
 				</i></small>
+
+				<!-- Start of StatCounter Code -->
+				<script type="text/javascript">
+				sc_project=1010390; 
+				sc_invisible=1; 
+				sc_partition=9; 
+				sc_security="a4cc6c6f"; 
+				</script>
+
+				<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+				<noscript><img src="http://c10.statcounter.com/1010390/0/a4cc6c6f/1/" alt="statcounter" /></noscript>
+				<!-- End of StatCounter Code -->
 			</body>
 		</html>
 	</xsl:template>
