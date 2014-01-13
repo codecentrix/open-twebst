@@ -160,6 +160,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="URLHistory.cs" />
+    <Compile Include="VbaGenerator.cs" />
     <Compile Include="VbNetGenerator.cs" />
     <Compile Include="VbsGenerator.cs" />
     <Compile Include="WatirGerator.cs" />

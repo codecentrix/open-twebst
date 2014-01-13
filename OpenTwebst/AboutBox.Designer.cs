@@ -81,10 +81,10 @@
             this.linkLabelCodecentrix.AutoSize = true;
             this.linkLabelCodecentrix.Location = new System.Drawing.Point(13, 206);
             this.linkLabelCodecentrix.Name = "linkLabelCodecentrix";
-            this.linkLabelCodecentrix.Size = new System.Drawing.Size(200, 15);
+            this.linkLabelCodecentrix.Size = new System.Drawing.Size(165, 15);
             this.linkLabelCodecentrix.TabIndex = 32;
             this.linkLabelCodecentrix.TabStop = true;
-            this.linkLabelCodecentrix.Text = "http://open-twebst.codecentrix.com";
+            this.linkLabelCodecentrix.Text = "http://www.codecentrix.com/";
             this.linkLabelCodecentrix.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelCodecentrix_LinkClicked);
             // 
             // labelGpl
@@ -101,10 +101,10 @@
             this.linkLabelMail.AutoSize = true;
             this.linkLabelMail.Location = new System.Drawing.Point(13, 182);
             this.linkLabelMail.Name = "linkLabelMail";
-            this.linkLabelMail.Size = new System.Drawing.Size(185, 15);
+            this.linkLabelMail.Size = new System.Drawing.Size(147, 15);
             this.linkLabelMail.TabIndex = 33;
             this.linkLabelMail.TabStop = true;
-            this.linkLabelMail.Text = "adrian.dorache@codecentrix.com";
+            this.linkLabelMail.Text = "support@codecentrix.com";
             this.linkLabelMail.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMail_LinkClicked);
             // 
             // AboutBox

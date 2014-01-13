@@ -112,6 +112,7 @@ namespace CatStudio
             BaseLanguageGenerator watirEnv   = new WatirGenerator();
             BaseLanguageGenerator csLang     = new CSharpGenerator();
             BaseLanguageGenerator vbNetLang  = new VbNetGenerator();
+            BaseLanguageGenerator vbaLang    = new VbaGenerator();
 
             // Populate language combo-box.
             this.codeToolStripLanguageCombo.Items.Add(vbsLang);
@@ -120,6 +121,7 @@ namespace CatStudio
             this.codeToolStripLanguageCombo.Items.Add(pythonLang);
             this.codeToolStripLanguageCombo.Items.Add(csLang);
             this.codeToolStripLanguageCombo.Items.Add(vbNetLang);
+            this.codeToolStripLanguageCombo.Items.Add(vbaLang);
 
             // Initialize code generator.
             this.codeGen = new CodeGenerator(vbsLang);
@@ -478,12 +480,6 @@ namespace CatStudio
         private void onlineDocumentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenURL(CatStudioConstants.TWEBST_ONLINE_HELP_URL);
-        }
-
-
-        private void fAQsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenURL(CatStudioConstants.TWEBST_FAQS_URL);
         }
 
 

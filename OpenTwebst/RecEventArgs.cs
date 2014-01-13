@@ -47,7 +47,7 @@ namespace CatStudio
             result.browserURL     = topURL;
             result.browserTitle   = twbstBrowser.title;
             result.browserAppName = twbstBrowser.app;
-            result.browserHwnd    = twbstBrowser.nativeBrowser.HWND;
+            result.browserHwnd    = 0; /*twbstBrowser.nativeBrowser.HWND;*/ // TODO: gotta solve exception? Maybe we don't need the handle after all...
             result.BuildAttributeDictionary(htmlElem);
             result.BuildValuesList(htmlElem);
 
