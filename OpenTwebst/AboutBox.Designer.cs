@@ -35,6 +35,7 @@
             this.linkLabelCodecentrix = new System.Windows.Forms.LinkLabel();
             this.labelGpl = new System.Windows.Forms.Label();
             this.linkLabelMail = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +71,7 @@
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(102, 40);
+            this.labelVersion.Location = new System.Drawing.Point(102, 48);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(46, 15);
             this.labelVersion.TabIndex = 28;
@@ -81,16 +82,16 @@
             this.linkLabelCodecentrix.AutoSize = true;
             this.linkLabelCodecentrix.Location = new System.Drawing.Point(13, 206);
             this.linkLabelCodecentrix.Name = "linkLabelCodecentrix";
-            this.linkLabelCodecentrix.Size = new System.Drawing.Size(165, 15);
+            this.linkLabelCodecentrix.Size = new System.Drawing.Size(247, 15);
             this.linkLabelCodecentrix.TabIndex = 32;
             this.linkLabelCodecentrix.TabStop = true;
-            this.linkLabelCodecentrix.Text = "http://www.codecentrix.com/";
+            this.linkLabelCodecentrix.Text = "https://github.com/codecentrix/open-twebst";
             this.linkLabelCodecentrix.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelCodecentrix_LinkClicked);
             // 
             // labelGpl
             // 
             this.labelGpl.AutoSize = true;
-            this.labelGpl.Location = new System.Drawing.Point(102, 63);
+            this.labelGpl.Location = new System.Drawing.Point(13, 115);
             this.labelGpl.Name = "labelGpl";
             this.labelGpl.Size = new System.Drawing.Size(298, 15);
             this.labelGpl.TabIndex = 28;
@@ -107,12 +108,22 @@
             this.linkLabelMail.Text = "support@codecentrix.com";
             this.linkLabelMail.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMail_LinkClicked);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(102, 80);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 15);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "Codecentrix 2014";
+            // 
             // AboutBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.okButton;
             this.ClientSize = new System.Drawing.Size(426, 237);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabelMail);
             this.Controls.Add(this.linkLabelCodecentrix);
             this.Controls.Add(this.labelGpl);
@@ -145,6 +156,7 @@
         private System.Windows.Forms.LinkLabel linkLabelCodecentrix;
         private System.Windows.Forms.Label labelGpl;
         private System.Windows.Forms.LinkLabel linkLabelMail;
+        private System.Windows.Forms.Label label1;
 
 
 

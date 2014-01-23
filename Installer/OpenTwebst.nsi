@@ -1,6 +1,6 @@
 !define PRODUCT_NAME		"Open Twebst"
-!define PRODUCT_VERSION		"1.1"
-!define SETUP_NAME			"OpenTwebstSetup_1.1.exe"
+!define PRODUCT_VERSION		"1.2"
+!define SETUP_NAME			"OpenTwebstSetup_1.2.exe"
 !define PRODUCT_PUBLISHER	"Codecentrix Software"
 !define PRODUCT_WEB_SITE	"http://open-twebst.codecentrix.com/"
 

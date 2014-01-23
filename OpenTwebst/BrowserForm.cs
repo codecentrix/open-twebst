@@ -285,13 +285,13 @@ namespace CatStudio
             {
                 // Web Recorder does not generate code for multiple browser windows yet, but this scenario IS supported by Twebst Library (see FindBrowser and FindAllBrowsers methods).
                 MessageBox.Show(this, "The web site opens a new window!\n\n" +
-                                      "Twebst recorder only works in one window.\n" + 
+                                      "Twebst recorder only works in one window.\n"/* + 
                                       "Selection mode works for any web page including IE web control embedded in other apps.\n\n" +
-                                      "Switching to selection mode ...",
+                                      "Switching to selection mode ..."*/,
                                 CatStudioConstants.TWEBST_PRODUCT_NAME,
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                this.codeForm.StartSelection();
+                //this.codeForm.StartSelection();
             }
         }
 
@@ -377,6 +377,7 @@ namespace CatStudio
                 IHTMLInputElement inputSource = (IHTMLInputElement)htmlSource;
                 this.OnIntroDontAskAgain(inputSource.@checked);
             }
+            // TODO: launch home and documentation with shell execute
         }
 
 

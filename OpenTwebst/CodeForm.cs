@@ -117,11 +117,11 @@ namespace CatStudio
             // Populate language combo-box.
             this.codeToolStripLanguageCombo.Items.Add(vbsLang);
             this.codeToolStripLanguageCombo.Items.Add(jsLang);
-            this.codeToolStripLanguageCombo.Items.Add(watirEnv);
-            this.codeToolStripLanguageCombo.Items.Add(pythonLang);
+            this.codeToolStripLanguageCombo.Items.Add(vbaLang);
             this.codeToolStripLanguageCombo.Items.Add(csLang);
             this.codeToolStripLanguageCombo.Items.Add(vbNetLang);
-            this.codeToolStripLanguageCombo.Items.Add(vbaLang);
+            this.codeToolStripLanguageCombo.Items.Add(pythonLang);
+            this.codeToolStripLanguageCombo.Items.Add(watirEnv);
 
             // Initialize code generator.
             this.codeGen = new CodeGenerator(vbsLang);

@@ -38,7 +38,7 @@ namespace CatStudio
         public static readonly String FIND_INDEX_HELPER_ATTR      = "twebst_find_index_rec";
         public static readonly String CRNT_SELECTION_ATTR         = "twebst_crnt_selected";
         public static readonly int    MAX_TEXT_ATTR_LEN_TO_RECORD = 128;
-        public static readonly String CODECENTRIX_HOME_URL        = "http://www.codecentrix.com/";
+        public static readonly String CODECENTRIX_HOME_URL        = "https://github.com/codecentrix/open-twebst";
         public static readonly String TWEBST_ONLINE_HELP_URL      = "http://codecentrix.com/doc/index.htm";
         public static readonly String TWEBST_COMMUNITY_URL        = "https://groups.google.com/forum/#!forum/twebst-automation-studio";
         public static readonly String TWEBST_LINKEDIN_URL         = "http://www.linkedin.com/groups/Twebst-3455722";
