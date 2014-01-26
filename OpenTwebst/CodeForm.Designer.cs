@@ -50,6 +50,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.onlineDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportABugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.twebstGoogleGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.twebstLinkedinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,6 +71,7 @@
             this.toolStripButtonDel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.codeToolStripLanguageCombo = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.codeContextMenu.SuspendLayout();
             this.codeStatusStrip.SuspendLayout();
             this.menuMain.SuspendLayout();
@@ -225,9 +227,11 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItemHelp,
             this.onlineDocumentationToolStripMenuItem,
-            this.communityToolStripMenuItem,
-            this.tutorialsToolStripMenuItem,
             this.samplesToolStripMenuItem,
+            this.tutorialsToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.communityToolStripMenuItem,
+            this.reportABugToolStripMenuItem,
             this.toolStripSeparator1,
             this.checkForUpdatesToolStripMenuItem,
             this.aboutToolStripMenuItem});
@@ -248,6 +252,13 @@
             this.onlineDocumentationToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.onlineDocumentationToolStripMenuItem.Text = "Online &Documentation";
             this.onlineDocumentationToolStripMenuItem.Click += new System.EventHandler(this.onlineDocumentationToolStripMenuItem_Click);
+            // 
+            // reportABugToolStripMenuItem
+            // 
+            this.reportABugToolStripMenuItem.Name = "reportABugToolStripMenuItem";
+            this.reportABugToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.reportABugToolStripMenuItem.Text = "Report a &Bug";
+            this.reportABugToolStripMenuItem.Click += new System.EventHandler(this.reportABugToolStripMenuItem_Click);
             // 
             // communityToolStripMenuItem
             // 
@@ -342,7 +353,7 @@
             this.codeToolStrip.Location = new System.Drawing.Point(0, 24);
             this.codeToolStrip.Name = "codeToolStrip";
             this.codeToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.codeToolStrip.Size = new System.Drawing.Size(463, 27);
+            this.codeToolStrip.Size = new System.Drawing.Size(357, 25);
             this.codeToolStrip.TabIndex = 0;
             this.codeToolStrip.Text = "Code";
             // 
@@ -352,7 +363,7 @@
             this.codeToolStripBtnNew.Image = ((System.Drawing.Image)(resources.GetObject("codeToolStripBtnNew.Image")));
             this.codeToolStripBtnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.codeToolStripBtnNew.Name = "codeToolStripBtnNew";
-            this.codeToolStripBtnNew.Size = new System.Drawing.Size(23, 24);
+            this.codeToolStripBtnNew.Size = new System.Drawing.Size(23, 22);
             this.codeToolStripBtnNew.Text = "New";
             this.codeToolStripBtnNew.Click += new System.EventHandler(this.codeToolStripBtnNew_Click);
             // 
@@ -362,7 +373,7 @@
             this.codeToolStripBtnSave.Image = ((System.Drawing.Image)(resources.GetObject("codeToolStripBtnSave.Image")));
             this.codeToolStripBtnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.codeToolStripBtnSave.Name = "codeToolStripBtnSave";
-            this.codeToolStripBtnSave.Size = new System.Drawing.Size(23, 24);
+            this.codeToolStripBtnSave.Size = new System.Drawing.Size(23, 22);
             this.codeToolStripBtnSave.Text = "Save";
             this.codeToolStripBtnSave.Click += new System.EventHandler(this.codeToolStripBtnSave_Click);
             // 
@@ -371,7 +382,7 @@
             this.codeToolStripBtnRun.Image = ((System.Drawing.Image)(resources.GetObject("codeToolStripBtnRun.Image")));
             this.codeToolStripBtnRun.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.codeToolStripBtnRun.Name = "codeToolStripBtnRun";
-            this.codeToolStripBtnRun.Size = new System.Drawing.Size(48, 24);
+            this.codeToolStripBtnRun.Size = new System.Drawing.Size(48, 22);
             this.codeToolStripBtnRun.Text = "Run";
             this.codeToolStripBtnRun.ToolTipText = "Run Macro";
             this.codeToolStripBtnRun.Click += new System.EventHandler(this.codeToolStripBtnRun_Click);
@@ -381,7 +392,7 @@
             this.toolStripButtonRec.Image = global::CatStudio.Properties.Resources.record_16;
             this.toolStripButtonRec.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRec.Name = "toolStripButtonRec";
-            this.toolStripButtonRec.Size = new System.Drawing.Size(73, 24);
+            this.toolStripButtonRec.Size = new System.Drawing.Size(73, 22);
             this.toolStripButtonRec.Text = "Start Rec";
             this.toolStripButtonRec.ToolTipText = "Web Recorder - works only in Twebst browser";
             this.toolStripButtonRec.Click += new System.EventHandler(this.toolStripButtonRec_Click);
@@ -391,7 +402,7 @@
             this.toolSpyButton.Image = ((System.Drawing.Image)(resources.GetObject("toolSpyButton.Image")));
             this.toolSpyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolSpyButton.Name = "toolSpyButton";
-            this.toolSpyButton.Size = new System.Drawing.Size(73, 24);
+            this.toolSpyButton.Size = new System.Drawing.Size(73, 22);
             this.toolSpyButton.Text = "Web Spy";
             this.toolSpyButton.ToolTipText = "Web Spy - works in any IE window";
             this.toolSpyButton.Visible = false;
@@ -402,7 +413,7 @@
             this.toolStripButtonDel.Image = global::CatStudio.Properties.Resources.delete_32;
             this.toolStripButtonDel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDel.Name = "toolStripButtonDel";
-            this.toolStripButtonDel.Size = new System.Drawing.Size(60, 24);
+            this.toolStripButtonDel.Size = new System.Drawing.Size(60, 22);
             this.toolStripButtonDel.Text = "Delete";
             this.toolStripButtonDel.ToolTipText = "Delete Last Statement";
             this.toolStripButtonDel.Click += new System.EventHandler(this.toolStripButtonDel_Click);
@@ -410,14 +421,19 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // codeToolStripLanguageCombo
             // 
             this.codeToolStripLanguageCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.codeToolStripLanguageCombo.Name = "codeToolStripLanguageCombo";
-            this.codeToolStripLanguageCombo.Size = new System.Drawing.Size(110, 27);
+            this.codeToolStripLanguageCombo.Size = new System.Drawing.Size(110, 25);
             this.codeToolStripLanguageCombo.SelectedIndexChanged += new System.EventHandler(this.codeToolStripLanguageCombo_SelectedIndexChanged);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(193, 6);
             // 
             // CodeForm
             // 
@@ -492,5 +508,7 @@
         private System.Windows.Forms.ToolStripMenuItem signUpForNewsletterToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolSpyButton;
         private System.Windows.Forms.ToolStripMenuItem samplesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportABugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }

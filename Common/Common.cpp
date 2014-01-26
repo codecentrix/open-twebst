@@ -88,6 +88,9 @@ namespace Common
 
 		return TRUE;
 	}
+
+	BOOL GetIEVersion(LPCTSTR szValName, CComBSTR& bstrVersion);
+	int GetIEVersion(LPCTSTR szValName);
 }
 
 
@@ -411,11 +414,29 @@ String Common::LoadStringFromRes(UINT uID, HINSTANCE hInst)
 
 BOOL Common::GetIEVersion(CComBSTR& bstrVersion)
 {
+	if (!GetIEVersion(_T("svcUpdateVersion"), bstrVersion))
+	{
+		if (!GetIEVersion(_T("svcVersion"), bstrVersion))
+		{
+			if (!GetIEVersion(_T("Version"), bstrVersion))
+			{
+				return FALSE;
+			}
+		}
+	}
+
+	return TRUE;
+}
+
+
+BOOL Common::GetIEVersion(LPCTSTR szValName, CComBSTR& bstrVersion)
+{
+	ATLASSERT(szValName != NULL);
 	bstrVersion = _T("");
 
 	HKEY hIEKey = NULL;
 	LONG lRes   = ::RegOpenKeyEx(HKEY_LOCAL_MACHINE, _T("Software\\Microsoft\\Internet Explorer"), 0, KEY_READ, &hIEKey);
-	if(lRes != ERROR_SUCCESS)
+	if (lRes != ERROR_SUCCESS)
 	{
 		// Can't open IE key. Assume is IE7.
 		traceLog << "Can't open IE key in Common::GetIEVersion\n";
@@ -427,11 +448,10 @@ BOOL Common::GetIEVersion(CComBSTR& bstrVersion)
     TCHAR szVersion[BUFFER_VAL_SIZE] = { 0 };
 	DWORD nValType = 0;
 	DWORD nValLen  = BUFFER_VAL_SIZE * sizeof(TCHAR);        
-	lRes = ::RegQueryValueEx(hIEKey, _T("Version"), NULL, &nValType, (LPBYTE)szVersion, &nValLen);    
+	lRes = ::RegQueryValueEx(hIEKey, szValName, NULL, &nValType, (LPBYTE)szVersion, &nValLen);    
 
-	if(lRes != ERROR_SUCCESS)
+	if (lRes != ERROR_SUCCESS)
 	{
-		// Can'T get "Version" data. Assume IE7.
 		traceLog << "Can't get Version value in Common::GetIEVersion\n";
 		::RegCloseKey(hIEKey);
 
@@ -444,25 +464,43 @@ BOOL Common::GetIEVersion(CComBSTR& bstrVersion)
 }
 
 
-// Get version from registry. It is stored there in 7.0.5730.11 format.
 int Common::GetIEVersion()
 {
 	static int nVersion = 0;
-
 	if (nVersion != 0)
 	{
 		return nVersion;
 	}
 
+	nVersion = GetIEVersion(_T("svcUpdateVersion"));
+	if (!nVersion)
+	{
+		nVersion = GetIEVersion(_T("svcVersion"));
+		if (!nVersion)
+		{
+			nVersion = GetIEVersion(_T("Version"));
+			if (!nVersion)
+			{
+				return 0;
+			}
+		}
+	}
+
+	return nVersion;
+}
+
+
+// Get version from registry. It is stored in 7.0.5730.11 format.
+int Common::GetIEVersion(LPCTSTR szValName)
+{
+	ATLASSERT(szValName != NULL);
+
 	HKEY hIEKey = NULL;
 	LONG lRes   = ::RegOpenKeyEx(HKEY_LOCAL_MACHINE, _T("Software\\Microsoft\\Internet Explorer"), 0, KEY_READ, &hIEKey);
-	if(lRes != ERROR_SUCCESS)
+	if (lRes != ERROR_SUCCESS)
 	{
-		// Can't open IE key. Assume is IE7.
 		traceLog << "Can't open IE key in Common::GetIEVersion\n";
-
-		nVersion = 7;
-		return nVersion;
+		return 0;
 	}
 
 	// Get the data from "Version" string value.
@@ -470,45 +508,37 @@ int Common::GetIEVersion()
     TCHAR szVersion[BUFFER_VAL_SIZE] = { 0 };
 	DWORD nValType = 0;
 	DWORD nValLen  = BUFFER_VAL_SIZE * sizeof(TCHAR);        
-	lRes = ::RegQueryValueEx(hIEKey, _T("Version"), NULL, &nValType, (LPBYTE)szVersion, &nValLen);    
+	lRes = ::RegQueryValueEx(hIEKey, szValName, NULL, &nValType, (LPBYTE)szVersion, &nValLen);    
 
-	if(lRes != ERROR_SUCCESS)
+	if (lRes != ERROR_SUCCESS)
 	{
-		// Can'T get "Version" data. Assume IE7.
 		traceLog << "Can't get Version value in Common::GetIEVersion\n";
 		::RegCloseKey(hIEKey);
 
-		nVersion = 7;
-		return nVersion;
+		return 0;
 	}
 
 	::RegCloseKey(hIEKey);
 
 	// Find first "."
 	TCHAR* pPoint = _tcschr(szVersion, _T('.'));
-	if (NULL == pPoint)
+	if (pPoint != NULL)
 	{
-		// Invalid version. Assume IE7.
+		*pPoint = _T('\0');
+	}
+	else
+	{
 		traceLog << "Malformed Version registry value in Common::GetIEVersion\n";
-		
-		nVersion = 7;
-		return nVersion;
 	}
 
-	*pPoint = _T('\0');
-    nVersion = _ttoi(szVersion);
+    int nVersion = _ttoi(szVersion);
 	if (0 == nVersion)
 	{
 		// Invalid version. Assume IE7.
 		traceLog << "Invalid Version string in Common::GetIEVersion\n";
+	}
 
-		nVersion = 7;
-		return nVersion;
-	}
-	else
-	{
-		return nVersion;
-	}
+	return nVersion;
 }
 
 

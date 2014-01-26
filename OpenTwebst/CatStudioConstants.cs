@@ -49,6 +49,8 @@ namespace CatStudio
         public static readonly String TWEBST_CHM_FILE_NAME        = "OpenTwebst.chm";
         public static readonly String TWEBST_SELECT_OUTLINE       = "1px solid black";
         public static readonly String TWEBST_SELECT_BCKG          = "LightGreen";
+        public static readonly String SUPPORT_EMAIL_MESSAGE       = "Please describe the problem you have encountered ...";
+        public static readonly String SUPPORT_EMAIL_SUBJECT       = "Twebst Bug Report";
 
         // Check for updates.
         public static readonly String TWEBST_CHECK_UPDATES_URL         = "http://codecentrix.com/doc/opentwbstupd.xml";

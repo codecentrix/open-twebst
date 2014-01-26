@@ -690,6 +690,16 @@ namespace CatStudio
         }
 
 
+        private void reportABugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SupportSystemInfo si = new SupportSystemInfo();
+            String supportBody = CatStudioConstants.SUPPORT_EMAIL_MESSAGE + "%0a%0a%0a" + si.Info;
+            String supportSubj = CatStudioConstants.SUPPORT_EMAIL_SUBJECT;
+            String supportCmd  = String.Format("mailto:support@codecentrix.com?subject={0}&body={1}", supportSubj, supportBody);
+
+            OpenURL(supportCmd);
+        }
+
         private BaseLanguageGenerator crntLang    = null;
         private CodeGenerator          codeGen     = null;
         private BrowserForm            browserForm = null;
