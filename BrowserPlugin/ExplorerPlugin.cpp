@@ -446,12 +446,6 @@ STDMETHODIMP CExplorerPlugin::GetTopFrame(IHTMLWindow2** pTopFrame)
 	}
 
 	CComQIPtr<IHTMLWindow2> spTopWindow = HtmlHelpers::HtmlWebBrowserToHtmlWindow(spBrws);
-	/*if (*pTopFrame != NULL)
-	{
-		(*pTopFrame)->Release();
-
-	}*/
-
 	*pTopFrame = spTopWindow.Detach();
 	return S_OK;
 }

@@ -43,6 +43,18 @@
 #include "SearchCondition.h"
 
 
+#undef FIRE_CANCEL_REQUEST
+#define FIRE_CANCEL_REQUEST() \
+{\
+	Fire_CancelRequest();\
+	if (this->IsCancelPending())\
+	{\
+		SetComErrorMessage(IDS_ERR_CANCELED, IDH_CORE_CANCELATION);\
+		SetLastErrorCode(ERR_CANCELED);\
+		return HRES_CANCELED_ERR;\
+	}\
+}
+
 
 extern HINSTANCE g_hInstance;
 
@@ -92,9 +104,58 @@ STDMETHODIMP CCore::InterfaceSupportsErrorInfo(REFIID riid)
 }
 
 
+HRESULT CCore::Fire_CancelRequest()
+{
+	if (IsCancelPending())
+	{
+		// Already canceled.
+		return S_OK;
+	}
+
+	HRESULT hr = S_OK;
+	int cConnections = m_vec.GetSize();
+
+	for (int iConnection = 0; iConnection < cConnections; iConnection++)
+	{
+		this->Lock();
+		CComPtr<IUnknown> punkConnection = m_vec.GetAt(iConnection);
+		this->Unlock();
+
+		IDispatch * pConnection = static_cast<IDispatch*>(punkConnection.p);
+		if (pConnection)
+		{
+			VARIANT_BOOL vbCancel = VARIANT_FALSE;
+			CComVariant avarParams[1];
+			avarParams[0].byref = &vbCancel;
+			avarParams[0].vt = VT_BOOL|VT_BYREF;
+
+			DISPPARAMS params = { avarParams, NULL, 1, 0 };
+			hr = pConnection->Invoke(1, IID_NULL, LOCALE_USER_DEFAULT, DISPATCH_METHOD, &params, NULL, NULL, NULL);
+
+            if (SUCCEEDED(hr) && (VARIANT_TRUE == vbCancel))
+            {
+				traceLog << "Cancel requested\n";
+				m_bCanceled = TRUE;
+
+                break;
+            }
+		}
+	}
+
+	return hr;
+}
+
+
+BOOL CCore::IsCancelPending()
+{
+	return m_bCanceled;
+}
+
+
 CCore::CCore()
 {
 	m_nLastError        = Common::ERR_OK;
+	m_bCanceled         = FALSE;
 	m_vbAutoClosePopups = VARIANT_FALSE;
 	m_bAsyncEvents      = VARIANT_FALSE;
 
@@ -291,12 +352,15 @@ HRESULT CCore::StartBrowser(IBrowser** ppNewBrowser, DWORD dwHelpID, BOOL bStart
 
 STDMETHODIMP CCore::StartBrowser(BSTR bstrUrl, IBrowser** ppNewBrowser)
 {
+	FIRE_CANCEL_REQUEST();
 	return StartBrowser(ppNewBrowser, IDH_CORE_START_BROWSER, FALSE, bstrUrl);
 }
 
 
 STDMETHODIMP CCore::FindBrowser(BSTR bstrCond, IBrowser** ppBrowserFound)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -391,6 +455,8 @@ STDMETHODIMP CCore::FindBrowser(BSTR bstrCond, IBrowser** ppBrowserFound)
 		DWORD dwStartTime = ::GetTickCount();
 		while (TRUE)
 		{
+			FIRE_CANCEL_REQUEST();
+
 			// Try to find the browser.
 			spBrowser = FindBrowser(pVarArgs, sAppName, bUseEqOp);
 			if (spBrowser != NULL)
@@ -901,6 +967,8 @@ BOOL CALLBACK CCore::FindWndCallback(HWND hWnd, LPARAM lParam)
 
 STDMETHODIMP CCore::get_searchTimeout(LONG* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -919,6 +987,8 @@ STDMETHODIMP CCore::get_searchTimeout(LONG* pVal)
 
 STDMETHODIMP CCore::put_searchTimeout(LONG newVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -937,6 +1007,8 @@ STDMETHODIMP CCore::put_searchTimeout(LONG newVal)
 
 STDMETHODIMP CCore::get_loadTimeout(LONG* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -955,6 +1027,8 @@ STDMETHODIMP CCore::get_loadTimeout(LONG* pVal)
 
 STDMETHODIMP CCore::put_loadTimeout(LONG newVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -994,6 +1068,8 @@ void CCore::SetLastErrorCode(LONG nErr)
 
 STDMETHODIMP CCore::get_loadTimeoutIsError(VARIANT_BOOL* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1012,6 +1088,8 @@ STDMETHODIMP CCore::get_loadTimeoutIsError(VARIANT_BOOL* pVal)
 
 STDMETHODIMP CCore::put_loadTimeoutIsError(VARIANT_BOOL newVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1359,12 +1437,6 @@ STDMETHODIMP CCore::AttachToNativeFrame(IHTMLWindow2* pHtmlWindow, IFrame** ppFr
 			pFrameObject->SetCore(this);
 			pFrameObject->SetHtmlWindow(pHtmlWindow);
 
-			if (*ppFrame != NULL)
-			{
-				// Release any previous object in the output parameter.
-				(*ppFrame)->Release();
-			}
-
 			// Set the object reference into the output pointer.
 			*ppFrame = pNewFrame;
 		}
@@ -1390,6 +1462,8 @@ STDMETHODIMP CCore::AttachToNativeFrame(IHTMLWindow2* pHtmlWindow, IFrame** ppFr
 
 STDMETHODIMP CCore::AttachToNativeElement(IHTMLElement* pHtmlElement, IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1457,6 +1531,8 @@ STDMETHODIMP CCore::AttachToNativeElement(IHTMLElement* pHtmlElement, IElement**
 
 STDMETHODIMP CCore::get_useHardwareInputEvents(VARIANT_BOOL* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1475,6 +1551,8 @@ STDMETHODIMP CCore::get_useHardwareInputEvents(VARIANT_BOOL* pVal)
 
 STDMETHODIMP CCore::put_useHardwareInputEvents(VARIANT_BOOL newVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1501,6 +1579,8 @@ STDMETHODIMP CCore::put_useHardwareInputEvents(VARIANT_BOOL newVal)
 
 STDMETHODIMP CCore::AttachToNativeBrowser(IWebBrowser2* pWebBrowser, IBrowser** ppBrowser)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1604,6 +1684,8 @@ BOOL CCore::IsValidDescriptorList(const std::list<DescriptorToken>& tokens)
 
 STDMETHODIMP CCore::Reset()
 {
+	FIRE_CANCEL_REQUEST();
+
 	traceLog << "CCore::Reset\n";
 	m_nSearchTimeout      = Settings::DEFAULT_SEARCH_TIMEOUT;
 	m_nLoadTimeout        = Settings::DEFAULT_LOAD_TIMEOUT;
@@ -1617,6 +1699,8 @@ STDMETHODIMP CCore::Reset()
 
 STDMETHODIMP CCore::get_IEVersion(BSTR* pBstrVersion)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1686,6 +1770,8 @@ BOOL CCore::FindVisibleChildWndCallback(HWND hWnd, void*)
 
 STDMETHODIMP CCore::get_foregroundBrowser(IBrowser** pFgBrowser)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1770,6 +1856,8 @@ STDMETHODIMP CCore::get_foregroundBrowser(IBrowser** pFgBrowser)
 
 STDMETHODIMP CCore::get_productVersion(BSTR* pBstrVersion)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1794,6 +1882,8 @@ STDMETHODIMP CCore::get_productVersion(BSTR* pBstrVersion)
 
 STDMETHODIMP CCore::get_productName(BSTR* pBstrName)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1814,6 +1904,8 @@ STDMETHODIMP CCore::get_productName(BSTR* pBstrName)
 
 STDMETHODIMP CCore::GetClipboardText(BSTR* pBstrClipboardText)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1897,6 +1989,8 @@ STDMETHODIMP CCore::GetClipboardText(BSTR* pBstrClipboardText)
 
 STDMETHODIMP CCore::SetClipboardText(BSTR bstrClipboardText)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2167,6 +2261,8 @@ BOOL CALLBACK CCore::FindIEFrameExcludeSetCallback(HWND hWnd, LPARAM lParam)
 
 STDMETHODIMP CCore::get_closeBrowserPopups(VARIANT_BOOL* pAutoClosePopups)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2186,6 +2282,8 @@ STDMETHODIMP CCore::get_closeBrowserPopups(VARIANT_BOOL* pAutoClosePopups)
 
 STDMETHODIMP CCore::put_closeBrowserPopups(VARIANT_BOOL  vbAutoClosePopups)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2202,6 +2300,8 @@ BOOL CCore::GetAutoClosePopups()
 
 STDMETHODIMP CCore::get_asyncHtmlEvents(VARIANT_BOOL* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	if (NULL == pVal)
 	{
 		traceLog << "Invalid argument in  CCore::get_asyncHtmlEvents\n";
@@ -2218,6 +2318,8 @@ STDMETHODIMP CCore::get_asyncHtmlEvents(VARIANT_BOOL* pVal)
 
 STDMETHODIMP CCore::put_asyncHtmlEvents(VARIANT_BOOL newVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 	m_bAsyncEvents = newVal;

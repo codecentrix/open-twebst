@@ -35,12 +35,16 @@ class ATL_NO_VTABLE CCore :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CCore, &CLSID_Core>,
 	public ISupportErrorInfo,
-	public IDispatchImpl<ICore, &IID_ICore, &LIBID_OpenTwebstLib, /*wMajor =*/ 1, /*wMinor =*/ 0>
+	public IDispatchImpl<ICore, &IID_ICore, &LIBID_OpenTwebstLib, /*wMajor =*/ 1, /*wMinor =*/ 0>,
+	public IConnectionPointContainerImpl<CCore>,
+	public IConnectionPointImpl<CCore, &DIID__ICoreEvents>
 {
 public:
 	CCore();
-	void SetLastErrorCode(LONG nErr);
-	BOOL GetAutoClosePopups();
+	void    SetLastErrorCode(LONG nErr);
+	BOOL    IsCancelPending();
+	HRESULT Fire_CancelRequest();
+	BOOL    GetAutoClosePopups();
 
 
 	DECLARE_REGISTRY_RESOURCEID(IDR_CORE)
@@ -50,6 +54,10 @@ public:
 		COM_INTERFACE_ENTRY(ICore)
 		COM_INTERFACE_ENTRY(ISupportErrorInfo)
 	END_COM_MAP()
+
+	BEGIN_CONNECTION_POINT_MAP(CCore)
+		CONNECTION_POINT_ENTRY(DIID__ICoreEvents)
+	END_CONNECTION_POINT_MAP()
 
 	// ISupportsErrorInfo
 	STDMETHOD(InterfaceSupportsErrorInfo)(REFIID riid);
@@ -139,6 +147,7 @@ private:
 
 private:
 	VARIANT_BOOL m_bAsyncEvents;
+	BOOL         m_bCanceled;
 	LONG         m_nSearchTimeout;
 	LONG         m_nLoadTimeout;
 	LONG         m_nLastError;

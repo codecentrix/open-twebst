@@ -171,6 +171,7 @@ STRINGTABLE
 BEGIN
     IDS_PROPERTY_FAILED     "%s property failed!"
     IDS_OPTION_ELEMENT_NOT_FOUND "Item(s) not found in <select> html element!"
+    IDS_ERR_CANCELED        "Execution interrupeted!"
     IDS_ERR_FIND_HTML_DIALOG_INVALID_PARAM 
                             "Invalid parameter list in FindModelessHtmlDialog method call!"
     IDS_ERR_FIND_HTML_DIALOG_FAILED 

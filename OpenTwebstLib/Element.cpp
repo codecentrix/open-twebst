@@ -126,6 +126,8 @@ STDMETHODIMP CElement::get_core(ICore** pVal)
 
 STDMETHODIMP CElement::get_nativeElement(IHTMLElement** pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -153,6 +155,8 @@ STDMETHODIMP CElement::get_nativeElement(IHTMLElement** pVal)
 
 STDMETHODIMP CElement::FindElement(BSTR bstrTag, BSTR bstrCond, IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -196,6 +200,8 @@ STDMETHODIMP CElement::FindElement(BSTR bstrTag, BSTR bstrCond, IElement** ppEle
 
 STDMETHODIMP CElement::FindChildElement(BSTR bstrTag, BSTR bstrCond, IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -239,6 +245,8 @@ STDMETHODIMP CElement::FindChildElement(BSTR bstrTag, BSTR bstrCond, IElement** 
 
 STDMETHODIMP CElement::FindAllElements(BSTR bstrTag, BSTR bstrCond, IElementList** ppElementList)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -282,6 +290,8 @@ STDMETHODIMP CElement::FindAllElements(BSTR bstrTag, BSTR bstrCond, IElementList
 
 STDMETHODIMP CElement::FindChildrenElements(BSTR bstrTag, BSTR bstrCond, IElementList** ppElementList)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -325,6 +335,8 @@ STDMETHODIMP CElement::FindChildrenElements(BSTR bstrTag, BSTR bstrCond, IElemen
 
 STDMETHODIMP CElement::Click()
 {
+	FIRE_CANCEL_REQUEST();
+
 	ClickCallContext clickCtx(FALSE, CLICK_METHOD, IDH_ELEMENT_CLICK);
 	return Click(clickCtx, TRUE);
 }
@@ -332,6 +344,8 @@ STDMETHODIMP CElement::Click()
 
 STDMETHODIMP CElement::RightClick()
 {
+	FIRE_CANCEL_REQUEST();
+
 	ClickCallContext clickCtx(TRUE, RIGHT_CLICK_METHOD, IDH_ELEMENT_RIGHT_CLICK);
 	return Click(clickCtx, TRUE);
 }
@@ -612,56 +626,10 @@ HRESULT CElement::Click(const ClickCallContext& clickCtx, BOOL bClickFileInputBu
 }
 
 
-// For the older versions only <body>, <img> and <input type=image> can be saved as images.
-HRESULT CElement::CanBeSavedAsImage(IHTMLElement* pElement)
-{
-	// Why not saving any HTML element.
-	return S_OK;
-
-	/*ATLASSERT(pElement != NULL);
-
-	CComBSTR bstrTagName;
-	HRESULT hRes = pElement->get_tagName(&bstrTagName);
-	if (FAILED(hRes))
-	{
-		traceLog << "IHTMLElement::get_tagName failed in CanBeSavedAsImage with code " << hRes <<  "\n";
-		return hRes;
-	}
-
-	if (!_wcsicmp(L"body", bstrTagName) || !_wcsicmp(L"img", bstrTagName))
-	{
-		return S_OK;
-	}
-
-	CComQIPtr<IHTMLInputElement> spInput;
-	hRes = pElement->QueryInterface(&spInput);
-	if (FAILED(hRes))
-	{
-		traceLog << "Query for IHTMLInputElement failed in CanBeSavedAsImage with code " << hRes <<  "\n";
-		return hRes;
-	}
-
-	if (spInput != NULL)
-	{
-		CComBSTR bstrType;
-		HRESULT hRes = spInput->get_type(&bstrType);
-		if (S_OK == hRes)
-		{
-			return !_wcsicmp(L"image", bstrType) ? S_OK : S_FALSE;
-		}
-		else
-		{
-			traceLog << "Can not get the type of the input element in CElement::CanBeSavedAsImage\n";
-			return hRes;
-		}
-	}
-
-	return S_FALSE;*/
-}
-
-
 STDMETHODIMP CElement::get_parentElement(IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -700,12 +668,6 @@ STDMETHODIMP CElement::get_parentElement(IElement** ppElement)
 
 	if (spParentElement == NULL)
 	{
-		/*if (*ppElement != NULL)
-		{
-			(*ppElement)->Release();
-			*ppElement = NULL;
-		}*/
-
 		*ppElement = NULL;
 		return HRES_OK;
 	}
@@ -725,6 +687,8 @@ STDMETHODIMP CElement::get_parentElement(IElement** ppElement)
 
 STDMETHODIMP CElement::get_nextSiblingElement(IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -792,12 +756,6 @@ STDMETHODIMP CElement::get_nextSiblingElement(IElement** ppElement)
 
 	if (spNextElement == NULL)
 	{
-		/*if (*ppElement != NULL)
-		{
-			(*ppElement)->Release();
-			*ppElement = NULL;
-		}*/
-
 		*ppElement = NULL;
 		return HRES_OK;
 	}
@@ -817,6 +775,8 @@ STDMETHODIMP CElement::get_nextSiblingElement(IElement** ppElement)
 
 STDMETHODIMP CElement::get_previousSiblingElement(IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -882,12 +842,6 @@ STDMETHODIMP CElement::get_previousSiblingElement(IElement** ppElement)
 
 	if (spPrevisouElement == NULL)
 	{
-		/*if (*ppElement != NULL)
-		{
-			(*ppElement)->Release();
-			*ppElement = NULL;
-		}*/
-
 		*ppElement = NULL;
 		return HRES_OK;
 	}
@@ -907,6 +861,8 @@ STDMETHODIMP CElement::get_previousSiblingElement(IElement** ppElement)
 
 STDMETHODIMP CElement::get_parentFrame(IFrame** ppFrame)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -993,6 +949,8 @@ HRESULT CElement::GetParentWindow(IHTMLElement* pElement, IHTMLWindow2** ppEleme
 
 STDMETHODIMP CElement::get_parentBrowser(IBrowser** ppBrowser)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1021,12 +979,6 @@ STDMETHODIMP CElement::get_parentBrowser(IBrowser** ppBrowser)
 		pBrowserObject->SetPlugin(m_spPlugin);
 		pBrowserObject->SetCore(m_spCore);
 
-		/*if (*ppBrowser != NULL)
-		{
-			// Release any previous object in the output parameter.
-			(*ppBrowser)->Release();
-		}*/
-
 		// Set the object reference into the output pointer.
 		*ppBrowser = pNewBrowser;
 	}
@@ -1044,6 +996,8 @@ STDMETHODIMP CElement::get_parentBrowser(IBrowser** ppBrowser)
 
 STDMETHODIMP CElement::InputText(BSTR bstrText)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -1300,8 +1254,10 @@ HRESULT CElement::InputTextInFileDlg(BSTR bstrText, HWND hIeWnd)
 	HWND hChooseFileDlg = NULL;
 	DWORD dwStartTime   = ::GetTickCount();
 
-	while(TRUE)
+	while (TRUE)
 	{
+		FIRE_CANCEL_REQUEST();
+
 		hChooseFileDlg = Common::GetTopLevelWindowByClassName(hIeWnd, _T("#32770"), FindFileDlgCallback);
 		if (::IsWindow(hChooseFileDlg))
 		{
@@ -1817,6 +1773,8 @@ HRESULT CElement::IsHtmlEditBox(IHTMLElement* pElement, HTML_EDIT_BOX_TYPE* pEdi
 
 STDMETHODIMP CElement::Select(VARIANT vItems)
 {
+	FIRE_CANCEL_REQUEST();
+
 	SelectCallContext context(SELECT_METHOD, 0, IDH_ELEMENT_SELECT);
 	return Select(vItems, CComVariant(), context);
 }
@@ -1824,6 +1782,8 @@ STDMETHODIMP CElement::Select(VARIANT vItems)
 
 STDMETHODIMP CElement::AddSelection(VARIANT vItems)
 {
+	FIRE_CANCEL_REQUEST();
+
 	SelectCallContext context(ADD_SELECTION_METHOD, Common::ADD_SELECTION, IDH_ELEMENT_ADD_SELECTION);
 	return Select(vItems, CComVariant(), context);
 }
@@ -1831,6 +1791,8 @@ STDMETHODIMP CElement::AddSelection(VARIANT vItems)
 
 STDMETHODIMP CElement::SelectRange(VARIANT vStart, VARIANT vEnd)
 {
+	FIRE_CANCEL_REQUEST();
+
 	SelectCallContext context(SELECT_RANGE_METHOD, 0, IDH_ELEMENT_SELECT_RANGE);
 	return Select(vStart, vEnd, context);
 }
@@ -1838,6 +1800,8 @@ STDMETHODIMP CElement::SelectRange(VARIANT vStart, VARIANT vEnd)
 
 STDMETHODIMP CElement::AddSelectionRange(VARIANT vStart, VARIANT vEnd)
 {
+	FIRE_CANCEL_REQUEST();
+
 	SelectCallContext context(ADD_SELECTION_RANGE_METHOD, Common::ADD_SELECTION, IDH_ELEMENT_ADD_SEL_RANGE);
 	return Select(vStart, vEnd, context);
 }
@@ -1981,6 +1945,8 @@ HRESULT CElement::Select(const VARIANT& vStartItems, const VARIANT& vEndItems, c
 
 STDMETHODIMP CElement::ClearSelection(void)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2022,6 +1988,8 @@ STDMETHODIMP CElement::ClearSelection(void)
 
 STDMETHODIMP CElement::get_uiName(BSTR* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2064,6 +2032,8 @@ STDMETHODIMP CElement::get_uiName(BSTR* pVal)
 
 STDMETHODIMP CElement::Highlight(void)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2204,6 +2174,8 @@ BOOL CElement::DrawRectangleInWindow(HWND hWnd, long nLeft, long nRight, long nT
 
 STDMETHODIMP CElement::get_tagName(BSTR* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2321,6 +2293,8 @@ HRESULT CElement::GetHandlerAttrText(BSTR bstrAttrName, VARIANT* pVal)
 
 STDMETHODIMP CElement::GetAttribute(BSTR bstrAttrName, VARIANT* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2402,6 +2376,8 @@ STDMETHODIMP CElement::GetAttribute(BSTR bstrAttrName, VARIANT* pVal)
 
 STDMETHODIMP CElement::SetAttribute(BSTR bstrAttrName, VARIANT varAttrValue)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2449,6 +2425,8 @@ STDMETHODIMP CElement::SetAttribute(BSTR bstrAttrName, VARIANT varAttrValue)
 
 STDMETHODIMP CElement::RemoveAttribute(BSTR bstrAttrName)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2496,6 +2474,8 @@ STDMETHODIMP CElement::RemoveAttribute(BSTR bstrAttrName)
 
 STDMETHODIMP CElement::FindParentElement(BSTR bstrTag, BSTR bstrCond, IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2541,6 +2521,8 @@ STDMETHODIMP CElement::FindParentElement(BSTR bstrTag, BSTR bstrCond, IElement**
 
 STDMETHODIMP CElement::get_isChecked(VARIANT_BOOL* pIsChecked)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2625,6 +2607,8 @@ BOOL CElement::IsCheckable(CComQIPtr<IHTMLElement> spElement, BOOL bRadioIsNotCh
 
 STDMETHODIMP CElement::Check()
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2676,6 +2660,8 @@ STDMETHODIMP CElement::Check()
 
 STDMETHODIMP CElement::Uncheck()
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2728,6 +2714,8 @@ STDMETHODIMP CElement::Uncheck()
 
 STDMETHODIMP CElement::get_selectedOption(IElement** ppSelectedOption)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -2764,6 +2752,8 @@ STDMETHODIMP CElement::get_selectedOption(IElement** ppSelectedOption)
 
 STDMETHODIMP CElement::GetAllSelectedOptions(IElementList** ppSelectedOptionsList)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 

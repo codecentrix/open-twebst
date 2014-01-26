@@ -127,7 +127,6 @@ private:
 	HRESULT IeInputText           (BSTR bstrText, BOOL bIsInputFileType, VARIANT_BOOL vbAsync);
 	HRESULT HardwareInputText     (BSTR bstrText, BOOL bIsInputFileType);
 	HRESULT InputTextInElement    (IHTMLElement* pElement, BSTR bstrText);
-	HRESULT CanBeSavedAsImage     (IHTMLElement* pElement);
 	HRESULT GetParentWindow       (IHTMLElement* pElement, IHTMLWindow2** ppElement);
 	HRESULT IsHtmlEditBox         (IHTMLElement* pElement, HTML_EDIT_BOX_TYPE* pEditBoxType);
 	HRESULT Select                (const VARIANT& vStartItems, const VARIANT& vEndItems, const SelectCallContext& context);

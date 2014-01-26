@@ -69,6 +69,8 @@ HRESULT CElementList::InitElementList(ILocalElementCollection* pElementCollectio
 
 STDMETHODIMP CElementList::get_length(LONG* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	ATLASSERT(m_spElementCollection != NULL);
 	ATLASSERT(m_spCore              != NULL);
 
@@ -90,6 +92,8 @@ STDMETHODIMP CElementList::get_length(LONG* pVal)
 
 STDMETHODIMP CElementList::get_item(LONG nIndex, IElement** pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 

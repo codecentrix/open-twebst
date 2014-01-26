@@ -66,6 +66,8 @@ STDMETHODIMP CBrowser::InterfaceSupportsErrorInfo(REFIID riid)
 
 STDMETHODIMP CBrowser::get_nativeBrowser(IWebBrowser2** pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -97,13 +99,6 @@ STDMETHODIMP CBrowser::get_nativeBrowser(IWebBrowser2** pVal)
 
 	if (pWebBrws != NULL)
 	{
-		/* An [out]-only parameter is assumed to be undefined when the remote procedure is called and
-		   memory for the object is allocated by the server.
-		if (*pVal != NULL)
-		{
-			(*pVal)->Release();
-		}*/
-
 		*pVal = pWebBrws;
 		return HRES_OK;
 	}
@@ -148,6 +143,8 @@ HRESULT CBrowser::GetWebBrowser(IWebBrowser2** ppWebBrowser)
 
 STDMETHODIMP CBrowser::get_title(BSTR* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -187,6 +184,8 @@ STDMETHODIMP CBrowser::get_title(BSTR* pVal)
 
 STDMETHODIMP CBrowser::get_app(BSTR* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -227,6 +226,8 @@ STDMETHODIMP CBrowser::get_app(BSTR* pVal)
 
 STDMETHODIMP CBrowser::get_url(BSTR* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -281,6 +282,8 @@ STDMETHODIMP CBrowser::get_url(BSTR* pVal)
 
 STDMETHODIMP CBrowser::get_isLoading(VARIANT_BOOL* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -334,6 +337,7 @@ STDMETHODIMP CBrowser::WaitToLoad(BSTR bstrCond, VARIANT_BOOL* pVal)
 	SearchCondition pVarArgs;
 	pVarArgs.AddMultiCondition(bstrCond);
 
+	FIRE_CANCEL_REQUEST();
 	this->Sleep(Common::INTERNAL_GLOBAL_PAUSE * 5);
 
 	// Reset the lastError property.
@@ -398,6 +402,8 @@ STDMETHODIMP CBrowser::WaitToLoad(BSTR bstrCond, VARIANT_BOOL* pVal)
 	DWORD dwStartTime = ::GetTickCount();
 	while (TRUE)
 	{
+		FIRE_CANCEL_REQUEST();
+
 		VARIANT_BOOL vbIsLoading;
 		HRESULT hRes = m_spPlugin->IsLoading(&vbIsLoading);
 		if (HRESULT_CODE(hRes) == RPC_S_SERVER_UNAVAILABLE)
@@ -493,6 +499,8 @@ STDMETHODIMP CBrowser::WaitToLoad(BSTR bstrCond, VARIANT_BOOL* pVal)
 
 STDMETHODIMP CBrowser::Navigate(BSTR bstrUrl)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -550,6 +558,8 @@ STDMETHODIMP CBrowser::Navigate(BSTR bstrUrl)
 
 STDMETHODIMP CBrowser::Close(void)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -624,6 +634,8 @@ STDMETHODIMP CBrowser::get_core(ICore** pVal)
 
 STDMETHODIMP CBrowser::get_topFrame(IFrame** ppTopFrame)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -669,6 +681,8 @@ STDMETHODIMP CBrowser::get_topFrame(IFrame** ppTopFrame)
 
 STDMETHODIMP CBrowser::FindElement(BSTR bstrTag, BSTR bstrCond, IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -711,6 +725,8 @@ STDMETHODIMP CBrowser::FindElement(BSTR bstrTag, BSTR bstrCond, IElement** ppEle
 
 STDMETHODIMP CBrowser::FindFrame(BSTR bstrCond, IFrame** ppFrame)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -753,6 +769,8 @@ STDMETHODIMP CBrowser::FindFrame(BSTR bstrCond, IFrame** ppFrame)
 
 STDMETHODIMP CBrowser::FindAllElements(BSTR bstrTag, BSTR bstrCond, IElementList** ppElementList)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -795,6 +813,8 @@ STDMETHODIMP CBrowser::FindAllElements(BSTR bstrTag, BSTR bstrCond, IElementList
 
 STDMETHODIMP CBrowser::get_navigationError(LONG* pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -856,6 +876,8 @@ BOOL CBrowser::IsValidDescriptorList(const std::list<DescriptorToken>& tokens)
 
 STDMETHODIMP CBrowser::FindModelessHtmlDialog(BSTR bstrCond, IFrame** ppFrame)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -899,6 +921,8 @@ STDMETHODIMP CBrowser::FindModelessHtmlDialog(BSTR bstrCond, IFrame** ppFrame)
 
 STDMETHODIMP CBrowser::FindModalHtmlDialog(IFrame** ppFrame)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -936,6 +960,8 @@ STDMETHODIMP CBrowser::FindModalHtmlDialog(IFrame** ppFrame)
 
 HRESULT CBrowser::ClosePopupOrPrompt(BSTR bstrPopupText, VARIANT vButton, BSTR bstrValue, BSTR* pPopupText)
 {
+	FIRE_CANCEL_REQUEST_NO_CLOSE_POPUP();
+
 	LPCTSTR szMethodName = NULL;
 	DWORD   dwHelpID     = 0;
 	
@@ -1004,6 +1030,8 @@ HRESULT CBrowser::ClosePopupOrPrompt(BSTR bstrPopupText, VARIANT vButton, BSTR b
 
 	while (TRUE)
 	{
+		FIRE_CANCEL_REQUEST_NO_CLOSE_POPUP();
+
 		if (!Common::GetPopupByText(nThreadID, sText, hDialog, &sPopupText))
 		{
 			traceLog << "Common::GetPopupByText failed in CBrowser::ClosePopupOrPrompt\n";

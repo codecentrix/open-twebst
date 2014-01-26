@@ -143,14 +143,6 @@ HRESULT BaseLibObject::CreateElementObject(IUnknown* pHtmlElement, IElement** pp
 	ATLASSERT(m_spPlugin   != NULL);
 	ATLASSERT(m_spCore     != NULL);
 
-	/* An [out]-only parameter is assumed to be undefined when the remote procedure is called and
-	   memory for the object is allocated by the server. 
-	if (*ppElement != NULL)
-	{
-		(*ppElement)->Release();
-		*ppElement = NULL;
-	}*/
-
 	// Query for IHTMLElement.
 	CComQIPtr<IHTMLElement> spHtmlElement = pHtmlElement;
 	if (spHtmlElement == NULL)
@@ -217,14 +209,6 @@ HRESULT BaseLibObject::CreateElemListObject(IUnknown* pLocalElemCollection, IEle
 	ATLASSERT(ppElementList        != NULL);
 	ATLASSERT(m_spPlugin           != NULL);
 	ATLASSERT(m_spCore             != NULL);
-
-	/* An [out]-only parameter is assumed to be undefined when the remote procedure is called and
-	   memory for the object is allocated by the server.
-	if (*ppElementList != NULL)
-	{
-		(*ppElementList)->Release();
-		*ppElementList = NULL;
-	}*/
 
 	// Query for IHTMLElement.
 	CComQIPtr<ILocalElementCollection> spLocalElemCollection = pLocalElemCollection;

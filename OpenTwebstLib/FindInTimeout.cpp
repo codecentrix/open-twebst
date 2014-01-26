@@ -31,6 +31,21 @@
 #include "FindInTimeout.h"
 
 
+#undef FIRE_CANCEL_REQUEST
+#define FIRE_CANCEL_REQUEST(pThisFinder) \
+{\
+	CCore* pCore =  static_cast<CCore*>(pThisFinder->m_spCore.p);\
+	if (pCore != NULL)\
+	{\
+		pCore->Fire_CancelRequest();\
+		if (pCore->IsCancelPending())\
+		{\
+			throw CreateExecutionCanceledException(_T("Execution canceled in FinderInTimeout"));\
+		}\
+	}\
+}
+
+
 // Returns TRUE if loadTimeout expired.
 BOOL FinderInTimeout::Find(FinderInTimeout*  pFinder,
                            ULONG             nSearchTimeout,
@@ -59,6 +74,8 @@ BOOL FinderInTimeout::Find(FinderInTimeout*  pFinder,
 			DWORD dwWaitToLoadStartTime = ::GetTickCount();
 			while (pFinder->IsBrowserLoading())
 			{
+				FIRE_CANCEL_REQUEST(pFinder);
+
 				if (pAutoClosePopups != NULL)
 				{
 					pAutoClosePopups->CloseBrowserPopups();
@@ -93,6 +110,8 @@ BOOL FinderInTimeout::Find(FinderInTimeout*  pFinder,
 		DWORD dwSearchStartTime = ::GetTickCount();
 		while (TRUE)
 		{
+			FIRE_CANCEL_REQUEST(pFinder);
+
 			if (pAutoClosePopups != NULL)
 			{
 				pAutoClosePopups->CloseBrowserPopups();
@@ -324,6 +343,8 @@ BOOL FindObjectInContainer::WaitToLoad(DWORD nLoadTimeout, ISleeper* pSleeper)
 				traceLog << except << "\n";
 				traceLog << "HtmlHelpers::IsWindowReady failed in FindObjectInContainer::WaitToLoad\n";
 			}
+
+			FIRE_CANCEL_REQUEST(this);
 
 			DWORD dwCurrentTime   = ::GetTickCount();
 			DWORD dwElapsedTime   = dwCurrentTime - dwWaitToLoadStartTime;

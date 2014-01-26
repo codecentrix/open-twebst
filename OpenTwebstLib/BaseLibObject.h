@@ -26,6 +26,39 @@
 #include "FindInTimeout.h"
 
 
+#define FIRE_CANCEL_REQUEST() \
+{\
+	CloseBrowserPopups(); \
+	CCore* pCore =  static_cast<CCore*>(m_spCore.p);\
+	if (pCore != NULL)\
+	{\
+		pCore->Fire_CancelRequest();\
+		if (pCore->IsCancelPending())\
+		{\
+			SetComErrorMessage(IDS_ERR_CANCELED, IDH_CORE_CANCELATION);\
+			SetLastErrorCode(ERR_CANCELED);\
+			return HRES_CANCELED_ERR;\
+		}\
+	}\
+}
+
+
+#define FIRE_CANCEL_REQUEST_NO_CLOSE_POPUP() \
+{\
+	CCore* pCore =  static_cast<CCore*>(m_spCore.p);\
+	if (pCore != NULL)\
+	{\
+		pCore->Fire_CancelRequest();\
+		if (pCore->IsCancelPending())\
+		{\
+			SetComErrorMessage(IDS_ERR_CANCELED, IDH_CORE_CANCELATION);\
+			SetLastErrorCode(ERR_CANCELED);\
+			return HRES_CANCELED_ERR;\
+		}\
+	}\
+}
+
+
 struct SearchContext;
 
 

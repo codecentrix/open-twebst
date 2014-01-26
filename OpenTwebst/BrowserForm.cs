@@ -377,7 +377,6 @@ namespace CatStudio
                 IHTMLInputElement inputSource = (IHTMLInputElement)htmlSource;
                 this.OnIntroDontAskAgain(inputSource.@checked);
             }
-            // TODO: launch home and documentation with shell execute
         }
 
 

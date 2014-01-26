@@ -87,6 +87,16 @@ namespace ExceptionServices
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
+	// ExecutionCanceledException
+	ExecutionCanceledException::ExecutionCanceledException(int nCodeLineNumber,
+                                                 const String& sSourceFileName,
+                                                 const String& sDebugErrMessage) :
+			Exception(nCodeLineNumber, sSourceFileName, sDebugErrMessage)
+	{
+		
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// OperationNotAllowedException
 	OperationNotAllowedException::OperationNotAllowedException(int nCodeLineNumber,
                                                  const String& sSourceFileName,

@@ -13,6 +13,7 @@
 #define IDH_CORE_CREATE_ELEMENT            1011
 #define IDH_CORE_CREATE_BROWSER            1012
 #define IDH_CORE_USE_IE_EVENTS             1013
+#define IDH_CORE_CANCELATION               1015
 #define IDH_CORE_RESET                     1016
 #define IDH_CORE_IE_VERSION                1017
 #define IDH_CORE_PROD_VERSION              1018

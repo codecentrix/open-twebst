@@ -445,11 +445,23 @@ library OpenTwebstLib
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	[
+		uuid(2552302B-021F-4166-9E38-CEE7A5B4EF79),
+		helpstring("Core events interface")
+	]
+	dispinterface _ICoreEvents
+	{
+		properties:
+		methods:
+		[id(1), helpstring("CancelRequest event")] void CancelRequest([out] VARIANT_BOOL* pbCancel);
+	};
+
+	[
 		uuid(7C3D11C2-14A2-45cb-A40F-6696D6685021),
 		helpstring("Core Class")
 	]
 	coclass Core
 	{
 		[default] interface ICore;
+		[default, source] dispinterface _ICoreEvents;
 	};
 };

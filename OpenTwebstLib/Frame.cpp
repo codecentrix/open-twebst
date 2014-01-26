@@ -91,6 +91,8 @@ STDMETHODIMP CFrame::get_core(ICore** pVal)
 
 STDMETHODIMP CFrame::get_nativeFrame(IHTMLWindow2** pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -118,6 +120,8 @@ STDMETHODIMP CFrame::get_nativeFrame(IHTMLWindow2** pVal)
 
 STDMETHODIMP CFrame::get_document(IHTMLDocument2** pVal)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -157,6 +161,8 @@ STDMETHODIMP CFrame::get_document(IHTMLDocument2** pVal)
 
 STDMETHODIMP CFrame::FindElement(BSTR bstrTag, BSTR bstrCond, IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -200,6 +206,8 @@ STDMETHODIMP CFrame::FindElement(BSTR bstrTag, BSTR bstrCond, IElement** ppEleme
 
 STDMETHODIMP CFrame::FindChildElement(BSTR bstrTag, BSTR bstrCond, IElement** ppElement)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -243,6 +251,8 @@ STDMETHODIMP CFrame::FindChildElement(BSTR bstrTag, BSTR bstrCond, IElement** pp
 
 STDMETHODIMP CFrame::FindAllElements(BSTR bstrTag, BSTR bstrCond, IElementList** ppElementList)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -286,6 +296,8 @@ STDMETHODIMP CFrame::FindAllElements(BSTR bstrTag, BSTR bstrCond, IElementList**
 
 STDMETHODIMP CFrame::FindChildrenElements(BSTR bstrTag, BSTR bstrCond, IElementList** ppElementList)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -329,6 +341,8 @@ STDMETHODIMP CFrame::FindChildrenElements(BSTR bstrTag, BSTR bstrCond, IElementL
 
 STDMETHODIMP CFrame::FindFrame(BSTR bstrCond, IFrame** ppFrame)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -372,6 +386,8 @@ STDMETHODIMP CFrame::FindFrame(BSTR bstrCond, IFrame** ppFrame)
 
 STDMETHODIMP CFrame::FindChildFrame(BSTR bstrCond, IFrame** ppFrame)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -415,6 +431,8 @@ STDMETHODIMP CFrame::FindChildFrame(BSTR bstrCond, IFrame** ppFrame)
 
 STDMETHODIMP CFrame::get_parentBrowser(IBrowser** ppBrowser)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 
@@ -446,12 +464,6 @@ STDMETHODIMP CFrame::get_parentBrowser(IBrowser** ppBrowser)
 		pBrowserObject->SetPlugin(m_spPlugin);
 		pBrowserObject->SetCore(m_spCore);
 
-		/*if (*ppBrowser != NULL)
-		{
-			// Release any previous object in the output parameter.
-			(*ppBrowser)->Release();
-		}*/
-
 		// Set the object reference into the output pointer.
 		*ppBrowser = pNewBrowser;
 	}
@@ -469,6 +481,8 @@ STDMETHODIMP CFrame::get_parentBrowser(IBrowser** ppBrowser)
 
 STDMETHODIMP CFrame::get_parentFrame(IFrame** ppParentFrame)
 {
+	FIRE_CANCEL_REQUEST();
+
 	// Reset the lastError property.
 	SetLastErrorCode(ERR_OK);
 

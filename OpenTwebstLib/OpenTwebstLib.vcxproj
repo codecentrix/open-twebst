@@ -484,6 +484,7 @@
     <ClInclude Include="..\Common\Keyboard.h" />
     <ClInclude Include="..\Common\MarshalService.h" />
     <ClInclude Include="..\Common\Registry.h" />
+    <ClInclude Include="HtmlHelpIDs.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

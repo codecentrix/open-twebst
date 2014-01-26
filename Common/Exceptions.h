@@ -82,6 +82,14 @@ namespace ExceptionServices
 		BrowserDisconnectedException(int nCodeLineNumber = -1, const String& sSourceFileName = _T(""), const String& sDebugErrMessage = _T(""));
 	};
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Exceptions thrown in case the client cancels the execution.
+	class ExecutionCanceledException : public Exception
+	{
+	public:
+		ExecutionCanceledException(int nCodeLineNumber = -1, const String& sSourceFileName = _T(""), const String& sDebugErrMessage = _T(""));
+	};
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Exceptions thrown in case the operation is not allowed on a certain HTML element (like selectedOption allowed only for combo-boxes).
 	class OperationNotAllowedException : public Exception
@@ -116,6 +124,9 @@ namespace ExceptionServices
 	#define CreateExecutionCanceledException(sMessage) \
 		ExceptionServices::ExecutionCanceledException(__LINE__, __TFILE__, sMessage)
 
+	#define CreateExecutionCanceledException(sMessage) \
+		ExceptionServices::ExecutionCanceledException(__LINE__, __TFILE__, sMessage)
+
 	#define CreateOperationNotAllowedException(sMessage) \
 		ExceptionServices::OperationNotAllowedException(__LINE__, __TFILE__, sMessage)
 
@@ -133,6 +144,9 @@ namespace ExceptionServices
 
 	#define CreateBrowserDisconnectedException(sMessage) \
 		ExceptionServices::BrowserDisconnectedException()
+
+	#define CreateExecutionCanceledException(sMessage) \
+		ExceptionServices::ExecutionCanceledException()
 
 	#define CreateExecutionCanceledException(sMessage) \
 		ExceptionServices::ExecutionCanceledException()
