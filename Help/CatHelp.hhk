@@ -21,6 +21,11 @@
 		<param name="Local" value="HTML\asyncHtmlEvents.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AttachToHWND">
+		<param name="Name" value="AttachToHWND method">
+		<param name="Local" value="HTML\AttachToHWND.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="AttachToNativeBrowser">
 		<param name="Name" value="AttachToNativeBrowser method">
 		<param name="Local" value="HTML\AttachToNativeBrowser.htm">

@@ -86,6 +86,7 @@ public:
 	STDMETHOD(get_lastError)                    (LONG* pVal);
 	STDMETHOD(get_loadTimeoutIsError)           (VARIANT_BOOL* pVal);
 	STDMETHOD(put_loadTimeoutIsError)           (VARIANT_BOOL newVal);
+	STDMETHOD(AttachToHWND)                     (LONG nWnd, IBrowser** ppBrowser);
 	STDMETHOD(AttachToNativeFrame)              (IHTMLWindow2* pHtmlWindow, IFrame** ppFrame);
 	STDMETHOD(AttachToNativeElement)            (IHTMLElement* pHtmlElement, IElement** ppElement);
 	STDMETHOD(AttachToNativeBrowser)            (IWebBrowser2* pWebBrowser,  IBrowser** ppBrowser);
@@ -140,6 +141,10 @@ private:
 	BOOL                       SetTextInClipboard(LPCSTR szText);
 	void                       FindAllIEFramesWnd(std::set<HWND>& allIeFrames);
 	void                       ProcessMessagesOrSleep();
+	BOOL                       AttachToIEFrame(HWND hIEFrameWnd, IBrowser** ppBrowser);
+	BOOL                       AttachToTab(HWND hIETabWnd, IBrowser** ppBrowser);
+	BOOL                       AttachToIEServer(HWND hIEServerWnd, IBrowser** ppBrowser);
+	BOOL                       AttachToTridentDlg(HWND hTargetWnd, IBrowser** ppBrowser);
 	HWND                       FindIEFrameExcludeSet(std::set<HWND>& ieFramesToExclude);
 	static BOOL CALLBACK       FindAllIEFramesWndCallback(HWND hWnd, LPARAM lParam);
 	static BOOL CALLBACK       FindIEFrameExcludeSetCallback(HWND hWnd, LPARAM lParam);

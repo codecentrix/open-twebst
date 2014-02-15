@@ -196,6 +196,10 @@
 			<param name="Local" value="HTML\AddSelectionRange.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AttachToHWND">
+			<param name="Local" value="HTML\AttachToHWND.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
 			<param name="Name" value="AttachToNativeBrowser">
 			<param name="Local" value="HTML\AttachToNativeBrowser.htm">
 			</OBJECT>

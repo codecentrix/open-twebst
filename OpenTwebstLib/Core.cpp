@@ -2423,3 +2423,201 @@ STDMETHODIMP CCore::FindElementFromPoint(LONG x, LONG y, IElement** ppElement)
 		return HRES_FAIL;
 	}
 }
+
+
+STDMETHODIMP CCore::AttachToHWND(LONG nWnd, IBrowser** ppBrowser)
+{
+	FIRE_CANCEL_REQUEST();
+
+	// Reset the lastError property.
+	SetLastErrorCode(ERR_OK);
+
+	HWND hTargetWnd = (HWND)LongToHandle(nWnd);
+	if (!::IsWindow(hTargetWnd))
+	{
+		traceLog << "Invalid window handle param in CCore::AttachToWnd\n";
+		SetComErrorMessage(IDS_INVALID_PARAM_LIST_IN_METHOD, ATTACH_TO_WND_CORE_METHOD, IDH_CORE_ATTACH_TO_WND);
+		SetLastErrorCode(ERR_INVALID_ARG);
+
+		return HRES_INVALID_ARG;
+	}
+
+	if (NULL == ppBrowser)
+	{
+		traceLog << "Invalid out param pointer in CCore::AttachToWnd\n";
+		SetComErrorMessage(IDS_INVALID_PARAM_LIST_IN_METHOD, ATTACH_TO_WND_CORE_METHOD, IDH_CORE_ATTACH_TO_WND);
+		SetLastErrorCode(ERR_INVALID_ARG);
+
+		return HRES_INVALID_ARG;
+	}
+
+	String sWndClassName = Common::GetWndClass(hTargetWnd);
+	BOOL   bRes          = TRUE;
+
+	if (_T("IEFrame") == sWndClassName)
+	{
+		bRes = AttachToIEFrame(hTargetWnd, ppBrowser);
+	}
+	else if (_T("TabWindowClass") == sWndClassName)
+	{
+		if (Common::GetIEVersion() <= 6)
+		{
+			traceLog << "CCore::AttachToWnd(TabWindowClass) only works for IE7\n";
+			SetComErrorMessage(IDS_METHOD_CALL_FAILED, ATTACH_TO_WND_CORE_METHOD, IDH_CORE_ATTACH_TO_WND);
+			SetLastErrorCode(ERR_OPERATION_NOT_APPLICABLE);
+
+			return HRES_OPERATION_NOT_APPLICABLE;
+		}
+
+		bRes = AttachToTab(hTargetWnd, ppBrowser);
+	}
+	else if (_T("Internet Explorer_Server") == sWndClassName)
+	{
+		bRes = AttachToIEServer(hTargetWnd, ppBrowser);
+	}
+	/*else if (_T("Internet Explorer_TridentDlgFrame") == sWndClassName)
+	{
+		// Future implementation to support HTML dialogs.
+		bRes = AttachToTridentDlg(hTargetWnd, ppBrowser);
+	}*/
+	else
+	{
+		traceLog << "Invalid window type param in CCore::AttachToWnd\n";
+		SetComErrorMessage(IDS_INVALID_PARAM_LIST_IN_METHOD, ATTACH_TO_WND_CORE_METHOD, IDH_CORE_ATTACH_TO_WND);
+		SetLastErrorCode(ERR_INVALID_ARG);
+
+		return HRES_INVALID_ARG;
+	}
+
+	if (!bRes)
+	{
+		SetComErrorMessage(IDS_METHOD_CALL_FAILED, ATTACH_TO_WND_CORE_METHOD, IDH_CORE_ATTACH_TO_WND);
+		SetLastErrorCode(ERR_FAIL);
+
+		return HRES_FAIL;
+	}
+
+	return HRES_OK;
+}
+
+
+BOOL CCore::AttachToIEFrame(HWND hIEFrameWnd, IBrowser** ppBrowser)
+{
+	ATLASSERT(::IsWindow(hIEFrameWnd));
+	ATLASSERT(_T("IEFrame") == Common::GetWndClass(hIEFrameWnd));
+	ATLASSERT(ppBrowser != NULL);
+
+	*ppBrowser = NULL;
+
+	HWND hShellDocWnd = Common::GetChildWindowByClassName(hIEFrameWnd, _T("Shell DocObject View"), FindVisibleChildShDocViewCallback);
+	if (::IsWindow(hShellDocWnd))
+	{
+		ATLASSERT(Common::GetWndClass(hShellDocWnd) == _T("Shell DocObject View"));
+
+		HWND hIeServerWnd = Common::GetChildWindowByClassName(hShellDocWnd, _T("Internet Explorer_Server"), FindVisibleChildWndCallback);
+		if (::IsWindow(hIeServerWnd))
+		{
+			return AttachToIEServer(hIeServerWnd, ppBrowser);
+		}
+		else
+		{
+			traceLog << "Can NOT find 'Internet Explorer_Server' window in CCore::AttachToIEFrame\n";
+			return FALSE;
+		}
+	}
+	else
+	{
+		traceLog << "Can NOT find 'Shell DocObject View' window in CCore::AttachToIEFrame\n";
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+
+BOOL CCore::AttachToTab(HWND hTabWnd, IBrowser** ppBrowser)
+{
+	ATLASSERT(::IsWindow(hTabWnd));
+	ATLASSERT(_T("TabWindowClass") == Common::GetWndClass(hTabWnd));
+	ATLASSERT(ppBrowser != NULL);
+	ATLASSERT(Common::GetIEVersion() > 6);
+
+	*ppBrowser = NULL;
+
+	HWND hShellDocWnd = Common::GetChildWindowByClassName(hTabWnd, _T("Shell DocObject View"), NewMarshalService::FindChildShDocViewCallback);
+	if (::IsWindow(hShellDocWnd))
+	{
+		ATLASSERT(Common::GetWndClass(hShellDocWnd) == _T("Shell DocObject View"));
+
+		HWND hIeServerWnd = Common::GetChildWindowByClassName(hShellDocWnd, _T("Internet Explorer_Server"));
+		if (::IsWindow(hIeServerWnd))
+		{
+			return AttachToIEServer(hIeServerWnd, ppBrowser);
+		}
+		else
+		{
+			traceLog << "Can NOT find 'Internet Explorer_Server' window in CCore::AttachToTab\n";
+			return FALSE;
+		}
+	}
+	else
+	{
+		traceLog << "Can NOT find 'Shell DocObject View' window in CCore::AttachToTab\n";
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+
+// This will only work with windows coming from IE or hosted browsers already attached!!!
+BOOL CCore::AttachToIEServer(HWND hIeServerWnd, IBrowser** ppBrowser)
+{
+	ATLASSERT(::IsWindow(hIeServerWnd));
+	ATLASSERT(_T("Internet Explorer_Server") == Common::GetWndClass(hIeServerWnd));
+	ATLASSERT(ppBrowser != NULL);
+
+	*ppBrowser = NULL;
+
+	CComQIPtr<IExplorerPlugin> spPlugin = NewMarshalService::FindBrwsPluginByIeWnd(hIeServerWnd, 0, TRUE);
+	if (spPlugin != NULL)
+	{
+		IBrowser* pBrws = NULL;
+		HRESULT   hRes  = CComCoClass<CBrowser>::CreateInstance(&pBrws);
+		if (pBrws != NULL)
+		{
+			ATLASSERT(SUCCEEDED(hRes));
+
+			CBrowser* pBrowser = static_cast<CBrowser*>(pBrws);
+			ATLASSERT(pBrowser != NULL);
+			pBrowser->SetPlugin(spPlugin);
+			pBrowser->SetCore(this);
+
+			*ppBrowser = pBrowser;
+		}
+		else
+		{
+			traceLog << "Can not create Browser instance in CCore::AttachToIEServer\n";
+			return FALSE;
+		}
+	}
+	else
+	{
+		traceLog << "Can NOT find IExplorerPlugin in CCore::AttachToIEServer\n";
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+
+BOOL CCore::AttachToTridentDlg(HWND hTargetWnd, IBrowser** ppBrowser)
+{
+	ATLASSERT(::IsWindow(hTargetWnd));
+	ATLASSERT(_T("Internet Explorer_TridentDlgFrame") == Common::GetWndClass(hTargetWnd));
+	ATLASSERT(ppBrowser != NULL);
+
+	*ppBrowser = NULL;
+
+	return FALSE;
+}

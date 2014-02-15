@@ -23,6 +23,7 @@ HTML\Core.htm
 HTML\AttachToNativeBrowser.htm
 HTML\AttachToNativeFrame.htm
 HTML\AttachToNativeElement.htm
+HTML\AttachToHWND.htm
 HTML\Browser.htm
 HTML\Close.htm
 HTML\Navigate.htm
@@ -125,6 +126,7 @@ IDH_BROWSER_URL=HTML\url.htm
 IDH_CORE_CREATE_BROWSER=HTML\AttachToNativeBrowser.htm
 IDH_CORE_CREATE_ELEMENT=HTML\AttachToNativeElement.htm
 IDH_CORE_CREATE_FRAME=HTML\AttachToNativeFrame.htm
+IDH_CORE_ATTACH_TO_WND=AttachToHWND.htm
 IDH_BROWSER_CLOSE=HTML\Close.htm
 IDH_FRAME_FIND_CHILD_ELEMENT=HTML\FindChildElement.htm
 IDH_ELEMENT_FIND_CHILD_ELEMENT=HTML\FindChildElement.htm

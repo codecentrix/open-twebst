@@ -21,6 +21,11 @@
 
 	<methods>
 		<method>
+			<method_name>AttachToHWND</method_name>
+			<method_description>Creates a library Browser IE macro object from a Win32 API window handle.</method_description>
+		</method>
+
+		<method>
 			<method_name>AttachToNativeBrowser</method_name>
 			<method_description>Creates a library Browser IE macro object from a native <i>Internet Explorer</i> browser object.</method_description>
 		</method>

@@ -219,7 +219,7 @@ function ColorLibraryKeyword(word)
 	// The list doesn't contain: item, length, core, document, title, text and url keywords because they are too general.
 	var libraryKeywords  =
 		[
-			"AddSelection",           "AddSelectionRange",    "asyncHtmlEvents",   "AttachToNativeBrowser", "AttachToNativeElement",
+			"AddSelection",           "AddSelectionRange",    "asyncHtmlEvents",   "AttachToHWND",          "AttachToNativeBrowser", "AttachToNativeElement",
 			"AttachToNativeFrame",    "Browser",              "Check",             "ClearSelection",        "Click",
 			"Close",                  "closeBrowserPopups",   "ClosePopup",        "ClosePrompt",           "Core",
 			"Element",			      "ElementList",          "FindAllElements",   "FindBrowser",           "FindChildElement",

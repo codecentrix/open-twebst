@@ -24,6 +24,7 @@
 #define IDH_CORE_ASYNC_HTML_EVENTS         1031
 #define IDH_CORE_CLOSE_BROWSER_POPUPS      1036
 #define IDH_CORE_ELEMENT_FROM_POINT        1037
+#define IDH_CORE_ATTACH_TO_WND             1038
 
 
 // IBrowser help context IDs.

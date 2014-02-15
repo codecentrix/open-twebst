@@ -45,6 +45,7 @@ attachedBrowser.Navigate("www.codecentrix.com");
 	<seealso>
 		<seealso_item>Core</seealso_item>
 		<seealso_item>Browser</seealso_item>
+		<seealso_item>AttachToHWND</seealso_item>
 		<seealso_item>AttachToNativeElement</seealso_item>
 		<seealso_item>AttachToNativeFrame</seealso_item>
 		<seealso_item>nativeBrowser</seealso_item>

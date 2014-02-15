@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="..\XSL\topic.xsl"?>
+
+<topic name="AttachToHWND" type="method">
+	<metadesc>Web Automation Library for MSHTML programming in C++, C#, VB.Net</metadesc>
+	<metakeywords>BHO, IE9 automation, browser addon, extension, library, web automation</metakeywords>
+
+	<title>
+		IE6-IE11 add-ons/extensions development with Twebst Web Automation Library
+	</title>
+
+	<description>
+		Creates a web automation library Browser object from a <i>'Internet Explorer_Server'</i>, <i>'IEFrame'</i> or <i>'TabWindowClass'</i> window handle.
+	</description>
+
+	<apply>
+		<apply_item>Core</apply_item>
+	</apply>
+
+	<call>
+		var b = coreObj.AttachToHWND(hWnd);
+	</call>
+
+	<arguments>
+		<arg><code>hWnd</code> is a Win32 API window handle.</arg>
+	</arguments>
+
+
+	<remarks>
+		Returns a Browser web automation library object.
+		The <i>hWnd</i> parameter is the handle of a <i>Internet Explorer_Server</i>, <i>IEFrame</i> or <i>TabWindowClass</i> window of <i>Internet Explorer</i> browser.
+		It could be obtained using other ways than <i>Twebst</i> web automation library features. It could be also obtained by using ieWindow, tabWindow or topWindow properties.
+		This method is useful when you need to automate an existing IE browser instance for which you have a Win32 API window handle.
+	</remarks>
+
+	<example>
+		<jscode>
+// hwnd is a valid handle of a 'Internet Explorer_Server', 'IEFrame' or 'TabWindowClass' window inside IE.
+var hwnd    = 0x1C05B8;
+var core    = new ActiveXObject("Twebst.Core");
+var browser = core.AttachToHWND(hwnd);
+
+browser.Navigate("http://www.codecentrix.com/");
+    </jscode>
+	</example>
+
+	<seealso>
+		<seealso_item>Core</seealso_item>
+		<seealso_item>Browser</seealso_item>
+		<seealso_item>AttachToNativeBrowser</seealso_item>
+		<seealso_item>AttachToNativeElement</seealso_item>
+		<seealso_item>AttachToNativeFrame</seealso_item>
+  </seealso>
+</topic>

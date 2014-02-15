@@ -54,6 +54,7 @@
 #define CORE_ASYNC_HTML_EVENTS_HELP         "Specifies if Click and InputText methods are executed asynchronouslye (non-blocking)."
 #define CORE_CLOSE_BROWSER_POPUPS           "Auto-close browser popups (security warnings, script errors and auto complete)."
 #define CORE_ELEMENT_FROM_POINT_HELP        "Returns the HTML element for the specified x and y screen coordinates."
+#define CORE_ATTACH_TO_WND_HELP             "Creates a new Browser object starting from a 'Internet Explorer_Server', 'IEFrame' or 'TabWndClass' window."
 
 
 // IBrowser interface help messages.

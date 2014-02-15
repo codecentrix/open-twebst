@@ -93,6 +93,9 @@ library OpenTwebstLib
 		[id(28), helpstring(CORE_ELEMENT_FROM_POINT_HELP), helpcontext(IDH_CORE_ELEMENT_FROM_POINT)]
 			HRESULT FindElementFromPoint([in] LONG x, [in] LONG y, [out, retval] IElement** ppElement);
 
+		[id(29), helpstring(CORE_ATTACH_TO_WND_HELP), helpcontext(IDH_CORE_ATTACH_TO_WND)]
+			HRESULT AttachToHWND([in] LONG nWnd, [out,retval] IBrowser** ppBrowser);
+
 
 		// Properties.
 		[propget, id(9), helpstring(CORE_ASYNC_HTML_EVENTS_HELP), helpcontext(IDH_CORE_ASYNC_HTML_EVENTS)]
