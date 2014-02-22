@@ -122,6 +122,9 @@ Section "Sample Files" SecSamples
 	SetOutPath "$DOCUMENTS\OpenTwebstSamples\C++"
 	File "..\Samples\C++\*.*"
 	
+	SetOutPath "$DOCUMENTS\OpenTwebstSamples\WebBrowserCSharp"
+	File "..\Samples\WebBrowserCSharp\*.*"
+
 	SetOutPath "$INSTDIR\Bin"
 	File ".\tbwstsamples.ico"
 
