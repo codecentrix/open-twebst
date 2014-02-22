@@ -90,89 +90,88 @@ library OpenTwebstLib
 		[id(8), helpstring(CORE_START_BROWSER_HELP), helpcontext(IDH_CORE_START_BROWSER)]
 			HRESULT StartBrowser([in] BSTR bstrUrl, [out, retval] IBrowser** ppNewBrowser);
 
-		[id(28), helpstring(CORE_ELEMENT_FROM_POINT_HELP), helpcontext(IDH_CORE_ELEMENT_FROM_POINT)]
+		[id(9), helpstring(CORE_ELEMENT_FROM_POINT_HELP), helpcontext(IDH_CORE_ELEMENT_FROM_POINT)]
 			HRESULT FindElementFromPoint([in] LONG x, [in] LONG y, [out, retval] IElement** ppElement);
 
-		[id(29), helpstring(CORE_ATTACH_TO_WND_HELP), helpcontext(IDH_CORE_ATTACH_TO_WND)]
+		[id(10), helpstring(CORE_ATTACH_TO_WND_HELP), helpcontext(IDH_CORE_ATTACH_TO_WND)]
 			HRESULT AttachToHWND([in] LONG nWnd, [out,retval] IBrowser** ppBrowser);
 
 
 		// Properties.
-		[propget, id(9), helpstring(CORE_ASYNC_HTML_EVENTS_HELP), helpcontext(IDH_CORE_ASYNC_HTML_EVENTS)]
+		[propget, id(11), helpstring(CORE_ASYNC_HTML_EVENTS_HELP), helpcontext(IDH_CORE_ASYNC_HTML_EVENTS)]
 			HRESULT asyncHtmlEvents([out, retval] VARIANT_BOOL* pVal);
 
-		[propput, id(9), helpstring(CORE_ASYNC_HTML_EVENTS_HELP), helpcontext(IDH_CORE_ASYNC_HTML_EVENTS)]
+		[propput, id(11), helpstring(CORE_ASYNC_HTML_EVENTS_HELP), helpcontext(IDH_CORE_ASYNC_HTML_EVENTS)]
 			HRESULT asyncHtmlEvents([in] VARIANT_BOOL newVal);
 
-		[propget, id(10), helpstring(CORE_CLOSE_BROWSER_POPUPS), helpcontext(IDH_CORE_CLOSE_BROWSER_POPUPS)]
+		[propget, id(12), helpstring(CORE_CLOSE_BROWSER_POPUPS), helpcontext(IDH_CORE_CLOSE_BROWSER_POPUPS)]
 			HRESULT closeBrowserPopups([out, retval] VARIANT_BOOL* pAutoClose);
 
-		[propput, id(10), helpstring(CORE_CLOSE_BROWSER_POPUPS), helpcontext(IDH_CORE_CLOSE_BROWSER_POPUPS)]
+		[propput, id(12), helpstring(CORE_CLOSE_BROWSER_POPUPS), helpcontext(IDH_CORE_CLOSE_BROWSER_POPUPS)]
 			HRESULT closeBrowserPopups([in] VARIANT_BOOL vbAutoClose);
 
-		[propget, id(11), helpstring(CORE_FOREGROUND_BRWS_HELP), helpcontext(IDH_CORE_FOREGROUND_BRWS)]
+		[propget, id(13), helpstring(CORE_FOREGROUND_BRWS_HELP), helpcontext(IDH_CORE_FOREGROUND_BRWS)]
 			HRESULT foregroundBrowser([out, retval] IBrowser** pFgBrowser);
 
-		[propget, id(12), helpstring(CORE_IE_VERSION_HELP), helpcontext(IDH_CORE_IE_VERSION)]
+		[propget, id(14), helpstring(CORE_IE_VERSION_HELP), helpcontext(IDH_CORE_IE_VERSION)]
 			HRESULT IEVersion([out, retval] BSTR* pBstrVersion);
 
-		[propget, id(13), helpstring(CORE_LAST_ERROR_HELP), helpcontext(IDH_CORE_LAST_ERROR)]
+		[propget, id(15), helpstring(CORE_LAST_ERROR_HELP), helpcontext(IDH_CORE_LAST_ERROR)]
 			HRESULT lastError([out, retval] LONG* pVal);
 
-		[propget, id(14), helpstring(CORE_LOAD_TIMEOUT_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT)]
+		[propget, id(16), helpstring(CORE_LOAD_TIMEOUT_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT)]
 			HRESULT loadTimeout([out, retval] LONG* pVal);
 
-		[propput, id(14), helpstring(CORE_LOAD_TIMEOUT_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT)]
+		[propput, id(16), helpstring(CORE_LOAD_TIMEOUT_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT)]
 			HRESULT loadTimeout([in] LONG newVal);
 
-		[propget, id(15), helpstring(CORE_LOAD_TIMEOUT_IS_ERR_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT_IS_ERR)]
+		[propget, id(17), helpstring(CORE_LOAD_TIMEOUT_IS_ERR_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT_IS_ERR)]
 			HRESULT loadTimeoutIsError([out, retval] VARIANT_BOOL* pVal);
 
-		[propput, id(15), helpstring(CORE_LOAD_TIMEOUT_IS_ERR_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT_IS_ERR)]
+		[propput, id(17), helpstring(CORE_LOAD_TIMEOUT_IS_ERR_HELP), helpcontext(IDH_CORE_LOAD_TIMEOUT_IS_ERR)]
 			HRESULT loadTimeoutIsError([in] VARIANT_BOOL newVal);
 
-		[propget, id(16), helpstring(CORE_PROD_NAME_HELP), helpcontext(IDH_CORE_PROD_NAME)]
+		[propget, id(18), helpstring(CORE_PROD_NAME_HELP), helpcontext(IDH_CORE_PROD_NAME)]
 			HRESULT productName([out, retval] BSTR* pBstrName);
 
-		[propget, id(17), helpstring(CORE_PROD_VERSION_HELP), helpcontext(IDH_CORE_PROD_VERSION)]
+		[propget, id(19), helpstring(CORE_PROD_VERSION_HELP), helpcontext(IDH_CORE_PROD_VERSION)]
 			HRESULT productVersion([out, retval] BSTR* pBstrVersion);
 
-		[propget, id(18), helpstring(CORE_SEARCH_TIMEOUT_HELP), helpcontext(IDH_CORE_SEARCH_TIMEOUT)]
+		[propget, id(20), helpstring(CORE_SEARCH_TIMEOUT_HELP), helpcontext(IDH_CORE_SEARCH_TIMEOUT)]
 			HRESULT searchTimeout([out, retval] LONG* pVal);
 
-		[propput, id(18), helpstring(CORE_SEARCH_TIMEOUT_HELP), helpcontext(IDH_CORE_SEARCH_TIMEOUT)]
+		[propput, id(20), helpstring(CORE_SEARCH_TIMEOUT_HELP), helpcontext(IDH_CORE_SEARCH_TIMEOUT)]
 			HRESULT searchTimeout([in] LONG newVal);
 
-		[propget, id(19), helpstring(CORE_USE_IE_EVENTS_HELP), helpcontext(IDH_CORE_USE_IE_EVENTS)]
+		[propget, id(21), helpstring(CORE_USE_IE_EVENTS_HELP), helpcontext(IDH_CORE_USE_IE_EVENTS)]
 			HRESULT useHardwareInputEvents([out, retval] VARIANT_BOOL* pVal);
 
-		[propput, id(19), helpstring(CORE_USE_IE_EVENTS_HELP), helpcontext(IDH_CORE_USE_IE_EVENTS)]
+		[propput, id(21), helpstring(CORE_USE_IE_EVENTS_HELP), helpcontext(IDH_CORE_USE_IE_EVENTS)]
 			HRESULT useHardwareInputEvents([in] VARIANT_BOOL newVal);
 
-
 		// Constant properties.
-		[propget, id(20), helpstring(CORE_BRWS_CONNECT_LOST_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+		[propget, id(100), helpstring(CORE_BRWS_CONNECT_LOST_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
 			HRESULT BROWSER_CONNECTION_LOST_ERROR([out, retval] LONG* pVal);
 		
-		[propget, id(21), helpstring(CORE_FAIL_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+		[propget, id(101), helpstring(CORE_FAIL_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
 			HRESULT FAIL_ERROR([out, retval] LONG* pVal);
 
-		[propget, id(22), helpstring(CORE_INDEX_OUT_OF_BOUND_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+		[propget, id(102), helpstring(CORE_INDEX_OUT_OF_BOUND_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
 			HRESULT INDEX_OUT_OF_BOUND_ERROR([out, retval] LONG* pVal);
 
-		[propget, id(23), helpstring(CORE_INVALID_ARG_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+		[propget, id(103), helpstring(CORE_INVALID_ARG_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
 			HRESULT INVALID_ARG_ERROR([out, retval] LONG* pVal);
 
-		[propget, id(24), helpstring(CORE_INVALID_OPERATION_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+		[propget, id(104), helpstring(CORE_INVALID_OPERATION_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
 			HRESULT INVALID_OPERATION_ERROR([out, retval] LONG* pVal);
 
-		[propget, id(25), helpstring(CORE_LOAD_TIMEOUT_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+		[propget, id(105), helpstring(CORE_LOAD_TIMEOUT_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
 			HRESULT LOAD_TIMEOUT_ERROR([out, retval] LONG* pVal);
 
-		[propget, id(26), helpstring(CORE_OK_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+		[propget, id(106), helpstring(CORE_OK_ERROR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
 			HRESULT OK_ERROR([out, retval] LONG* pVal);
 
-		[propget, id(27), helpstring(CORE_NOT_FOUND_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
+		[propget, id(107), helpstring(CORE_NOT_FOUND_ERR_HELP), helpcontext(IDH_CORE_CONSTANTS)]
 			HRESULT NOT_FOUND_ERROR([out, retval] LONG* pVal);
 	};
 

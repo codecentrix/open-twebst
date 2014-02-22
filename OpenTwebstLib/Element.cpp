@@ -2095,7 +2095,7 @@ STDMETHODIMP CElement::Highlight(void)
 				throw CreateException(_T("DrawRectangleInWindow failed in CElement::Highlight"));
 			}
 
-			::Sleep(DELAY_BETWEEN_ITERATIONS);
+			this->Sleep(DELAY_BETWEEN_ITERATIONS);
 		}
 	}
 	catch (const ExceptionServices::Exception& except)

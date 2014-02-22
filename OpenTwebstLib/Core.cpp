@@ -2482,6 +2482,12 @@ STDMETHODIMP CCore::AttachToHWND(LONG nWnd, IBrowser** ppBrowser)
 	}*/
 	else
 	{
+		HWND hIeServerWnd = Common::GetChildWindowByClassName(hTargetWnd, _T("Internet Explorer_Server"), FindVisibleChildWndCallback);
+		if (::IsWindow(hIeServerWnd))
+		{
+			return AttachToIEServer(hIeServerWnd, ppBrowser);
+		}
+
 		traceLog << "Invalid window type param in CCore::AttachToWnd\n";
 		SetComErrorMessage(IDS_INVALID_PARAM_LIST_IN_METHOD, ATTACH_TO_WND_CORE_METHOD, IDH_CORE_ATTACH_TO_WND);
 		SetLastErrorCode(ERR_INVALID_ARG);
