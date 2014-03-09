@@ -184,6 +184,7 @@ Section "Uninstall"
 	Delete "$DOCUMENTS\OpenTwebstSamples\VB.Net\*.*"
 	Delete "$DOCUMENTS\OpenTwebstSamples\C#\*.*"
 	Delete "$DOCUMENTS\OpenTwebstSamples\C++\*.*"
+	Delete "$DOCUMENTS\OpenTwebstSamples\WebBrowserCSharp\*.*"
 	SetShellVarContext all
 
 	;Delete folders
