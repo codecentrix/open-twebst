@@ -129,10 +129,57 @@ namespace CatStudio
             this.codeGen.CodeChanged  += OnLanguageChanged;
 
             // Select a language in the combo-box.
-            this.codeToolStripLanguageCombo.SelectedIndex = 0;
+            int defaultLanguage = GetRecorderSavedLanguage();
+            if ((defaultLanguage < 0) || (defaultLanguage >= this.codeToolStripLanguageCombo.Items.Count))
+            {
+                defaultLanguage = 0;
+            }
+
+            this.codeToolStripLanguageCombo.SelectedIndex = defaultLanguage;
 
             this.codeToolStrip.ClickThrough = true;
             this.toolStripStatusProductLabel.Text = CoreWrapper.Instance.productName + " " + CoreWrapper.Instance.productVersion;
+        }
+
+
+        private int GetRecorderSavedLanguage()
+        {
+            RegistryKey twbstStudioRegKey = null;
+            int language = 0;
+
+            try
+            {
+                twbstStudioRegKey = Registry.CurrentUser.CreateSubKey("Software\\Codecentrix\\OpenTwebst\\Studio");
+                language = (int)twbstStudioRegKey.GetValue("recorderLanguage", 0);
+            }
+            finally
+            {
+                if (twbstStudioRegKey != null)
+                {
+                    twbstStudioRegKey.Close();
+                }
+            }
+
+            return language;
+        }
+
+
+        private void SaveRecorderLanguage(int language)
+        {
+            RegistryKey twbstStudioRegKey = null;
+
+            try
+            {
+                twbstStudioRegKey = Registry.CurrentUser.CreateSubKey("Software\\Codecentrix\\OpenTwebst\\Studio");
+                twbstStudioRegKey.SetValue("recorderLanguage", language);
+            }
+            finally
+            {
+                if (twbstStudioRegKey != null)
+                {
+                    twbstStudioRegKey.Close();
+                }
+            }
         }
 
 
@@ -290,6 +337,8 @@ namespace CatStudio
                 this.codeRichTextBox.Select(0, 0);
                 this.codeRichTextBox.ScrollToCaret();
             }
+
+            SaveRecorderLanguage(this.codeToolStripLanguageCombo.SelectedIndex);
         }
 
 

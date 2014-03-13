@@ -433,7 +433,7 @@ STDMETHODIMP CBrowser::WaitToLoad(BSTR bstrCond, VARIANT_BOOL* pVal)
 		}
 
 		// Sleep for a while.
-		this->Sleep(Common::INTERNAL_GLOBAL_PAUSE);
+		this->Sleep(Common::INTERNAL_GLOBAL_PAUSE, TRUE);
 	}
 
 	if (0 == nLoadTimeout)
@@ -551,7 +551,7 @@ STDMETHODIMP CBrowser::Navigate(BSTR bstrUrl)
 	}
 
 	// Give Internet Explorer browser a chance to start the navigation.
-	this->Sleep(Common::INTERNAL_GLOBAL_PAUSE);
+	this->Sleep(Common::INTERNAL_GLOBAL_PAUSE, TRUE);
 	return HRES_OK;
 }
 

@@ -77,7 +77,7 @@ public:
 	void    SetCore               (ICore* pCore);
 	
 	virtual void CloseBrowserPopups();
-	virtual BOOL Sleep(DWORD dwMiliseconds);
+	virtual BOOL Sleep(DWORD dwMiliseconds, BOOL bDispatchMsg = FALSE);
 	static BOOL InitCloseBrowserPopups();
 
 

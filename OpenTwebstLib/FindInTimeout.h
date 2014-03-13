@@ -37,7 +37,7 @@ public:
 class ISleeper
 {
 public:
-	virtual BOOL Sleep(DWORD dwMiliseconds) = 0;
+	virtual BOOL Sleep(DWORD dwMiliseconds, BOOL bDispatchMsg = FALSE) = 0;
 };
 
 

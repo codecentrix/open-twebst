@@ -718,7 +718,7 @@ BOOL BaseLibObject::GetPluginThreadID(LONG& nThreadID)
 }
 
 
-BOOL BaseLibObject::Sleep(DWORD dwMiliseconds)
+BOOL BaseLibObject::Sleep(DWORD dwMiliseconds, BOOL bDispatchMsg)
 {
 	LONG nPluginThreadID = 0;
 	if (!GetPluginThreadID(nPluginThreadID))
@@ -731,33 +731,36 @@ BOOL BaseLibObject::Sleep(DWORD dwMiliseconds)
 
 	if (::GetCurrentThreadId() == nPluginThreadID)
 	{
-		// this object runs in the same thread as m_spPlugin
-		// Here's a good place to dispatch messages so hosted browser controls won't block.
-		// (e.g. winforms applications trying to automate a hosted WebBrowser control).
-
-		DWORD dwStartTime = ::GetTickCount();
-		while (TRUE)
+		if (bDispatchMsg)
 		{
-			MSG  msg = { 0 };
-			BOOL bDispatched = FALSE;
+			// this object runs in the same thread as m_spPlugin
+			// Here's a good place to dispatch messages so hosted browser controls won't block.
+			// (e.g. winforms applications trying to automate a hosted WebBrowser control).
 
-			if (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+			DWORD dwStartTime = ::GetTickCount();
+			while (TRUE)
 			{
-				::DispatchMessage(&msg);
-				bDispatched = TRUE;
-			}
+				MSG  msg = { 0 };
+				BOOL bDispatched = FALSE;
 
-			DWORD dwCurrentTime = ::GetTickCount();
-			if ((dwCurrentTime - dwStartTime) > dwMiliseconds)
-			{
-				// Timeout has expired. Quit the loop.
-				break;
-			}
+				if (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+				{
+					::DispatchMessage(&msg);
+					bDispatched = TRUE;
+				}
 
-			if (!bDispatched)
-			{
-				// No message to process yet; sleep for a short while.
-				::Sleep(10);
+				DWORD dwCurrentTime = ::GetTickCount();
+				if ((dwCurrentTime - dwStartTime) > dwMiliseconds)
+				{
+					// Timeout has expired. Quit the loop.
+					break;
+				}
+
+				if (!bDispatched)
+				{
+					// No message to process yet; sleep for a short while.
+					::Sleep(10);
+				}
 			}
 		}
 

@@ -57,7 +57,8 @@ BOOL FinderInTimeout::Find(FinderInTimeout*  pFinder,
 	// Sleep for a while.
 	if (pSleeper != NULL)
 	{
-		pSleeper->Sleep(Common::INTERNAL_GLOBAL_PAUSE);
+		BOOL bDispatchMsg = (nLoadTimeout || nSearchTimeout);
+		pSleeper->Sleep(Common::INTERNAL_GLOBAL_PAUSE, bDispatchMsg);
 	}
 
 	ATLASSERT(pFinder != NULL);
@@ -95,7 +96,7 @@ BOOL FinderInTimeout::Find(FinderInTimeout*  pFinder,
 				// Sleep for a while.
 				if (pSleeper != NULL)
 				{
-					pSleeper->Sleep(Common::INTERNAL_GLOBAL_PAUSE);
+					pSleeper->Sleep(Common::INTERNAL_GLOBAL_PAUSE, TRUE);
 				}
 			}
 
@@ -313,6 +314,11 @@ BOOL FindObjectInContainer::Find()
 
 BOOL FindObjectInContainer::WaitToLoad(DWORD nLoadTimeout, ISleeper* pSleeper)
 {
+	if (nLoadTimeout == 0)
+	{
+		return TRUE;
+	}
+
 	if ((m_nSearchFlags & Common::SEARCH_HTML_DIALOG) ||
 		(m_nSearchFlags & SEARCH_MODAL_HTML_DLG))
 	{
@@ -358,7 +364,7 @@ BOOL FindObjectInContainer::WaitToLoad(DWORD nLoadTimeout, ISleeper* pSleeper)
 			// Sleep for a while.
 			if (pSleeper != NULL)
 			{
-				pSleeper->Sleep(Common::INTERNAL_GLOBAL_PAUSE);
+				pSleeper->Sleep(Common::INTERNAL_GLOBAL_PAUSE, TRUE);
 			}
 		}
 	}

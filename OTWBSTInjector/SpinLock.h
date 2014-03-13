@@ -44,7 +44,7 @@ public:
 
 	void Lock()
     {
-        while (::InterlockedExchange(m_pLock, SL_LOCKED) != SL_UNLOCKED)
+        while (::InterlockedCompareExchange(m_pLock, SL_LOCKED, SL_UNLOCKED) == SL_LOCKED)
         {
 			::Sleep(30);
         }
