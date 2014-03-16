@@ -220,7 +220,7 @@ BOOL NewMarshalService::GetMarshalWndName(HWND hIeServer, String& sRetName)
 		{
 			if (!bIsIeWindow)
 			{
-				os << L"+" << (ULONG)HandleToLong(dwIeServerThID);
+				os << L"+" << dwIeServerThID;
 			}
 			else
 			{

@@ -1,10 +1,11 @@
 !define PRODUCT_NAME		"Open Twebst"
-!define PRODUCT_VERSION		"1.3"
-!define SETUP_NAME			"OpenTwebstSetup_1.3.exe"
+!define PRODUCT_VERSION		"1.4"
+!define SETUP_NAME			"OpenTwebstSetup_1.4.exe"
 !define PRODUCT_PUBLISHER	"Codecentrix Software"
-!define PRODUCT_WEB_SITE	"http://open-twebst.codecentrix.com/"
+!define PRODUCT_WEB_SITE	"http://www.codecentrix.com/"
 
 
+!include    "WMI.nsh"
 !include	"MUI.nsh"
 Name		"${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile		${SETUP_NAME}
@@ -83,11 +84,22 @@ Section "Twebst Library" SecTwebstLib
 	File "..\outdir\release\OpenTwebstLib.dll"
 	File "..\outdir\release\Dbgserv.dll"
 	File "..\outdir\release\OTWBSTInjector.dll"
-	File "..\License.txt"
+	
+	File "..\outdir\release\OTWBSTPlugin_x64.dll"
+	File "..\outdir\release\OpenTwebstLib_x64.dll"
+	File "..\outdir\release\Dbgserv_x64.dll"
+	File "..\outdir\release\OTWBSTInjector_x64.dll"
+	
+	;File "..\outdir\release\OTwbstXbit_x86.exe"
+	;File "..\outdir\release\OTwbstXbit_x64.exe"
 
+	File "..\License.txt"
 
 	RegDLL "$INSTDIR\Bin\OTWBSTPlugin.dll"
 	RegDLL "$INSTDIR\Bin\OpenTwebstLib.dll"
+
+	ExecWait 'regsvr32.exe /s "$INSTDIR\Bin\OTWBSTPlugin_x64.dll"'
+	ExecWait 'regsvr32.exe /s "$INSTDIR\Bin\OpenTwebstLib_x64.dll"'
 SectionEnd
 
 
@@ -164,9 +176,16 @@ SectionEnd
 ;Uninstaller Section
 Section "Uninstall"
 	SetShellVarContext all
+	
+	; http://nsis.sourceforge.net/WMI_header
+	;${WMIKillProcess} OTwbstXbit_x86.exe
+	;${WMIKillProcess} OTwbstXbit_x64.exe
 
 	UnRegDLL "$INSTDIR\Bin\OTWBSTPlugin.dll"
 	UnRegDLL "$INSTDIR\Bin\OpenTwebstLib.dll"
+	
+	ExecWait 'regsvr32.exe /s /u "$INSTDIR\Bin\OTWBSTPlugin_x64.dll"'
+	ExecWait 'regsvr32.exe /s /u "$INSTDIR\Bin\OpenTwebstLib_x64.dll"'
 
 	;Delete binaries and some icons
 	Delete "$INSTDIR\Bin\*.dll"
@@ -229,6 +248,6 @@ Section "Uninstall"
 	DeleteRegKey HKCU "Software\CodeCentrix\OpenTwebst"
 	DeleteRegKey HKLM "Software\CodeCentrix\OpenTwebst"
 	
-	; To refresh desktop after shortcuts are deleted.
+	; To refresh desktop after short-cuts are deleted.
 	System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'	
 SectionEnd

@@ -455,10 +455,10 @@ HRESULT CElement::Click(const ClickCallContext& clickCtx, BOOL bClickFileInputBu
 		}
 
 		// Get the window handle of the IE instance.
-		long nIeWnd;
+		LONG_PTR nIeWnd = NULL;
 		hRes = spWebBrws->get_HWND(&nIeWnd);
 
-		HWND hIeWnd = static_cast<HWND>(LongToHandle(nIeWnd));
+		HWND hIeWnd = (HWND)nIeWnd;
 		if (FAILED(hRes) || !::IsWindow(hIeWnd))
 		{
 			// Maybe it is an embeded browser control.

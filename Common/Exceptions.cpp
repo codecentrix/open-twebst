@@ -60,7 +60,7 @@ namespace ExceptionServices
 	{
 		Common::Ostringstream outputStream;
 
-		outputStream << Exception::ToString() << _T("lResult= ") << HandleToLong(m_lRegErrorResult);
+		outputStream << Exception::ToString() << _T("lResult= ") << m_lRegErrorResult;
 		return outputStream.str();
 	}
 

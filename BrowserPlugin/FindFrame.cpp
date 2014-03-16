@@ -410,13 +410,13 @@ BOOL FindFrameAlgorithms::VisitHtmlDialogCollection(CComQIPtr<IWebBrowser2> spBr
 	BOOL bErr            = FALSE;
 
 	// Use the main IEFrame window as starting point for enumerating IE server children windows.
-	BOOL    bInsideIE = TRUE;
-	LONG    nTopWnd   = NULL;
-	HRESULT hRes      = spBrowser->get_HWND(&nTopWnd);
+	BOOL     bInsideIE = TRUE;
+	LONG_PTR nTopWnd   = NULL;
+	HRESULT  hRes      = spBrowser->get_HWND(&nTopWnd);
 
 	if (SUCCEEDED(hRes))
 	{
-		hStartSearchWnd = (HWND)LongToHandle(nTopWnd);
+		hStartSearchWnd = (HWND)nTopWnd;
 	}
 	else
 	{
@@ -514,13 +514,13 @@ BOOL FindFrameAlgorithms::VisitModalHtmlDialog(CComQIPtr<IWebBrowser2> spBrowser
 	BOOL bErr            = FALSE;
 
 	// Use the main IEFrame window as starting point for enumerating IE server children windows.
-	BOOL    bInsideIE = TRUE;
-	LONG    nTopWnd   = NULL;
-	HRESULT hRes      = spBrowser->get_HWND(&nTopWnd);
+	BOOL     bInsideIE = TRUE;
+	LONG_PTR nTopWnd   = NULL;
+	HRESULT  hRes      = spBrowser->get_HWND(&nTopWnd);
 
 	if (SUCCEEDED(hRes))
 	{
-		hStartSearchWnd = (HWND)LongToHandle(nTopWnd);
+		hStartSearchWnd = (HWND)nTopWnd;
 	}
 	else
 	{
