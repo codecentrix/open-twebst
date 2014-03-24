@@ -1,9 +1,13 @@
 // TwbstXbit.cpp : Defines the entry point for the application.
 #include "stdafx.h"
+#include "DebugServices.h"
 #include "TwbstXbit.h"
 #include "Common.h"
 #include "..\OTWBSTInjector\OTWBSTInjector.h"
 #include "MarshalService.h"
+#include "..\OpenTwebstLib\CatCLSLib.h"
+#include "..\OpenTwebstLib\CatCLSLib_i.c"
+
 
 using namespace XBit;
 
@@ -63,10 +67,36 @@ int StartIE(LPCWSTR szUrl)
 {
 	if (!szUrl)
 	{
+		traceLog << "Invalid URL in StartIE\n";
 		return 0;
 	}
 
-	return Common::StartInternetExplorerProcessOnVista(szUrl, NULL);
+	CComQIPtr<ICore> spCore;
+	HRESULT          hRes = spCore.CoCreateInstance(CLSID_Core);
+
+	if (FAILED(hRes) || !spCore)
+	{
+		traceLog << "Cannot create ICore object hres=" << hRes << "\n";
+		return 0;
+	}
+
+	CComQIPtr<IBrowser> spBrowser;
+	hRes = spCore->StartBrowser(CComBSTR(szUrl), &spBrowser);
+	if (FAILED(hRes))
+	{
+		traceLog << "spCore->StartBrowser failed hres=" << hRes << "\n";
+		return 0;
+	}
+
+	CComVariant vPid;
+	hRes = spBrowser->GetAttr(CComBSTR("pid"), &vPid);
+	if (FAILED(hRes) || (vPid.vt != VT_I4))
+	{
+		traceLog << "spBrowser->GetAttr failed hres=" << hRes << "\n";
+		return 0;
+	}
+
+	return vPid.lVal;
 }
 
 

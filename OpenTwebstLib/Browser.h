@@ -86,6 +86,8 @@ public:
 	STDMETHOD(FindModalHtmlDialog)   (IFrame** ppFrame);
 	STDMETHOD(ClosePopup)            (BSTR bstrPopupText, VARIANT vButton, BSTR* pPopupText);
 	STDMETHOD(ClosePrompt)           (BSTR bstrPromptText, BSTR bstrValue, VARIANT vButton, BSTR* pPopupText);
+	STDMETHOD(GetAttr)               (BSTR bstrAttrName, VARIANT* pVal);
+	STDMETHOD(SetAttr)               (BSTR bstrAttrName, VARIANT newVal);
 
 	/////////////////////////////////////////////////////////////////////////////////////////
 	// Methods and properties not yet implemented.
@@ -96,4 +98,7 @@ private:
 	HRESULT ClosePopupOrPrompt   (BSTR bstrPopupText, VARIANT vButton, BSTR bstrValue, BSTR* pPopupText);
 	HRESULT GetWebBrowser        (IWebBrowser2** ppWebBrowser);
 	BOOL    IsValidDescriptorList(const std::list<DescriptorToken>& tokens);
+
+	HRESULT GetAppName(VARIANT* pAppName);
+	HRESULT GetPID    (VARIANT* pPid);
 };

@@ -1131,6 +1131,93 @@ STDMETHODIMP CBrowser::ClosePrompt(BSTR bstrPromptText, BSTR bstrValue, VARIANT 
 }
 
 
+STDMETHODIMP CBrowser::GetAttr(BSTR bstrAttrName, VARIANT* pVal)
+{
+	// Reset the lastError property.
+	SetLastErrorCode(ERR_OK);
+
+	if (!bstrAttrName || !bstrAttrName[0] || !pVal)
+	{
+		traceLog << "Invalid arguments in CBrowser::GetAttr\n";
+		SetComErrorMessage(IDS_METHOD_CALL_FAILED, BROWSER_GETATTR_METHOD, IDH_BROWSER_GET_ATTR);
+		SetLastErrorCode(ERR_INVALID_ARG);
+
+		return HRES_INVALID_ARG;
+	}
+
+	if (!IsValidState(IDS_METHOD_CALL_FAILED, BROWSER_GETATTR_METHOD, IDH_BROWSER_GET_ATTR))
+	{
+		traceLog << "Invalid state in CBrowser::GetAttr\n";
+		return HRES_FAIL;
+	}
+
+	HRESULT hRes = HRES_OK;
+	if (!_wcsicmp(bstrAttrName, L"appname"))
+	{
+		hRes = GetAppName(pVal);
+	}
+	else if (!_wcsicmp(bstrAttrName, L"pid"))
+	{
+		hRes = GetPID(pVal);
+	}
+	else
+	{
+		return E_INVALIDARG;
+	}
+
+	if (FAILED(hRes))
+	{
+		traceLog << "Failure in CBrowser::GetAttr\n";
+
+		SetComErrorMessage(IDS_METHOD_CALL_FAILED, BROWSER_GETATTR_METHOD, IDH_BROWSER_GET_ATTR);
+		SetLastErrorCode(ERR_FAIL);
+		return HRES_FAIL;
+	}
+	else
+	{
+		return hRes;
+	}
+}
+
+
+STDMETHODIMP CBrowser::SetAttr(BSTR bstrAttrName, VARIANT newVal)
+{
+	if (!bstrAttrName || !bstrAttrName[0])
+	{
+		traceLog << "Invalid arguments in CBrowser::SetAttr\n";
+		return E_INVALIDARG;
+	}
+
+	return E_NOTIMPL;
+}
+
+
+HRESULT CBrowser::GetAppName(VARIANT* pAppName)
+{
+	ATLASSERT(pAppName);
+
+	LONG nProcID = 0;
+	HRESULT hRes = m_spPlugin->GetBrowserProcessID(&nProcID);
+	if (FAILED(hRes) || !nProcID)
+	{
+		traceLog << "m_spPlugin->GetBrowserProcessID failed in CBrowser::GetAppName with code:" << hRes <<"\n";
+		SetComErrorMessage(IDS_METHOD_CALL_FAILED, BROWSER_GETATTR_METHOD, IDH_BROWSER_GET_ATTR);
+		SetLastErrorCode(ERR_FAIL);
+		return HRES_FAIL;
+	}
+
+	CComVariant vPid(nProcID);
+	return vPid.Detach(pAppName);
+}
+
+
+HRESULT CBrowser::GetPID(VARIANT* pPid)
+{
+	ATLASSERT(pPid);
+	return E_NOTIMPL;
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////
 // Methods and properties not yet implemented.
 

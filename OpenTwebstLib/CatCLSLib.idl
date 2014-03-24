@@ -188,68 +188,73 @@ library OpenTwebstLib
 	]
 	interface IBrowser : IDispatch {
 		// Methods.
-		[id(7), helpstring(BROWSER_CLOSE_HELP), helpcontext(IDH_BROWSER_CLOSE)]
+		[id(1), helpstring(BROWSER_CLOSE_HELP), helpcontext(IDH_BROWSER_CLOSE)]
 			HRESULT Close(void);
 
-		[id(39), helpstring(BROWSER_CLOSE_POPUP), helpcontext(IDH_BROWSER_CLOSE_POPUP)]
+		[id(2), helpstring(BROWSER_CLOSE_POPUP), helpcontext(IDH_BROWSER_CLOSE_POPUP)]
 			HRESULT ClosePopup([in] BSTR bstrPopupText, [in] VARIANT vButton, [out, retval] BSTR* pPopupText);
 
-		[id(40), helpstring(BROWSER_CLOSE_PROMPT), helpcontext(IDH_BROWSER_CLOSE_PROMPT)]
+		[id(3), helpstring(BROWSER_CLOSE_PROMPT), helpcontext(IDH_BROWSER_CLOSE_PROMPT)]
 			HRESULT ClosePrompt([in] BSTR bstrPromptText, [in] BSTR bstrValue, [in] VARIANT vButton, [out, retval] BSTR* pPopupText);
 
-		[id(14), helpstring(BROWSER_FIND_ALL_ELEM_HELP), helpcontext(IDH_BROWSER_FIND_ALL_ELEMENTS)]
+		[id(4), helpstring(BROWSER_FIND_ALL_ELEM_HELP), helpcontext(IDH_BROWSER_FIND_ALL_ELEMENTS)]
 			HRESULT FindAllElements([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElementList** ppElementList);
 
-		[id(11), helpstring(BROWSER_FIND_ELEMENT_HELP), helpcontext(IDH_BROWSER_FIND_ELEMENT)]
+		[id(5), helpstring(BROWSER_FIND_ELEMENT_HELP), helpcontext(IDH_BROWSER_FIND_ELEMENT)]
 			HRESULT FindElement([in] BSTR bstrTag, [in] BSTR bstrCond, [out,retval] IElement** ppElement);
 		
-		[id(13), helpstring(BROWSER_FIND_FRAME_HELP), helpcontext(IDH_BROWSER_FIND_FRAME)]
+		[id(6), helpstring(BROWSER_FIND_FRAME_HELP), helpcontext(IDH_BROWSER_FIND_FRAME)]
 			HRESULT FindFrame([in] BSTR bstrCond, [out,retval] IFrame** ppFrame);
 
-		[id(34), helpstring(BROWSER_FIND_MODELESS_HTML_DIALOG), helpcontext(IDH_BROWSER_FIND_MODELESS_HTML_DLG)]
+		[id(7), helpstring(BROWSER_FIND_MODELESS_HTML_DIALOG), helpcontext(IDH_BROWSER_FIND_MODELESS_HTML_DLG)]
 			HRESULT FindModelessHtmlDialog([in] BSTR bstrCond, [out, retval] IFrame** ppFrame);
 
-		[id(35), helpstring(BROWSER_FIND_MODAL_HTML_DIALOG), helpcontext(IDH_BROWSER_FIND_MODAL_HTML_DLG)]
+		[id(8), helpstring(BROWSER_FIND_MODAL_HTML_DIALOG), helpcontext(IDH_BROWSER_FIND_MODAL_HTML_DLG)]
 			HRESULT FindModalHtmlDialog([out,retval] IFrame** ppFrame);
 
-		[id(6), helpstring(BROWSER_NAVIGATE_HELP), helpcontext(IDH_BROWSER_NAVIGATE)]
+		[id(9), hidden, helpstring(BROWSER_NAVIGATE_HELP), helpcontext(IDH_BROWSER_NAVIGATE)]
 			HRESULT Navigate([in] BSTR bstrUrl);
 
-		[id(5), helpstring(BROWSER_WAIT_TO_LOAD_HELP), helpcontext(IDH_BROWSER_WAIT_TO_LOAD)]
+		[id(10), helpstring(BROWSER_WAIT_TO_LOAD_HELP), helpcontext(IDH_BROWSER_WAIT_TO_LOAD)]
 			HRESULT WaitToLoad([in] BSTR bstrCond, [out, retval] VARIANT_BOOL* pVal);
 
+		[id(11), hidden, helpstring(BROWSER_GET_ATTR_HELP), helpcontext(IDH_BROWSER_GET_ATTR)]
+			HRESULT GetAttr([in] BSTR bstrAttrName, [out, retval] VARIANT* pVal);
+
+		[id(12), helpstring(BROWSER_SET_ATTR_HELP), helpcontext(IDH_BROWSER_SET_ATTR)]
+			HRESULT SetAttr([in] BSTR bstrAttrName, [in] VARIANT newVal);
 
 		// Properties.
-		[propget, id(10), helpstring(BROWSER_CORE_HELP), helpcontext(IDH_BROWSER_CORE)]
+		[propget, id(13), helpstring(BROWSER_CORE_HELP), helpcontext(IDH_BROWSER_CORE)]
 			HRESULT core([out, retval] ICore** pVal);
 
-		[propget, id(4), helpstring(BROWSER_IS_LOADING_HELP), helpcontext(IDH_BROWSER_ISLOADING)]
+		[propget, id(14), helpstring(BROWSER_IS_LOADING_HELP), helpcontext(IDH_BROWSER_ISLOADING)]
 			HRESULT isLoading([out, retval] VARIANT_BOOL* pVal);
 
-		[propget, id(1), helpstring(BROWSER_NATIVE_BROWSER_HELP), helpcontext(IDH_BROWSER_NATIVE_BROWSER)]
+		[propget, id(15), helpstring(BROWSER_NATIVE_BROWSER_HELP), helpcontext(IDH_BROWSER_NATIVE_BROWSER)]
 			HRESULT nativeBrowser([out, retval] IWebBrowser2** pVal);
 
-		[propget, id(23), helpstring(BROWSER_NAVIGATION_ERROR), helpcontext(IDH_BROWSER_NAVIGATION_ERR)]
+		[propget, id(16), helpstring(BROWSER_NAVIGATION_ERROR), helpcontext(IDH_BROWSER_NAVIGATION_ERR)]
 			HRESULT navigationError([out, retval] LONG* pVal);
 
-		[propget, id(12), helpstring(BROWSER_TOP_FRAME_HELP), helpcontext(IDH_BORWSER_TOP_FRAME)]
+		[propget, id(17), helpstring(BROWSER_TOP_FRAME_HELP), helpcontext(IDH_BORWSER_TOP_FRAME)]
 			HRESULT topFrame([out, retval] IFrame** ppTopFrame);
 
-		[propget, id(2), helpstring(BROWSER_TITLE_HELP), helpcontext(IDH_BROWSER_TITLE)]
+		[propget, id(18), helpstring(BROWSER_TITLE_HELP), helpcontext(IDH_BROWSER_TITLE)]
 			HRESULT title([out, retval] BSTR* pVal);
 
-		[propget, id(3), helpstring(BROWSER_URL_HELP), helpcontext(IDH_BROWSER_URL)]
+		[propget, id(19), helpstring(BROWSER_URL_HELP), helpcontext(IDH_BROWSER_URL)]
 			HRESULT url([out, retval] BSTR* pVal);
 
-		[propget, id(41), helpstring(BROWSER_APP_HELP), helpcontext(IDH_BROWSER_APP)]
+		[propget, id(20), helpstring(BROWSER_APP_HELP), helpcontext(IDH_BROWSER_APP)]
 			HRESULT app([out, retval] BSTR* pVal);
 
 		/////////////////////////////////////////////////////////////////////////////////////////////
 		// Methods and properties not yet implemented.
-		[id(28), hidden, helpstring(BROWSER_SAVE_SNAPSHOT), helpcontext(IDH_BROWSER_SAVE_SNAPSHOT)]
+		[id(21), hidden, helpstring(BROWSER_SAVE_SNAPSHOT), helpcontext(IDH_BROWSER_SAVE_SNAPSHOT)]
 			HRESULT SaveSnapshot([in] BSTR bstrImgFileName);
 
-		[id(38), hidden, helpstring(BROWSER_FIND_ELEMENT_BY_XPATH), helpcontext(IDH_BROWSER_FIND_ELEM_BY_XPATH)]
+		[id(22), hidden, helpstring(BROWSER_FIND_ELEMENT_BY_XPATH), helpcontext(IDH_BROWSER_FIND_ELEM_BY_XPATH)]
 			HRESULT FindElementByXPath([in] BSTR bstrXPath, [out,retval] IElement** ppElement);
 
 	};

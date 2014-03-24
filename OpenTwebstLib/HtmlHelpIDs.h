@@ -50,6 +50,8 @@
 #define IDH_BROWSER_CLOSE_POPUP            2038
 #define IDH_BROWSER_CLOSE_PROMPT           2039
 #define IDH_BROWSER_APP                    2040
+#define IDH_BROWSER_GET_ATTR               2041
+#define IDH_BROWSER_SET_ATTR               2042
 
 
 // IFrame help context IDs.

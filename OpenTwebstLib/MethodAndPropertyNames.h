@@ -82,3 +82,4 @@
 #define CORE_CLOSE_BROWSER_POPUPS            _T("closeBrowserPopups")
 #define CORE_ASYNC_HTML_EVENTS               _T("asyncHtmlEvents")
 #define CORE_FIND_ELEM_FROM_POINT            _T("FindElementFromPoint")
+#define BROWSER_GETATTR_METHOD               _T("GetAttr")
