@@ -30,6 +30,7 @@
 #include "..\BrowserPlugin\BrowserPlugin_i.c"
 #include "SpinLock.h"
 #include "OTWBSTInjector.h"
+#include "TwbstXbit.h"
 
 
 extern HINSTANCE g_hInstance;
@@ -37,6 +38,8 @@ extern UINT      g_nRegisteredMsg;
 extern HHOOK     g_hLoaderHook;
 extern SpinLock  g_spinLockBho;
 
+static BOOL                       IsXBitWindow     (HWND hWnd);
+static BOOL                       InjectXBit       (HWND hIEWnd, BOOL bStopBrowser);
 static BOOL                       IsIEServerWindow (HWND hTargetWnd);
 static BOOL                       OnLoadBHO        (HWND hWnd, BOOL bStopBrowser, CComQIPtr<IWebBrowser2> spBrowser = CComQIPtr<IWebBrowser2>());
 static BOOL                       IsBhoLoaded      (HWND hWnd);
@@ -76,6 +79,14 @@ OPENTWBSTINJECTOR_API BOOL InjectBHO(HWND hIEWnd, BOOL bStopBrowser, CComQIPtr<I
 		traceLog << "Invalid hIEWnd in InjectBHO\n";
 		g_spinLockBho.Unlock();
 		return FALSE;
+	}
+
+	if (IsXBitWindow(hIEWnd))
+	{
+		BOOL bRes = InjectXBit(hIEWnd, bStopBrowser);
+		g_spinLockBho.Unlock();
+
+		return bRes;
 	}
 
 	HHOOK hHook = ::SetWindowsHookEx(WH_CALLWNDPROC, BhoLoaderHookProc, g_hInstance, dwIEThread);
@@ -230,4 +241,173 @@ static BOOL IsBhoLoaded(HWND hWnd)
 
 	HWND hPluginCommWnd = ::FindWindow(NewMarshalService::HIDDEN_COMMUNICATION_WND_CLASS_NAME, sPluginMarshalName.c_str());
 	return (hPluginCommWnd != NULL);
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static BOOL Is64BitProc(HANDLE hProc)
+{
+	if (!hProc)
+	{
+		traceLog << "Invalid window in Is64BitProc\n";
+		return FALSE;
+	}
+
+	BOOL bisWow64Proc   = FALSE;
+	BOOL bRes           = ::IsWow64Process(hProc, &bisWow64Proc);
+	BOOL bIs64BitWindow = (bRes && !bisWow64Proc);
+
+	return bIs64BitWindow;
+}
+
+
+static BOOL Is64BitWindow(HWND hWnd)
+{
+	if (!::IsWindow(hWnd))
+	{
+		traceLog << "Invalid window in Is64BitWindow\n";
+		return FALSE;
+	}
+
+	DWORD pid = 0;
+	::GetWindowThreadProcessId(hWnd, &pid);
+
+	if (!pid)
+	{
+		traceLog << "Cannot get pid in Is64BitWindow\n";
+		return FALSE;
+	}
+
+	HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, pid);
+	if (!hProcess)
+	{
+		traceLog << "Cannot get hProcess in Is64BitWindow\n";
+		return FALSE;
+	}
+
+	BOOL bIs64BitProc = Is64BitProc(hProcess);
+
+	// Clean up.
+	::CloseHandle(hProcess);
+	hProcess = NULL;
+
+	return bIs64BitProc;
+}
+
+
+static BOOL WeRunOnWin64()
+{
+	HANDLE hCrntProc = ::GetCurrentProcess();
+
+	BOOL bisWow64Proc   = FALSE;
+	BOOL bRes           = ::IsWow64Process(hCrntProc, &bisWow64Proc);
+
+	return (bRes && bisWow64Proc);
+}
+
+
+static BOOL IsXBitWindow(HWND hWnd)
+{
+#ifdef _AMD64_
+	// This is 64-bit process.
+    if (Is64BitWindow(hWnd))
+	{
+        return FALSE;
+	}
+	else
+	{
+		return TRUE;
+	}
+#else
+	// This is 32-bit process.
+    if (!WeRunOnWin64() || !Is64BitWindow(hWnd))
+	{
+        // Not x64 windows or hWnd does not belong to 64 bit process.
+        return FALSE;
+	}
+	else
+	{
+		return TRUE;
+	}
+#endif
+}
+
+
+static BOOL StartInjectorProc()
+{
+	ATLASSERT(g_hInstance != NULL);
+
+	// Get the name of the current DLL.
+	TCHAR szModuleFullName[MAX_PATH + 1] = {};
+
+	::GetModuleFileName(g_hInstance, szModuleFullName, MAX_PATH);
+	szModuleFullName[MAX_PATH] = _T('\0');
+
+	CPath path(szModuleFullName);
+	path.RemoveFileSpec();
+	path.AddBackslash();
+	path.Append(XBit::XBIT_INJECTOR_EXE_NAME);
+
+	PROCESS_INFORMATION	pi = { };
+	STARTUPINFO			si = { };
+
+	si.cb          = sizeof(STARTUPINFO);
+	si.dwFlags     = STARTF_USESHOWWINDOW;
+	si.wShowWindow = SW_SHOWNORMAL;
+
+	// Start xbit injector application.
+	BOOL bResult = ::CreateProcess(path, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
+	if (!bResult)
+	{
+		traceLog << "CreateProcess failed in StartInjectorProc\n";
+		return FALSE;
+	}
+
+	// Clean up.
+	::CloseHandle(pi.hProcess);
+	::CloseHandle(pi.hThread);
+
+	pi.hProcess = 0;
+	pi.hThread  = 0;
+
+	return TRUE;
+}
+
+
+static BOOL InjectXBit(HWND hIEWnd, BOOL bStopBrowser)
+{
+	HWND hWnd = ::FindWindow(XBit::XBIT_INJECTOR_WND_CLASS_NAME, XBit::XBIT_INJECTOR_WND_NAME);
+	if (!hWnd)
+	{
+		traceLog << "xbit window not found, start injector proc in InjectXBit\n";
+		StartInjectorProc();
+	}
+
+	DWORD dwStartTime = ::GetTickCount();
+	while (TRUE)
+	{
+		hWnd = ::FindWindow(XBit::XBIT_INJECTOR_WND_CLASS_NAME, XBit::XBIT_INJECTOR_WND_NAME);
+		if (::IsWindow(hWnd))
+		{
+			traceLog << "xbit injector window found in InjectXBit\n";
+			break;
+		}
+
+		DWORD dwCurrentTime = ::GetTickCount();
+		if ((dwCurrentTime - dwStartTime) > Common::START_XBIT_INJECT_TIMEOUT)
+		{
+			traceLog << "Timeout waiting for xbit window in InjectXBit\n";
+			return FALSE;
+		}
+	}
+
+	DWORD_PTR dwRes = 0;
+	LRESULT   lRes  = ::SendMessageTimeout(hWnd, XBit::XBIT_MSG_INJECT_BHO, bStopBrowser, (LPARAM)hIEWnd, SMTO_NORMAL, Common::START_PROCESS_TIMEOUT, &dwRes);
+	if (!lRes || !dwRes)
+	{
+		traceLog << "SendMessageTimeout fail of timeout in InjectXBit\n";
+		return FALSE;
+	}
+
+	return TRUE;
 }

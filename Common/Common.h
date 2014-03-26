@@ -51,6 +51,8 @@ namespace Common
 	typedef BOOL (*FIND_CHILD_WND_CONDITION_CALLBACK)(HWND hCrntWnd, void*);
 
 	// Constants.
+	const DWORD START_XBIT_INJECT_TIMEOUT = 4000;
+	const DWORD START_PROCESS_TIMEOUT     = 16000; // in miliseconds.
 	const DWORD INTERNAL_GLOBAL_TIMEOUT = 60000; // in miliseconds.
 	const DWORD INTERNAL_GLOBAL_PAUSE   = 50;    // in miliseconds.
 	const DWORD TIME_SCALE              = 1;     // 1 = miliseconds, 10 = 1/100 seconds, 1000 = seconds.

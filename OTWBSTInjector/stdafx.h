@@ -18,3 +18,4 @@
 #include <Exdisp.h>
 #include <algorithm>
 #include <shlguid.h>
+#include <atlpath.h>
