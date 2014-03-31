@@ -35,7 +35,7 @@ namespace ProductSettings
 {
 	const BYTE   BUILD_NUMBER    = 0; // Increment for each official build!
 	const BYTE   MAJOR_VERSION   = 1;
-	const BYTE   MINOR_VERSION   = 3;
+	const BYTE   MINOR_VERSION   = 4;
 
 	const TCHAR OPEN_TWEBST_PRODUCT_NAME[] = _T("Open Twebst");
 }

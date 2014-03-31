@@ -121,7 +121,17 @@ int APIENTRY _tWinMain
 	{
 		if ((nArgs > 1) && !_wcsicmp(XBIT_START_IE_CMDL, szArglist[0]))
 		{
-			return StartIE(szArglist[1]);
+			::CoInitialize(NULL);
+
+			int nRes = StartIE(szArglist[1]);
+
+			::CoUninitialize();
+
+			// Clean up.
+			LocalFree(szArglist);
+			szArglist = NULL;
+
+			return nRes;
 		}
 
 		// Clean up.

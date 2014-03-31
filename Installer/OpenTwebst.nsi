@@ -90,8 +90,8 @@ Section "Twebst Library" SecTwebstLib
 	File "..\outdir\release\Dbgserv_x64.dll"
 	File "..\outdir\release\OTWBSTInjector_x64.dll"
 	
-	;File "..\outdir\release\OTwbstXbit_x86.exe"
-	;File "..\outdir\release\OTwbstXbit_x64.exe"
+	File "..\outdir\release\OTwbstXbit_x86.exe"
+	File "..\outdir\release\OTwbstXbit_x64.exe"
 
 	File "..\License.txt"
 
@@ -178,8 +178,8 @@ Section "Uninstall"
 	SetShellVarContext all
 	
 	; http://nsis.sourceforge.net/WMI_header
-	;${WMIKillProcess} OTwbstXbit_x86.exe
-	;${WMIKillProcess} OTwbstXbit_x64.exe
+	${WMIKillProcess} OTwbstXbit_x86.exe
+	${WMIKillProcess} OTwbstXbit_x64.exe
 
 	UnRegDLL "$INSTDIR\Bin\OTWBSTPlugin.dll"
 	UnRegDLL "$INSTDIR\Bin\OpenTwebstLib.dll"

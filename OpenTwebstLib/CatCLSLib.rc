@@ -34,8 +34,8 @@ IDI_TWBST_ICON          ICON                    "res\\twbst.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,3,0,0
- PRODUCTVERSION 1,3,0,0
+ FILEVERSION 1,4,0,0
+ PRODUCTVERSION 1,4,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -53,12 +53,12 @@ BEGIN
             VALUE "Comments", "www.codecentrix.com"
             VALUE "CompanyName", "Codecentrix Software"
             VALUE "FileDescription", "Open Twebst Library"
-            VALUE "FileVersion", "1.3.0.0"
+            VALUE "FileVersion", "1.4.0.0"
             VALUE "InternalName", "OpenTwebstLib.dll"
             VALUE "LegalCopyright", "(c) 2014 Codecentrix Software."
             VALUE "OriginalFilename", "OpenTwebstLib.dll"
             VALUE "ProductName", "Open Twebst"
-            VALUE "ProductVersion", "1.3.0.0"
+            VALUE "ProductVersion", "1.4.0.0"
         END
     END
     BLOCK "VarFileInfo"

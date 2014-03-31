@@ -363,6 +363,8 @@ static BOOL StartInjectorProc()
 		return FALSE;
 	}
 
+	::WaitForInputIdle(pi.hProcess, Common::START_XBIT_INJECT_TIMEOUT);
+
 	// Clean up.
 	::CloseHandle(pi.hProcess);
 	::CloseHandle(pi.hThread);
@@ -405,7 +407,7 @@ static BOOL InjectXBit(HWND hIEWnd, BOOL bStopBrowser)
 	LRESULT   lRes  = ::SendMessageTimeout(hWnd, XBit::XBIT_MSG_INJECT_BHO, bStopBrowser, (LPARAM)hIEWnd, SMTO_NORMAL, Common::START_PROCESS_TIMEOUT, &dwRes);
 	if (!lRes || !dwRes)
 	{
-		traceLog << "SendMessageTimeout fail of timeout in InjectXBit\n";
+		traceLog << "SendMessageTimeout fail or timeout in InjectXBit\n";
 		return FALSE;
 	}
 
