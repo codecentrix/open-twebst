@@ -3,10 +3,10 @@
 
 <topic name="AttachToHWND" type="method">
 	<metadesc>Web Automation Library for MSHTML programming in C++, C#, VB.Net</metadesc>
-	<metakeywords>BHO, IE9 automation, browser addon, extension, library, web automation</metakeywords>
+	<metakeywords>BHO, IE11 automation, browser add-on, extension, library, web automation</metakeywords>
 
 	<title>
-		IE6-IE11 add-ons/extensions development with Twebst Web Automation Library
+		IE6-IE11 add-ons/extensions development with Open Twebst Web Automation Library
 	</title>
 
 	<description>
@@ -29,7 +29,7 @@
 	<remarks>
 		Returns a Browser web automation library object.
 		The <i>hWnd</i> parameter is the handle of a <i>Internet Explorer_Server</i>, <i>IEFrame</i> or <i>TabWindowClass</i> window of <i>Internet Explorer</i> browser.
-		It could be obtained using other ways than <i>Twebst</i> web automation library features. It could be also obtained by using ieWindow, tabWindow or topWindow properties.
+		It could be obtained using other ways than <i>Open Twebst</i> web automation library features. It could be also obtained by using ieWindow, tabWindow or topWindow properties.
 		This method is useful when you need to automate an existing IE browser instance for which you have a Win32 API window handle.
 	</remarks>
 
@@ -37,7 +37,7 @@
 		<jscode>
 // hwnd is a valid handle of a 'Internet Explorer_Server', 'IEFrame' or 'TabWindowClass' window inside IE.
 var hwnd    = 0x1C05B8;
-var core    = new ActiveXObject("Twebst.Core");
+var core    = new ActiveXObject("OpenTwebst.Core");
 var browser = core.AttachToHWND(hwnd);
 
 browser.Navigate("http://www.codecentrix.com/");
