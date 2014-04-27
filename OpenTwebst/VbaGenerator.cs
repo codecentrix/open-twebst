@@ -82,6 +82,7 @@ namespace CatStudio
 
         private readonly String vbaDecoration = 
 @"'Add Open Twebst Type Library in Tools/References menu of the VBA editor.
+'' See tutorial: http://codecentrix.blogspot.ro/2014/04/excel-web-automation-in-6-easy-steps.html
 Sub OpenTwebstMacro
 {0}
 End Sub
