@@ -216,6 +216,7 @@ Section "Uninstall"
 	RMDir "$DOCUMENTS\OpenTwebstSamples\VB6"
 	RMDir "$DOCUMENTS\OpenTwebstSamples\JScript"
 	RMDir "$DOCUMENTS\OpenTwebstSamples\VBScript"
+	RMDir "$DOCUMENTS\OpenTwebstSamples\WebBrowserCSharp"
 	RMDir "$DOCUMENTS\OpenTwebstSamples"
 	SetShellVarContext all
 
