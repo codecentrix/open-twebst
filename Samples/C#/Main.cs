@@ -32,7 +32,7 @@ namespace OpenTwebstSample
             core.useHardwareInputEvents = true;
 
             // Start a new Internet Explorer browser and create a Browser object for it.
-            IBrowser browser = core.StartBrowser("http://doc.codecentrix.com/Lnkplayground.htm");
+            IBrowser browser = core.StartBrowser("http://codecentrix.com/doc/Lnkplayground.htm");
 
             System.Threading.Thread.Sleep(1000);
 

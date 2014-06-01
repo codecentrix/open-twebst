@@ -32,7 +32,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		pCore->useHardwareInputEvents = VARIANT_TRUE;
 
 		// Start a new Internet Explorer instance and navigate to a given URL.
-		IBrowserPtr pBrowser = pCore->StartBrowser("http://doc.codecentrix.com/Lnkplayground.htm");
+		IBrowserPtr pBrowser = pCore->StartBrowser("http://codecentrix.com/doc/Lnkplayground.htm");
 
 		::Sleep(1000);
 

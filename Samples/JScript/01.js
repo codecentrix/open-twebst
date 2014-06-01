@@ -17,7 +17,7 @@ var core = new ActiveXObject("OpenTwebst.Core");
 core.useHardwareInputEvents = true;
 
 // Start a new Internet Explorer browser and create a Browser object for it.
-var browser = core.StartBrowser("http://doc.codecentrix.com/Lnkplayground.htm");
+var browser = core.StartBrowser("http://codecentrix.com/doc/Lnkplayground.htm");
 
 WScript.Sleep(1000);
 

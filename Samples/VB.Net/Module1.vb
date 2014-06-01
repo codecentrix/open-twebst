@@ -22,7 +22,7 @@ Module Module1
         core.useHardwareInputEvents = True
 
         ' Start a new Internet Explorer browser and create a Twebst Browser object for it.
-        Dim browser As IBrowser = core.StartBrowser("http://doc.codecentrix.com/Lnkplayground.htm")
+        Dim browser As IBrowser = core.StartBrowser("http://codecentrix.com/doc/Lnkplayground.htm")
 
         'Call WScript.Sleep(1000)
         System.Threading.Thread.Sleep(1000)

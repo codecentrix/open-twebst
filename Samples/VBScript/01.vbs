@@ -21,7 +21,7 @@ On Error Resume Next
 core.useHardwareInputEvents = true
 
 ' Start a new Internet Explorer browser and create a Twebst Browser object for it.
-Set browser = core.StartBrowser("http://doc.codecentrix.com/Lnkplayground.htm")
+Set browser = core.StartBrowser("http://codecentrix.com/doc/Lnkplayground.htm")
 
 Call WScript.Sleep(1000)
 
