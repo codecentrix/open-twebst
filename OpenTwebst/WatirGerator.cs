@@ -170,8 +170,10 @@ namespace CatStudio
         // ICustomRecording
         public Object[] GetRecordedAttributes(String tagName, String inputType)
         {
-            bool bDonUseValue = ((inputType == "text") || (inputType == "password") || (tagName == "textarea"));
-            if (bDonUseValue)
+            bool bDontUseValue = (("text"   == inputType) || ("password" == inputType) || ("textarea" == tagName)   ||
+                                  ("email"  == inputType) || ("url"      == inputType) || ("number"   == inputType) ||
+                                  ("search" == inputType) || ("tel"      == inputType) || ("range"    == inputType));
+            if (bDontUseValue)
             {
                 Object[] res = { "id", "name", "value", "class", "title" };
                 return res;

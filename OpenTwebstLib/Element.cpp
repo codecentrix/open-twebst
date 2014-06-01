@@ -1016,8 +1016,19 @@ STDMETHODIMP CElement::InputText(BSTR bstrText)
 		return HRES_FAIL;
 	}
 
+	// Get the useHardwareEvents Core property value.
+	VARIANT_BOOL vbUseHardwareEvents;
+	HRESULT hRes = m_spCore->get_useHardwareInputEvents(&vbUseHardwareEvents);
+	if (FAILED(hRes))
+	{
+		traceLog << "ICore::get_useIEevents failed in CElement::InputText with code " << hRes << "\n";
+		SetComErrorMessage(IDS_METHOD_CALL_FAILED, INPUT_TEXT_METHOD, IDH_ELEMET_INPUT_TEXT);
+		SetLastErrorCode(ERR_FAIL);
+		return HRES_FAIL;
+	}
+
 	HTML_EDIT_BOX_TYPE editBoxType = HTML_NOT_EDIT_BOX;
-	HRESULT hRes = IsHtmlEditBox(m_spHtmlElement, &editBoxType);
+	hRes = IsHtmlEditBox(m_spHtmlElement, &editBoxType);
 	if (S_FALSE == hRes)
 	{
 		traceLog << "InputText is not applicable to the current html element in CElement::InputText\n";
@@ -1041,17 +1052,6 @@ STDMETHODIMP CElement::InputText(BSTR bstrText)
 			SetLastErrorCode(ERR_FAIL);
 			return HRES_FAIL;
 		}
-	}
-
-	// Get the useRegExp Core property value.
-	VARIANT_BOOL vbUseHardwareEvents;
-	hRes = m_spCore->get_useHardwareInputEvents(&vbUseHardwareEvents);
-	if (FAILED(hRes))
-	{
-		traceLog << "ICore::get_useIEevents failed in CElement::InputText with code " << hRes << "\n";
-		SetComErrorMessage(IDS_METHOD_CALL_FAILED, INPUT_TEXT_METHOD, IDH_ELEMET_INPUT_TEXT);
-		SetLastErrorCode(ERR_FAIL);
-		return HRES_FAIL;
 	}
 
 	int nIeVer = Common::GetIEVersion();
@@ -1574,9 +1574,6 @@ HRESULT CElement::InputTextInElement(IHTMLElement* pElement, BSTR bstrText)
 		}
 		else
 		{
-			// <input type=text> or // <input type=password> case.
-			ATLASSERT(!_wcsicmp(bstrType, L"password") || !_wcsicmp(bstrType, L"text"));
-
 			hRes = spInputElement->put_value(bstrText);
 			if (FAILED(hRes))
 			{
@@ -1742,7 +1739,9 @@ HRESULT CElement::IsHtmlEditBox(IHTMLElement* pElement, HTML_EDIT_BOX_TYPE* pEdi
 		if (S_OK == hRes)
 		{
 			BOOL bIsEdit = FALSE;
-			if (!_wcsicmp(L"text", bstrType))
+			if (!_wcsicmp(L"text", bstrType)   || !_wcsicmp(L"email", bstrType)  ||
+				!_wcsicmp(L"number", bstrType) || !_wcsicmp(L"search", bstrType) ||
+				!_wcsicmp(L"tel", bstrType)    || !_wcsicmp(L"url", bstrType))
 			{
 				*pEditBoxType = HTML_TEXT_EDIT_BOX;
 				bIsEdit       = TRUE;

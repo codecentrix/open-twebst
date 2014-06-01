@@ -846,7 +846,8 @@ BOOL FindElementAlgorithms::IsValidInputType(const String& sInputType)
 	const TCHAR* const VALID_INPUT_TYPES[] = 
 	{
 		_T("button"), _T("checkbox"), _T("file"), _T("hidden"), _T("image"), _T("password"), _T("radio"),
-		_T("reset"),  _T("submit"),   _T("text")
+		_T("reset"),  _T("submit"),   _T("text"), _T("email"),  _T("url"),   _T("search"),   _T("number"),
+		_T("tel"),    _T("range")
 	};
 	const int NUMBER_OF_VALID_INPUT_TYPES = sizeof(VALID_INPUT_TYPES) / sizeof(VALID_INPUT_TYPES[0]);
 

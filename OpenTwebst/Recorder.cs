@@ -248,7 +248,9 @@ namespace CatStudio
                 String        inputType       = ((IHTMLInputElement)crntNativeElem2).type.ToLower();
                 IHTMLElement  crntElem        = (IHTMLElement)crntNativeElem2;
 
-                if (("text" == inputType) || ("password" == inputType) || ("file" == inputType))
+                if (("text" == inputType)   || ("password" == inputType) || ("file" == inputType)   ||
+                    ("email" == inputType)  || ("url" == inputType)      || ("number" == inputType) ||
+                    ("search" == inputType) || ("tel" == inputType))
                 {
                     IHTMLWindow2 wnd = ((IHTMLDocument2)crntElem.document).parentWindow;
                     crntNativeElem2.attachEvent("onchange", new HtmlHandler(this.OnHtmlChange, wnd));
@@ -372,7 +374,9 @@ namespace CatStudio
                 IHTMLInputElement inputElem = (IHTMLInputElement)htmlSource;
                 String            type = inputElem.type.ToLower();
 
-                if ((type == "text") || (type == "password") || (type == "file"))
+                if (("text"  == type)  || ("password" == type) || ("file"   == type) ||
+                    ("email"  == type) || ("url"      == type) || ("number" == type) ||
+                    ("search" == type) || ("tel"      == type))
                 {
                     return false;
                 }
